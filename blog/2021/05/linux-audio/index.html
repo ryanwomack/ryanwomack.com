@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - Linux audio </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">Linux audio</h1>
+            
+                <p class="blog-post-info">Posted: <time>2021-05-29</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/audio">audio</a>, <a class="blog-taxonomy-info" href="/tags/debian">Debian</a>, <a class="blog-taxonomy-info" href="/tags/linux">Linux</a>, <a class="blog-taxonomy-info" href="/tags/technology">technology</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p>This is my small rant/ramble about my recent experience with Linux audio. <strong>Warning to the reader</strong>: <em>I am not claiming there is anything of interest in the following - just getting it off my chest.</em></p>
+<p>I have been a Linux user since about 2000 or so, having performed countless installs.  With few exceptions&ndash;I did waver from the path from about 2005 to 2007&ndash;I have always relied on Linux for my primary home/personal computing needs.</p>
+<p>I jumped from preferring Fedora to Debian due to the GNOME debacle, and now for many years have been relying on Debian stable + XFCE for stability, predictability, and straightforward performance without any weirdness getting in the way.</p>
+<p>However, it still amazes me that there is <strong>always</strong> something that goes slightly awry during installation that needs to be tweaked.</p>
+<p>In the old days, there were hairy moments with video, tweaking the X settings manually until the right combo came up.  That is really terrifying when you are wondering if the system whose OS you just overwrote with Linux will ever be functional.  But, ultimately, everything always worked out.</p>
+<p>My most recent system had a persistent quirk that I was never able to fix (or never bothered to fix) that came about due to switching back and forth between NVidia and Nouveau drivers. Afterwards, during a restart I always had to manually type a couple of things that remained a minor annoyance.</p>
+<p>I have decided to say goodbye to proprietary graphics setups entirely as a result. NVidia has always been highly disappointing with their attitude towards Linux.  This time around, I bought a chip with Intel HD graphics included and have not looked back.</p>
+<p>Anyway, on to the latest story. I was delighted to see that after assembling my latest system and installing Debian 10 (Buster), that everything booted flawlessly, the graphics ran beautifully in HD, and all seemed to be going well.  Until I tried to play one of my favorite videos on YouTube.</p>
+<p><strong>No Sound!</strong></p>
+<p>Well, that was disappointing, but I thought it would not be hard to fix. First I tried some basic efforts like installing the sound control in my tool bar, but that didn&rsquo;t help.  I was a little worried that my motherboard audio support wasn&rsquo;t working.  I then guessed that part of the problem was that I had my USB microphone plugged in during the initial setup.  I needed to reset the default sink. Somehow I couldn&rsquo;t manage this is alsa, but I could in pulse with the command:</p>
+<blockquote>
+<p>pactl set-default-sink &lsquo;alsa_output.pci-0000_00_1f.3.analog-stereo&rsquo;</p>
+</blockquote>
+<p>After this, I could play .wav and .mp3 files directly from my system, but my YouTube in Firefox was still not working.</p>
+<p>I thought it might be a codec issue with Firefox, and so installed a whole bunch of packages hoping for codec support (libffms, libmediainfo, libogmrip, ccextractor, handbrake, ffcvt, and a bunch of libav* packages with &ldquo;extra&rdquo; in the title).  Rebooted a few times along the way too.</p>
+<p>But still no dice!</p>
+<p>All along this process, I had been searching online for various tips to help with this issue. Finally I found a suggestion to use <strong>pavucontrol</strong>. Although I couldn&rsquo;t see or control it in the toolbar audio control, pavucontrol showed me that Firefox was muted.  And unmuting was all I needed to do.</p>
+<p>I was relieved to have a fully functional system, but I do sometimes find the Linux world really a bit wacko at times.  For advanced operations and specialized packages, you can usually find a good and authoritative source of documentation and help.  And it is great that you can pretty much always find a fix by tinkering with your system. But for the really low-level stuff (as used to happen with video for me, and now audio), there is nothing comprehensive to rely on, only a wilderness of Q&amp;A&rsquo;s from those having trouble in the past.</p>
+<p>Note: Debian is great, but the audio documentation there was very vague and general. Really there should be something akin to &ldquo;to set up audio on your flavor of Linux, install packages A, B, and C, and check settings x, y, and z.  One can hope for the future.</p>
+<p>In the end, it was only two small settings changes that kept me soundless, but it took a couple of hours or more to figure this out.  I am still not sure why Firefox would be muted by default.</p>
+<p>With all that said, <strong>Long live Linux!</strong>  I greatly prefer having an OS that I am in control of, rather than one that controls me (MacOS, I am looking at you!).</p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
