@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - Diversification as Risk Management, or, Disaster with AWS </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">Diversification as Risk Management, or, Disaster with AWS</h1>
+            
+                <p class="blog-post-info">Posted: <time>2023-07-08</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/amazon">Amazon</a>, <a class="blog-taxonomy-info" href="/tags/aws">AWS</a>, <a class="blog-taxonomy-info" href="/tags/blog">blog</a>, <a class="blog-taxonomy-info" href="/tags/digital-ocean">Digital Ocean</a>, <a class="blog-taxonomy-info" href="/tags/gandi">Gandi</a>, <a class="blog-taxonomy-info" href="/tags/hugo">Hugo</a>, <a class="blog-taxonomy-info" href="/tags/linux">linux</a>, <a class="blog-taxonomy-info" href="/tags/render">Render</a>, <a class="blog-taxonomy-info" href="/tags/vercel">Vercel</a>, <a class="blog-taxonomy-info" href="/tags/website">website</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p>That title sounds a bit <a href="https://rockyandbullwinkle.fandom.com/wiki/Rocky_and_Bullwinkle_Wiki">Rocky and Bullwinkle</a> to me. But it is appropriate to the situation.</p>
+<p>I have migrated an older Wordpress post to this blog on <a href="/blog/2016/04/a-manual-backup-routine-using-aws/">AWS backup</a> that provides some context or evidence of my past history with AWS.</p>
+<p>Let me try to tell this story as concisely as I can.  For the TL;DR crowd, the takeaways are labeled <strong>this whole episode made me realize</strong>.</p>
+<p>I had been using AWS to serve all of my various websites for a long time.  At least since 2011 for the first of them.  The appeal of the S3 static website option, and the integration of certificates, http-&gt;https redirects, Cloudfront, and so on was appealing.  And the widescale adoption of AWS and associated documentation and help aided this process.</p>
+<p>But I became complacent.  After having developed an unchanging routine for website development involving local Hugo delivered to AWS S3, with Cloudfront and Route 53 serving as the glue to deliver the final product to the web, I kept using that &ldquo;stack&rdquo; in an unquestioning manner.  And AWS <strong>was</strong> reliable during this time.</p>
+<p>But, just as with <a href="https://www.earthdate.org/episodes/yes-we-had-no-bananas">bananas</a>, a monoculture is vulnerable.</p>
+<p>Somehow, AWS had flagged my account for unauthorized activity in late June.  Their <a href="/amazon_message/">opaque messages</a> warning me of this ended up in my spam folders, perhaps because they follow spam styling conventions.  All I saw was a prompt to change my password once I logged in, which struck me as routine, since sites often force this on their users once they require them to adopt longer passwords or ones requiring special characters.</p>
+<p>After I changed my password, I received additional e-mail that did get through to my active inbox about the issues with my account.  I went into my AWS console and &ldquo;closed&rdquo; the issue, since I had not noticed any authorized activity.  Although I have no actual explanation from Amazon about what happened, I believe that &ldquo;closing&rdquo; the issue was the wrong thing to do, equivalent to marking my &ldquo;unauthorized use&rdquo; as &ldquo;not resolved&rdquo;.  After I did that, I soon noticed the problems.  My websites served through Amazon went down.</p>
+<p>Yes, <strong>all</strong> of my sites were offline for <strong>hours!!!!!!!!!</strong>  So much for Amazon&rsquo;s market-leading reliability!</p>
+<p><strong>This whole episode made me realize</strong> just how opaque and unfriendly the Amazon diktats that one receives are.  There was literally no guidance on how to resolve this issue from the big A, or on what had caused it.</p>
+<p>After a couple of hours of searching online for solutions, lost in a maze of pages about IAM users and policy authorizations with overlapping and contradictory information of unclear currency, I contacted Amazon&rsquo;s chat help in the middle of the night.  They did collect my information and submit it for verification.  A few hours after that - not sure when, but while I was sleeping - access was restored, and I woke up to working websites.</p>
+<p><strong>This whole episode made me realize</strong> that the static website space has evolved a lot since I started out with AWS as a default ten years ago.  There are many providers, each of whom offers their own combination of strong points for different use cases.  Services like Netlify, Cloudflare, and others clearly are serving their users well.  In the case of Netlify, I did not really need their quick build features or heavy-duty production process, along with potential costs.  In the case of Cloudflare, their preference for use of their own DNS (although there appear to be partial workarounds for that) was the only thing keeping me away. If I am happy with anything, I am very happy with Gandi DNS&ndash;see below.</p>
+<p>Now, I have no information from Amazon about what might have caused this issue, but it really shook me up.  I can speculate that it is because I use a VPN and edit from multiple machines, each of which might temporarily be seen as operating from a different country.  If AWS is using that as a screen for unauthorized activity, I can only say that it seems extremely naive (although Rutgers once locked my account for this exact reason).  I am not going to dumb down my computing security practices solely in order not to inconvenience Amazon.</p>
+<p>Also, <strong>this whole episode made me realize</strong> that I was overly dependent on a <a href="https://grasshopperfilm.com/film/behemoth/">behemoth</a> corporation to serve up material that ostensibly represents my academic career and other interests.  Amazon has not been getting better lately, acting in <a href="https://www.theatlantic.com/technology/archive/2021/03/amazon-twitter-aggression/618477/e">malevolent ways</a>.  There is no reason to believe that AWS is an exception to their corporate culture of dehumanizing pressure to perform to metrics and to automate out the human component of any interaction.  If their e-commerce site is now notorious for selling counterfeit items and fly-by-night ersatz products, and Amazon&rsquo;s corporate mission was to destroy&ndash;ahem, disrupt&ndash;the market, why wouldn&rsquo;t AWS also be moving in that direction?</p>
+<p>So, <strong>this whole episode made me realize</strong> that I had better investigate substitute ways of serving up my web content, pronto.</p>
+<p>In my <a href="/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/">next post</a> I will talk a bit more about the solutions I found, involving <a href="https://render.com">Render</a>, <a href="https://digitalocean.com">DigitalOcean</a>, <a href="https://netlify.com">Netlify</a>, <a href="https://vercel.com">Vercel</a>.</p>
+<p>Let me also give a shoutout to <a href="https://gandi.net">Gandi</a> for providing 100% reliable, unquestioned domain registration, DNS, and webmail services to me for more than 20 years!  And doing it with simplicity and user-friendliness.  I have never had any doubts, qualms, or suspicions about Gandi or its future, unlike AWS.  So when I could, within the space of minutes, delete my AWS Route 53 DNS and edit Gandi DNS to point to Render, I was so delighted with this solution to my AWS problems.</p>
+<p>Again, <strong>this whole episode made me realize</strong> that I had better diversify and have a few methods of serving up web content at my fingertips in case of other issues with <strong>any</strong> provider.  So I am now actively hosting my sites on a couple of new providers, and I am hanging onto my S3 buckets and methods for serving from AWS, just in case.  But I sincerely hope that new AI or whatever alerting systems will not flag me as a problem user, no matter what service I am on.  However, the onus is on the individual to protect themselves and manage their exposure and risk resulting from any one service provider.  I hope I have now moved into that new, more diverse and protected space, thanks to the cuckoo AWS nudging me out of the cozy nest they had once created!</p>
+<p>Anyway, this is the first blog post of mine after I have migrated hosting of ryanwomack.com to <a href="https://vercel.com">Vercel</a> for ryanwomack.com.  Thanks Vercel for supporting me in a more secure and controllable life!</p>
+<p>Was my title hyperbolic?  No, I don&rsquo;t think so.  Having one&rsquo;s core identity websites down for hours, <strong>without knowing why</strong>, is a crisis.  And diagnosing the crisis, it seems that my AWS account was working, my S3 was working, my static S3 websites were being still served via their long S3 URLs, <strong>but</strong> Route 53 was blocking all requests for my domains and Cloudfront was also disabled.  Why not freeze my account but leave services running?  Or, why not label my Cloudfront endpoints as &ldquo;temporarily unavailable&rdquo;?  But to me, having an unresolved DNS record was basically tbe worst imaginable outcome.</p>
+<p>What do you usually think when a hostname comes back as &ldquo;we couldn&rsquo;t find that site&rdquo;?  You think it is gone forever from the web.  Maybe the owner took down the server, or forgot to renew the domain name, or anything like that.  But the implication is clearly &ldquo;dead and gone&rdquo;.  And that is what AWS did to me.  I do not understand the rationale for this.  If an account is blocked, even for legitimate reasons, why would the DNS be disabled in this heinous manner?</p>
+<p><strong>This whole episode made me realize</strong> that I don&rsquo;t trust AWS or Amazon anymore, <a href="https://www.youtube.com/watch?v=mXU0GvtOTH0">anyway, anyhow, anywhere</a>. I hope I am able to fully free myself from dependence on them.</p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>

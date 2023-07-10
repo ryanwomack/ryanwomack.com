@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Ryan Womack, Data Librarian</title>
+        <link>https://ryanwomack.com/tags/render/</link>
+        <description>Latest blog posts from Ryan Womack, Data Librarian</description>
+
+        
+        <language>en-us</language>
+        
+
+        
+
+        
+
+        
+
+        
+        <lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate>
+        
+
+        
+        <atom:link href="https://ryanwomack.com/tags/render/index.xml" rel="self" type="application/rss+xml" />
+        
+
+        
+            
+        <item>
+          <title>Spinning up new static site servers, or, diversification as risk management</title>
+          <link>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</link>
+          <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</guid>
+          <description>As I mentioned in my last blog post, I am trying to broaden my knowledge and secure my web assets by learning a bit more about other services and migrating sites there, after realizing that it is perhaps not wise to remain reliant on AWS.
+This is a quick commentary on services that I learned about and tried (this post is one source of information). My needs are simple. All my sites are static, with mail hosting and any other services taken care of elsewhere.</description>
+        </item>
+            
+        <item>
+          <title>Diversification as Risk Management, or, Disaster with AWS</title>
+          <link>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</link>
+          <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</guid>
+          <description>That title sounds a bit Rocky and Bullwinkle to me. But it is appropriate to the situation.
+I have migrated an older Wordpress post to this blog on AWS backup that provides some context or evidence of my past history with AWS.
+Let me try to tell this story as concisely as I can. For the TL;DR crowd, the takeaways are labeled this whole episode made me realize.
+I had been using AWS to serve all of my various websites for a long time.</description>
+        </item>
+            
+        <item>
+          <title>Missing Time Series</title>
+          <link>https://ryanwomack.com/blog/2023/06/missing-time-series/</link>
+          <pubDate>Sat, 10 Jun 2023 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2023/06/missing-time-series/</guid>
+          <description>I just posted a rather uncharacteristic video on YouTube about my deletion of videos. Usually I confine myself to either instructional videos or presentations, but this was just a rambling self-explanatory monologue.
+This is a text version of some similar thoughts.
+In my work, my personal organizing practice is to scan for files that are ten years old (or more) and reviewing them to either delete or permanently archive as a memento of the past.</description>
+        </item>
+            
+        <item>
+          <title>On job applications and interviews</title>
+          <link>https://ryanwomack.com/blog/2022/06/on-job-applications-and-interviews/</link>
+          <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2022/06/on-job-applications-and-interviews/</guid>
+          <description>About three years back, I had posted some tips for job applicants on my old blog, which I am reposting here for convenience.
+After having been on search committees yet again, I am compelled to write up some additional thoughts. The tips in the earlier post are still valid. This time, I may be a bit more pointed and direct about just a few items.
+interview etiquette - thank you notes I know that no one really gets consistent instructions about interview etiquette anymore.</description>
+        </item>
+            
+        <item>
+          <title>About the Sackler verdict</title>
+          <link>https://ryanwomack.com/blog/2021/09/about-the-sackler-verdict/</link>
+          <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2021/09/about-the-sackler-verdict/</guid>
+          <description>I am still torn up by the Sackler verdict, which absolves the Sackler family of guilt for deceptively promoting addictive and ultimately deadly drugs in order to boost their all-American profits. The result was over 500,000 all-American corpses due to overdose, and the judicial system’s recent verdict has only awarded approximately enough money to cover the funeral expenses of these corpses. The Sacklers get to pay these expenses over a decade while keeping their fortunes intact and being shielded from further prosecution.</description>
+        </item>
+            
+        <item>
+          <title>ryandata blog migration</title>
+          <link>https://ryanwomack.com/blog/2021/06/ryandata-blog-migration/</link>
+          <pubDate>Wed, 09 Jun 2021 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2021/06/ryandata-blog-migration/</guid>
+          <description>So, a couple of years ago, I wrote here to introduce the possibility of my blogging at this site. At that time, I said that I would be continuing to also post work-related announcements at ryandata.wordpress.com.
+Well, time has passed, and I am trying to simplify many things in my life. The need for a blog site announcing things has been superseded by the growing capabilities of our workshop calendar and the increasing accumulation of material on the graduate specialist libguide, in addition to supplemental resources like the graduate specialist github.</description>
+        </item>
+            
+        <item>
+          <title>Linux audio</title>
+          <link>https://ryanwomack.com/blog/2021/05/linux-audio/</link>
+          <pubDate>Sat, 29 May 2021 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2021/05/linux-audio/</guid>
+          <description>This is my small rant/ramble about my recent experience with Linux audio. Warning to the reader: I am not claiming there is anything of interest in the following - just getting it off my chest.
+I have been a Linux user since about 2000 or so, having performed countless installs. With few exceptions–I did waver from the path from about 2005 to 2007–I have always relied on Linux for my primary home/personal computing needs.</description>
+        </item>
+            
+        <item>
+          <title>IASSIST 2021</title>
+          <link>https://ryanwomack.com/blog/2021/05/iassist-2021/</link>
+          <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2021/05/iassist-2021/</guid>
+          <description>I am very happy to be back with my IASSIST colleagues this week at IASSIST 2021, even if it is virtual rather than in sunny Gothenburg, Sweden, as we had hoped to be last year.
+My own presentation on May 20 has been “flipped” so that there will be more time for interactive discussion during the live session.
+I am encouraging anyone with interest in the development of our graduate specialist program to view the slides and videos linked below.</description>
+        </item>
+            
+        <item>
+          <title>Personal Statement</title>
+          <link>https://ryanwomack.com/blog/2021/04/personal-statement/</link>
+          <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2021/04/personal-statement/</guid>
+          <description>The image above is a wordcloud based on the word frequency in the personal statement that I used for promotion—my career in feline form.
+I was inspired by my colleague Francesca Giannetti’s post about the personal statement she used for her !successful! tenure applicaton at Rutgers. In her post, she discusses the benefit to be gained from sharing one’s own articulation of how one has built a professional identity in a new area of services.</description>
+        </item>
+            
+        <item>
+          <title>Unofficial and informal tips for job applicants</title>
+          <link>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</link>
+          <pubDate>Tue, 24 Sep 2019 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</guid>
+          <description>Having been involved in several hiring committees over recent years, it is sometimes a bit frustrating to not be able to give advice to applicants. We cannot do that in individual cases as a matter of HR policy. The decision-making process is confidential. But I hope that by offering some general observations I have made after reviewing many applications, that this might be of help to future seekers. We are, after all, trying to find the person who will provide the best job performance, not perform the best in the application process.</description>
+        </item>
+            
+        <item>
+          <title>Ryandata.wordpress.com</title>
+          <link>https://ryanwomack.com/blog/2019/07/ryandata.wordpress.com/</link>
+          <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2019/07/ryandata.wordpress.com/</guid>
+          <description>My blog has been located at RyanData.wordpress.com for many years.
+In the future, I will start posting about some of more personal thoughts about data and statistics directly on this site, but RyanData.wordpress.com will continue to be the place for Rutgers-related announcements of workshops and data developments.</description>
+        </item>
+            
+        <item>
+          <title>A manual backup routine using AWS</title>
+          <link>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</link>
+          <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</guid>
+          <description>This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
+I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.</description>
+        </item>
+            
+        
+    </channel>
+</rss>

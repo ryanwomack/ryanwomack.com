@@ -16,7 +16,7 @@
         
 
         
-        <lastBuildDate>Sat, 29 May 2021 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate>
         
 
         
@@ -24,6 +24,28 @@
         
 
         
+            
+        <item>
+          <title>Spinning up new static site servers, or, diversification as risk management</title>
+          <link>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</link>
+          <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</guid>
+          <description>As I mentioned in my last blog post, I am trying to broaden my knowledge and secure my web assets by learning a bit more about other services and migrating sites there, after realizing that it is perhaps not wise to remain reliant on AWS.
+This is a quick commentary on services that I learned about and tried (this post is one source of information). My needs are simple. All my sites are static, with mail hosting and any other services taken care of elsewhere.</description>
+        </item>
+            
+        <item>
+          <title>Diversification as Risk Management, or, Disaster with AWS</title>
+          <link>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</link>
+          <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</guid>
+          <description>That title sounds a bit Rocky and Bullwinkle to me. But it is appropriate to the situation.
+I have migrated an older Wordpress post to this blog on AWS backup that provides some context or evidence of my past history with AWS.
+Let me try to tell this story as concisely as I can. For the TL;DR crowd, the takeaways are labeled this whole episode made me realize.
+I had been using AWS to serve all of my various websites for a long time.</description>
+        </item>
             
         <item>
           <title>Missing Time Series</title>
@@ -114,6 +136,16 @@ I was inspired by my colleague Francesca Giannetti’s post about the personal s
           <guid>https://ryanwomack.com/blog/2019/07/ryandata.wordpress.com/</guid>
           <description>My blog has been located at RyanData.wordpress.com for many years.
 In the future, I will start posting about some of more personal thoughts about data and statistics directly on this site, but RyanData.wordpress.com will continue to be the place for Rutgers-related announcements of workshops and data developments.</description>
+        </item>
+            
+        <item>
+          <title>A manual backup routine using AWS</title>
+          <link>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</link>
+          <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</guid>
+          <description>This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
+I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.</description>
         </item>
             
         

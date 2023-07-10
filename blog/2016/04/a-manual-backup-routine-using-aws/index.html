@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - A manual backup routine using AWS </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">A manual backup routine using AWS</h1>
+            
+                <p class="blog-post-info">Posted: <time>2016-04-28</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/amazon">Amazon</a>, <a class="blog-taxonomy-info" href="/tags/aws">AWS</a>, <a class="blog-taxonomy-info" href="/tags/backup">backup</a>, <a class="blog-taxonomy-info" href="/tags/blog">blog</a>, <a class="blog-taxonomy-info" href="/tags/encryption">encryption</a>, <a class="blog-taxonomy-info" href="/tags/linux">linux</a>, <a class="blog-taxonomy-info" href="/tags/ryandata">ryandata</a>, <a class="blog-taxonomy-info" href="/tags/wordpress">wordpress</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p>This post is also slightly off topic – not a data announcement, workshop, video, etc.  But it does contain one specific instance of something that everyone should be thinking about – data backup.  Everyone knows the <strong>rule of three</strong> – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.</p>
+<p>I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.  I had been using that for a while, but then upgraded to SpiderOak One, and my incremental backups seemed to take forever, with the SpiderOak process constantly using lots of CPU and seemingly not accomplishing much.  [This is all on Linux as usual].  I realized that I understood very little of what the client was actually doing, and since the client was unresponsive, could no longer rely on it to actually be able to backup and retrieve my files.  I decided to go completely manual so that I would know exactly what my backup status was and what was happening.</p>
+<p>Part 0 of my personal rule of three is that all of my family’s home machines get an rsync run periodically (i.e., whenever I remember) to back up their contents to the main home server.</p>
+<p>Part 1 is a local backup to an internal hard drive on the server.  I leave this drive unmounted most of the time, then mount it and rsync the main drive to it.  The total file size is about 600 GB right now, partly because I do not really de-dupe anything or get rid of old stuff.  Also, I don’t have a high volume of video files to worry about at this point.</p>
+<p>Part 2 is a similar rsync backup to a portable hard drive [encrypted].  I have two drives that I swap and carry back and forth to work every couple of weeks or so.  I have decided that I don’t really like frequent automated backup, because I’d be more worried about spreading a problem like accidental deletion of files, or a virus, before the problem is discovered.  I can live with the loss of a couple of weeks of my “machine learning” if disaster truly strikes.</p>
+<p>But what about Part 3?  I wanted to go really offsite, and not pay a great deal for the privilege.  I have grown more comfortable with <a href="https://aws.amazon.com">AWS</a> as I learn more about it, and so after some trial and error, devised this scheme…</p>
+<p>On the server, I tar and zip my files, then encrypt them, taking checksums along the way</p>
+<pre tabindex="0"><code>tar -cvf mystuff.tar /home/mystuff
+
+bzip mystuff.tar
+
+sha256sum mystuff.tar.bz &gt; mystuffsha
+
+gpg -c –sign mystuff.tar.bz2
+
+sha256sum mystuff.tar.bz2.gpg &gt; mystuffgpgpsha
+</code></pre><p>This takes some time to run, and generates some big files, but it is doable.  I actually do this in three parts because I have three main directories on my system.</p>
+<p>Then we need to get it up to the cloud.  Here is where file transfer really slows down.  I guess it is around 6 days total wait time for all of my files to transfer, although I do it in pieces.  The files need to be small enough that a breakdown in the process will not lose too much work, but large enough so that you don’t have thousands of files to keep track of.  I do this to split the data into 2GB chunks:</p>
+<pre tabindex="0"><code>split -b 2147483648 mystuff.tar.bz2.gpg
+</code></pre><p>Now we have to upload it.  I want to get the data into <a href="https://aws.amazon.com/glacier">AWS Glacier</a> since it is cheap, and this is a backup just for emergencies.  Now Glacier does have a direct command line interface, but it requires the use of long IDs and is just fussy in terms of accepting slow uploads over a home cable modem.  Fortunately, getting data into <a href="https://aws.amazon.com/aws">S3</a> is easier and more reliable.  And, S3 allows you to set a file policy that will allow you to automatically transfer your data from S3 to Glacier after a set amount of time.  So the extra cost you incur for say, letting your data sit in S3 for a day, is really pretty small.  I guess you could do this with regular expressions, but I just have a long shell file with each of my S3 commands on a separate line.  This requires you to install the <a href="https://aws.amazon.com/cli">Amazon CLI</a> on your system.</p>
+<pre tabindex="0"><code>aws s3 cp xaa s3://your_unique_bucket_name_here
+
+aws s3 cp xab s3://your_unique_bucket_name_here
+</code></pre><p>…</p>
+<p>I just run that with a simple shell command that dumps any messages to a file.</p>
+<pre tabindex="0"><code>sh -xv my_special_shell_script.sh &gt; special_output
+</code></pre><p>And, voila…days later your files will be in the cloud.  You can set a hosting zone that will put the files on the other side of the planet from you if you think that will be more reliable.</p>
+<p>To bring the files back down, you must request through the AWS interface for the files to be brought back from Glacier to S3, then download from S3, then use “cat” to fuse them together, and in general reverse all the other steps to decrypt, untar, checksum and such.  It worked for me on small scale tests, but I guess I should try it on my entire archive at least once to make sure this really works.</p>
+<p>At least with this method, I know exactly what is in the cloud, how and when it got there, and how to get it back.  And it looks like it will only run me about $6 a month.</p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>

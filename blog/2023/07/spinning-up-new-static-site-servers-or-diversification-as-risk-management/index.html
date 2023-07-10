@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - Spinning up new static site servers, or, diversification as risk management </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">Spinning up new static site servers, or, diversification as risk management</h1>
+            
+                <p class="blog-post-info">Posted: <time>2023-07-09</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/amazon">Amazon</a>, <a class="blog-taxonomy-info" href="/tags/aws">AWS</a>, <a class="blog-taxonomy-info" href="/tags/blog">blog</a>, <a class="blog-taxonomy-info" href="/tags/digital-ocean">Digital Ocean</a>, <a class="blog-taxonomy-info" href="/tags/gandi">Gandi</a>, <a class="blog-taxonomy-info" href="/tags/hugo">Hugo</a>, <a class="blog-taxonomy-info" href="/tags/linux">linux</a>, <a class="blog-taxonomy-info" href="/tags/render">Render</a>, <a class="blog-taxonomy-info" href="/tags/vercel">Vercel</a>, <a class="blog-taxonomy-info" href="/tags/website">website</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p>As I mentioned in my <a href="/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws">last blog post</a>, I am trying to broaden my knowledge and secure my web assets by learning a bit more about other services and migrating sites there, after realizing that it is perhaps not wise to remain reliant on <a href="https://aws.amazon.com">AWS</a>.</p>
+<p>This is a quick commentary on services that I learned about and tried (<a href="https://geekflare.com/best-static-site-hosting-platform/">this post</a> is one source of information).  My needs are simple.  All my sites are static, with mail hosting and any other services taken care of elsewhere.  I was looking for services that would make the provision of sites with SSL easy, have a reasonable free tier, be relatively transparent in their setup, and also have reasonable paid plans for a modest level of use in the odd event that I would somehow go viral and generate a lot of requests and bandwidth usage.</p>
+<p><a href="https://render.com">Render</a> provided a free and easy-to-understand pathway to pushing my Hugo website content to their servers, along with HTTPS and domain redirects that &ldquo;just worked&rdquo;.  With just 30-40 minutes of late night work, I was able to serve up my most important web project via Render and make that project independent of the foibles of AWS.  It was Render that resolved my midnight panic over the potential demise of my sites.I</p>
+<p><a href="https://digitalocean.com">DigitalOcean</a> has always been appealing to me because of their Droplets being simple to operate and predictable in pricing.  Their &ldquo;Apps&rdquo; feature is only a few years old, and can host static sites.  I was hopeful, and it was quite quick to get almost all of the way there.  I was able to get the www prefixed subdomains working easily, but the base domains had problems authenticating.  I have a ticket in to try to resolve this.  Maybe it is something easy.  I hope it is not a limitation of their free tier.  Otherwise I quite like the service and the way dashboards are presented.</p>
+<p><a href="https://netlify.com">Netlify</a> is well known, and I have seen its power and reliability in other contexts.  Their step-by-step setup was impressively done.  But like DigitalOcean, something hangs up in authenticating my custom domains via external DNS, and the instructions seem to emphasize getting you to switch to Netlify DNS rather than providing detail about how to resolve the issues.</p>
+<p><a href="https://vercel.com">Vercel</a> was completely unknown to me before this crisis, although I gather they are a hot item in certain sectors.  This site had a slick interactive setup that was super quick.  The only nit I can pick is that it is a bit too smooth and corporate, which makes me slightly uncomfortable.  But Vercel got my site up and running even faster than Render.</p>
+<p>My issues seem to revolve around needing a solid A record IP address to point to so that the hosting service can deal with redirect and secure authentication in a complete way.  Render and Vercel put that up front in their process and instructions.  I&rsquo;m waiting on DigitalOcean and hope that I can figure out the Netlify details as well.  Maybe there is another way to fix this, but I&rsquo;m hoping not to have to spend too much time learning the ins and outs of DNS.  &ldquo;Flattened CNAMEs&rdquo; are already enough for me!</p>
+<p>I looked at a few services that also seemed solid, but didn&rsquo;t provide much in the free tier.  An honorable mention to <a href="https://surge.sh">Surge.sh</a>, which was intriguing, but their documentation is somewhat opaque and their presentation a bit too sleek and minimalist.  Where are my files being hosted?  What is happening with their uploads?  We are being asked to trust everything to their scripts, which sounds like a recipe for giving up control and becoming vulnerable to their future decisions.  Very path dependent.  And who hosts out of St. Helena anyway?  So I didn&rsquo;t go down that road.</p>
+<p>One issue is that all of these &ldquo;simple&rdquo; services revolve around pulling code from <a href="https://github.com">Github</a>, which introduces another single point of failure (and a reason not to use Github Pages). I suppose that I would be in the same boat as I was with AWS all over again if Github or any of the above services deactivated my account. But at least with control of my own static files, I could always take back control by spinning up one&rsquo;s own server instance, in the worst case scenario.  My familiarity with multiple services will also help me adapt to future outages and changes.  Perhaps going back to traditional web hosting might be the <strong>best</strong> case scenario.</p>
+<p>Once again, I really appreciate <a href="https://gandi.net">Gandi&rsquo;s</a> simplicity and long-term stability, providing the backbone domain names and DNS supporting all of these hosting adventures.</p>
+<p>I am feeling a bit better after last week&rsquo;s crisis, having developed some updated skills and coping mechanisms for navigating today&rsquo;s hosting environment.</p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
