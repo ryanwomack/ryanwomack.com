@@ -1,0 +1,416 @@
+---
+title: "R_Packages"
+author: "Ryan Womack"
+date: "2023-10-16"
+toc: true
+number-sections: true
+highlight-style: pygments
+output: html_document
+format:
+  html: 
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+  docx: default
+theme: vapor #litera *journal *cerulean slate *solar sketchy vapor
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
+```
+
+**R Packages**
+
+## The R packages book, by Wickham and Bryan
+
+This is a brief introduction to R package creation, taking as its text the book [R Packages, 2nd edition](https://r-pkgs.org) by Hadley Wickham and Jennifer Bryan.  This book is freely available on the web, so please consult for further details of topics that are only outlined here.  The second edition has been finalized in June 2023.
+
+### Install and load packages
+
+The fundamental packages required to create an R package are _devtools_, _roxygen2_, and _testthat_.  Please install these with the following commands if they are not already available on your system.  These will not install by default if you just attempt to run this R markdown file.
+
+We will use the [_pak_](https://pak.r-lib.org/) package for installation as a more complete approach to package management. Replace the pkg commands with _install.packages()_ versions if you prefer.
+
+```{r install packages, eval=FALSE}
+install.packages("pak", dependencies=TRUE)
+library(pak)
+pkg_install("devtools")
+pkg_install("roxygen2")
+pkg_install("testthat")
+
+devtools::session_info()
+```
+Let's load those libraries now.
+```{r libraries}
+library(devtools)
+library(roxygen2)
+library(testthat)
+```
+We can check that we're running recent enough versions of our software with the _packageVersion_ command for indivual packages, or _session_info_ for our entire setup.
+```{r versions}
+packageVersion("devtools")
+
+devtools::session_info()
+```
+
+## Outline of the creation of a little package
+
+We'll follow along with [Chapter 1](https://r-pkgs.org/whole-game.html) of the R Packages book and walk through the creation of a little package, even simpler than the "toy package" presented in the text.
+
+This will enable us to review the fundamental features of a typical package:
+
+* functions
+* version control
+* documentation (_roxygen2_)
+* testing (_testthat_)
+* creation of a README.Rmd file
+
+After we do this for our little package, we'll coverage some additional details relating to the steps above.
+
+### Caution!
+
+There is a conflict when using Rmarkdown to perform some of the steps below.  We're presenting the code in this .Rmd file since it allows us to insert explanatory text.  But you may be better off running the R_Packages.R version of this code, since that version is more straightforward.  Using Rmd causes some switching back and forth between the Rmd project directory and the package directory we're creating.  Just a caution!
+
+### Create_package function
+
+We call _create_package_ to initiate a package.  We want to start this in its own fresh directory, not a pre-existing project or git repository.  The _create_package_ function will set up the necessary folder structure for a package. Please *EDIT* the contents of the command below to correspond to your computer's file system.  This is the one place in the code where you'll have to modify it.  Note that to be a valid package name and to be allowed on CRAN, the package name should:
+
+* Contain only ASCII letters, numbers, and '.'
+* Have at least two characters
+* Start with a letter
+* Not end with '.'
+
+```{r create package}
+create_package("/home/ryan/R/littlePackage")
+```
+
+This will launch a new window.  To be able to continue using our script here, we have to reopen our code (here you could just use the .R script if you want to run two RStudio sessions - one for reading the guidance and one for the package).  We also have to reload our packages since this is a new session.
+
+```{r reload packages}
+library(devtools)
+library(roxygen2)
+library(testthat)
+```
+The "dot files" beginning with a period (.) are used to store a history of the R session and to tell R and git to ignore certain files.  Generally we can leave these files as is and let R worry about how to handle them.  You shouldn't need to modify these files in most circumstances.
+
+Likewise, the .Rproj file is usually left unmodified.  This helps RStudio manage the package folder as a project.
+
+The NAMESPACE is also a file we won't edit.  It is used to keep track of relations between functions that your package will use, but you can let RStudio handle this.
+
+One of the two locations that we *WILL* edit are the *DESCRIPTION*, which is a structured way of providing information about your package.  This is what you will see when you look up the function in the R help system, or what would be displayed if your package makes it onto CRAN.  For example, try typing ?testthat to see the description of that package.
+
+The other is the *R* folder.  This is the folder that we will put our functions into.  Optionally we could add a *data* folder as well, if we wanted to distribute data via our package.
+
+It is quite convenient to use _create_package_ to take care of all of this for us.
+
+### Git
+
+We won't go into any details about *git* or *github* usage, except to note that it is common and desirable to use this form of version control for your work, and also for sharing and collaboration.  To initiate the use of git in any R project (not just packages), use the command _use_git_.  To be sure we're committing the right directory, we use _proj_set_ to navigate to the directory for our package first.  Select the positive option when asked if you want to commit your files.  For the purpose of our demo, you don't have to restart RStudio at the prompt here, but if you want to use git for real, you should. If your RStudio resets again at this stage, you'll have to do _proj_set_ and reload the packages in lines 82-84 again.
+
+```{r use git}
+proj_set("/home/ryan/R/littlePackage/")
+use_git()
+```
+
+### Writing a function
+
+We are going to write a very basic function, just as an example.  Keep in mind that you can write functions to accomplish almost any task you want to in R, and write as many of them as you want.  Many packages have been born out of the gradual accumulation of useful functions.  Our function will be called _funkyadd_ and it just adds a little modification to addition.
+
+```{r funkyadd}
+funkyadd <- function(x,y)
+  {
+  x+y+1
+}
+```
+
+Just for fun, let's also create a _randomadd_ function that introduces true uncertainty into the addition process.
+```{r randomadd}
+randomadd <- function(x,y)
+  {
+  x+y+round(rnorm(1,0,3),digits=0)
+}
+```
+
+We can see these functions in action, attempting to add 6 and 9.
+
+```{r examples}
+funkyadd(6,9)
+randomadd(6,9)
+```
+
+We're not here to talk about functions, but about how functions are used in packages, so let's move on from these examples.  We use _use_r_ to add functions to our R directory for the our little package, as follows:
+
+```{r use_r}
+use_r("funkyadd")
+use_r("randomadd")
+```
+Copy and paste the function definitons into the editor window that pops up.  Namely, lines 124-127 for _funkyadd_ and lines 132-135 for _randomadd_.
+
+Now we run _load_all_ to bring our functions as we've defined them into the R workspace.  Note that we remove the previous manually created functions just to show that _load_all_ is working properly.  Note that the _library_ command only works for installed packages. Since we haven't finished with our package yet, we need to use _load_all_ instead.
+We also reconfirm that we're in the correct project directory.  Then we can check that the functions are in our workspace, now provided directly by the package definitions.
+[Note that at this point we're no longer going to print output from our commands in this summary text, due to a conflict between the package directory and our home directory.]
+```{r load_all, eval=FALSE}
+rm(funkyadd)
+rm(randomadd)
+setwd("/home/ryan/R/littlePackage/")
+proj_set("/home/ryan/R/littlePackage/")
+load_all()
+funkyadd(3,5)
+randomadd(3,5)
+```
+
+In the actual development of a package, it is recommended to commit your changes using git as you go along, but we'll omit those steps for clarity of exposition here.
+
+### Checking your work
+
+R has a function to look for any errors in your package.  In the terminal, you could type _R CMD check_.  Within R or Rstudio, use _check_
+
+```{r check, eval=FALSE}
+check()
+```
+We get a lot of output and a useful note and a warning in this case.
+
+### Filling in the details
+
+*Edit the DESCRIPTION* file using RStudio.  Just insert your own name and descriptive information in the fields and save.
+
+Run _use_mit_license_ to insert a complete current license for your package. Note the appearance of the LICENSE files after this. We could also use GPL or other licenses.  Use the _document_ command to make it finito.
+
+```{r license, eval=FALSE}
+use_mit_license()
+```
+
+If you use RStudio, open R/funkyadd.R in the source editor and put the cursor somewhere in the _funkyadd_ function definition. Now select *Code > Insert roxygen skeleton* from the RStudio menu. A very special comment should appear above your function, in which each line begins with #'. RStudio only inserts a barebones template, so you will need to edit it to add descriptive information after the #' @___ characters.
+
+Now we run the _document_ command to generate Rdocumentation format files from our R commands.  We can repeat this process for _randomadd_.  Note that we could also create Rdocumentation (.Rd) files in a text editor, but the roxygen/document process saves us from learning a new set of markup tags.
+
+```{r document, eval=FALSE}
+document()
+?funkyadd
+```
+Now we can get help on _funkyadd_ with the usual ?funkyadd syntax. The NAMESPACE file has also been updated by the _document_ command.
+
+We can now _check_ and _install_ the package to include it in our R space.  We can now load it with a _library_ command, although you may still want to _load_all_ to be safe.  Our functions should work now.
+```{r check and install, eval=FALSE}
+check()
+install()
+library(littlePackage)
+load_all()
+randomadd(3,6)
+```
+
+We can test our package systematically by loading _use_testthat_ and then running tests using _use_test_.  Note that we have to create our own tests to run them.  These might check, for example, that the results of certain functions fall into the values we expect them to take.  The _use_test_ function will insert properly named R files into a "tests" directory, but it is up to you to edit them into something sensible.  Once tests are created, you can run them all with the _test_ command.
+
+```{r testthat, eval=FALSE}
+use_testthat()
+use_test("funkyadd")
+test()
+```
+
+### Some additional useful commands
+
+We can require the use of certain packages with the _use_package_ command.
+
+We can connect our project to a specific Github repository using the _use_github_ command.
+
+For usage on Github, we need a more complete README file.  The _use_readme_rmd_ command will set this up for us.  This creates a README.Rmd file that is structured for typical R package usage, along with a process for generating a Github-friendly README.md file as well.  Just use the _build_readme_ command to render the .md formatted file.
+
+These steps are highly recommended for a working package, but we won't try to reproduce them in this short introduction.
+
+### Finishing up the little package
+
+A final _check_ and _install_ once you are satisfied with all the edits on your package will finalize, rebuild, and install the package properly.
+
+```{r check and install again, eval=FALSE}
+check()
+install()
+```
+
+### Review of command sequence
+
+We used the following commands to step through the creation, editing, and testing of our package.
+
+* create_package()
+* use_git()
+* use_r()
+* load_all()
+* check()
+* use_mit_license()
+* document()
+* check()  [again]
+* edit the DESCRIPTION using RStudio
+* install()
+* use_testthat()
+* use_package()
+* use_github()
+* use_readme_rmd()
+* check() [last time]
+* install() [last time]
+
+![Workflow for package creation](package_workflow.png)
+Quoting the [R Packages](https://r-pkgs.org/) book:
+
+Here is a review of the key functions you’ve seen here, organized roughly by their role in the development process.
+
+These functions setup parts of the package and are typically called once per package:
+
+* create_package()
+* use_git()
+* use_mit_license()
+* use_testthat()
+* use_github()
+* use_readme_rmd()
+
+You will call these functions on a regular basis, as you add functions and tests or take on dependencies:
+
+* use_r()
+* use_test()
+* use_package()
+
+You will call these functions multiple times per day or per hour, during development:
+
+* load_all()
+* document()
+* test()
+* check()
+
+## Additional miscellaneous highlights from [R Packages](https://r-pkgs.org)
+
+The [available](https://cran.r-project.org/package=available) package has a function called _available()_ that helps you evaluate a potential package name from many angles
+
+Here are the most common gotchas that trip many of us up at first:
+
+Package code requires new ways of working with functions in other packages. The **DESCRIPTION** file is the principal way to declare dependencies; we don’t do this via _library(somepackage)_. Instead name the package in the
+"imports" section of DESCRIPTION file. If you want data or files to be persistently available, there are package-specific methods of storage and retrieval. You can’t just put files in the package and hope for the best. It’s necessary to be explicit about which functions are user-facing and which are internal helpers. By default, functions are not exported for use by others. A new level of discipline is required to ensure that code runs at the intended time (build time vs. run time) and that there are no unintended side effects.
+
+Refer to commands in long form, e.g.
+
+_dplyr::mutate_
+
+It is natural to assume that listing a package in Imports actually “imports” the package, but this is just an unfortunate choice of name for the Imports field. The Imports field makes sure that the packages listed there are installed when your package is installed. It does not make those functions available to you, e.g. below R/, or to your user.
+
+Every package mentioned in NAMESPACE must also be present in the Imports or Depends fields.
+
+### Code style  [extracts from R Packages book]
+
+We recommend following the [tidyverse style guide](https://style.tidyverse.org), which goes into much more detail than we can here. 
+
+Although the style guide explains the “what” and the “why”, another important decision is how to enforce a specific code style. For this we recommend the [styler package](https://styler.r-lib.org); its default behaviour enforces the tidyverse style guide.	
+
+There are some functions that modify global settings that you should never use because there are better alternatives:
+
+Don’t use _library()_ or _require()_. These modify the search path, affecting what functions are available from the global environment.Instead, you should use the DESCRIPTION to specify your package’s requirements, as described in Chapter 9. This also makes sure those packages are installed when your package is installed.
+
+Never use _source()_ to load code from a file. _source()_ modifies the current environment, inserting the results of executing the code. There is no reason to use _source()_ inside your package, i.e. in a file below
+R/. Sometimes people _source()_ files below R/ during package development, but as we’ve explained in Section 4.4 and Section 6.2, _load_all()_ is a much better way to load your current code for exploration. If you’re using _source()_ to create a dataset, it is better to use the methods in Chapter 7 for including data in a package.
+
+Here is a non-exhaustive list of other functions that should be used with caution:
+
+_options()_
+_par()_
+_setwd()_
+_Sys.setenv()_
+_Sys.setlocale()_
+_set.seed()_ (or anything that changes the state of the random number generator)
+
+We usually manage state using the [withr package](https://withr.r-lib.org/) we need to "Restore the state" to what we left it .  These functions do this automatically for us.
+
+For example, change working directory using	_with_dir()_
+
+### Testing  [extracts from R Packages book]
+
+_testthat_ function is most commonly used
+
+to setup your package to use _testthat_, run:
+
+_usethis::use_testthat(3)_
+
+Can create in /tests/testthat directory, any tests to run and testthat.R file to run the tests
+
+for example:
+
+The _foofy()_ function (and its friends and helpers) should be defined in R/foofy.R and their tests should live in tests/testthat/test-foofy.R.
+
+functions _use_r()_ / _use_test()_ are handy for initially creating these file pairs and, later, for shifting your attention from one to the other.
+
+When _use_test()_ creates a new test file, it inserts an example test.
+
+[mockery](https://github.com/r-lib/mockery) is also useful in this context.
+
+Github Actions are recommended as a way to improve the checking and testing process.
+
+### Documentation [extracts from R Packages book]
+
+In the devtools ecosystem, we don’t edit .Rd files directly with our bare hands. Instead, we include specially formatted “roxygen comments” above the source code for each function1. Then we use the roxygen2 package to generate the .Rd files from these special comments2 . There are a few advantages to using roxygen2 :
+
+- Code and documentation are co-located. When you modify your code, it’s easy to remember to also update your documentation.
+- You can use markdown, rather than having to learn a one-off markup language that only applies to .Rd files. In addition to formatting, the automatic hyperlinking functionality makes it much, much easier to create richly linked documentation.
+- There’s a lot of .Rd boilerplate that’s automated away.
+- roxygen2 provides a number of tools for sharing content across documentation topics and even between topics and vignettes.
+
+Roxygen comment lines always start with #' , the usual # for a comment, followed immediately by a single quote ' 
+
+To summarize, there are four steps in the basic roxygen2 workflow:
+
+- Add roxygen2 comments to your .R files.
+- Run devtools::document() or press Ctrl/Cmd + Shift + D to convert roxygen2 comments to .Rd files.
+- Preview documentation with ?function.
+- Rinse and repeat until the documentation looks the way you want.
+
+The title is taken from the first sentence. It should be written in sentence case, not end in a full stop, and be followed by a blank line. The title is shown in various function indexes (e.g. help(package = "somepackage")) and is what the user will usually see when browsing multiple functions.
+
+The description is taken from the next paragraph. It’s shown at the top of documentation and should briefly describe the most important features of the function.
+
+Additional details are anything after the description. Details are optional, but can be any length so are useful if you want to dig deep into some important aspect of the function. Note that, even though the details come right after the description in the introduction, they appear much later in rendered documentation.
+
+The book also addresses **vignettes**, which allow a more in-depth view of your package functionality
+
+**[pkgdown](https://pkgdown.r-lib.org/)** can help you build a website for
+your package easily and easily manage links.
+
+Should also have a README.md file for basic explanation (which can be
+generated from an .Rmd file) and perhaps a NEWS.md file
+
+There is even guidance on producing a logo and a [hex sticker](https://cran.r-project.org/package=hexSticker)
+
+### Licensing [extracts from R Packages book]
+
+If you want a permissive license so people can use your code with minimal restrictions, choose the MIT license with _use_mit_license()_.
+
+If you want a copyleft license so that all derivatives and bundles of your code are also open source, choose the GPLv3 license with _use_gpl_license()_.
+
+If your package primarily contains data, not code, and you want minimal restrictions, choose the CC0 license with _use_cc0_license()_. Or if you want to require attribution when your data is used, choose the CC BY license by calling _use_ccby_license()_.
+
+If you don’t want to make your code open source, call _use_proprietary_license()_. Such packages can not be distributed by CRAN.
+
+We highly recommend [https://choosealicense.com](https://choosealicense.com), 
+
+For more details about licensing R packages, we recommend [Licensing R](https://thinkr-open.github.io/licensing-r/) by Colin Fay
+
+### Data [extracts from R Packages book]
+
+LazyData is relevant if your package makes data available to the user. If you specify LazyData: true, the datasets are lazy-loaded, which makes them more immediately available, i.e. users don’t have to use _data()_. The addition of LazyData: true is handled automatically by _usethis::use_data()_
+
+If you want to store R objects and make them available to the user, put them in data/
+Each file should be an .rda file created by _save()_ containing a single R object, with the same name as the file. The easiest way to achieve this is to use _usethis::use_data()_."
+
+It is also common for data packages to provide, e.g., a csv version of the package data that is also provided as an R object.  This data is placed in the _inst/extdata_ directory so that it is visible to end users of the package in the _extdata_ directory.
+
+Often, the data you include in data/ is a cleaned up version of raw data you’ve gathered from elsewhere. We highly recommend taking the time to include the code used to do this in the source version of your package. This makes it easy for you to update or reproduce your version of the data. This data-creating script is also a natural place to leave comments about important properties of the data, i.e. which features are important for downstream usage in package documentation.  This data should be kept in a _data-raw_ directory, best handling by the _usethis::use_data_raw()_ function.
+
+Package data submitted to CRAN should be less than 1MB or you will need to argue for an exemption.  Also consider compression.
+
+Use the usual method to document your dataset.
+
+There are two roxygen tags that are especially important for documenting datasets:
+
+- @format gives an overview of the dataset. For data frames, you should include a definition list that describes each variable. It’s usually a good idea to describe variables’ units here.
+- @source provides details of where you got the data, often a URL.
+
+Never @export a data set.
+
+Other uses for data are discussed in Chapter 7 of [R packages](https://r-pkgs.org)
