@@ -61,9 +61,9 @@ And for more information, use
 
 R Packages are an excellent way to distribute collections of data and code.  Following on the release of the 2nd edition of Hadley Wickham's [_R Packages_ book](https://r-pkgs.org), this workshop reviews the package creation process, covering prerequisites, the steps involved in creating a complete package, and following up on documentation and testing.
 
-You have a choice of how you'd like to follow along with this material.  To run code yourself, you can use the R_Packages.R, R_Packages.qmd (Quarto), or R_Packages.Rmd (Rmarkdown) files.  Alternatively, you can read along using:
+You have a choice of how you'd like to follow along with this material.  To run code yourself, you can use the [R_Packages.R](https://ryanwomack.com/data_topics/R_Packages.R), [R_Packages.qmd](https://ryanwomack.com/data_topics/R_Packages.qmd) (Quarto), or [R_Packages.Rmd](https://ryanwomack.com/data_topics/R_Packages.Rmd) (Rmarkdown) files.  Alternatively, you can read along using:
 
-- R_Packages_light.html (web - light theme)
-- R_Packages_dark.html (web - dark theme)
-- R_Packages.pdf (PDF)
-- R_Packages.docx (Word)
+- [R_Packages.html](https://ryanwomack.com/data_topics/R_Packages.html) (web - light theme)
+- [R_Packages_dark.html](https://ryanwomack.com/data_topics/R_Packages_dark.html) (web - dark theme)
+- [R_Packages.pdf](https://ryanwomack.com/data_topics/R_Packages.pdf) (PDF)
+- [R_Packages.docx](https://ryanwomack.com/data_topics/R_Packages.docx) (Word)
