@@ -3,13 +3,13 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
 
 
-## ----install packages---------------------------------------------
+## ----install packages, eval=FALSE---------------------------------------------
 ## install.packages("pak", dependencies=TRUE)
 ## library(pak)
 ## pkg_install("devtools")
 ## pkg_install("roxygen2")
 ## pkg_install("testthat")
-##
+## 
 ## devtools::session_info()
 
 
@@ -64,44 +64,45 @@ use_r("funkyadd")
 use_r("randomadd")
 
 
-## ----load_all-----------------------------------------------------
-rm(funkyadd)
-rm(randomadd)
-setwd("/home/ryan/R/littlePackage/")
-proj_set("/home/ryan/R/littlePackage/")
-load_all()
-funkyadd(3,5)
-randomadd(3,5)
+## ----load_all, eval=FALSE-----------------------------------------------------
+## rm(funkyadd)
+## rm(randomadd)
+## setwd("/home/ryan/R/littlePackage/")
+## proj_set("/home/ryan/R/littlePackage/")
+## load_all()
+## funkyadd(3,5)
+## randomadd(3,5)
 
 
-## ----check--------------------------------------------------------
-check()
+## ----check, eval=FALSE--------------------------------------------------------
+## check()
 
 
-## ----license------------------------------------------------------
-use_mit_license()
+## ----license, eval=FALSE------------------------------------------------------
+## use_mit_license()
 
 
-## ----document-----------------------------------------------------
-document()
-?funkyadd
+## ----document, eval=FALSE-----------------------------------------------------
+## document()
+## ?funkyadd
+## library(help="littlePackage")
 
 
-## ----check and install--------------------------------------------
-check()
-install()
-library(littlePackage)
-load_all()
-randomadd(3,6)
+## ----check and install, eval=FALSE--------------------------------------------
+## check()
+## install()
+## library(littlePackage)
+## load_all()
+## randomadd(3,6)
 
 
-## ----testthat-----------------------------------------------------
-use_testthat()
-use_test("funkyadd")
-test()
+## ----testthat, eval=FALSE-----------------------------------------------------
+## use_testthat()
+## use_test("funkyadd")
+## test()
 
 
-## ----check and install again--------------------------------------
-check()
-install()
+## ----check and install again, eval=FALSE--------------------------------------
+## check()
+## install()
 

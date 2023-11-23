@@ -22,6 +22,7 @@ theme: vapor #litera *journal *cerulean slate *solar sketchy vapor
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
 ```
+Copyright Ryan Womack, 2023. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 **R Packages**
 
