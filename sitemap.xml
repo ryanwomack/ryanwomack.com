@@ -2,14 +2,59 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ryanwomack.com/tags/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/blog/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/desec/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/dnssimple/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/domain-registrar/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/dynadot/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/easydns/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/gandi/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/infomaniak/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/linux/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/namecheap/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/namesilo/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/njalla/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/porkbun/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/postale/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</loc>
+    <lastmod>2023-12-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://ryanwomack.com/career_timeline/</loc>
     <lastmod>2023-09-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/</loc>
     <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryanwomack.com/tags/</loc>
-    <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/tags/amazon/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
@@ -17,19 +62,10 @@
     <loc>https://ryanwomack.com/tags/aws/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/blog/</loc>
-    <lastmod>2023-07-09T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://ryanwomack.com/tags/digital-ocean/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/gandi/</loc>
-    <lastmod>2023-07-09T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://ryanwomack.com/tags/hugo/</loc>
-    <lastmod>2023-07-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryanwomack.com/tags/linux/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/tags/render/</loc>

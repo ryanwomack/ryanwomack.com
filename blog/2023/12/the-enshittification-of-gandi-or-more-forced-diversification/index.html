@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - The Enshittification of Gandi, or, more forced diversification </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">The Enshittification of Gandi, or, more forced diversification</h1>
+            
+                <p class="blog-post-info">Posted: <time>2023-12-26</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/blog">blog</a>, <a class="blog-taxonomy-info" href="/tags/desec">deSEC</a>, <a class="blog-taxonomy-info" href="/tags/dnssimple">DNSSimple</a>, <a class="blog-taxonomy-info" href="/tags/domain-registrar">domain registrar</a>, <a class="blog-taxonomy-info" href="/tags/dynadot">Dynadot</a>, <a class="blog-taxonomy-info" href="/tags/easydns">EasyDNS</a>, <a class="blog-taxonomy-info" href="/tags/gandi">Gandi</a>, <a class="blog-taxonomy-info" href="/tags/infomaniak">Infomaniak</a>, <a class="blog-taxonomy-info" href="/tags/linux">linux</a>, <a class="blog-taxonomy-info" href="/tags/namecheap">Namecheap</a>, <a class="blog-taxonomy-info" href="/tags/namesilo">Namesilo</a>, <a class="blog-taxonomy-info" href="/tags/njalla">Njalla</a>, <a class="blog-taxonomy-info" href="/tags/porkbun">Porkbun</a>, <a class="blog-taxonomy-info" href="/tags/postale">Postale</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p><a href="https://www.wired.com/story/tiktok-platforms-cory-doctorow/">Enshittification</a> has rapidly become enshrined as a fundamental principle of the economy of the internet. Once customers are hooked on various free and enhanced services funded by excess capital, the screws are turned and customers are bled as the service is monetized by reducing costs and quality.</p>
+<p>Now that it&rsquo;s happened to me, it&rsquo;s become personal.</p>
+<p>I was a <a href="https://gandi.net">Gandi</a> customer for over 20 years, since my first ventures onto the internet with web hosting, still discoverable via the Wayback Machine (although I won&rsquo;t give any further clues than that).  I was attracted to Gandi by the &ldquo;No Bullshit&rdquo; slogan which seemed to match their attitude, their Frenchness, and their support for the open internet.  I even got sent a free t-shirt by them for my 20 years of loyalty. That was nice, but in retrospect it may have been a signal of the beginning of the end.</p>
+<p>I don&rsquo;t intend to provide a blow-by-blow here, although one can do that via the discussion and links at <a href="https://techrights.org/n/2023/12/14/_Video_Lessons_to_be_Learned_From_Gandi_s_Death_Total_Webhostin.shtml">TechRights</a> and reading reviews on <a href="https://www.trustpilot.com/review/gandi.net">Trustpilot</a>. Suffice it to say that, after an initial sale to private equity in 2019, Gandi fell into the clutches of Total Webhosting in 2023, which started an express enshittification program of the service.</p>
+<p>Gandi, which had always provided free e-mail accounts (first 5, later cut to 2) with domain registration, now began to charge $4/month (3.99 actually) for <em>each</em> e-mail address. My e-mail strategy, fueled by these very same Gandi free accounts, had been to run several addresses on each of my domains to segregate e-mails by purpose (e.g., online shopping vs. personal communication). $48/year is actually an outrageously high fee even for one mailbox that does not include any encryption or any kind of add-on features at all. $48/year per domain might have been passable, or $1/month per address, but the way Gandi did this was quite nasty. Also, this cost was imposed universally, not at renewal time, meaning that the free e-mail addresses that one might have been counting on in already-paid-for multi-year renewals were essentially snatched away. The whole thing was a giant insult to the customer. When someone says &ldquo;sorry sucker!&rdquo; to me, I&rsquo;m going to take action.</p>
+<p>After figuring out that keeping Gandi as my e-mail provider was going to be impossible, I set about on the long path of removing Gandi from my life.</p>
+<p>As I mentioned in my <a href="/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/">last blog post</a> and <a href="/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws">the one before that</a>, I learned all about the benefits of diversification for disaster recovery and general resilience, so I decided to implement that now by separating out all of my functions and using multiple, different providers.  Domain &gt; DNS &gt; Email &gt; Webhosting would all be handled separately, minimizing my dependency on any one link in the chain.  Ironically, in my last blog post I had praised Gandi for being an island of stability in all this, having not yet learned of their plans to overthrow my e-mail.</p>
+<p>I had already settled on Vercel and Render for static website hosting, with a little bit of DigitalOcean thrown in. Knowing that other services like Surge.sh, Netlify, or even Github pages could be pressed into service if necessary was also comforting. So my website needs had already been taken care of by my early crisis with AWS.</p>
+<p>Now the immediate task in front of me was to migrate e-mail from Gandi. I had been a longtime paying user of <a href="https://tutanota.com">Tutanota</a>, now rebranded to <a href="https://tuta.com">Tuta</a>, and a free user of <a href="https://protonmail.ch">ProtonMail</a>. Both of these services are great on encryption and privacy, and I had already been using Tuta for one of my domain e-mails, this being one of the main benefits of paying for their service. I decided to do the same thing with ProtonMail and start paying for it to link it to another domain e-mail.  I consider both of these to be trustworthy and reasonably priced mail services, and I sincerely hope they remain that way.  The encryption aspect makes these services slightly harder to work with, although their apps and the intriguing ProtonMail Bridge are making using them increasingly easy and seamless.</p>
+<p>However, for the more lightweight e-mails that are not quite &ldquo;throwaways&rdquo; but not quite heavy, serious usage either, Tuta or Proton would be overkill. I needed something that would provide several e-mails cheaply, without being free. I do believe that if something is free, then I become the product. I want to pay something reasonable to ensure that the service is <strong>for</strong> me, not <strong>about</strong> me. I discovered <a href="https://postale.io">Postale.io</a>, which has a Premium tier that is only $5/month and allows unlimited domains and up to 25 mailboxes. It is not fully encrypted e-mail, but is a solid &ldquo;classic&rdquo; style e-mail service. This was enough to meet all my remaining needs at the same cost as a single Gandi so-called e-mail address would.  Postale had a nice simple interface and it was relatively easy to use IMAP to sync up my local e-mail archives and ingest them into the new service. After a short transition, my new e-mail now works seamlessly. There were other contenders that also seemed fine, which I won&rsquo;t mention here, since I didn&rsquo;t need to go further than Postale.</p>
+<p>Having completed my e-mail migration before the November deadline, I paused a bit to rest. But in reading the numerous complaints about Gandi, including their now non-existent support, I realized that the company was circling the drain, and I needed to finish my exit from their services.  Gandi had made it convenient to handle both Domain Names and DNS with them, but I needed to break this dependence. I set up DNS with <a href="https://easydns.com">EasyDNS</a>, <a href="https://namecheap.com">NameCheap</a>, <a href="https://dnsimple.com">DNSimple</a>, and the intriguing <a href="https://desec.io">deSEC</a> project. How I chose among these services is a bit hard to explain. I was looking for some combination of inexpensive, ease of navigation and tweaking settings, and relatively capable. But once you start learning about the issues around DNS, you develop a desire to pay for some level of assurance. No one service seems like an answer to all DNS problems, but I hope that exposure to this mixture of services will help me learn more over time.  For example, EasyDNS&rsquo;s $20/year cost is reasonable for one domain that is important to me. But maybe not so reasonable to maintain that cost for a throwaway or parked domain. NameCheap is less expensive, and DNSimple even more so on their amateur solo plan.  The deSEC project provides a Wikipedia-style model, allowing donations to fund their open service. Also, domain registration and DNS are so often bundled that my desire to keep these services separate may have overly complicated my configuration and my life. But now that this, is done, I really appreciate having separation among these services.</p>
+<p>Finally, having set up e-mail and DNS, I turned to the migration of my domain-name registrar services away from Gandi.  Here I found <a href="https://namecheap.com">Namecheap</a>, <a href="https://namesilo.com">NameSilo</a>, and <a href="https://dynadot.com">Dynadot</a> to be the services that offered a combination of low cost, track record, and ease of use. Particular kudos to Dynadot for their support for a large range of TLDs at low cost. <a href="https://porkbun.com">Porkbun</a> was also intriguing, but the online complaints about their sharing with Chinese companies, their privacy policy that permits sharing information widely with commercial partners, and their website&rsquo;s style of preferring cute to being informative gave me pause. Although I had initially feared this transition, it turns out that swapping registrars is the simplest thing of all, not nearly as tricky as DNS records.</p>
+<p>In conclusion, I would encourage any internet user to dive in and take control of these issues for yourself, rather than relying on any &ldquo;easy&rdquo; or bundled services that ultimately deprive you of freedom and leave you vulnerable to predatory business practices.  The first step may seem the hardest, particularly if you are (for example) Alphabet or Meta dependent, but it is the path of freedom.</p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
