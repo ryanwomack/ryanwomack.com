@@ -136,7 +136,8 @@ I was inspired by my colleague Francesca Giannetti’s post about the personal s
           <pubDate>Tue, 24 Sep 2019 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</guid>
-          <description>Having been involved in several hiring committees over recent years, it is sometimes a bit frustrating to not be able to give advice to applicants. We cannot do that in individual cases as a matter of HR policy. The decision-making process is confidential. But I hope that by offering some general observations I have made after reviewing many applications, that this might be of help to future seekers. We are, after all, trying to find the person who will provide the best job performance, not perform the best in the application process.</description>
+          <description>(migrated from ryandata.wordpress.com)
+Having been involved in several hiring committees over recent years, it is sometimes a bit frustrating to not be able to give advice to applicants. We cannot do that in individual cases as a matter of HR policy. The decision-making process is confidential. But I hope that by offering some general observations I have made after reviewing many applications, that this might be of help to future seekers.</description>
         </item>
             
         <item>
@@ -155,7 +156,8 @@ In the future, I will start posting about some of more personal thoughts about d
           <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</guid>
-          <description>This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
+          <description>(migrated from ryandata.wordpress.com)
+This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
 I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.</description>
         </item>
             
