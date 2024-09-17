@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown ">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title"></h1>
+            
+                <h2 id="data-publication-2"><strong>Data Publication 2</strong></h2>
+<p>This workshop first reviews repositories for data publication such as Dataverse, ICPSR, OSF, Zenodo, and more. Then we turn to a detailed discussion of building R packages.</p>
+<h3 id="why-data-publication">Why Data Publication?</h3>
+<p>Sharing data is a way to maximize the impact and usefulness of your research, and is increasingly mandated by research funders.</p>
+<h3 id="general-principles">General Principles</h3>
+<p>Data should be shared in a manner that is <a href="https://www.go-fair.org/fair-principles/">FAIR</a>, enabling the data to be:</p>
+<ul>
+<li>Findable,</li>
+<li>Accessible,</li>
+<li>Interoperable, and</li>
+<li>Reusable</li>
+</ul>
+<p>We should also <a href="https://www.gida-global.org/care">CARE</a> for our data, respecting indigenous data governance, and managing our data according to the following principles:</p>
+<ul>
+<li>Collective Benefit</li>
+<li>Authority to Control</li>
+<li>Responsibility</li>
+<li>Ethics</li>
+</ul>
+<p>The NIH is the most recent major US funding agency to promulgate data sharing guidelines and requirements, so their materials are as good a place as any to get more information&hellip;</p>
+<p><a href="https://sharing.nih.gov/data-management-and-sharing-policy/sharing-scientific-data/repositories-for-sharing-scientific-data">NIH on Sharing Scientific Data</a></p>
+<h3 id="data-repositories">Data Repositories</h3>
+<p>NIH lists several
+<a href="https://sharing.nih.gov/data-management-and-sharing-policy/sharing-scientific-data/generalist-repositories">Generalist Repositories</a>
+which are all good places to deposit data when more specialized repositories are not available.</p>
+<ul>
+<li><a href="https://dataverse.org/"><em>Dataverse</em></a></li>
+<li><a href="https://datadryad.org/">Dryad</a></li>
+<li><a href="https://figshare.com/">Figshare</a></li>
+<li><a href="https://ieee-dataport.org/">IEEE Dataport</a></li>
+<li><a href="https://data.mendeley.com/">Mendeley Data</a></li>
+<li><a href="https://openicpsr.org"><em>OpenICPSR</em></a> - social science emphasis, free to use for Rutgers due to our institutional membership in ICPSR</li>
+<li><a href="https://osf.io/"><em>Open Science Framework</em></a></li>
+<li><a href="https://www.synapse.org/">Synapse</a></li>
+<li><a href="https://vivli.org/">Vivli</a></li>
+<li><a href="https://zenodo.org/"><em>Zenodo</em></a></li>
+</ul>
+<p>A <a href="https://doi.org/10.5281/zenodo.3946719">comparison</a> of many of these repositories is available.</p>
+<p><em>italic</em> entries are recommended for their ease of use and suitability for a wide range of data.</p>
+<p>Specialized repositories, if available, are the best place to deposit data with special characteristics.  These repositories are built to handle and showcase certain kinds of data.</p>
+<p>To discover specialized repositories, such as the <a href="https://www.rcsb.org">Protein Data Bank</a>, use</p>
+<p><a href="https://www.re3data.org/">Re3data - the Registry of Research Data Repositories</a></p>
+<p>And for more information, use</p>
+<p><a href="https://fairsharing.org/">FAIRsharing.org</a></p>
+<h3 id="r-package-creation">R package creation</h3>
+<p>R Packages are an excellent way to distribute collections of data and code.  Following on the release of the 2nd edition of Hadley Wickham&rsquo;s <a href="https://r-pkgs.org"><em>R Packages</em> book</a>, this workshop reviews the package creation process, covering prerequisites, the steps involved in creating a complete package, and following up on documentation and testing.</p>
+<p>You have a choice of how you&rsquo;d like to follow along with this material.  To run code yourself, you can use the <a href="https://ryanwomack.com/data_topics/R_Packages.R">R_Packages.R</a>, <a href="https://ryanwomack.com/data_topics/R_Packages.qmd">R_Packages.qmd</a> (Quarto), or <a href="https://ryanwomack.com/data_topics/R_Packages.Rmd">R_Packages.Rmd</a> (Rmarkdown) files.  Alternatively, you can read along using:</p>
+<ul>
+<li><a href="https://ryanwomack.com/data_topics/R_Packages.html">R_Packages.html</a> (web - light theme)</li>
+<li><a href="https://ryanwomack.com/data_topics/R_Packages_dark.html">R_Packages_dark.html</a> (web - dark theme)</li>
+<li><a href="https://ryanwomack.com/data_topics/R_Packages.pdf">R_Packages.pdf</a> (PDF)</li>
+<li><a href="https://ryanwomack.com/data_topics/R_Packages.docx">R_Packages.docx</a> (Word)</li>
+</ul>
+
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
