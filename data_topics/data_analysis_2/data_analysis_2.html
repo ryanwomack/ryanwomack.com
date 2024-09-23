@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Womack">
-<meta name="dcterms.date" content="2024-09-18">
+<meta name="dcterms.date" content="2024-09-22">
 
-<title>R_Data_Analysis_2</title>
+<title>Data Analysis 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -157,14 +157,16 @@ window.Quarto = {
   <li><a href="#python-bookstrap" id="toc-python-bookstrap" class="nav-link" data-scroll-target="#python-bookstrap"><span class="header-section-number">6.3</span> Python bookstrap</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats">
-<h2>Other Formats</h2>
-  <ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2>
+<ul>
    <li>
     <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
    </li>
    <li>
     <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.docx"><i class="bi bi-file-word"></i>MS Word</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.qmd"><i class="bi bi-file-word"></i>Quarto</a>
    </li>
    <li>
     <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.R"><i class="bi bi-file-text"></i>R script only</a>
@@ -173,7 +175,6 @@ window.Quarto = {
     <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2_dark.html"><i class="bi bi-file-html"></i>HTML - dark mode</a>
    </li>
   </ul>
-  <h2>Back to <a href="https://ryanwomack.com/data_topics/">Data Topics</a></h2>
 </div></nav>
 </div>
 <main class="content" id="quarto-document-content">
@@ -197,7 +198,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 18, 2024</p>
+      <p class="date">September 22, 2024</p>
     </div>
   </div>
   
@@ -281,7 +282,7 @@ window.Quarto = {
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Gender_StatsCSV.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 305545 Columns: 68
+<pre><code>Rows: 306340 Columns: 68
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (4): Country Name, Country Code, Indicator Name, Indicator Code
@@ -442,6 +443,7 @@ mean difference
 <p>Running Python in RStudio requires the <em>reticulate</em> package. Your Python installation should also have <em>numpy</em> and <em>scipy</em> installed. Python will not have direct access to the R data structures, so we use a simplified example here from <a href="https://builtin.com/data-science/t-test-python">Builtin.com</a></p>
 <p>How to pass data from R to Python and vice-versa is described in this <a href="https://medium.com/data-and-beyond/how-to-seamlessly-integrate-python-into-r-rmarkdown-codes-2fe09cfdd0ee">blog post by Dima Diachkov</a></p>
 <p>Note that our code chunk is labeled Python. For more <em>reticulate</em> package, see <a href="https://www.r-bloggers.com/2022/04/getting-started-with-python-using-r-and-reticulate/">this post</a></p>
+<p>Also note that it is also possible to invoke R from a Python environment using <a href="https://pypi.org/project/rpy2/">rpy2</a></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -584,7 +586,7 @@ X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6162542</code></pre>
+<pre><code>[1] 0.1601738</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -593,7 +595,7 @@ X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  81.13177 107.13505  80.19468 114.64515  85.79921</code></pre>
+<pre><code>[1] 105.44994 117.81522 101.63770  78.37509 123.37488</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -877,7 +879,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p><em>Regression diagnostics</em> are used to evaluate the fit and appropriateness of the regression model as applied. Once again, we are providing some illustrative examples without going into depth here.</p>
 <p>One thing that we may wish to test is the normality of the regression residuals (i.e., the difference between predicted and actual values of the observations is normally distributed). See this <a href="https://sscc.wisc.edu/sscc/pubs/RegDiag-R/normality.html">discussion of Normality at U Wisconsin</a> and this <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/">article available in PubMedCentral</a> for a brief explanation.</p>
 <p>We can apply a typically used test for normality, the Shapiro-Wilk Normality Test, as follows. We get standardized residuals from the model with <em>rstandard</em> (or more simply the residuals accessed with <em>regoutput$residuals</em>), and then use the <em>shapiro.test</em> function to perform the test, or the (less powerful) Kolmogorov-Smirnov Test with <em>ks.test</em>, which also allows us to test against different distributions (here we just specific <em>‘pnorm’</em> for the normal distribution).</p>
-<p>Note the interpretation of these two tests is different. A <span class="math inline">p</span>&lt;.05 for Shapiro implies <em>rejection</em> of normality. A <span class="math inline">p</span>&lt;.05 for K-S is <em>acceptance</em> of normality.</p>
+<p>A <span class="math inline">p</span>&lt;.05 in both the Shapiro-Wilk and Kolmogorov-Smirnov test implies <em>rejection</em> of normality. But note in the example below that we must be careful to standardize the residuals so that the test is applied correctly.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1113,7 +1115,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <pre><code># A tibble: 1 × 2
   lower_ci upper_ci
      &lt;dbl&gt;    &lt;dbl&gt;
-1    0.160    0.749</code></pre>
+1    0.159    0.750</code></pre>
 </div>
 </div>
 <p>Note that we are resampling from a small population of 12, so even with large replications, our confidence interval is wide. Using this technique on the type of country data we have is atypical, and is just for demonstration purposes. A more typical usage would be on survey data with individual responses selected from a larger population. Again to quote <em>IMS</em>, “bootstrapping is best suited for modeling studies where the data have been generated through random sampling from a population.”</p>
@@ -1141,7 +1143,7 @@ data:  x
 p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
-  9.120698 32.071785
+  9.310535 29.980189
 sample estimates:
 mean of x 
  16.22617 </code></pre>
@@ -1175,7 +1177,7 @@ mean of x
 <pre><code># A tibble: 1 × 2
   mean_stat std_err_stat
       &lt;dbl&gt;        &lt;dbl&gt;
-1     0.137         6.03</code></pre>
+1     0.192         6.39</code></pre>
 </div>
 </div>
 </section>

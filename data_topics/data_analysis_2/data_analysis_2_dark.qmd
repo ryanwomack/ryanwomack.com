@@ -1,7 +1,7 @@
 ---
-title: "R_Data_Analysis_2"
+title: "Data Analysis 2"
 author: "Ryan Womack"
-date: "2024-09-18"
+date: "2024-09-22"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -19,7 +19,7 @@ format:
     colorlinks: true
     papersize: A4
   docx: default
-theme: vapor #cerulean #vapor #litera *journal  slate *solar sketchy
+theme: slate #cerulean #litera *journal *solar sketchy
 ---
 
 ```{r setup, include=FALSE}
@@ -204,6 +204,8 @@ Running Python in RStudio requires the _reticulate_ package. Your Python install
 How to pass data from R to Python and vice-versa is described in this [blog post by Dima Diachkov](https://medium.com/data-and-beyond/how-to-seamlessly-integrate-python-into-r-rmarkdown-codes-2fe09cfdd0ee)
 
 Note that our code chunk is labeled Python. For more _reticulate_ package, see [this post](https://www.r-bloggers.com/2022/04/getting-started-with-python-using-r-and-reticulate/)
+
+Also note that it is also possible to invoke R from a Python environment using [rpy2](https://pypi.org/project/rpy2/)
 
 ```{python t-test python}
 
@@ -419,7 +421,7 @@ One thing that we may wish to test is the normality of the regression residuals 
 
 We can apply a typically used test for normality, the Shapiro-Wilk Normality Test, as follows. We get standardized residuals from the model with _rstandard_ (or more simply the residuals accessed with _regoutput$residuals_), and then use the _shapiro.test_ function to perform the test, or the (less powerful) Kolmogorov-Smirnov Test with _ks.test_, which also allows us to test against different distributions (here we just specific _'pnorm'_ for the normal distribution).
 
-Note the interpretation of these two tests is different. A $p$<.05 for Shapiro implies _rejection_ of normality. A $p$<.05 for K-S is _acceptance_ of normality.
+A $p$<.05 in both the Shapiro-Wilk and Kolmogorov-Smirnov test implies _rejection_ of normality. But note in the example below that we must be careful to standardize the residuals so that the test is applied correctly.
 
 ```{r tests for normality}
 
