@@ -1,7 +1,7 @@
 ---
 title: "R_Packages"
 author: "Ryan Womack"
-date: "2023-11-08"
+date: "2023-10-16"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -15,15 +15,13 @@ format:
       - top=30mm
       - left=30mm
   docx: default
-theme: cerulean #litera *journal *cerulean *slate solar *vapor
+theme: cerulean #litera *journal *cerulean *slate solar
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
 ```
-
-Copyright Ryan Womack, 2023. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 **R Packages**
 
@@ -193,9 +191,8 @@ Now we run the _document_ command to generate Rdocumentation format files from o
 ```{r document, eval=FALSE}
 document()
 ?funkyadd
-library(help="littlePackage")
 ```
-Now we can get help on _funkyadd_ with the usual ?funkyadd syntax. The NAMESPACE file has also been updated by the _document_ command.  We can also view the overall package description with the _library(help="littlePackage")_ command
+Now we can get help on _funkyadd_ with the usual ?funkyadd syntax. The NAMESPACE file has also been updated by the _document_ command.
 
 We can now _check_ and _install_ the package to include it in our R space.  We can now load it with a _library_ command, although you may still want to _load_all_ to be safe.  Our functions should work now.
 ```{r check and install, eval=FALSE}

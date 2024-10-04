@@ -1,7 +1,7 @@
 ---
 title: "Data Visualization 2"
 author: "Ryan Womack"
-date: "2024-10-02"
+date: "2024-10-03"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -19,7 +19,7 @@ format:
     colorlinks: true
     papersize: A4
   docx: default
-theme: slate #cerulean  #solar #litera #sketchy #journal cyborg darkly
+theme: cyborg
 ---
 
 ```{r setup, include=FALSE}
@@ -77,7 +77,7 @@ library(rsconnect)
 
 # Shiny basics
 
-We'll walk through some of the [Shiny gallery examples](https://shiny.posit.co/r/gallery/)] to understand the fundamentals of Shiny.
+We'll walk through some of the [Shiny gallery examples](https://shiny.posit.co/r/gallery/) to understand the fundamentals of Shiny.
 
 ## ui and server
 
@@ -91,9 +91,9 @@ We should use the default labeling of "input" and "output" to render our code cl
 
 We put our Shiny files in a single directory, including supplementary files like data (unless using direct file location references). While all Shiny visualizations will have a _ui_ and _server_ component, we have two options on how to set this up:
 
-1. Create two files, one called _ui.R_ and the other called _server.R_ with code describing the user interface and server commands respectively. We can also (optionally) use a third file called _global.R_ to take care of some settings and globally applicable commands (like loading packages).  This approach has the advantage of making the 
+1. Create two files, one called _ui.R_ and the other called _server.R_ with code describing the user interface and server commands respectively. We can also (optionally) use a third file called _global.R_ to take care of some settings and globally applicable commands (like loading packages).  This approach has the advantage of making the separate sides of the Shiny app easy to view and edit.
 
-2. Create a single file, called _app.R_. This approach can be simpler to deploy, since it is obvious that everything happens in the single file. Inside the app.R file, we have a _ui_ section and a _server_ section. We then run the app by running _shinyApp(ui, server)_ .
+2. Create a single file, called _app.R_. This approach can be simpler to deploy, since it is obvious that everything happens in the single file, just one thing to update and upload. Inside the app.R file, we have a _ui_ section and a _server_ section. We then run the app by running _shinyApp(ui, server)_ .
 
 Here's a very basic single file _app.R_, as an illustration.
 
@@ -119,6 +119,8 @@ server <- function(input, output) {
 shinyApp(ui, server)
 
 ```
+
+In the live workshop (and recording), we walk through creating the files in RStudio at this point.
 
 ## Reactivity
 
@@ -154,8 +156,6 @@ function(input, output, session) {
 
 Note this is a very basic example that doesn't accomplish too much.
 
-walk through creating the files in RStudio
-
 To continue the learning process, see these sections from _Mastering Shiny_:
 
 - [Shiny in Action](https://mastering-shiny.org/action-intro.html)
@@ -167,6 +167,8 @@ To continue the learning process, see these sections from _Mastering Shiny_:
 In this section we walk through the process of using the RStudio interface to upload a Shiny app to [shinyapps.io](https://shinyapps.io). This requires us to log in and perform a few steps (notably grabbing an authentication token), using the [shinyapps instructions](https://docs.posit.co/shinyapps.io/guide/). Afterwards, we'll be able to publish to _my_account.shinyapps.io/my_project_ (substituting your account name and your project folder name).
 
 Shinyapps.io is free for 5 projects with limited bandwidth. Later we'll see how to completely take control of your own server. The publishing button used in RStudio for shinyapps.io might also be used for in house connection to an organization's own Shiny server (if you have that kind of tech support).
+
+Note that [shinylive](https://posit-dev.github.io/r-shinylive/) is another option and approach to serving up your Shiny content.
 
 # Some extras
 

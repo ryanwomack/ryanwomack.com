@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Womack">
-<meta name="dcterms.date" content="2024-10-02">
+<meta name="dcterms.date" content="2024-10-03">
 
 <title>Data Visualization 2</title>
 <style>
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2>
-  <ul>
+<ul>
    <li>
     <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
    </li>
@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    <li>
     <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.html"><i class="bi bi-file-html"></i>HTML - light mode</a>
    </li>
-  </ul>
+</ul>
 </div></nav>
 </div>
 <main class="content" id="quarto-document-content">
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 2, 2024</p>
+      <p class="date">October 3, 2024</p>
     </div>
   </div>
   
@@ -232,7 +232,7 @@ The following object is masked from 'package:shiny':
 </section>
 <section id="shiny-basics" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Shiny basics</h1>
-<p>We’ll walk through some of the <a href="https://shiny.posit.co/r/gallery/">Shiny gallery examples</a>] to understand the fundamentals of Shiny.</p>
+<p>We’ll walk through some of the <a href="https://shiny.posit.co/r/gallery/">Shiny gallery examples</a> to understand the fundamentals of Shiny.</p>
 <section id="ui-and-server" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="ui-and-server"><span class="header-section-number">3.1</span> ui and server</h2>
 <p>The <em>ui</em> section of the code controls the user interface, and often passes variables to the server side. The ui side has a number of Shiny-specific functions to control the interface (e.g., “sliderInput”) and allow us to quickly build interactivity via these building blocks.</p>
@@ -243,8 +243,8 @@ The following object is masked from 'package:shiny':
 <h2 data-number="3.2" class="anchored" data-anchor-id="conventions-and-app.r"><span class="header-section-number">3.2</span> Conventions and app.R</h2>
 <p>We put our Shiny files in a single directory, including supplementary files like data (unless using direct file location references). While all Shiny visualizations will have a <em>ui</em> and <em>server</em> component, we have two options on how to set this up:</p>
 <ol type="1">
-<li><p>Create two files, one called <em>ui.R</em> and the other called <em>server.R</em> with code describing the user interface and server commands respectively. We can also (optionally) use a third file called <em>global.R</em> to take care of some settings and globally applicable commands (like loading packages). This approach has the advantage of making the</p></li>
-<li><p>Create a single file, called <em>app.R</em>. This approach can be simpler to deploy, since it is obvious that everything happens in the single file. Inside the app.R file, we have a <em>ui</em> section and a <em>server</em> section. We then run the app by running <em>shinyApp(ui, server)</em> .</p></li>
+<li><p>Create two files, one called <em>ui.R</em> and the other called <em>server.R</em> with code describing the user interface and server commands respectively. We can also (optionally) use a third file called <em>global.R</em> to take care of some settings and globally applicable commands (like loading packages). This approach has the advantage of making the separate sides of the Shiny app easy to view and edit.</p></li>
+<li><p>Create a single file, called <em>app.R</em>. This approach can be simpler to deploy, since it is obvious that everything happens in the single file, just one thing to update and upload. Inside the app.R file, we have a <em>ui</em> section and a <em>server</em> section. We then run the app by running <em>shinyApp(ui, server)</em> .</p></li>
 </ol>
 <p>Here’s a very basic single file <em>app.R</em>, as an illustration.</p>
 <div class="cell">
@@ -273,6 +273,7 @@ The following object is masked from 'package:shiny':
 <p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
 </div>
+<p>In the live workshop (and recording), we walk through creating the files in RStudio at this point.</p>
 </section>
 <section id="reactivity" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="reactivity"><span class="header-section-number">3.3</span> Reactivity</h2>
@@ -307,7 +308,6 @@ The following object is masked from 'package:shiny':
 </div>
 </div>
 <p>Note this is a very basic example that doesn’t accomplish too much.</p>
-<p>walk through creating the files in RStudio</p>
 <p>To continue the learning process, see these sections from <em>Mastering Shiny</em>:</p>
 <ul>
 <li><a href="https://mastering-shiny.org/action-intro.html">Shiny in Action</a></li>
@@ -320,6 +320,7 @@ The following object is masked from 'package:shiny':
 <h1 data-number="4"><span class="header-section-number">4</span> Publishing your Shiny app</h1>
 <p>In this section we walk through the process of using the RStudio interface to upload a Shiny app to <a href="https://shinyapps.io">shinyapps.io</a>. This requires us to log in and perform a few steps (notably grabbing an authentication token), using the <a href="https://docs.posit.co/shinyapps.io/guide/">shinyapps instructions</a>. Afterwards, we’ll be able to publish to <em>my_account.shinyapps.io/my_project</em> (substituting your account name and your project folder name).</p>
 <p>Shinyapps.io is free for 5 projects with limited bandwidth. Later we’ll see how to completely take control of your own server. The publishing button used in RStudio for shinyapps.io might also be used for in house connection to an organization’s own Shiny server (if you have that kind of tech support).</p>
+<p>Note that <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> is another option and approach to serving up your Shiny content.</p>
 </section>
 <section id="some-extras" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Some extras</h1>
@@ -427,18 +428,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -470,7 +460,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -478,7 +490,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

@@ -1,7 +1,7 @@
 ---
 title: "Data Analysis 2"
 author: "Ryan Womack"
-date: "2024-09-22"
+date: "2024-10-03"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -19,13 +19,13 @@ format:
     colorlinks: true
     papersize: A4
   docx: default
-theme: slate #cerulean #litera *journal *solar sketchy
+theme: cyborg
 ---
 
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis2/")
+knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis_2/")
 
 ```
 
@@ -432,7 +432,7 @@ ks.test(regoutput$residuals, 'pnorm')
 ks.test(rstandard(regoutput), 'pnorm', mean=0, sd=1)
 
 ```
-Note that standardizing the residuals makes a big difference for the Kolmogorov-Smirnow test!
+Note that standardizing the residuals makes a big difference for the Kolmogorov-Smirnov test!
 
 We can also easily pull up regression diagnostic plots:
 
