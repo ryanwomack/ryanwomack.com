@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - Mongolian Multivariate Statistics (at the Mongolian University of Life Sciences) </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/data_topics/">
+                    <span>Data Topics</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/shiny/">
+                    <span>Shiny</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">Mongolian Multivariate Statistics (at the Mongolian University of Life Sciences)</h1>
+            
+                <p class="blog-post-info">Posted: <time>2018-03-18</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/blog">blog</a>, <a class="blog-taxonomy-info" href="/tags/data-science-workshops">Data Science Workshops</a>, <a class="blog-taxonomy-info" href="/tags/mongolia">Mongolia</a>, <a class="blog-taxonomy-info" href="/tags/mongolian-university-of-life-sciences">Mongolian University of Life Sciences</a>, <a class="blog-taxonomy-info" href="/tags/multivariate-statistics">Multivariate Statistics</a>, <a class="blog-taxonomy-info" href="/tags/r">R</a>, <a class="blog-taxonomy-info" href="/tags/statistics">Statistics</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p>(migrated from ryandata.wordpress.com)</p>
+<p><a href="/img/MGL_2018_01.png"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_01.png"
+         alt="Hong Kong to Ulaanbaatar flight"/> <figcaption>
+            <h4>Hong Kong to Ulaanbaatar flight</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_02.png"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_02.png"
+         alt="MIAT Plane"/> <figcaption>
+            <h4>MIAT Plane</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>I was delighted to be invited to return to Mongolia again for a more in-depth visit to the <a href="http://muls.edu.mn">Mongolian University of Life Sciences</a> [<a href="http://muls.edu.mn">Хөдөө Аж Ахуйн Их Сургууль</a>].  I was honored by the invitation from the Dean of the <a href="http://seb.muls.edu.mn/">School of Economics and Business</a> [<a href="http://seb.muls.edu.mn/">Эдийн засаг бизнесийн сургууль</a>], B. Baasansukh, and P. Munkhtuya, Chair of the Department of Economic Statistics and Mathematical Modeling, to come and teach a one week <a href="https://doi.org/10.7282/T3BZ69BB">Short Course on Applied Multivariate Statistical Methods with R</a> [<a href="https://doi.org/10.7282/T3BZ69BB">Олон хэмжээст статистикийн богино хэмжээний сургалт R программ дээр</a>].  This post is a brief summary of my trip.</p>
+<p>I got to Ulaanbaatar on my first ever flight on <a href="http://www.miat.com">MIAT Mongolian Airlines</a>, which was quite comfortable.</p>
+<p><a href="/img/MGL_2018_03.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_03.jpg"
+         alt="At Mongolian University of Life Sciences, with P. Munkhtuya, photo by B. Ganchimeg"/> <figcaption>
+            <h4>At Mongolian University of Life Sciences, with P. Munkhtuya, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_04.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_04.jpg"
+         alt="Outside School of Economics and Business, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Outside School of Economics and Business, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_05.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_05.jpg"
+         alt="Inside School of Economics and Business, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Inside School of Economics and Business, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>On Monday, February 26, we jumped right into work.  The material for the short course was adapted from the book and associated R code by Brian Everitt and Torsten Hothorn, <a href="https://www.springer.com/us/book/9781441996497">An Introduction to Applied Multivariate Statistical Analysis with R</a>, Springer, 2011.  The eight chapters of the book were covered in four days.  Topics covered were the following:</p>
+<ul>
+<li>R environment, setup, basics</li>
+<li>Multivariate Analysis - what is it?</li>
+<li>Data Exploration and Visualization</li>
+<li>Principal Components</li>
+<li>Multidimensional Scaling</li>
+<li>Exploratory Factor Analysis</li>
+<li>Confirmatory Factor Analysis</li>
+<li>Structural Equation Modeling</li>
+<li>Cluster Analysis</li>
+<li>Repeated Measures</li>
+</ul>
+<p>The Everitt and Hothorn text was particularly useful for its compact treatment of complex topics, and the self-contained nature of the included R code demo modules.</p>
+<p><a href="/img/MGL_2018_06.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_06.jpg"
+         alt="In the classroom, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In the classroom, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_07.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_07.jpg"
+         alt="In the classroom, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In the classroom, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>There were a total of 31 participants attending, although course and meeting conflicts prevented some from coming every day.  The MULS School of Economics and Business had 20 participants, with the remaining attendees coming from the Division of Science and Research, the School of Agroecology, the School of Veterinary Medicine, and the School of Engineering and Technology.  Outside of MULS, participants also came from the National Statistics Office of Mongolia and the Cabinet Secretariat of the Government of Mongolia.</p>
+<p><a href="/img/MGL_2018_08.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_08.jpg"
+         alt="In the classroom, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In the classroom, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_09.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_09.jpg"
+         alt="In the classroom, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In the classroom, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>All participants followed along by executing sample code on their own laptops.  All presentation materials and code are available from <a href="https://github.com/ryandata/">github</a>.  Supplemental texts and files were made available using a portable PirateBox to distribute materials via local wireless network.  See this post on <!-- raw HTML omitted -->how to set up a PirateBox<!-- raw HTML omitted -->.</p>
+<p><a href="/img/MGL_2018_10.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_10.webp"
+         alt="B. Purev executing code, photo by B. Ganchimeg"/> <figcaption>
+            <h4>B. Purev executing code, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_11.webp"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_11.webp"
+         alt="B. Purev using Rstudio"/> <figcaption>
+            <h4>B. Purev using Rstudio, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>The interaction was lively and particularly aided by assistance in translation from G. Bilguun, O. Amartuvshin, and T. Suvdmaa.  I hope the participants enjoyed it as much as I did!</p>
+<p>Putting our knowledge of R to immediate use, we used R to select a random sample of winners of swag provided by <a href="https://mbs.rutgers.edu/">Rutgers&rsquo; Master of Business and Science program</a>.</p>
+<p><a href="/img/MGL_2018_12.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_12.webp"
+         alt="Explaining the PirateBox, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Explaining the PirateBox, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_13.webp"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_13.webp"
+         alt="Explaining the PirateBox, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Explaining the PirateBox, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>During the week, I also had the opportunity for several meetings to discuss future collaborations on projects to improve the academic and data infrastructure of MULS, which I believe will be the subject of future collaborations.  The week also included some delicious food, including a hot pot dinner and <a href="https://en.wikipedia.org/wiki/Khorkhog">khorkhog</a> (хopxoг) and <a href="https://en.wikipedia.org/wiki/Khuushuur">khuushuur</a> (хуушууp).</p>
+<p><a href="/img/MGL_2018_14.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_14.webp"
+         alt="Consulting with O. Amartuvshin, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Consulting with O. Amartuvshin, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_15.webp"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_15.webp"
+         alt="In discussion, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In discussion, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>Thursday afternoon, I had the opportunity to address a group of undergraduate statistics majors on trends in data science and its intersection with statistics.  I argued that the expansion in the power and availability of open source software and data has made it possible for anyone, from Mongolia or even the United States (where there are arguably more distractions) to study and master the tools and skills that underpin the most dynamic growth sectors for future jobs.</p>
+<p><a href="/img/MGL_2018_16.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_16.webp"
+         alt="In discussion, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In discussion, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_17.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_17.webp"
+         alt="In discussion with T. Suvdmaa, photo by B. Ganchimeg"/> <figcaption>
+            <h4>In discussion with T. Suvdmaa, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>Finally on Friday, we wrapped up the course with some final discussion and the presentation of certificates to participants.</p>
+<p><a href="/img/MGL_2018_18.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_18.webp"
+         alt="Rutgers swag random drawing, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Rutgers swag random drawing, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_19.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_19.webp"
+         alt="Rutgers swag random drawing, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Rutgers swag random drawing, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_20.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_20.webp"
+         alt="Rutgers swag random drawing, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Rutgers swag random drawing, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p>Mongolia is always a land of warm welcome and surprises.  Thanks to my hosts at SEB-MULS for a fantastic trip, filled with learning.  Thanks to D Music for inspiration as always.  And thanks especially to P. Munkhtuya for leading all of the organizational efforts for my visit. I am looking forward to working together with MULS colleagues in the future!  Маш их баярлалаа!</p>
+<p><a href="/img/MGL_2018_21.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_21.webp"
+         alt="Dean Baasansukh, G. Bilguun, M. Bayarmaa, P. Munkhuya, S. Altantsetseg at “The Bull”, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Dean Baasansukh, G. Bilguun, M. Bayarmaa, P. Munkhuya, S. Altantsetseg at “The Bull”, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_22.webp"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_22.webp"
+         alt="with P. Munkhtuya, T. Suvdmaa, and B. Ganchimeg at “Kozy Nomads”"/> <figcaption>
+            <h4>Dean Baasansukh, G. Bilguun, M. Bayarmaa, P. Munkhuya, S. Altantsetseg at “The Bull”, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a>
+&hellip;.</p>
+<p><a href="/img/MGL_2018_23.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_23.jpg"
+         alt="On the way to class, photo by B. Ganchimeg"/> <figcaption>
+            <h4>On the way to class, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_24.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_24.jpg"
+         alt="Speaking to undergraduates, photo by B. Ganchimeg”"/> <figcaption>
+            <h4>Speaking to undergraduates, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_25.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_25.jpg"
+         alt="With G. Bilguun and P. Munkhtuya, photo by B. Ganchimeg"/> <figcaption>
+            <h4>With G. Bilguun and P. Munkhtuya, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_26.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_26.jpg"
+         alt="Undergraduate statistics students, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Undergraduate statistics students, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_27.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_27.jpg"
+         alt="with undergraduate statistics students, photo by B. Ganchimeg"/> <figcaption>
+            <h4>with undergraduate statistics students, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_28.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_28.jpg"
+         alt="At presentation of certificates"/> <figcaption>
+            <h4>At presentation of certificates</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_29.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_29.jpg"
+         alt="with T. Suvdmaa, photo by B. Ganchimeg"/> <figcaption>
+            <h4>with T. Suvdmaa, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_30.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_30.jpg"
+         alt="Wrapping up class, photo by B. Ganchimeg"/> <figcaption>
+            <h4>Wrapping up class, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_31.jpg"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_31.jpg"
+         alt="End of class, photo by B. Ganchimeg"/> <figcaption>
+            <h4>End of class, photo by B. Ganchimeg</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_32.webp"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_32.webp"
+         alt="Parking lot attendant"/> <figcaption>
+            <h4>Parking lot attendant</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_33.webp"><figure class="image-shortcode left" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_33.webp"
+         alt="At Tsonjin Boldog"/> <figcaption>
+            <h4>At Tsonjin Boldog</h4>
+        </figcaption>
+</figure>
+</a></p>
+<p><a href="/img/MGL_2018_34.webp"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/MGL_2018_34.webp"
+         alt="with G. Bilguun, P. Munkhtuya, and Y. Temujin"/> <figcaption>
+            <h4>with G. Bilguun, P. Munkhtuya, and Y. Temujin</h4>
+        </figcaption>
+</figure>
+</a></p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
