@@ -161,6 +161,17 @@ Hong Kong to Ulaanbaatar flight MIAT Plane I was delighted to be invited to retu
         </item>
             
         <item>
+          <title>PirateBox for Data Literacy</title>
+          <link>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</link>
+          <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</guid>
+          <description>(migrated from ryandata.wordpress.com)
+Distributing files via PirateBox PirateBox with pen for scale A PirateBox is a wireless router that has been reconfigured to serve as a local fileserver. The PirateBox project develops software to do this. PirateBox makes it easy to share files with anyone within range of the router, and also supports a local anonymous discussion board for those within range.
+I did this for the TP-Link TL-MR3040, a commonly used piece of hardware for PirateBoxes.</description>
+        </item>
+            
+        <item>
           <title>A manual backup routine using AWS</title>
           <link>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</link>
           <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
