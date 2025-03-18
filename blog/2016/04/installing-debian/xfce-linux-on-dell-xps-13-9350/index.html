@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian - Installing Debian/XFCE (Linux) on Dell XPS 13 9350 </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown activetab">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/data_topics/">
+                    <span>Data Topics</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/shiny/">
+                    <span>Shiny</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title blog">Installing Debian/XFCE (Linux) on Dell XPS 13 9350</h1>
+            
+                <p class="blog-post-info">Posted: <time>2016-04-14</time>
+                
+
+
+    <span class="blog-taxonomy-info"> &nbsp; | &nbsp; Tags: 
+        
+        
+        
+        <a class="blog-taxonomy-info" href="/tags/blog">blog</a>, <a class="blog-taxonomy-info" href="/tags/debian">Debian</a>, <a class="blog-taxonomy-info" href="/tags/dell-xps">Dell XPS</a>, <a class="blog-taxonomy-info" href="/tags/linux">Linux</a>, <a class="blog-taxonomy-info" href="/tags/xfce">XFCE</a>
+    </span>
+
+</p>
+
+                <div class="blog-post-content">
+                <p>Well, this is off topic for the theme of the blog, but I felt the urge to record an expurgated version of my recent installation of Linux on a new Dell XPS 13 (9350), for the potential edification of the populace.  I will try to make it brief, by my standards 🙂  (but I guess I failed..)  This is not in any way an objective post, but I am just blowing off steam and letting my opinions fly.  Please skip over if you are looking for actual educational material…</p>
+<p>As tweeted earlier, a Pi day discount tempted me into the purchase of a 13″ Dell XPS (model 9350).  I had been following Dell primarily due to their Linux support on via the Developer Series, and had been tempted on many occasions in the past.</p>
+<p>I should also mention that dating back to the fin-de-siècle, I have been a Linux user.  Although I have occasionally strayed away, for most of the time, Linux computers have formed the core of my computing infrastructure.  In Linux, I can do what I want to do, rather than simply obey the instructions of other OSes.  In recent years, I converted from the Fedora sect to become a Debian adherent, and I have been very satisfied with that choice.</p>
+<p>Still, the computer I bought was NOT a Developer’s Edition, but a new Windows 10 machine.  In the past, I have usually put Linux onto either very standard or slightly older hardware, and didn’t have FEAR that it would not work.  My working laptop recently has been a leftover 2010 Macbook Pro running Debian only, and it has no real issues, but it is running hot and noisy.   Since this XPS laptop was brand new with the latest technology, I have to confess that for a moment or two I even considered leaving Windows on the machine and using it in dual boot mode.  But two minutes in Windows 10 erased any of those doubts.  Seriously, why would anyone voluntarily remain in that depressing environment if they had the possibility of escape?</p>
+<p>So, I committed to putting Debian on the machine as its sole operating system, and began Googling to get ready.  I learned that the Dell-rebranded Broadcom wireless card was not being supported, except in bleeding edge kernels, and was not very good anyway.  And also that Intel wireless cards worked easily with Linux.  Thanks to Dell, because they put a wonderful service manual online and don’t mind users operating on their own hardware (unlike the fruit-themed gadget company).  I ordered an Intel Wireless card.  Due to a bit of carelessness, I picked a 9260 instead of the 9265 model.  The 9265 is supported natively in the kernel, whereas the 9260 requires a download of Intel proprietary drivers (more on this later).  But, in spite of my nerves, popping open and disassembling my brand new laptop was a piece of cake, and it went back together just as good as new.  I am liking Dell from the hardware perspective.</p>
+<p>Then, I prepared a USB boot stick to install Debian 8 (Jessie).  So, I had to fidget about a bit with the UEFI/BIOS settings to get the Dell to want to boot from the stick, but eventually made it happen.  Then I went through a couple of abortive installation attempts because of the aforementioned wireless drivers, which needed to be loaded from a second USB stick.  I am sorry I can’t really document it completely here, but only more fiddling until I found the right combination that would recognize one USB as the boot media and one USB as the supplemental driver files allowed me to proceed.  During that phase, I began to worry that I had gone too far by buying a slim fancy device without an ethernet port, but I survived.  I would still lean towards getting a computer with a real ethernet port in the future though, just for safety.  Turns out the Linux drivers for the USB-C to Ethernet are reported to be fussy too.</p>
+<p>On to the next complication… Did I mention that I not only like Linux and Debian, but prefer XFCE as my desktop?  Because I am old school and don’t care for eye candy at all.  It was the horrible broken experience of GNOME 3 that drove me away from Fedora.  I just want a desktop that stays out of my way and does the work (is that some antiquated colonialist mindset? perhaps, but I think it is still OK to exploit a computer, right?).  Anyway, XFCE has been my go-to for the last 4-5 years.  I respect LinuxMint/Cinammon too for their attempt to correct the awful GNOME decisions that were forced on unsuspecting users.  But XFCE has done the job for me.  So, I was willing to work overtime to get XFCE as my desktop.</p>
+<p>Now, I have done Debian/XFCE installs on a number of desktops, and my Macbook too.  But somehow, the Debian 8 XFCE install (at the time of writing) had one major issue.  I finished the installation, but could only login to XFCE desktop as root, not as a user.  There was some kind of weird permissions issue, or some problem with the install scripts.  I am experienced in Linux, but not expert, so extensive Googling on this topic failed to resolve the issue.  What did work was to do a standard Debian install with Cinammon as the default desktop.  And only after that was working did I install XFCE.  That worked like a charm.  Hopefully someone who has more knowledge of what could cause this would fix it for the young generations.</p>
+<p>I also had to try a few different configurations before getting my preferred configuration of encrypted hard drive and swap space, while leaving a bit of open /boot directory.  I wish there was a better-documented path for this too.  Somehow encryption is still considered to be a slightly exotic option, when it shouldn’t be.</p>
+<p>Ok, so now I am excited because I have a working Debian/XFCE install on my new laptop.  My hand-installed wireless is working, and everything is looking up.  BUT, I have NO SOUND, and it appears that the lack of sound is also causing any standard (e.g., YouTube) videos to play too fast.  I take a deep breath.  More googling reveals that this is an issue with the Dell 9350 model’s audio, and that future kernels will handle it.  But my Debian 8 kernel does not handle it, and I cannot use my expensive laptop to watch my favorite YouTube videos!!!!  I use all of my experience in “taming my dog of desire” to reconcile myself to the situation.  I can use my laptop as a wonderful distraction-free zone to code and write wonderful things.  What do I need sound for?  After all, Plato and Muhammad both condemned music.  Yes, what do I need sound for?  Ok, I will live without sound on my laptop 😦</p>
+<p>But, after getting everything else configured to my liking, I was ready to keep experimenting.  Is that not the whole point of Linux?  To experiment, to control your own working environment?   Not to blindly obey when a popup window says, “You must update now”, or “You must click ‘accept’ to continue”, or “Operation not permitted”.  Right, this is Linux, so let’s go!</p>
+<p>In practice, what that meant was that I attempted a full upgrade from Debian 8 (jessie) to Debian 9 (stretch), even though 9 is not yet stable.  What was my motivation?  Well, to confess, at least 90% of the motivation was to get that audio working.  Because if this is the kind of world where we can’t listen to music on our laptops, is that the kind of world that we want to live in?  We want our music, and we want control of our computers too!</p>
+<p>Now, the Debian instructions are very clear and very good, and after editing my apt sources, I was able to update and upgrade, and within a very, very short period of time, had my entire OS running a very current set of applications with crystal clear audio and video.  I now have pretty close to my full suite of applications (R, RStudio, Mathematica, Claws-mail, LaTeX, LyX, Gummi, all of the old favorites…).  Now I am content!  I then had to go and customize my desktop settings and browser to a very dark theme and plaster my laptop with some stickers to make it seem more like my own.  Too much, probably, but it is a small thing that makes me happy 🙂  My family says I’m crazy, but I get that all the time anyway…</p>
+<p><a href="/img/XFCE_1.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/XFCE_1.jpg"
+         alt="XFCE_1"/> 
+</figure>
+</a></p>
+<p><a href="/img/XFCE_2.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/XFCE_2.jpg"
+         alt="XFCE_2"/> 
+</figure>
+</a></p>
+<p><a href="/img/XFCE_3.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/XFCE_3.jpg"
+         alt="XFCE_3"/> 
+</figure>
+</a></p>
+<p><a href="/img/XFCE_4.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/XFCE_4.jpg"
+         alt="XFCE_4"/> 
+</figure>
+</a></p>
+<p><a href="/img/XFCE_5.jpg"><figure class="image-shortcode right" 
+         style="width: 10em;">
+    <img src="https://ryanwomack.com/img/XFCE_5.jpg"
+         alt="XFCE_5"/> 
+</figure>
+</a></p>
+
+                </div>
+                
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
