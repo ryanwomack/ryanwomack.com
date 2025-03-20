@@ -48,6 +48,7 @@ User-agent: CatBoost
 User-agent: CC-Crawler
 User-agent: CCBot
 User-agent: ChatGLM
+User-agent: ChatGPT-User
 User-agent: Chinchilla
 User-agent: Claude
 User-agent: ClearScope
@@ -83,6 +84,8 @@ User-agent: Doubao AI
 User-agent: DuckAssistBot
 User-agent: FacebookBot
 User-agent: FacebookExternalHit
+User-agent: facebookexternalhit
+User-agent: Facebot
 User-agent: Firecrawl
 User-agent: Flyriver
 User-agent: Frase AI
@@ -96,6 +99,7 @@ User-agent: Google-Extended
 User-agent: GoogleOther
 User-agent: Goose
 User-agent: GPT
+User-agent: GPTBot
 User-agent: Grammarly
 User-agent: Grendizer
 User-agent: Grok
@@ -134,6 +138,7 @@ User-agent: Neural Text
 User-agent: NeuralSEO
 User-agent: OAI-SearchBot
 User-agent: Omgili
+USer-agent: Omgilibot
 User-agent: Open AI
 User-agent: OpenAI
 User-agent: OpenBot
