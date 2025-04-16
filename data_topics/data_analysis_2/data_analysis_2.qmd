@@ -322,7 +322,7 @@ We can also perform simple correlations to evaluate the strength of a relationsh
 
 ```{r correlation incorrect, eval=FALSE}
 
-cor(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`, na.rm=TRUE)
+cor(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`, na.rm=TRUE)
 
 ```
 
@@ -330,7 +330,7 @@ Why won't this work? The defaults and options of R commands are not very standar
 
 ```{r correlation correct}
 
-cor(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`, use="complete.obs")
+cor(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`, use="complete.obs")
 
 ```
 
@@ -338,7 +338,7 @@ The _cor.test_ function gives more complete output
 
 ```{r cor.test}
 
-cor.test(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`)
+cor.test(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`)
 
 ```
 
@@ -348,11 +348,11 @@ cor.test(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per
 
 ## Linear Regression
 
-We start at the beginning, with linear regresion and the _lm_ command.  Let's see if there is a relationship between female labor participation and GDP:
+We start at the beginning, with linear regression and the _lm_ command.  Let's see if there is a relationship between female labor participation and GDP:
 
 ```{r linear regression}
 
-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`)
+lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`)
 
 ```
 
@@ -360,7 +360,7 @@ Which predicts about a 0.5 increase in the percentage labor participation of fem
 
 ```{r linear regression with summary}
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`))
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`))
 
 ```
 
@@ -400,7 +400,7 @@ A very important feature of R is the flexibility that derives from the ability t
 
 ```{r stored regression output}
 
-regoutput<-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`)
+regoutput<-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`)
 names(regoutput)
 regoutput$residuals
 
@@ -484,7 +484,7 @@ gender_python = r.gender_data_final
 
 # specify variables
 labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
-gdp = gender_python.loc[:,"GDP per capita (constant 2010 US$)"]
+gdp = gender_python.loc[:,"GDP per capita (constant 2015 US$)"]
 
 # this step is important to put the data in Python-friendly form
 labor2 = labor.array.reshape(-1, 1)

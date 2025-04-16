@@ -20,6 +20,10 @@ format:
     papersize: A4
   docx: default
 theme: litera
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
 ```{r setup, include=FALSE}
@@ -87,11 +91,11 @@ Some highlights of US government data
 
 - [**Census**](https://data.census.gov). The Bureau of the Census is the largest collector of demographic information. The original Decennial Census has seen most of its questions moved to the American Community Survey, an annual sample that provides more up-to-date information, while the Decennial Census retains its role as a complete count of the population. The Census produces numerous [other surveys](https://www.census.gov/programs-surveys.html) on business and other topics, as well as microdata.
 
-- [**Bureau of Labor Statistics**](https://www.bls.gov/) - The BLS collects employment, inflation, and other information related to work, including the [_American Time Use Study_](https://www.bls.gov/tus/).
+- [**Bureau of Labor Statistics](https://www.bls.gov/) - The BLS collects employment, inflation, and other information related to work, including the [American Time Use Study](https://www.bls.gov/tus/).
 
 - [**FRED**](https://fred.stlouisfed.org/) and [**ALFRED**](https://alfred.stlouisfed.org/) - The Federal Reserve Bank collects and archives major economic data series in their comprehensive FRED (Federal Reserve Economic Data) site, along with ALFRED (Archival FRED), which archives original releases of data. The original releases can later be updated and corrected (in FRED), but for economists and others studying how markets originally reacted to information, ALFRED is important.
 
-- [**Crime Data Explorer**](https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/home) - represents the current information from the Federal Bureau of Investigation's [_Uniform Crime Statistics_](https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/ucr).
+- [**Crime Data Explorer**](https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/home) - represents the current information from the Federal Bureau of Investigation's [Uniform Crime Statistics](https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/ucr).
 
 - [**CDC Wonder**](https://wonder.cdc.gov/) - the Center for Disease Control's data collection, a first stop for mortality, disease, and other health statistics.
 
@@ -99,7 +103,7 @@ Some highlights of US government data
 
 There are many, many more possibilities with federal data, but we'll stop with these highlights.
 
-## New Jersey - State Data
+# New Jersey - State Data
 
 - [**New Jersey State Data Center**](https://nj.gov/labor/labormarketinformation/contact-us/NJSDC.shtml) - The New Jersey State Data Center (NJSDC) is a cooperative project of the State of New Jersey and the U.S. Bureau of the Census, serving data users in the public, private, and academic sectors.
 
@@ -111,7 +115,7 @@ Other states operate similarly, so just apply the same principles to your search
 
 Other open data sites also exist, such as [_NYC Open Data_](https://opendata.cityofnewyork.us/) for New York City and [_OpenDataPhilly_](https://opendataphilly.org/) for Philadelphia.
 
-## Nonprofit organizations
+# Nonprofit organizations for data
 
 Data _archives_, like ICPSR, collect data from multiple sources. Other projects, like IPUMS, have specific aims and goals.
 
@@ -121,66 +125,77 @@ Data _archives_, like ICPSR, collect data from multiple sources. Other projects,
 
 - [**IPUMS**](https://ipums.org) - IPUMS provides census and survey data from around the world integrated (harmonized) across time and space. IPUMS integration and documentation makes it easy to study change, conduct comparative research, merge information across data types, and analyze individuals within family and community contexts. Data and services available free of charge (with registration). Focus on microdata. Excellent coverage of historical US Census microdata in research-friendly formats. NHGIS component provides GIS-coded Census data.
 
-- [**General Social Survey (GSS)**](https://gss.norc.org/) - a nationally representative survey of adults in the US conducted since 1972. The GSS collects data on contemporary American society in order to monitor and explain trends in opinions, attitudes and behaviors. The GSS has adapted questions from earlier surveys, thereby allowing researchers to conduct comparisons for up to 80 years.
-
-- [**American National Election Studies (ANES)**](https://electionstudies.org/) - produces high quality data from its own surveys on voting, public opinion, and political participation. 
-
 - [**re3data**](https://www.re3data.org/) is an index to data repositories, ranging from discipline specific to general, and can be used as a discovery tool for potential archives of data.
 
-## Commercial (subscription)
+# Commercial/subscription resources
 
 These require a subscription to access. Links are to the Rutgers-subscribed versions, which require authentication via Rutgers NetID. If you are viewing this from another institution, check your library for access.
 
-- [**Sage Data**](https://www.libraries.rutgers.edu/databases/data-planet) - a large collection of statistics from state, federal, international, and private sources in a standardized, searchable format, with download and graphing capability.
+- [**Sage Data**](https://www.libraries.rutgers.edu/databases/data-planet) - Sage Data lets you search a large collection of statistics from state, federal, international, and private sources and download extracts and graphs.
 
 - [**Social Explorer**](https://www.libraries.rutgers.edu/databases/socialexplorer) and [**PolicyMap**](https://www.libraries.rutgers.edu/databases/policymap) are two resources that provide easy access to demographic data in map and downloadable form for the US.
 
-- [**Statista**](https://www.libraries.rutgers.edu/databases/statista) provides quick lookups of current statistics with a business focus.
-
-- [**Statistical Abstract of the US**](https://www.libraries.rutgers.edu/databases/statabus) for quick statistical tables. For pre-2000 tables, try [**Historical Statistics of the US**](https://www.libraries.rutgers.edu/databases/hsus).
-
 There are many business databases that provide information about companies. For detailed financial information, _COMPUSTAT_ (corporate financials) and _CRSP_ (stock prices) are two of the most commonly used. At Rutgers these are available through the Rutgers Business School's subscription to [_WRDS_](https://wrds-www.wharton.upenn.edu/).
 
-# Restricted data
+# Setup
+Polling
 
-A word about restricted data. In the social sciences, there are privacy concerns around releasing data about sensitive topics, personally identifiable information, and data about vulnerable populations (minors, incarcerated, mentally ill, etc.). This can result in the free, publicly available datasets being somewhat limited. Accessing the more detailed data, with information at the individual level (microdata) often requires additional steps, where the researcher must apply to use the data and demonstrate that they can handle it responsibly. ICPSR is one major provider of [restricted data](https://www.icpsr.umich.edu/web/pages/ICPSR/access/restricted/).
+https://libguides.rutgers.edu/c.php?g=1053090&p=8235886
 
-Restricted data may have to be accessed in a secure data enclave. The [_Federal Statistical Research Data Centers_](https://www.census.gov/about/adrm/fsrdc.html) provide secure environments supporting qualified researchers using restricted-access data while protecting respondent confidentiality. These restricted-access data come from censuses and surveys of businesses and households, linked employer-employee data, and administrative records from federal and state agencies and other sources. The Census Bureau maintains and enhances these confidential microdata through the FSRDC network to equip researchers with the resources they need to generate insights for the public good.
+ARDA https://www.thearda.com/
 
-# Data for minoritized and underrepresented groups
+GSS https://gss.norc.org/
 
-Many organizations and projects focus attention on data and issues related to minoritized and underrepresented groups, surfacing data that has lacked attention previously. Some examples follow:
+World Values https://www.worldvaluessurvey.org/wvs.jsp
 
-- [**Resource Center for Minority Data (ICPSR)**](https://www.icpsr.umich.edu/web/pages/RCMD/) - highlights from the ICPSR collections across many dimensions of minority populations and experience.
-
-- [**Diversitydatakids**](https://www.diversitydatakids.org/) - data focused on equity for children of all races/ethnicities.
-
-- [**Civil Rights Data Collection**](https://www.ed.gov/laws-and-policy/civil-rights-laws/crdc/civil-rights-data) - on education and civil rights, since 1968.
-
-- [**The Sentencing Project**](https://www.sentencingproject.org/) - advocates for effective and humane responses to crime that minimize imprisonment and criminalization of youth and adults by promoting racial, ethnic, economic, and gender justice. Data tools and resource library available.
-
-- [**Mapping Inequality**](https://dsl.richmond.edu/panorama/redlining/) - redlining in New Deal America
-
-- [**Mapping Prejudice**](https://mappingprejudice.umn.edu/) - visualizing the hidden histories of race and privilege in the built environment
-
-- [**Measuring Race and Ethnicity Across the Decades: 1790–2010**](https://www.census.gov/data-tools/demo/race/MREAD_1790_2010.html) - how racial classifications used by the government have changed from 1790-2020, with [further information](https://www.census.gov/library/visualizations/interactive/decennial-census-measurement-of-race-and-ethnicity-across-the-decades-1790-2020.html)
-
-- [**IASSIST Antiracism resources guide**](https://iassistdata.org/community/antiracism-resources-guide/) - for more data sources, check here.
+Statista
+Data Planet
 
 # Further exploration
 
 For further information, consult the following research guides from Rutgers University Libraries and elsewhere:
 
+- [Criminal Justice Guide](https://libguides.rutgers.edu/c.php?g=336221&p=7622717)
+
 - [Data by Subject](https://libguides.rutgers.edu/databysubject) - links to the Economics, Political Science, and Social Work data guides
 
 - [GIS data](https://libguides.rutgers.edu/gis/datasources)
-
-- [Qualitative Data](https://libguides.rutgers.edu/c.php?g=1053090&p=7646958)
-
-- [Criminal Justice Guide](https://libguides.rutgers.edu/c.php?g=336221&p=7622717)
 
 - [Elections guide (Princeton)](https://libguides.princeton.edu/elections) - from Jeremy Darrington, a comprehensive guide to finding elections data
 
 - [Humanities Data](https://libguides.rutgers.edu/c.php?g=337057&p=2272539)
 
+for INTL-Latin
+https://libguides.rutgers.edu/LAS/data
+
 - [Linguistic Corpora](https://libguides.rutgers.edu/ling/corpora)
+
+- []()
+
+[]()
+Resource Center for Minority Data (ICPSR)
+
+Hall of Justice
+http://hallofjustice.sunlightfoundation.com/
+
+Elecotions - role of orgs
+https://libguides.rutgers.edu/elections/federaldata
+
+for INTL-Latin
+https://libguides.rutgers.edu/LAS/data
+
+
+
+
+
+- [****]()
+
+- [****]()
+
+Science Dat?
+
+African Guide https://libguides.rutgers.edu/c.php?g=648743&p=4549702
+
+# Restricted Data
+
+# with focus on diversity and data for minoritized and underrepresented groups

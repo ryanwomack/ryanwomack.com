@@ -16,6 +16,8 @@
         
 
         
+        <lastBuildDate>Wed, 16 Apr 2025 00:00:00 +0000</lastBuildDate>
+        
 
         
         <atom:link href="https://ryanwomack.com/data_topics/index.xml" rel="self" type="application/rss+xml" />
@@ -149,6 +151,37 @@ In the future, I will start posting about some of more personal thoughts about d
         </item>
             
         <item>
+          <title>Mongolian Multivariate Statistics (at the Mongolian University of Life Sciences)</title>
+          <link>https://ryanwomack.com/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</link>
+          <pubDate>Sun, 18 Mar 2018 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</guid>
+          <description>(migrated from ryandata.wordpress.com)
+Hong Kong to Ulaanbaatar flight MIAT Plane I was delighted to be invited to return to Mongolia again for a more in-depth visit to the Mongolian University of Life Sciences [Хөдөө Аж Ахуйн Их Сургууль]. I was honored by the invitation from the Dean of the School of Economics and Business [Эдийн засаг бизнесийн сургууль], B. Baasansukh, and P. Munkhtuya, Chair of the Department of Economic Statistics and Mathematical Modeling, to come and teach a one week Short Course on Applied Multivariate Statistical Methods with R [Олон хэмжээст статистикийн богино хэмжээний сургалт R программ дээр].</description>
+        </item>
+            
+        <item>
+          <title>PirateBox for Data Literacy</title>
+          <link>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</link>
+          <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</guid>
+          <description>(migrated from ryandata.wordpress.com)
+Distributing files via PirateBox PirateBox with pen for scale A PirateBox is a wireless router that has been reconfigured to serve as a local fileserver. The PirateBox project develops software to do this. PirateBox makes it easy to share files with anyone within range of the router, and also supports a local anonymous discussion board for those within range.
+I did this for the TP-Link TL-MR3040, a commonly used piece of hardware for PirateBoxes.</description>
+        </item>
+            
+        <item>
+          <title>Data Science in Mongolia - Маш их сайн! (very good!)</title>
+          <link>https://ryanwomack.com/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</link>
+          <pubDate>Thu, 15 Jun 2017 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</guid>
+          <description>Data Science in Mongolia - Маш их сайн! (very good!)
+While it is the subject for another blog post or another blog, Mongol culture has long held my fascination. Thanks to a series of fortunate events, I had the opportunity to bring some of my favorite interests (data, statistics, R, Mongolian) all together to form an unforgettable experience in May 2017. During one week in Ulaanbaatar, I visited three of the oldest, largest, and most important Mongolian universities, as well as the nerve center of Mongolian data, the National Statistics Office.</description>
+        </item>
+            
+        <item>
           <title>A manual backup routine using AWS</title>
           <link>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</link>
           <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
@@ -157,6 +190,15 @@ In the future, I will start posting about some of more personal thoughts about d
           <description>(migrated from ryandata.wordpress.com)
 This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
 I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.</description>
+        </item>
+            
+        <item>
+          <title>Installing Debian/XFCE (Linux) on Dell XPS 13 9350</title>
+          <link>https://ryanwomack.com/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</link>
+          <pubDate>Thu, 14 Apr 2016 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</guid>
+          <description>Well, this is off topic for the theme of the blog, but I felt the urge to record an expurgated version of my recent installation of Linux on a new Dell XPS 13 (9350), for the potential edification of the populace. I will try to make it brief, by my standards 🙂 (but I guess I failed..) This is not in any way an objective post, but I am just blowing off steam and letting my opinions fly.</description>
         </item>
             
         <item>
