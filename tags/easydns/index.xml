@@ -136,8 +136,7 @@ I was inspired by my colleague Francesca Giannetti’s post about the personal s
           <pubDate>Tue, 24 Sep 2019 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</guid>
-          <description>(migrated from ryandata.wordpress.com)
-Having been involved in several hiring committees over recent years, it is sometimes a bit frustrating to not be able to give advice to applicants. We cannot do that in individual cases as a matter of HR policy. The decision-making process is confidential. But I hope that by offering some general observations I have made after reviewing many applications, that this might be of help to future seekers.</description>
+          <description>Having been involved in several hiring committees over recent years, it is sometimes a bit frustrating to not be able to give advice to applicants. We cannot do that in individual cases as a matter of HR policy. The decision-making process is confidential. But I hope that by offering some general observations I have made after reviewing many applications, that this might be of help to future seekers. We are, after all, trying to find the person who will provide the best job performance, not perform the best in the application process.</description>
         </item>
             
         <item>
@@ -156,8 +155,7 @@ In the future, I will start posting about some of more personal thoughts about d
           <pubDate>Sun, 18 Mar 2018 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</guid>
-          <description>(migrated from ryandata.wordpress.com)
-Hong Kong to Ulaanbaatar flight MIAT Plane I was delighted to be invited to return to Mongolia again for a more in-depth visit to the Mongolian University of Life Sciences [Хөдөө Аж Ахуйн Их Сургууль]. I was honored by the invitation from the Dean of the School of Economics and Business [Эдийн засаг бизнесийн сургууль], B. Baasansukh, and P. Munkhtuya, Chair of the Department of Economic Statistics and Mathematical Modeling, to come and teach a one week Short Course on Applied Multivariate Statistical Methods with R [Олон хэмжээст статистикийн богино хэмжээний сургалт R программ дээр].</description>
+          <description>Hong Kong to Ulaanbaatar flight MIAT Plane I was delighted to be invited to return to Mongolia again for a more in-depth visit to the Mongolian University of Life Sciences [Хөдөө Аж Ахуйн Их Сургууль]. I was honored by the invitation from the Dean of the School of Economics and Business [Эдийн засаг бизнесийн сургууль], B. Baasansukh, and P. Munkhtuya, Chair of the Department of Economic Statistics and Mathematical Modeling, to come and teach a one week Short Course on Applied Multivariate Statistical Methods with R [Олон хэмжээст статистикийн богино хэмжээний сургалт R программ дээр].</description>
         </item>
             
         <item>
@@ -166,8 +164,7 @@ Hong Kong to Ulaanbaatar flight MIAT Plane I was delighted to be invited to retu
           <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</guid>
-          <description>(migrated from ryandata.wordpress.com)
-Distributing files via PirateBox PirateBox with pen for scale A PirateBox is a wireless router that has been reconfigured to serve as a local fileserver. The PirateBox project develops software to do this. PirateBox makes it easy to share files with anyone within range of the router, and also supports a local anonymous discussion board for those within range.
+          <description>Distributing files via PirateBox PirateBox with pen for scale A PirateBox is a wireless router that has been reconfigured to serve as a local fileserver. The PirateBox project develops software to do this. PirateBox makes it easy to share files with anyone within range of the router, and also supports a local anonymous discussion board for those within range.
 I did this for the TP-Link TL-MR3040, a commonly used piece of hardware for PirateBoxes.</description>
         </item>
             
@@ -182,13 +179,23 @@ While it is the subject for another blog post or another blog, Mongol culture ha
         </item>
             
         <item>
+          <title>What is a Data Librarian?</title>
+          <link>https://ryanwomack.com/blog/2016/11/what-is-a-data-librarian/</link>
+          <pubDate>Wed, 23 Nov 2016 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2016/11/what-is-a-data-librarian/</guid>
+          <description>A while back I was asked this question, and it provoked an almost subterranean thought process in me. While I can’t promise a deep answer to this question, at least an answer has emerged.
+For me, librarianship itself is all about guiding people to knowledge.
+So, a data librarian is not necessarily someone who collects data and puts on a shelf or on a server (although that certainly can be done by data librarians).</description>
+        </item>
+            
+        <item>
           <title>A manual backup routine using AWS</title>
           <link>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</link>
           <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</guid>
-          <description>(migrated from ryandata.wordpress.com)
-This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
+          <description>This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
 I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.</description>
         </item>
             
@@ -207,9 +214,8 @@ I needed to develop a new routine for my home computer backup after deciding to 
           <pubDate>Tue, 31 Mar 2015 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2015/03/ple-personal-learning-environment/</guid>
-          <description>(migrated from ryandata.wordpress.com)
-I am responding to a now defunct post by my colleague, Francesca Giannetti. The discussion there is about the PLE, or personal learning environment. I think it’s interesting to reflect on, because most of the time I am just marinating in my PLE rather than conscious of it.
-I find that I use different communication mechanisms for different purposes, and they have different time scales and impacts on my thinking.</description>
+          <description>I am responding to a now defunct post by my colleague, Francesca Giannetti. The discussion there is about the PLE, or personal learning environment. I think it’s interesting to reflect on, because most of the time I am just marinating in my PLE rather than conscious of it.
+I find that I use different communication mechanisms for different purposes, and they have different time scales and impacts on my thinking. Enough generalities, let’s jump in!</description>
         </item>
             
         <item>
@@ -218,8 +224,7 @@ I find that I use different communication mechanisms for different purposes, and
           <pubDate>Fri, 27 Mar 2015 00:00:00 +0000</pubDate>
           
           <guid>https://ryanwomack.com/blog/2015/03/benfords-law/</guid>
-          <description>(migrated from ryandata.wordpress.com)
-I somehow skipped through life up to now without encountering Benford’s Law. Now that I have, I am flabbergasted that it is not more widely known, or maybe I’ve just been hanging with wrong crowd. Here’s a hint. If I have a set of measurements, like the population of countries, or a list of atomic weights, how often would you expect the first digit of the measurement to be 1?</description>
+          <description>I somehow skipped through life up to now without encountering Benford’s Law. Now that I have, I am flabbergasted that it is not more widely known, or maybe I’ve just been hanging with wrong crowd. Here’s a hint. If I have a set of measurements, like the population of countries, or a list of atomic weights, how often would you expect the first digit of the measurement to be 1? Well, it can’t start with a zero, but any of the other 9 digits is possible, right?</description>
         </item>
             
         
