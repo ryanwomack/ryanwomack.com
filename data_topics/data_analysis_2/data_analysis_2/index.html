@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ryan Womack, Data Librarian </title>
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://ryanwomack.com/css/styles.css">
+    
+    
+    <link rel="icon" href="https://ryanwomack.com/images/favicon-32x32.png">
+    
+    <meta charset="UTF-8">
+    <meta name="author" content="Ryan Womack">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+<header class="page-header">
+    <div class="myname"> 
+        <h2><a href="https://ryanwomack.com/">Ryan Womack</a></h2> 
+    </div>
+    <nav>
+        <ul class="navbar">
+            <li class="dropdown ">
+                <a href ="/blog/">
+                    <span>Blog</span>
+                </a>
+                <div class=sub-menu>
+                    <a class="" href="/tags/">All Tags</a>
+                </div>
+            </li>
+            <li class="">
+                <a href="/camgdp/">
+                    <span>CAMGDP</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/contact/">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/data_topics/data_topics/">
+                    <span>Data Topics</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/personal/">
+                    <span>Personal</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/shiny/">
+                    <span>Shiny</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <main>
+        <article>
+            
+            <h1 class="page-title"></h1>
+            
+                <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ryan Womack">
+<meta name="dcterms.date" content="2024-10-03">
+
+<title>Data Analysis 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="data_analysis_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="data_analysis_2_files/libs/quarto-html/quarto.js"></script>
+<script src="data_analysis_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="data_analysis_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="data_analysis_2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="data_analysis_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="data_analysis_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="data_analysis_2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="data_analysis_2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="data_analysis_2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#setup-and-preparing-data" id="toc-setup-and-preparing-data" class="nav-link" data-scroll-target="#setup-and-preparing-data"><span class="header-section-number">2</span> Setup and preparing data</a>
+  <ul class="collapse">
+  <li><a href="#r-packages-required" id="toc-r-packages-required" class="nav-link" data-scroll-target="#r-packages-required"><span class="header-section-number">2.1</span> R packages required</a></li>
+  <li><a href="#data-import-and-preparation" id="toc-data-import-and-preparation" class="nav-link" data-scroll-target="#data-import-and-preparation"><span class="header-section-number">2.2</span> Data import and preparation</a></li>
+  </ul></li>
+  <li><a href="#statistical-tests" id="toc-statistical-tests" class="nav-link" data-scroll-target="#statistical-tests"><span class="header-section-number">3</span> Statistical Tests</a>
+  <ul class="collapse">
+  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test"><span class="header-section-number">3.1</span> t-test</a></li>
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test"><span class="header-section-number">3.2</span> One Sample t-test</a></li>
+  <li><a href="#paired-t-test" id="toc-paired-t-test" class="nav-link" data-scroll-target="#paired-t-test"><span class="header-section-number">3.3</span> Paired t-test</a></li>
+  <li><a href="#python-t-test" id="toc-python-t-test" class="nav-link" data-scroll-target="#python-t-test"><span class="header-section-number">3.4</span> Python t-test</a></li>
+  <li><a href="#chi-squared-test-in-r-and-python" id="toc-chi-squared-test-in-r-and-python" class="nav-link" data-scroll-target="#chi-squared-test-in-r-and-python"><span class="header-section-number">3.5</span> Chi-squared test (in R and Python)</a></li>
+  <li><a href="#how-to-choose-the-appropriate-statistical-test" id="toc-how-to-choose-the-appropriate-statistical-test" class="nav-link" data-scroll-target="#how-to-choose-the-appropriate-statistical-test"><span class="header-section-number">3.6</span> How to choose the appropriate statistical test?</a></li>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="header-section-number">3.7</span> Distributions</a></li>
+  </ul></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">4</span> Correlation</a></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">5</span> Regression</a>
+  <ul class="collapse">
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">5.1</span> Linear Regression</a></li>
+  <li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression"><span class="header-section-number">5.2</span> Multiple Regression</a></li>
+  <li><a href="#stored-regression-objects" id="toc-stored-regression-objects" class="nav-link" data-scroll-target="#stored-regression-objects"><span class="header-section-number">5.3</span> Stored Regression Objects</a></li>
+  <li><a href="#regression-diagnostics" id="toc-regression-diagnostics" class="nav-link" data-scroll-target="#regression-diagnostics"><span class="header-section-number">5.4</span> Regression Diagnostics</a></li>
+  <li><a href="#glm-and-logistic-regression" id="toc-glm-and-logistic-regression" class="nav-link" data-scroll-target="#glm-and-logistic-regression"><span class="header-section-number">5.5</span> glm and Logistic Regression</a></li>
+  <li><a href="#python-regression" id="toc-python-regression" class="nav-link" data-scroll-target="#python-regression"><span class="header-section-number">5.6</span> Python regression</a></li>
+  </ul></li>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap"><span class="header-section-number">6</span> Bootstrap</a>
+  <ul class="collapse">
+  <li><a href="#t-test-via-simulation" id="toc-t-test-via-simulation" class="nav-link" data-scroll-target="#t-test-via-simulation"><span class="header-section-number">6.1</span> t-test via simulation</a></li>
+  <li><a href="#bootstrap-to-estimate-variability-of-the-slope-of-the-regression" id="toc-bootstrap-to-estimate-variability-of-the-slope-of-the-regression" class="nav-link" data-scroll-target="#bootstrap-to-estimate-variability-of-the-slope-of-the-regression"><span class="header-section-number">6.2</span> bootstrap to estimate variability of the slope of the regression</a></li>
+  <li><a href="#python-bookstrap" id="toc-python-bookstrap" class="nav-link" data-scroll-target="#python-bookstrap"><span class="header-section-number">6.3</span> Python bookstrap</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2>
+<ul>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.docx"><i class="bi bi-file-word"></i>MS Word</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.qmd"><i class="bi bi-file-word"></i>Quarto</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.R"><i class="bi bi-file-text"></i>R script only</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2_dark.html"><i class="bi bi-file-html"></i>HTML - dark mode</a>
+   </li>
+</ul>
+</div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Analysis 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ryan Womack </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Copyright Ryan Womack, 2024. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+<p><strong>Data Analysis 2</strong></p>
+<p><em>statistical tests, distributions, regression, bootstrap, and more + comparison with Python</em></p>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>This workshop reviews the implementation of basic statistical tests and methods in R, with discussion contextualizing the appropriate use of these tests. For comparison purposes, an alternative Python approach to performing similar statistical analysis is illustrated in some cases. This workshop takes inspiration from the <strong>Introduction to Modern Statistics</strong> available via <a href="https://github.com/OpenIntroStat/ims">github</a> and <a href="https://openintro-ims2.netlify.app/">online text</a>, part of the <a href="https://openintro.org">OpenIntro</a> project.</p>
+<p>Note that “packages” in R are the equivalent of “modules” in Python.</p>
+</section>
+<section id="setup-and-preparing-data" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Setup and preparing data</h1>
+<section id="r-packages-required" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="r-packages-required"><span class="header-section-number">2.1</span> R packages required</h2>
+<p>We will use the <a href="https://pak.r-lib.org/"><em>pak</em></a> package for installation as a more complete approach to package management. Replace the pkg commands with <em>install.packages()</em> versions if you prefer.</p>
+<p>This session relies on the <a href="https://tidyverse.org"><em>tidyverse</em></a> suite of packages for data manipulation as a preference, although the same tasks could be accomplished in base R. The statistical functions used are those from base R. Install <em>pak</em> and <em>tidyverse</em> if you don’t already have them on your system. We will also need <em>reticulate</em> to run Python code chunks.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pak)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"reticulate"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"infer"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"TOSTER"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now let’s load the tidyverse, infer, TOSTER, and reticulate (for Python support only)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TOSTER)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"/usr/bin/python3"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-import-and-preparation" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="data-import-and-preparation"><span class="header-section-number">2.2</span> Data import and preparation</h2>
+<p>Now let’s grab some data. We will use a realistic data example, the <a href="https://genderdata.worldbank.org/">World Bank’s Gender Statistics database</a>, whose <a href="https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip">raw data</a> is directly downloadable. Other <a href="https://data.worldbank.org/">World Bank Open Data</a> is available as well. See <a href="https://genderdata.worldbank.org">genderdata.worldbank.org</a> for more background on the Gender Data portal. Note that we have to inspect the data and understand the variables first before manipulating in R – this is not an automatic process.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">"timeout"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout=</span><span class="dv">6000</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip"</span>, <span class="st">"gender.zip"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">"gender.zip"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Gender_StatsCSV.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 306340 Columns: 68
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (4): Country Name, Country Code, Indicator Name, Indicator Code
+dbl (64): 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Now we’ll perform a few steps to clean the data, focusing on generating a useable file for a few countries (Central Asia and Mongolia plus selected high population or high income countries), from the latest available data year with complete data, typically the year before the last in the data set. For this session, we’ll just run these steps without explaining them. Data cleaning and wrangling is covered in more detail in the Data Analysis 1 workshop (forthcoming). The final filtered output is the <em>gender_data_final</em> file, which we <em>attach</em> so that a copy of the data is made the default dataset for this session.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clean the data to remove superfluous columns</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gender_data)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> gender_data[,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>)]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gender_data)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># select countries of interest</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>country_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"China"</span>, <span class="st">"Germany"</span>, <span class="st">"India"</span>, <span class="st">"Japan"</span>, <span class="st">"Kazakhstan"</span>, <span class="st">"Kyrgyz Republic"</span>, <span class="st">"Mongolia"</span>, <span class="st">"Russian Federation"</span>, <span class="st">"Tajikistan"</span>, <span class="st">"Turkmenistan"</span>, <span class="st">"United States"</span>, <span class="st">"Uzbekistan"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>gender_data2 <span class="ot">&lt;-</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  gender_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span> <span class="sc">%in%</span> country_list)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># clean the data to focus on a recent more complete time period</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>gender_data3 <span class="ot">&lt;-</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>   gender_data2 <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">pivot_longer</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">66</span>, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#filter by year</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>gender_data2022 <span class="ot">&lt;-</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  gender_data3 <span class="sc">%&gt;%</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year<span class="sc">==</span><span class="st">"2022"</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>gender_data2022 <span class="ot">&lt;-</span> gender_data2022[,<span class="sc">-</span><span class="dv">3</span>]</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>gender_data2022wide <span class="ot">&lt;-</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  gender_data2022 <span class="sc">%&gt;%</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"Indicator Name"</span>, <span class="at">values_from =</span> <span class="st">"Value"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># now use a little sapply trick to select variables that don't have much missing data - here the proportion is 0.75 (the 0.25 in the function is 1-proportion desired)</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>gender_data_filtered <span class="ot">&lt;-</span> gender_data2022wide[,<span class="sc">!</span><span class="fu">sapply</span>(gender_data2022wide, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">is.na</span>(x)))<span class="sc">&gt;</span><span class="fl">0.25</span>]</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># and lastly simplify the dataset by removing some of the topics we won't use</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>phrases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Worried"</span>, <span class="st">"Made"</span>, <span class="st">"Received"</span>, <span class="st">"Saved"</span>, <span class="st">"Used"</span>, <span class="st">"Coming"</span>, <span class="st">"Borrowed"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>gender_data_final <span class="ot">&lt;-</span> </span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  gender_data_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">starts_with</span>(phrases))</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co"># we'll also generate a couple of variables for future use</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>gender_data_final<span class="sc">$</span>female_high_labor <span class="ot">&lt;-</span> gender_data_final<span class="sc">$</span><span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">70</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>gender_data_final<span class="sc">$</span>male_high_labor <span class="ot">&lt;-</span> gender_data_final<span class="sc">$</span><span class="st">`</span><span class="at">Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">70</span> </span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(gender_data_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s test for some basic relationships between labor participation, gender, fertility, and income, using the <a href="https://genderdata.worldbank.org/en/about">World Bank’s own definition of gender</a>:</p>
+<blockquote class="blockquote">
+<p>“Gender refers to the social, behavioral, and cultural attributes, expectations, and norms associated with being male or female.”</p>
+</blockquote>
+<p>Note that this is just for the purposes of demonstration, and not a serious investigation into these important research issues.</p>
+</section>
+</section>
+<section id="statistical-tests" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Statistical Tests</h1>
+<section id="t-test" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="t-test"><span class="header-section-number">3.1</span> t-test</h2>
+<p>In statistics there are many <strong>hypothesis tests</strong>. Per the Wikipedia entry on <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_test">statistical hypothesis tests</a>,</p>
+<blockquote class="blockquote">
+<p>“a statistical hypothesis test is a method of statistical inference used to decide whether the data sufficiently supports a particular hypothesis. A statistical hypothesis test typically involves a calculation of a test statistic. Then a decision is made, either by comparing the test statistic to a critical value or equivalently by evaluating a p-value computed from the test statistic. Roughly 100 specialized statistical tests have been defined.”</p>
+</blockquote>
+<p>The hypothesis is usually framed as a “Null hypothesis”, describing the situation where there is no statistically significant difference, and the alternative hypothesis. Then a test is chosen appropriate to the situation, which often involves invoking a statistical distribution.</p>
+<p>The <em>t-test</em> is one of the most common tests, used to determine if the difference between two groups, according to some numerical measure, is statistically significant. The Null hypothesis, usually denoted <span class="math inline">H_{0}</span>, is that there is no difference (a difference of zero). The Alternative, usually denoted <span class="math inline">H_{1}</span> or <span class="math inline">H_{A}</span>, is that the difference is not zero.</p>
+<p>The t-test was originally, and sometimes still is called <a href="https://en.wikipedia.org/wiki/Student's_t-test">“Student’s t-test”</a>. The story of the student who invented this test, and his affiliation with a certain well known Irish stout, is interesting from both a statistical and human perspective. The <span class="math inline">t</span>-test has a few variants: a one sample test, a two sample test with unpaired results, and two sample test with paired results. The one sample test simply checks whether one measure is significantly different from the null. The two sample test with unpaired results compares whether two separate sets of observations are different, such as sampling the populations of two different cities. The two sample test with paired results implies that we have the same subjects in the dataset who are measured twice, perhaps at different intervals or via different measures. The <span class="math inline">t</span>-distribution is the underlying statistical distribution determining the test statistic and critical value that we check for. These are conveniently summarized by the <em>p-value</em>, which expresses the level of significance. We typically look for a <span class="math inline">p</span>&lt;.05 to determine statistical significance, but this is a convention: other <span class="math inline">p</span>-value cutoffs can be used.</p>
+</section>
+<section id="one-sample-t-test" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="one-sample-t-test"><span class="header-section-number">3.2</span> One Sample t-test</h2>
+<p>We start with a one sample <span class="math inline">t</span>-test to check the labor force participation rates of females and males across the countries in our dataset.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)
+t = 12.495, df = 11, p-value = 7.667e-08
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 48.54567 69.30399
+sample estimates:
+mean of x 
+ 58.92483 </code></pre>
+</div>
+</div>
+<p>This first example returns a statistically significant, but not very interesting result. The default is to test whether the variable is different than zero. It is not surprising that female labor force participation is higher than zero.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="st">`</span><span class="at">Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span>, <span class="at">mu=</span><span class="dv">70</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)
+t = 1.4864, df = 11, p-value = 0.1653
+alternative hypothesis: true mean is not equal to 70
+95 percent confidence interval:
+ 67.52371 82.77829
+sample estimates:
+mean of x 
+   75.151 </code></pre>
+</div>
+</div>
+<p>We refine the test by passing the option <span class="math inline">mu</span>=70, to test whether the male labor participation rate is significantly different than 70. With a <span class="math inline">p</span>&gt;.05 and a 95% confidence interval of (66,82), it is <em>not</em> significantly different than 70 in a statistical sense.</p>
+<p>Note the use of options is a common R syntax technique. Base execution of the command without options gives sensible results, but one can pass many options to tweak the function’s behavior. Most of the things demanded by statisticians are available through these option tweaks. Typing <em>?t.test</em> (the question mark followed by the function name) will pull up the help that displays the possibilities.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>?t.test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="paired-t-test" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="paired-t-test"><span class="header-section-number">3.3</span> Paired t-test</h2>
+<p>Perhaps a more interesting question is to see if there is a significantly significant difference in male and female labor participation rates. We can compare them, country-by-country, using the paired=TRUE option, in the paired two-sample test below. For one explanation of this see <a href="http://www.sthda.com/english/wiki/paired-samples-t-test-in-r">STHDA</a>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span>, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate) and Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)
+t = -3.9856, df = 11, p-value = 0.002138
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -25.186732  -7.265602
+sample estimates:
+mean difference 
+      -16.22617 </code></pre>
+</div>
+</div>
+<p>There is a statistically significant difference, with the 95% confidence interval of female participation being between 7 and 25 percentage points lower than male rates, and a mean difference of -16 points.</p>
+</section>
+<section id="python-t-test" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="python-t-test"><span class="header-section-number">3.4</span> Python t-test</h2>
+<p>We will be giving a flavor of the Python approach to these problems, without going in depth. Python is covered in other workshops in greater detail.</p>
+<p>Running Python in RStudio requires the <em>reticulate</em> package. Your Python installation should also have <em>numpy</em> and <em>scipy</em> installed. Python will not have direct access to the R data structures, so we use a simplified example here from <a href="https://builtin.com/data-science/t-test-python">Builtin.com</a></p>
+<p>How to pass data from R to Python and vice-versa is described in this <a href="https://medium.com/data-and-beyond/how-to-seamlessly-integrate-python-into-r-rmarkdown-codes-2fe09cfdd0ee">blog post by Dima Diachkov</a></p>
+<p>Note that our code chunk is labeled Python. For more <em>reticulate</em> package, see <a href="https://www.r-bloggers.com/2022/04/getting-started-with-python-using-r-and-reticulate/">this post</a></p>
+<p>Also note that it is also possible to invoke R from a Python environment using <a href="https://pypi.org/project/rpy2/">rpy2</a></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># import from R</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>gender_python <span class="op">=</span> r.gender_data_final</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print(gender_python)</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> gender_python.loc[:,<span class="st">"Labor force participation rate, female (</span><span class="sc">% o</span><span class="st">f female population ages 15-64) (modeled ILO estimate)"</span>]</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothesized population mean</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform one-sample t-test</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># t_stat, p_value = stats.ttest_1samp(labor, mu)</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(labor, mu)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"T statistic:"</span>, t_stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>T statistic: -2.348578772454398</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P-value:"</span>, p_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>P-value: 0.038583930428602614</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting significance level</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpret the results</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p_value <span class="op">&lt;</span> alpha:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Reject the null hypothesis; there is a significant difference between the sample mean and the hypothesized population mean."</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Fail to reject the null hypothesis; there is no significant difference between the sample mean and the hypothesized population mean."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reject the null hypothesis; there is a significant difference between the sample mean and the hypothesized population mean.</code></pre>
+</div>
+</div>
+</section>
+<section id="chi-squared-test-in-r-and-python" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="chi-squared-test-in-r-and-python"><span class="header-section-number">3.5</span> Chi-squared test (in R and Python)</h2>
+<p>Many operations in R are a question of finding the appropriate function, either using the built-in R help via the ? (for help on a specific command) or ?? (to search across functions by keywords), or by using the built-in help system. Using a search engine like DuckDuckGo for a topic plus “in R” or a help site like stackoverflow.com will also turn up useful leads. Or one can consult books such as the many <a href="https://link-springer-com.proxy.libraries.rutgers.edu/search?new-search=true&amp;query=Use+R&amp;dateFrom=&amp;dateTo=&amp;sortBy=relevance">R-related book series</a> in <a href="https://login.proxy.libraries.rutgers.edu/login?url=https://link.springer.com">SpringerLink</a> for more comprehensive how-to’s. I would not recommend using AI tools for anything important, since one must understand the results well enough to check them for errors.</p>
+<p>So, for example, if we wanted to run a <a href="https://en.wikipedia.org/wiki/Chi-squared_test">chi-squared test</a> instead of a t-test, some noodling about will turn up the <em>chisq.test</em> function. We won’t discuss the distribution or mathematical background of the chi-squared test here.</p>
+<p>Take a look at this table of the number of countries with “high” labor participation rates of over 70%, for males and females.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(female_high_labor,male_high_labor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 male_high_labor
+female_high_labor FALSE TRUE
+            FALSE     2    5
+            TRUE      0    5</code></pre>
+</div>
+</div>
+<p>We can test whether this is a statistically significant pattern via the chi-squared test, implemented with:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(female_high_labor,male_high_labor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in chisq.test(table(female_high_labor, male_high_labor)): Chi-squared
+approximation may be incorrect</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  table(female_high_labor, male_high_labor)
+X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
+</div>
+</div>
+<p>Which is <em>not</em> statistically significant, probably due to the small size of the matrix.</p>
+</section>
+<section id="how-to-choose-the-appropriate-statistical-test" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="how-to-choose-the-appropriate-statistical-test"><span class="header-section-number">3.6</span> How to choose the appropriate statistical test?</h2>
+<p>This is a question that depends on many factors, that we won’t go into detail about in this introductory workshop, but you can consult the following resources:</p>
+<ul>
+<li><a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/">UCLA’s quick guide</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8327789/">a nice brief summary article</a></li>
+<li>You can also consult <a href="https://methods-sagepub-com.proxy.libraries.rutgers.edu/which-stats-test">Sage Research Methods’ Which Stats Test?</a> for more information on choosing the appropriate statistical test. The other guides in <a href="https://methods-sagepub-com.proxy.libraries.rutgers.edu/">Sage Research Methods</a> are good too for more in-depth exploration of specific tests and topics! - <em>Rutgers-restricted</em></li>
+</ul>
+</section>
+<section id="distributions" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="distributions"><span class="header-section-number">3.7</span> Distributions</h2>
+<p>One great aspect of R is the availability of tools to work with almost any statistical distribution. The density, distribution function, quantile function and random generation of a number are easily available with R functions, via the prefixes <em>d, p, q, and r</em>. For example for the normal distribution, we have:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the density of a standard normal distribution at the value 2 (2 above mean of zero)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05399097</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the cumulative percentage of a standard normal distribution below the value 2</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9772499</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and standard deviation of the distribution can also be specified</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in this example the cumulative percentage of a normal distribution with mean 100 and s.d. 20, below the value 90</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">90</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3085375</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># provides the numeric value of a particular quantile of the distribution (again standard normal in this example)</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(.<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.281552</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a single random draw from the standard normal distribution</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.09699293</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># five random draws from a normal distribution with mean 100 and s.d. 20</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  80.66612  83.52564 117.55674  88.57431  43.68888</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># getting help</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>?rnorm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>As usual the question mark will provide details about implementation, variables, and options.</p>
+<p>Other distributions and their functions can be found on the <a href="https://cran.r-project.org/web/views/Distributions.html">TaskViews on Distributions</a> page.</p>
+</section>
+</section>
+<section id="correlation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Correlation</h1>
+<p>We can also perform simple correlations to evaluate the strength of a relationship between two variables, but there are some cautions.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Why won’t this work? The defaults and options of R commands are not very standardized. Instead try this option:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.5795293</code></pre>
+</div>
+</div>
+<p>The <em>cor.test</em> function gives more complete output</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  GDP per capita (constant 2010 US$) and Fertility rate, total (births per woman)
+t = -2.2488, df = 10, p-value = 0.04828
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.865553906 -0.008432122
+sample estimates:
+       cor 
+-0.5795293 </code></pre>
+</div>
+</div>
+</section>
+<section id="regression" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Regression</h1>
+<p><em>Regression</em> is a common and fundamental technique to model a relationship between a <em>response</em> variable (also called dependent or outcome variable) and one or more <em>explanatory</em> variables (also called independent or predictor variables). Proper implementation of regression requires careful attention to the data and examination of the model fit, variable selection, and more. The quick and dirty approach below is simply designed to show R syntax in action.</p>
+<section id="linear-regression" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">5.1</span> Linear Regression</h2>
+<p>We start at the beginning, with linear regresion and the <em>lm</em> command. Let’s see if there is a relationship between female labor participation and GDP:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
+    `GDP per capita (constant 2010 US$)`)
+
+Coefficients:
+                         (Intercept)  `GDP per capita (constant 2010 US$)`  
+                           5.123e+01                             4.685e-04  </code></pre>
+</div>
+</div>
+<p>Which predicts about a 0.5 increase in the percentage labor participation of females for every $1000 rise in GDP. However, the presentation of the result is a bit odd. R only presents the coefficients by default. The <em>summary</em> command must be used to tease out the additional information that we expect in a regression table to evaluate fit and significance.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
+    `GDP per capita (constant 2010 US$)`)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-22.291 -10.311   4.305   8.679  16.604 
+
+Coefficients:
+                                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                          5.123e+01  5.289e+00   9.687 2.13e-06 ***
+`GDP per capita (constant 2010 US$)` 4.685e-04  2.085e-04   2.247   0.0484 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.97 on 10 degrees of freedom
+Multiple R-squared:  0.3355,    Adjusted R-squared:  0.2691 
+F-statistic:  5.05 on 1 and 10 DF,  p-value: 0.04841</code></pre>
+</div>
+</div>
+<p>Which is not significant at the 0.05 level. Note that we must decide on the appropriate <span class="math inline">p</span>-value to test for in advance and resist the temptation to say that this is “almost significant”. Note that this is heavily influenced by the fact that we are using a small sample of 12 countries, which could be an argument to use a 0.10 signficance level.</p>
+<p>Let’s check some additional relationships:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
+    `Fertility rate, total (births per woman)`)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-31.482  -1.573   2.473   4.759  23.896 
+
+Coefficients:
+                                           Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                                  84.981     12.334   6.890 4.25e-05
+`Fertility rate, total (births per woman)`  -11.723      5.243  -2.236   0.0494
+                                              
+(Intercept)                                ***
+`Fertility rate, total (births per woman)` *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.99 on 10 degrees of freedom
+Multiple R-squared:  0.3333,    Adjusted R-squared:  0.2666 
+F-statistic: 4.999 on 1 and 10 DF,  p-value: 0.04936</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Fertility rate, total (births per woman)` ~ `GDP per capita (constant 2010 US$)`)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1598 -0.5151  0.2188  0.5433  0.7865 
+
+Coefficients:
+                                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                           2.602e+00  2.604e-01   9.991  1.6e-06 ***
+`GDP per capita (constant 2010 US$)` -2.308e-05  1.026e-05  -2.249   0.0483 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6876 on 10 degrees of freedom
+Multiple R-squared:  0.3359,    Adjusted R-squared:  0.2694 
+F-statistic: 5.057 on 1 and 10 DF,  p-value: 0.04828</code></pre>
+</div>
+</div>
+<p>Also note that if want to run the regression without an intercept, we can just add a -1 to the equation.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span><span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
+    `GDP per capita (constant 2010 US$)` - 1)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-45.42  22.33  37.70  51.06  54.50 
+
+Coefficients:
+                                      Estimate Std. Error t value Pr(&gt;|t|)   
+`GDP per capita (constant 2010 US$)` 0.0017757  0.0004883   3.637  0.00391 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 42.91 on 11 degrees of freedom
+Multiple R-squared:  0.5459,    Adjusted R-squared:  0.5047 
+F-statistic: 13.23 on 1 and 11 DF,  p-value: 0.003911</code></pre>
+</div>
+</div>
+</section>
+<section id="multiple-regression" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="multiple-regression"><span class="header-section-number">5.2</span> Multiple Regression</h2>
+<p>And if we need to explore <em>multiple regression</em>, with multiple explanatory variables, this is as easy as using a + sign in the equation:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
+    `Fertility rate, total (births per woman)` + `GDP per capita (constant 2010 US$)`)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-26.297  -4.967   3.314   6.118  21.839 
+
+Coefficients:
+                                             Estimate Std. Error t value
+(Intercept)                                70.4503342 17.2103704   4.093
+`Fertility rate, total (births per woman)` -7.3868624  6.3067567  -1.171
+`GDP per capita (constant 2010 US$)`        0.0002980  0.0002512   1.186
+                                           Pr(&gt;|t|)   
+(Intercept)                                  0.0027 **
+`Fertility rate, total (births per woman)`   0.2716   
+`GDP per capita (constant 2010 US$)`         0.2659   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.71 on 9 degrees of freedom
+Multiple R-squared:  0.4234,    Adjusted R-squared:  0.2953 
+F-statistic: 3.305 on 2 and 9 DF,  p-value: 0.08392</code></pre>
+</div>
+</div>
+</section>
+<section id="stored-regression-objects" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="stored-regression-objects"><span class="header-section-number">5.3</span> Stored Regression Objects</h2>
+<p>A very important feature of R is the flexibility that derives from the ability to store (and use) our regression output as an R object. The output becomes an R object, and we can access its variables/components using the familiar $ notation. This can allow us to easily store and compare multiple models and use regression data such as residuals or predicted values as inputs into other equations and analyses.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>regoutput<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(regoutput)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "coefficients"  "residuals"     "effects"       "rank"         
+ [5] "fitted.values" "assign"        "qr"            "df.residual"  
+ [9] "xlevels"       "call"          "terms"         "model"        </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>regoutput<span class="sc">$</span>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          1           2           3           4           5           6 
+  5.6933288   3.5491144 -26.2966144   3.0798884  21.8391887   6.5276402 
+          7           8           9          10          11          12 
+  5.9814379   8.0805563 -14.9933760  -0.5648145  -9.4097100  -3.4866397 </code></pre>
+</div>
+</div>
+<p>Once we have store the regression output, numerous quick functions are available that build off of the regression results, such as <em>predict</em> for predicted values and <em>anova</em> for the Analysis of Variance.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># predicted values</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(regoutput)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2        3        4        5        6        7        8 
+65.21567 72.62389 56.22061 71.93111 51.28281 50.12836 51.22556 62.97944 
+       9       10       11       12 
+47.65238 53.64881 77.13971 47.04964 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analysis of variance (anova)</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(regoutput)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)
+                                           Df  Sum Sq Mean Sq F value Pr(&gt;F)  
+`Fertility rate, total (births per woman)`  1  978.27  978.27  5.2022 0.0485 *
+`GDP per capita (constant 2010 US$)`        1  264.65  264.65  1.4073 0.2659  
+Residuals                                   9 1692.46  188.05                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="regression-diagnostics" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="regression-diagnostics"><span class="header-section-number">5.4</span> Regression Diagnostics</h2>
+<p><em>Regression diagnostics</em> are used to evaluate the fit and appropriateness of the regression model as applied. Once again, we are providing some illustrative examples without going into depth here.</p>
+<p>One thing that we may wish to test is the normality of the regression residuals (i.e., the difference between predicted and actual values of the observations is normally distributed). See this <a href="https://sscc.wisc.edu/sscc/pubs/RegDiag-R/normality.html">discussion of Normality at U Wisconsin</a> and this <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/">article available in PubMedCentral</a> for a brief explanation.</p>
+<p>We can apply a typically used test for normality, the Shapiro-Wilk Normality Test, as follows. We get standardized residuals from the model with <em>rstandard</em> (or more simply the residuals accessed with <em>regoutput$residuals</em>), and then use the <em>shapiro.test</em> function to perform the test, or the (less powerful) Kolmogorov-Smirnov Test with <em>ks.test</em>, which also allows us to test against different distributions (here we just specific <em>‘pnorm’</em> for the normal distribution).</p>
+<p>A <span class="math inline">p</span>&lt;.05 in both the Shapiro-Wilk and Kolmogorov-Smirnov test implies <em>rejection</em> of normality. But note in the example below that we must be careful to standardize the residuals so that the test is applied correctly.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">rstandard</span>(regoutput))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  rstandard(regoutput)
+W = 0.93422, p-value = 0.427</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(regoutput<span class="sc">$</span>residuals, <span class="st">'pnorm'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact one-sample Kolmogorov-Smirnov test
+
+data:  regoutput$residuals
+D = 0.5823, p-value = 0.000215
+alternative hypothesis: two-sided</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rstandard</span>(regoutput), <span class="st">'pnorm'</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact one-sample Kolmogorov-Smirnov test
+
+data:  rstandard(regoutput)
+D = 0.184, p-value = 0.7471
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
+<p>Note that standardizing the residuals makes a big difference for the Kolmogorov-Smirnov test!</p>
+<p>We can also easily pull up regression diagnostic plots:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(regoutput, <span class="at">pch=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_2_files/figure-html/diagnostic%20plots-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_2_files/figure-html/diagnostic%20plots-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_2_files/figure-html/diagnostic%20plots-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_2_files/figure-html/diagnostic%20plots-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="glm-and-logistic-regression" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="glm-and-logistic-regression"><span class="header-section-number">5.5</span> glm and Logistic Regression</h2>
+<p>R is developed by statisticians for statisticians, so you will find every variant of regression that you might eventually need. The <em>glm</em> command implements generalized linear models (or alternatively, the <a href="https://cran.r-project.org/package=glm2"><em>glm2</em></a> package).</p>
+<p>One commonly used alternative, necessary where the response variable is binary (categorical) is <em>logistic regression</em>. The <em>glm</em> command is used, with “family=binomial” as an argument. The binomial distribution represents the fact that the response variable is binary (either a two-level factor or directly coded as 0/1 - referred to as “one-hot” coding in certain circles).</p>
+<p>We can try this out with our categorized variable that labels female labor participation as high if over 70% (otherwise low):</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>logistic_output <span class="ot">&lt;-</span> <span class="fu">glm</span>(female_high_labor <span class="sc">~</span> <span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>, <span class="at">family=</span>binomial)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logistic_output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = female_high_labor ~ `Fertility rate, total (births per woman)` + 
+    `GDP per capita (constant 2010 US$)`, family = binomial)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.2787  -0.6362  -0.3845   0.6530   2.2036  
+
+Coefficients:
+                                             Estimate Std. Error z value
+(Intercept)                                 4.925e+00  3.387e+00   1.454
+`Fertility rate, total (births per woman)` -2.313e+00  1.340e+00  -1.726
+`GDP per capita (constant 2010 US$)`       -1.823e-05  4.076e-05  -0.447
+                                           Pr(&gt;|z|)  
+(Intercept)                                  0.1459  
+`Fertility rate, total (births per woman)`   0.0843 .
+`GDP per capita (constant 2010 US$)`         0.6547  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 16.301  on 11  degrees of freedom
+Residual deviance: 11.227  on  9  degrees of freedom
+AIC: 17.227
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<p>We won’t delve further into the interpretation of logistic regression or other regression alternatives here, but just know that nearly anything is possible with R!</p>
+</section>
+<section id="python-regression" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="python-regression"><span class="header-section-number">5.6</span> Python regression</h2>
+<p>Linear Regression is part of the <a href="https://scikit-learn.org/">scikit-learn</a> module which forms the core of machine learning in Python.</p>
+<p>Some basic information on linear regression in Python is at <a href="https://realpython.com/linear-regression-in-python/#simple-linear-regression">RealPython</a></p>
+<p>We include this code as a quick illustration of the approach. As is typical, the output in Python must be individually extracted with commands. The <a href="https://github.com/StatsReporting/stargazer">stargazer</a> module is at least one approach to automating the process of generating output tables. The <a href="https://www.statsmodels.org/stable/index.html">statsmodels</a> module is less commonly used, but provides an alternative in Python that generates output tables more easily.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># import from R</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>gender_python <span class="op">=</span> r.gender_data_final</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co"># specify variables</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> gender_python.loc[:,<span class="st">"Labor force participation rate, female (</span><span class="sc">% o</span><span class="st">f female population ages 15-64) (modeled ILO estimate)"</span>]</span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>gdp <span class="op">=</span> gender_python.loc[:,<span class="st">"GDP per capita (constant 2010 US$)"</span>]</span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="co"># this step is important to put the data in Python-friendly form</span></span>
+<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>labor2 <span class="op">=</span> labor.array.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb75-15"><a href="#cb75-15" aria-hidden="true" tabindex="-1"></a>gdp2 <span class="op">=</span> gdp.array.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(labor2,gdp2)</span>
+<span id="cb75-17"><a href="#cb75-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.intercept_, model.coef_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[-25782.0414102] [[716.19818691]]</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>r_sq <span class="op">=</span> model.score(labor2, gdp2)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared: </span><span class="sc">{</span>r_sq<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>R-squared: 0.33554087609678596</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="bootstrap" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Bootstrap</h1>
+<p>This section is modeled off the approach used by <a href="https://openintro-ims.netlify.app/">Introduction to Modern Statistics</a>, Second Edition by Mine Çetinkaya-Rundel and Johanna Hardin, which goes into greater depth and provides many useful code exercises. We’ll refer to this text as <em>IMS</em> below. As elsewhere, we are providing a quick and dirty demo, but please use these resources to go further!</p>
+<p>In particular take a look at the section on <a href="https://openintro-ims.netlify.app/foundations-bootstrapping">bootstrapping</a> and the <a href="https://openintrostat.github.io/ims-tutorials/">supplementary tutorials</a>.</p>
+<p>Why the “bootstrap”? Many traditional statistical techniques rely on assumptions about the behavior or distribution of the data, assumptions that we cannot always be sure of satsifying. According to IMS, “some statistics do not have simple theory for how they vary, and bootstrapping provides a computational approach for providing interval estimates for almost any population parameter.”</p>
+<p>The bootstrap works by sampling and resampling the original collection of data. The variability of the samples can be used to estimate the variability of the underlying population, without requiring any further assumptions about its characteristics.</p>
+<p>Essentially, we resample our data to construct an empirical distribution, which we can then use to estimate standard errors and corresponding confidence intervals, as well as other parameters. We call it the “bootstrap” because we are “pulling ourselves up by our bootstraps” and creating the standard error ourselves via this replicate sampling process.</p>
+<p>R makes this easy via the <a href="https://infer.netlify.app/"><em>infer</em></a> package from the tidyverse.</p>
+<p>The bootstrap in R is constructed by a three-part sequence of commands: <em>specify</em>, <em>generate</em>, and <em>calculate</em>: - we <em>specify</em> the variable we want to sample - then <em>generate</em> the number of sample replicates we want to generate - then <em>calculate</em> the statistic of interest on the replicates</p>
+<p>Before any sampling we can simply generate the point estimate of our proportion, in this case one of our indicator variables for the gender data, whether a woman can work in dangerous jobs in the same way as a man.</p>
+<p>Note that |&gt; is the “pipe” in base R (relatively newly introduced, so you won’t see it as often yet), versus the %&gt;% “pipe” in tidyverse via <em>magrittr</em> (traditional).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>point_estimate <span class="ot">&lt;-</span> gender_data_final <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> <span class="st">`</span><span class="at">A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 rows containing missing values.</code></pre>
+</div>
+</div>
+<p>Then run replicate samples that we will use to estimate the confidence interval.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="ot">&lt;-</span> gender_data_final <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> <span class="st">`</span><span class="at">A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">50000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 rows containing missing values.</code></pre>
+</div>
+</div>
+<p>We can easily visualize the distribution of the replicate samples.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_2_files/figure-html/bootstrap%20replicates-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualize</span>() <span class="sc">+</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> point_estimate, <span class="at">direction =</span> <span class="st">"two-sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_2_files/figure-html/bootstrap%20replicates-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_confidence_interval</span>(</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">point_estimate =</span> point_estimate,</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"se"</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  lower_ci upper_ci
+     &lt;dbl&gt;    &lt;dbl&gt;
+1    0.160    0.750</code></pre>
+</div>
+</div>
+<p>Note that we are resampling from a small population of 12, so even with large replications, our confidence interval is wide. Using this technique on the type of country data we have is atypical, and is just for demonstration purposes. A more typical usage would be on survey data with individual responses selected from a larger population. Again to quote <em>IMS</em>, “bootstrapping is best suited for modeling studies where the data have been generated through random sampling from a population.”</p>
+<section id="t-test-via-simulation" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="t-test-via-simulation"><span class="header-section-number">6.1</span> t-test via simulation</h2>
+<p><em>IMS</em> has some examples of using <em>infer</em> to simulate t-test type results, however this is not as well-suited to the case of a paired t-test, for which the TOSTER package has a built in function that quickly implements a bootstrapped version of the t-test. This is just one example of how we can switch among the many ways of accomplishing a task in R.</p>
+<p>First, instead of preserving the pairs, we get at the same idea by computing the difference in labor participation for males and females for each country.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>labor_diff <span class="ot">&lt;-</span> <span class="st">`</span><span class="at">Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Then apply the bootstrap t-test from the <em>TOSTER</em> package, specifying 1000 replications.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boot_t_test</span>(labor_diff, <span class="at">R=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bootstrapped One Sample t-test
+
+data:  x
+p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  9.078154 31.432132
+sample estimates:
+mean of x 
+ 16.22617 </code></pre>
+</div>
+</div>
+</section>
+<section id="bootstrap-to-estimate-variability-of-the-slope-of-the-regression" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="bootstrap-to-estimate-variability-of-the-slope-of-the-regression"><span class="header-section-number">6.2</span> bootstrap to estimate variability of the slope of the regression</h2>
+<p>We can also bootstrap our way to some of the results of a regression model. Here we also use the <em>hypothesize</em> option of the <em>infer</em> package</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>var_slope <span class="ot">&lt;-</span> gender_data_final <span class="sc">|&gt;</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">500</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"slope"</span>)</span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>var_slope <span class="sc">|&gt;</span> </span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ungroup the dataset</span></span>
+<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate summary statistics</span></span>
+<span id="cb90-11"><a href="#cb90-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb90-12"><a href="#cb90-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mean of stat</span></span>
+<span id="cb90-13"><a href="#cb90-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_stat =</span> <span class="fu">mean</span>(stat), </span>
+<span id="cb90-14"><a href="#cb90-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Std error of stat</span></span>
+<span id="cb90-15"><a href="#cb90-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">std_err_stat =</span> <span class="fu">sd</span>(stat)</span>
+<span id="cb90-16"><a href="#cb90-16" aria-hidden="true" tabindex="-1"></a>  )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_stat std_err_stat
+      &lt;dbl&gt;        &lt;dbl&gt;
+1   -0.0815         6.05</code></pre>
+</div>
+</div>
+</section>
+<section id="python-bookstrap" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="python-bookstrap"><span class="header-section-number">6.3</span> Python bookstrap</h2>
+<p>Finally we’ll briefy look at the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html">Python approach to bootstrapping</a>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> bootstrap</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> r.labor_diff</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="co">#convert array to sequence</span></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> (labor,)</span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate 95% bootstrapped confidence interval for median</span></span>
+<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a>bootstrap_ci <span class="op">=</span> bootstrap(data, np.mean, confidence_level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">1</span>, method<span class="op">=</span><span class="st">'percentile'</span>)</span>
+<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-13"><a href="#cb92-13" aria-hidden="true" tabindex="-1"></a><span class="co">#view 95% boostrapped confidence interval</span></span>
+<span id="cb92-14"><a href="#cb92-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bootstrap_ci.confidence_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>ConfidenceInterval(low=9.203395833333337, high=24.488916666666658)</code></pre>
+</div>
+</div>
+<p>There’s <a href="https://machinelearningmastery.com/calculate-bootstrap-confidence-intervals-machine-learning-results-python/">more that can be done</a> of course, but we’ll stop here.</p>
+<p><em>Enjoy R!</em> <em>(and Python!)</em></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
+
+            
+        </article>
+    </main>
+
+        </div><footer>
+    <span></span>
+</footer>
+</body>
+</html>
