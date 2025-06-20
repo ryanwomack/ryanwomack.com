@@ -2,358 +2,355 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://ryanwomack.com/data_topics/data_topics/</loc>
+    <loc>http://localhost:1313/data_topics/</loc>
     <lastmod>2025-04-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/</loc>
-    <lastmod>2025-04-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryanwomack.com/shiny/</loc>
+    <loc>http://localhost:1313/shiny/</loc>
     <lastmod>2025-01-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/career_timeline/</loc>
+    <loc>http://localhost:1313/career_timeline/</loc>
     <lastmod>2024-09-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/blog/</loc>
+    <loc>http://localhost:1313/tags/blog/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/desec/</loc>
+    <loc>http://localhost:1313/tags/desec/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/dnssimple/</loc>
+    <loc>http://localhost:1313/tags/dnssimple/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/domain-registrar/</loc>
+    <loc>http://localhost:1313/tags/domain-registrar/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/dynadot/</loc>
+    <loc>http://localhost:1313/tags/dynadot/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/easydns/</loc>
+    <loc>http://localhost:1313/tags/easydns/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/gandi/</loc>
+    <loc>http://localhost:1313/tags/gandi/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/infomaniak/</loc>
+    <loc>http://localhost:1313/tags/infomaniak/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/linux/</loc>
+    <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/namecheap/</loc>
+    <loc>http://localhost:1313/tags/namecheap/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/namesilo/</loc>
+    <loc>http://localhost:1313/tags/namesilo/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/njalla/</loc>
+    <loc>http://localhost:1313/tags/njalla/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/porkbun/</loc>
+    <loc>http://localhost:1313/tags/porkbun/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/postale/</loc>
+    <loc>http://localhost:1313/tags/postale/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</loc>
+    <loc>http://localhost:1313/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</loc>
     <lastmod>2023-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2023-09-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/amazon/</loc>
+    <loc>http://localhost:1313/tags/amazon/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/aws/</loc>
+    <loc>http://localhost:1313/tags/aws/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/digital-ocean/</loc>
+    <loc>http://localhost:1313/tags/digital-ocean/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/hugo/</loc>
+    <loc>http://localhost:1313/tags/hugo/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/render/</loc>
+    <loc>http://localhost:1313/tags/render/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</loc>
+    <loc>http://localhost:1313/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/vercel/</loc>
+    <loc>http://localhost:1313/tags/vercel/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/website/</loc>
+    <loc>http://localhost:1313/tags/website/</loc>
     <lastmod>2023-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/amazon_message/</loc>
+    <loc>http://localhost:1313/amazon_message/</loc>
     <lastmod>2023-07-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</loc>
+    <loc>http://localhost:1313/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</loc>
     <lastmod>2023-07-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/chronology/</loc>
+    <loc>http://localhost:1313/chronology/</loc>
     <lastmod>2023-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/librarianship/</loc>
+    <loc>http://localhost:1313/tags/librarianship/</loc>
     <lastmod>2023-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2023/06/missing-time-series/</loc>
+    <loc>http://localhost:1313/blog/2023/06/missing-time-series/</loc>
     <lastmod>2023-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/r/</loc>
+    <loc>http://localhost:1313/tags/r/</loc>
     <lastmod>2023-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/time-series/</loc>
+    <loc>http://localhost:1313/tags/time-series/</loc>
     <lastmod>2023-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/youtube/</loc>
+    <loc>http://localhost:1313/tags/youtube/</loc>
     <lastmod>2023-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/camgdp/</loc>
+    <loc>http://localhost:1313/camgdp/</loc>
     <lastmod>2023-05-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/contact/</loc>
+    <loc>http://localhost:1313/contact/</loc>
     <lastmod>2023-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/applications/</loc>
+    <loc>http://localhost:1313/tags/applications/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/interviews/</loc>
+    <loc>http://localhost:1313/tags/interviews/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/jobs/</loc>
+    <loc>http://localhost:1313/tags/jobs/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/librarian/</loc>
+    <loc>http://localhost:1313/tags/librarian/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/library-jobs/</loc>
+    <loc>http://localhost:1313/tags/library-jobs/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/news/</loc>
+    <loc>http://localhost:1313/tags/news/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2022/06/on-job-applications-and-interviews/</loc>
+    <loc>http://localhost:1313/blog/2022/06/on-job-applications-and-interviews/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/ryandata/</loc>
+    <loc>http://localhost:1313/tags/ryandata/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/wordpress/</loc>
+    <loc>http://localhost:1313/tags/wordpress/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2021/09/about-the-sackler-verdict/</loc>
+    <loc>http://localhost:1313/blog/2021/09/about-the-sackler-verdict/</loc>
     <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/death/</loc>
+    <loc>http://localhost:1313/tags/death/</loc>
     <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/opioid/</loc>
+    <loc>http://localhost:1313/tags/opioid/</loc>
     <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/overdose/</loc>
+    <loc>http://localhost:1313/tags/overdose/</loc>
     <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/sackler/</loc>
+    <loc>http://localhost:1313/tags/sackler/</loc>
     <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2021/06/ryandata-blog-migration/</loc>
+    <loc>http://localhost:1313/blog/2021/06/ryandata-blog-migration/</loc>
     <lastmod>2021-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/audio/</loc>
+    <loc>http://localhost:1313/tags/audio/</loc>
     <lastmod>2021-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/debian/</loc>
+    <loc>http://localhost:1313/tags/debian/</loc>
     <lastmod>2021-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2021/05/linux-audio/</loc>
+    <loc>http://localhost:1313/blog/2021/05/linux-audio/</loc>
     <lastmod>2021-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/technology/</loc>
+    <loc>http://localhost:1313/tags/technology/</loc>
     <lastmod>2021-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/data/</loc>
+    <loc>http://localhost:1313/tags/data/</loc>
     <lastmod>2021-05-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/iassist/</loc>
+    <loc>http://localhost:1313/tags/iassist/</loc>
     <lastmod>2021-05-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2021/05/iassist-2021/</loc>
+    <loc>http://localhost:1313/blog/2021/05/iassist-2021/</loc>
     <lastmod>2021-05-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/scholarship/</loc>
+    <loc>http://localhost:1313/tags/scholarship/</loc>
     <lastmod>2021-05-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2021/04/personal-statement/</loc>
+    <loc>http://localhost:1313/blog/2021/04/personal-statement/</loc>
     <lastmod>2021-04-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/personal/</loc>
+    <loc>http://localhost:1313/personal/</loc>
     <lastmod>2020-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/</loc>
+    <loc>http://localhost:1313/blog/</loc>
     <lastmod>2020-06-04T23:15:33+02:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</loc>
+    <loc>http://localhost:1313/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</loc>
     <lastmod>2019-09-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2019/07/ryandata.wordpress.com/</loc>
+    <loc>http://localhost:1313/blog/2019/07/ryandata.wordpress.com/</loc>
     <lastmod>2019-07-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/</loc>
+    <loc>http://localhost:1313/features/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/has/</loc>
+    <loc>http://localhost:1313/tags/has/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/page/</loc>
+    <loc>http://localhost:1313/tags/page/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/some/</loc>
+    <loc>http://localhost:1313/tags/some/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/tags/</loc>
+    <loc>http://localhost:1313/tags/tags/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/tags/</loc>
+    <loc>http://localhost:1313/features/tags/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/this/</loc>
+    <loc>http://localhost:1313/tags/this/</loc>
     <lastmod>2019-03-19T13:21:00+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/nested-menus/</loc>
+    <loc>http://localhost:1313/features/nested-menus/</loc>
     <lastmod>2019-03-18T11:14:35+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/responsive-design/</loc>
+    <loc>http://localhost:1313/features/responsive-design/</loc>
     <lastmod>2019-03-18T11:14:30+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/more/items-to-show/</loc>
+    <loc>http://localhost:1313/more/items-to-show/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/more/the-nested-menus-feature/</loc>
+    <loc>http://localhost:1313/more/the-nested-menus-feature/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/more/</loc>
+    <loc>http://localhost:1313/more/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/more/some-more-menu/</loc>
+    <loc>http://localhost:1313/more/some-more-menu/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/nested-menus/third-level-1/</loc>
+    <loc>http://localhost:1313/features/nested-menus/third-level-1/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/nested-menus/third-level-2/</loc>
+    <loc>http://localhost:1313/features/nested-menus/third-level-2/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/features/nested-menus/third-level-3/</loc>
+    <loc>http://localhost:1313/features/nested-menus/third-level-3/</loc>
     <lastmod>2019-02-05T07:51:49+01:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/data-science-workshops/</loc>
+    <loc>http://localhost:1313/tags/data-science-workshops/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/mongolia/</loc>
+    <loc>http://localhost:1313/tags/mongolia/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</loc>
+    <loc>http://localhost:1313/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/mongolian-university-of-life-sciences/</loc>
+    <loc>http://localhost:1313/tags/mongolian-university-of-life-sciences/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/multivariate-statistics/</loc>
+    <loc>http://localhost:1313/tags/multivariate-statistics/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/statistics/</loc>
+    <loc>http://localhost:1313/tags/statistics/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/data-literacy/</loc>
+    <loc>http://localhost:1313/tags/data-literacy/</loc>
     <lastmod>2017-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/piratebox/</loc>
+    <loc>http://localhost:1313/tags/piratebox/</loc>
     <lastmod>2017-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</loc>
+    <loc>http://localhost:1313/blog/2017/07/piratebox-for-data-literacy/</loc>
     <lastmod>2017-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</loc>
+    <loc>http://localhost:1313/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</loc>
     <lastmod>2017-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/mongolian-university-of-science-and-technology/</loc>
+    <loc>http://localhost:1313/tags/mongolian-university-of-science-and-technology/</loc>
     <lastmod>2017-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/national-statistics-office-of-mongolia/</loc>
+    <loc>http://localhost:1313/tags/national-statistics-office-of-mongolia/</loc>
     <lastmod>2017-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/national-university-of-mongolia/</loc>
+    <loc>http://localhost:1313/tags/national-university-of-mongolia/</loc>
     <lastmod>2017-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/privacy/</loc>
+    <loc>http://localhost:1313/tags/privacy/</loc>
     <lastmod>2017-04-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2017/04/traveling-with-a-light-digital-footprint/</loc>
+    <loc>http://localhost:1313/blog/2017/04/traveling-with-a-light-digital-footprint/</loc>
     <lastmod>2017-04-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/data-librarianship/</loc>
+    <loc>http://localhost:1313/tags/data-librarianship/</loc>
     <lastmod>2016-11-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2016/11/what-is-a-data-librarian/</loc>
+    <loc>http://localhost:1313/blog/2016/11/what-is-a-data-librarian/</loc>
     <lastmod>2016-11-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</loc>
+    <loc>http://localhost:1313/blog/2016/04/a-manual-backup-routine-using-aws/</loc>
     <lastmod>2016-04-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/backup/</loc>
+    <loc>http://localhost:1313/tags/backup/</loc>
     <lastmod>2016-04-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/encryption/</loc>
+    <loc>http://localhost:1313/tags/encryption/</loc>
     <lastmod>2016-04-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/dell-xps/</loc>
+    <loc>http://localhost:1313/tags/dell-xps/</loc>
     <lastmod>2016-04-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</loc>
+    <loc>http://localhost:1313/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</loc>
     <lastmod>2016-04-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/xfce/</loc>
+    <loc>http://localhost:1313/tags/xfce/</loc>
     <lastmod>2016-04-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/personal-learning-environment-ple/</loc>
+    <loc>http://localhost:1313/tags/personal-learning-environment-ple/</loc>
     <lastmod>2015-03-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2015/03/ple-personal-learning-environment/</loc>
+    <loc>http://localhost:1313/blog/2015/03/ple-personal-learning-environment/</loc>
     <lastmod>2015-03-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/benford/</loc>
+    <loc>http://localhost:1313/tags/benford/</loc>
     <lastmod>2015-03-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/blog/2015/03/benfords-law/</loc>
+    <loc>http://localhost:1313/blog/2015/03/benfords-law/</loc>
     <lastmod>2015-03-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2/</loc>
+    <loc>http://localhost:1313/data_topics/data_analysis_2/data_analysis_2/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2_dark/</loc>
+    <loc>http://localhost:1313/data_topics/data_analysis_2/data_analysis_2_dark/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_publication_2/data_publication_2/</loc>
+    <loc>http://localhost:1313/data_topics/data_publication_2/data_publication_2/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_publication_2/data_publication_2_dark/</loc>
+    <loc>http://localhost:1313/data_topics/data_publication_2/data_publication_2_dark/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_sources_1/data_sources_1/</loc>
+    <loc>http://localhost:1313/data_topics/data_sources_1/data_sources_1/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_sources_1/data_sources_1_dark/</loc>
+    <loc>http://localhost:1313/data_topics/data_sources_1/data_sources_1_dark/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2/</loc>
+    <loc>http://localhost:1313/data_topics/data_visualization_2/data_visualization_2/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2_dark/</loc>
+    <loc>http://localhost:1313/data_topics/data_visualization_2/data_visualization_2_dark/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/data_topics/data_publication_2/getting_started_with_r/</loc>
+    <loc>http://localhost:1313/data_topics/data_publication_2/getting_started_with_r/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/month/</loc>
+    <loc>http://localhost:1313/month/</loc>
   </url><url>
-    <loc>https://ryanwomack.com/year/</loc>
+    <loc>http://localhost:1313/year/</loc>
   </url>
 </urlset>
