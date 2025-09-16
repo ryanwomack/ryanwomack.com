@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ryan Womack">
+<meta name="dcterms.date" content="2024-10-03">
+
+<title>Data Visualization 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="data_visualization_2_dark_files/libs/clipboard/clipboard.min.js"></script>
+<script src="data_visualization_2_dark_files/libs/quarto-html/quarto.js"></script>
+<script src="data_visualization_2_dark_files/libs/quarto-html/popper.min.js"></script>
+<script src="data_visualization_2_dark_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="data_visualization_2_dark_files/libs/quarto-html/anchor.min.js"></script>
+<link href="data_visualization_2_dark_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="data_visualization_2_dark_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="data_visualization_2_dark_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="data_visualization_2_dark_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="data_visualization_2_dark_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a>
+  <ul class="collapse">
+  <li><a href="#mastering-shiny-by-hadley-wickham" id="toc-mastering-shiny-by-hadley-wickham" class="nav-link" data-scroll-target="#mastering-shiny-by-hadley-wickham"><span class="header-section-number">1.1</span> <em>Mastering Shiny</em>, by Hadley Wickham</a></li>
+  </ul></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a>
+  <ul class="collapse">
+  <li><a href="#shiny-and-rsconnect" id="toc-shiny-and-rsconnect" class="nav-link" data-scroll-target="#shiny-and-rsconnect"><span class="header-section-number">2.1</span> Shiny and rsconnect</a></li>
+  </ul></li>
+  <li><a href="#shiny-basics" id="toc-shiny-basics" class="nav-link" data-scroll-target="#shiny-basics"><span class="header-section-number">3</span> Shiny basics</a>
+  <ul class="collapse">
+  <li><a href="#ui-and-server" id="toc-ui-and-server" class="nav-link" data-scroll-target="#ui-and-server"><span class="header-section-number">3.1</span> ui and server</a></li>
+  <li><a href="#conventions-and-app.r" id="toc-conventions-and-app.r" class="nav-link" data-scroll-target="#conventions-and-app.r"><span class="header-section-number">3.2</span> Conventions and app.R</a></li>
+  <li><a href="#reactivity" id="toc-reactivity" class="nav-link" data-scroll-target="#reactivity"><span class="header-section-number">3.3</span> Reactivity</a></li>
+  </ul></li>
+  <li><a href="#publishing-your-shiny-app" id="toc-publishing-your-shiny-app" class="nav-link" data-scroll-target="#publishing-your-shiny-app"><span class="header-section-number">4</span> Publishing your Shiny app</a></li>
+  <li><a href="#some-extras" id="toc-some-extras" class="nav-link" data-scroll-target="#some-extras"><span class="header-section-number">5</span> Some extras</a></li>
+  <li><a href="#other-topics" id="toc-other-topics" class="nav-link" data-scroll-target="#other-topics"><span class="header-section-number">6</span> Other topics</a></li>
+  <li><a href="#run-your-own-shiny-server" id="toc-run-your-own-shiny-server" class="nav-link" data-scroll-target="#run-your-own-shiny-server"><span class="header-section-number">7</span> Run your own Shiny server</a>
+  <ul class="collapse">
+  <li><a href="#digital-ocean" id="toc-digital-ocean" class="nav-link" data-scroll-target="#digital-ocean"><span class="header-section-number">7.1</span> Digital Ocean</a>
+  <ul class="collapse">
+  <li><a href="#get-a-droplet" id="toc-get-a-droplet" class="nav-link" data-scroll-target="#get-a-droplet"><span class="header-section-number">7.1.1</span> Get a Droplet</a></li>
+  <li><a href="#configure-login-with-ssh" id="toc-configure-login-with-ssh" class="nav-link" data-scroll-target="#configure-login-with-ssh"><span class="header-section-number">7.1.2</span> Configure login with SSH</a></li>
+  <li><a href="#install-nginx" id="toc-install-nginx" class="nav-link" data-scroll-target="#install-nginx"><span class="header-section-number">7.1.3</span> Install Nginx</a></li>
+  <li><a href="#install-shiny" id="toc-install-shiny" class="nav-link" data-scroll-target="#install-shiny"><span class="header-section-number">7.1.4</span> Install Shiny</a></li>
+  <li><a href="#upload" id="toc-upload" class="nav-link" data-scroll-target="#upload"><span class="header-section-number">7.1.5</span> Upload!</a></li>
+  <li><a href="#final-steps" id="toc-final-steps" class="nav-link" data-scroll-target="#final-steps"><span class="header-section-number">7.1.6</span> Final steps</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2>
+<ul>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.docx"><i class="bi bi-file-word"></i>MS Word</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.qmd"><i class="bi bi-file-word"></i>Quarto</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.R"><i class="bi bi-file-text"></i>R script only</a>
+   </li>
+   <li>
+    <a href="https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.html"><i class="bi bi-file-html"></i>HTML - light mode</a>
+   </li>
+</ul>
+</div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Visualization 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ryan Womack </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Copyright Ryan Womack, 2024. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+<p><strong>Data Visualization 2</strong></p>
+<p><em>interactive visualizations with Shiny, including hosting a Shiny server</em></p>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>Let’s start by looking at the basic documentation and gallery examples at <a href="https://shiny.posit.co/">https://shiny.posit.co/</a> and <a href="https://shiny.posit.co/r/gallery/">https://shiny.posit.co/r/gallery/</a>. Shiny allows us to build interactive data visualizations. It now supports Python visualizations as well, although this session will use R examples.</p>
+<p>A few examples of Shiny in action:</p>
+<ul>
+<li><a href="https://www.r-bloggers.com/2017/06/shiny-app-to-explore-ggplot2/">Explore ggplot2 with Shiny</a></li>
+<li><a href="https://shiny.ryanwomack.com/CollegeSearchTool">College Scorecard Data</a></li>
+<li><a href="https://ryandata.shinyapps.io/BTAA">BTAA librarians</a></li>
+</ul>
+<section id="mastering-shiny-by-hadley-wickham" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="mastering-shiny-by-hadley-wickham"><span class="header-section-number">1.1</span> <em>Mastering Shiny</em>, by Hadley Wickham</h2>
+<p>We’ll refer frequently to <a href="https://mastering-shiny.org/index.html">Mastering Shiny</a> by Hadley Wickham, master R developer, which provide a complete presentation of working with Shiny beyond this introductory workshop. The open version of the text is linked above, but we also have access through Rutgers to the <a href="https://learning-oreilly-com.proxy.libraries.rutgers.edu/home/">O’Reilly collection</a> which contains the <a href="https://learning-oreilly-com.proxy.libraries.rutgers.edu/library/view/mastering-shiny/9781492047377/">officially published version</a>, along with other useful <a href="https://learning-oreilly-com.proxy.libraries.rutgers.edu/videos/shiny-r/9780134863320/9780134863320-SHIR_01_00_00/">Shiny learning materials</a> (and much more for all kinds of tech!).</p>
+</section>
+</section>
+<section id="setup" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
+<section id="shiny-and-rsconnect" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="shiny-and-rsconnect"><span class="header-section-number">2.1</span> Shiny and rsconnect</h2>
+<p>We will use the <a href="https://pak.r-lib.org/"><em>pak</em></a> package for installation as a more complete approach to package management. Replace the pkg commands with <em>install.packages()</em> versions if you prefer.</p>
+<p>The <a href="https://tidyverse.org"><em>shiny</em></a> package encapsulates most of what you need to run <em>shiny</em> (of course you’d need the packages for whatever kinds of graphics you’d like to display as well). The <a href="https://rstudio.github.io/rsconnect/"><em>rsconnect</em></a> package is used to publish Shiny apps to the web, as we’ll see later. Install <em>pak</em> and <em>tidyverse</em> if you don’t already have them on your system. We will not run Python code in this session, but keep in mind that it is now possible to use Python in Shiny.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pak)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"shiny"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"rsconnect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now let’s load the <em>tidyverse</em>, <em>shiny</em>, and <em>rsconnect</em>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsconnect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'rsconnect'
+
+The following object is masked from 'package:shiny':
+
+    serverInfo</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="shiny-basics" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Shiny basics</h1>
+<p>We’ll walk through some of the <a href="https://shiny.posit.co/r/gallery/">Shiny gallery examples</a> to understand the fundamentals of Shiny.</p>
+<section id="ui-and-server" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="ui-and-server"><span class="header-section-number">3.1</span> ui and server</h2>
+<p>The <em>ui</em> section of the code controls the user interface, and often passes variables to the server side. The ui side has a number of Shiny-specific functions to control the interface (e.g., “sliderInput”) and allow us to quickly build interactivity via these building blocks.</p>
+<p>The <em>server</em> section of the code controls the generation of data, tables, and visualization, creating output that is passed to the ui side. While the output generated by the server may be encapsulated by a Shiny fuction, the core output is typically generated by standard R functions (or Python if you choose).</p>
+<p>We should use the default labeling of “input” and “output” to render our code clear and consistent, although in theory these names are arbitrarily assigned.</p>
+</section>
+<section id="conventions-and-app.r" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="conventions-and-app.r"><span class="header-section-number">3.2</span> Conventions and app.R</h2>
+<p>We put our Shiny files in a single directory, including supplementary files like data (unless using direct file location references). While all Shiny visualizations will have a <em>ui</em> and <em>server</em> component, we have two options on how to set this up:</p>
+<ol type="1">
+<li><p>Create two files, one called <em>ui.R</em> and the other called <em>server.R</em> with code describing the user interface and server commands respectively. We can also (optionally) use a third file called <em>global.R</em> to take care of some settings and globally applicable commands (like loading packages). This approach has the advantage of making the separate sides of the Shiny app easy to view and edit.</p></li>
+<li><p>Create a single file, called <em>app.R</em>. This approach can be simpler to deploy, since it is obvious that everything happens in the single file, just one thing to update and upload. Inside the app.R file, we have a <em>ui</em> section and a <em>server</em> section. We then run the app by running <em>shinyApp(ui, server)</em> .</p></li>
+</ol>
+<p>Here’s a very basic single file <em>app.R</em>, as an illustration.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">basicPage</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot1"</span>, <span class="at">click =</span> <span class="st">"plot_click"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verbatimTextOutput</span>(<span class="st">"info"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>mpg)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>info <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="st">"x="</span>, input<span class="sc">$</span>plot_click<span class="sc">$</span>x, <span class="st">"</span><span class="sc">\n</span><span class="st">y="</span>, input<span class="sc">$</span>plot_click<span class="sc">$</span>y)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
+</div>
+</div>
+<p>In the live workshop (and recording), we walk through creating the files in RStudio at this point.</p>
+</section>
+<section id="reactivity" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="reactivity"><span class="header-section-number">3.3</span> Reactivity</h2>
+<p>The concept of <em>reactivity</em> is fundamental to the interactivity of the Shiny display. Reactive expressions dynamically update as inputs change.</p>
+<p>The code wrapper <em>reactive({…})</em> is used to turn any function into a reactive expression. Then one can call it like a function. The difference between it and a function is that the reactive expression runs once and caches its result, unless and until its inputs are updated.</p>
+<p>We can modify the default Shiny server.R to make define its reactive as follows:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  my_input <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>bins)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>distPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate bins based on input$bins from ui.R</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    x    <span class="ot">&lt;-</span> faithful[, <span class="dv">2</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> <span class="fu">my_input</span>() <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># draw the histogram with the specified number of bins</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">'darkgray'</span>, <span class="at">border =</span> <span class="st">'white'</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">xlab =</span> <span class="st">'Waiting time to next eruption (in mins)'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">main =</span> <span class="st">'Histogram of waiting times'</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">ylab =</span> <span class="fu">paste</span>(<span class="fu">my_input</span>(), <span class="st">' bins'</span>))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;srcref: file "" chars 2:1 to 20:1&gt;</code></pre>
+</div>
+</div>
+<p>Note this is a very basic example that doesn’t accomplish too much.</p>
+<p>To continue the learning process, see these sections from <em>Mastering Shiny</em>:</p>
+<ul>
+<li><a href="https://mastering-shiny.org/action-intro.html">Shiny in Action</a></li>
+<li><a href="https://mastering-shiny.org/reactivity-intro.html">Mastering Reactivity</a></li>
+<li><a href="https://mastering-shiny.org/scaling-intro.html">Best Practices</a></li>
+</ul>
+</section>
+</section>
+<section id="publishing-your-shiny-app" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Publishing your Shiny app</h1>
+<p>In this section we walk through the process of using the RStudio interface to upload a Shiny app to <a href="https://shinyapps.io">shinyapps.io</a>. This requires us to log in and perform a few steps (notably grabbing an authentication token), using the <a href="https://docs.posit.co/shinyapps.io/guide/">shinyapps instructions</a>. Afterwards, we’ll be able to publish to <em>my_account.shinyapps.io/my_project</em> (substituting your account name and your project folder name).</p>
+<p>Shinyapps.io is free for 5 projects with limited bandwidth. Later we’ll see how to completely take control of your own server. The publishing button used in RStudio for shinyapps.io might also be used for in house connection to an organization’s own Shiny server (if you have that kind of tech support).</p>
+<p>Note that <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> is another option and approach to serving up your Shiny content.</p>
+</section>
+<section id="some-extras" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Some extras</h1>
+<p>Like other widely used ecosystems, Shiny has evolved a variety of tools to extend its functionality and to make working with it easier.</p>
+<p>One example is the <a href="https://rstudio.github.io/thematic/"><em>thematic</em></a> package which will automatically style your plots to match the customised style of your app, using the <em>thematic_shiny()</em> command.</p>
+<p>There are other packages like <a href="https://rstudio.github.io/shinydashboard/">shinydashboard</a> or also <a href="https://pkgs.rstudio.com/flexdashboard/">flexdashboard</a> which will help you quickly build dashboards.</p>
+<p>A <a href="https://github.com/nanxstats/awesome-shiny-extensions">complete list of extensions is here</a>.</p>
+</section>
+<section id="other-topics" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Other topics</h1>
+<p>This is an introductory workshop, but the <em>Mastering Shiny</em> book and other sites gives many example of ways to improve your coding and make more powerful and complex Shiny apps, via topics like</p>
+<ul>
+<li><a href="https://shiny.posit.co/r/articles/improve/modules/">modularizing Shiny code</a></li>
+<li><a href="https://mastering-shiny.org/scaling-modules.html">scaling modules</a></li>
+<li><a href="https://mastering-shiny.org/action-tidy.html">code tips</a> such as the difference between data variables and environmental variables which is important in making reactive functions work properly, for example <em>diamonds %&gt;% filter(.data[[var]] &gt; .env$min)</em></li>
+<li><a href="https://mastering-shiny.org/action-workflow.html#action-workflow">debugging</a></li>
+<li><a href="https://mastering-shiny.org/reactive-graph.html">reactive graphs</a> using the <em>reactlog</em> package which shows how the reactive graph evolves over time</li>
+</ul>
+</section>
+<section id="run-your-own-shiny-server" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Run your own Shiny server</h1>
+<p>Shiny gives some information on this at <a href="https://shiny.posit.co/r/deploy">https://shiny.posit.co/r/deploy</a> and also information on <a href="https://shiny.posit.co/py/docs/deploy.html">deploying Python on a Shiny server</a>. <a href="https://www.rstudio.com/products/connect/"><em>Posit Connect</em></a> is their commercial offering, but the open source <a href="https://www.rstudio.com/products/shiny/shiny-server/"><em>Shiny Server</em></a> remains free and open source.</p>
+<section id="digital-ocean" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="digital-ocean"><span class="header-section-number">7.1</span> Digital Ocean</h2>
+<p>To run one’s own server, one has to set up a server someplace. This is a sketch of how that is done via <a href="https://www.digitalocean.com/">DigitalOcean</a>, which has a straightforward and easy-to-use infrastructure that I would recommend over the complexity and unreliability of AWS. This will cost at least $4 a month for a minimal setup.</p>
+<section id="get-a-droplet" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="get-a-droplet"><span class="header-section-number">7.1.1</span> Get a Droplet</h3>
+<p>First we set up an account with Digital Ocean, then set up a “Droplet”, which in DigitalOcean’s lingo is a self-contained server instance. You should be familiar with the basics of Linux and the command line to manage these steps.</p>
+<p>Follow the <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ubuntu-server-on-a-digitalocean-droplet">instructions to install an Ubuntu or Debian server</a>. Note that other distros are avaialble, but I prefer Debian for its long-term stability and commitment to open source.</p>
+</section>
+<section id="configure-login-with-ssh" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="configure-login-with-ssh"><span class="header-section-number">7.1.2</span> Configure login with SSH</h3>
+<p>I highly recommend configuring login to the Droplet with SSH keys instead of password access.</p>
+<p>These links may be helpful for that:</p>
+<ul>
+<li><a href="https://docs.digitalocean.com/products/droplets/how-to/connect-with-ssh/openssh/">Connect with OpenSSH</a></li>
+<li><a href="https://docs.digitalocean.com/support/i-lost-the-ssh-key-for-my-droplet/#enable-password-authentication">Lost SSH key?</a></li>
+<li><a href="https://docs.digitalocean.com/support/how-to-troubleshoot-ssh-authentication-issues/#fixing-key-permissions-and-ownership">Troubleshooting SSH</a></li>
+<li><a href="https://askubuntu.com/questions/20863/how-do-i-permanently-add-an-identity-for-ssh">add SSH identity</a></li>
+</ul>
+</section>
+<section id="install-nginx" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="install-nginx"><span class="header-section-number">7.1.3</span> Install Nginx</h3>
+<p>We need a web server. The <a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04">Nginx instructions</a> are straightforward.</p>
+<p>Then we should understand how to use the <a href="https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands">ufw firewall</a>, and then install an <a href="https://docs.digitalocean.com/support/how-do-i-install-an-ssl-certificate-on-a-droplet/">SSL certificate</a>. A modern server should use SSL, since most browsers have begun to reject unencrypted sites by default.</p>
+<p>Our Nginx documents (for the home page or other non-Shiny html we want to host) will be put in</p>
+<p><em>/var/www/html</em> on the server, using DigitalOcean’s tools, or <em>scp</em> or other transfer/editing methods.</p>
+</section>
+<section id="install-shiny" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="install-shiny"><span class="header-section-number">7.1.4</span> Install Shiny</h3>
+<p>Now that the web server is up and running, we can follow the <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-shiny-server-on-ubuntu-20-04">instructions to install Shiny</a>. There are several steps here that should be followed carefully, in particular to use your own server names where appropriate.</p>
+<p>The <a href="https://docs.posit.co/shiny-server/">complete Shiny server guide is here</a>.</p>
+</section>
+<section id="upload" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="upload"><span class="header-section-number">7.1.5</span> Upload!</h3>
+<p>The Shiny apps (R files as well as data files) that are served up should be placed in</p>
+<p><em>/srv/shiny-server/myprojectname</em></p>
+<p>and your home page should be</p>
+<p><em>/srv/shiny-server/index.html</em></p>
+<p>I find it is easiest to just use <em>git clone</em> to pull the files in there. Note that, unlike the <em>rsconnect</em>/publish process, there is no generating of a bundle. The Shiny server can work directly with the R files in the directory.</p>
+</section>
+<section id="final-steps" class="level3" data-number="7.1.6">
+<h3 data-number="7.1.6" class="anchored" data-anchor-id="final-steps"><span class="header-section-number">7.1.6</span> Final steps</h3>
+<p>You may also have to configure your nameservers to point to the DigitalOcean droplet if it is just a component of your web services.</p>
+<p>My little installation is at <a href="https://shiny.ryanwomack.com">shiny.ryanwomack.com</a>, with a demo project, <a href="https://shiny.ryanwomack.com/CollegeSearchTool">CollegeSearchTool</a> and actually uses <a href="https://plotly.com/">Plotly</a> for its graphics.</p>
+<p>As always, <em>Enjoy R!</em></p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
