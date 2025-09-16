@@ -68,12 +68,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Womack">
-<meta name="dcterms.date" content="2024-10-03">
+<meta name="dcterms.date" content="2025-09-15">
 
 <title>Data Analysis 2</title>
 <style>
@@ -89,8 +89,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -101,7 +102,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -126,15 +127,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="data_analysis_2_dark_files/libs/clipboard/clipboard.min.js"></script>
-<script src="data_analysis_2_dark_files/libs/quarto-html/quarto.js"></script>
+<script src="data_analysis_2_dark_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="data_analysis_2_dark_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="data_analysis_2_dark_files/libs/quarto-html/popper.min.js"></script>
 <script src="data_analysis_2_dark_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="data_analysis_2_dark_files/libs/quarto-html/anchor.min.js"></script>
 <link href="data_analysis_2_dark_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="data_analysis_2_dark_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="data_analysis_2_dark_files/libs/quarto-html/quarto-syntax-highlighting-dark-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="data_analysis_2_dark_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="data_analysis_2_dark_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="data_analysis_2_dark_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="data_analysis_2_dark_files/libs/bootstrap/bootstrap-423a09b0214535a57d4d6f8c119499c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+</head><body class="quarto-light">
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -180,9 +183,9 @@ window.Quarto = {
 };
 </script>
 
-</head>
 
-<body>
+
+
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -238,6 +241,9 @@ window.Quarto = {
     <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.R"><i class="bi bi-file-text"></i>R script only</a>
    </li>
    <li>
+    <a href="https://www.youtube.com/watch?v=aMnOB7YkuT4&list=PLCj1LhGni3hPWrEXBkeUULqB3v1cQu38y"><i class="bi bi-file-html"></i>Screencast video</a>
+   </li>
+   <li>
     <a href="https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html"><i class="bi bi-file-html"></i>HTML - light mode</a>
    </li>
 </ul>
@@ -264,7 +270,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 3, 2024</p>
+      <p class="date">September 15, 2025</p>
     </div>
   </div>
   
@@ -276,7 +282,7 @@ window.Quarto = {
 </header>
 
 
-<p>Copyright Ryan Womack, 2024. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+<p>Copyright Ryan Womack, 2025. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
 <p><strong>Data Analysis 2</strong></p>
 <p><em>statistical tests, distributions, regression, bootstrap, and more + comparison with Python</em></p>
 <section id="overview" class="level1" data-number="1">
@@ -311,11 +317,12 @@ window.Quarto = {
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
+✔ forcats   1.0.0     ✔ stringr   1.5.2
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ purrr::%||%()   masks base::%||%()
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
@@ -348,11 +355,11 @@ window.Quarto = {
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Gender_StatsCSV.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 306340 Columns: 68
+<pre><code>Rows: 338405 Columns: 69
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (4): Country Name, Country Code, Indicator Name, Indicator Code
-dbl (64): 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
+dbl (65): 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -376,22 +383,22 @@ dbl (64): 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># clean the data to focus on a recent more complete time period</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>gender_data3 <span class="ot">&lt;-</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>   gender_data2 <span class="sc">%&gt;%</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">pivot_longer</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">66</span>, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">pivot_longer</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">67</span>, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#filter by year</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>gender_data2022 <span class="ot">&lt;-</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>gender_data2023 <span class="ot">&lt;-</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  gender_data3 <span class="sc">%&gt;%</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year<span class="sc">==</span><span class="st">"2022"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year<span class="sc">==</span><span class="st">"2023"</span>)</span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>gender_data2022 <span class="ot">&lt;-</span> gender_data2022[,<span class="sc">-</span><span class="dv">3</span>]</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>gender_data2023 <span class="ot">&lt;-</span> gender_data2023[,<span class="sc">-</span><span class="dv">3</span>]</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>gender_data2022wide <span class="ot">&lt;-</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  gender_data2022 <span class="sc">%&gt;%</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="ot">&lt;-</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  gender_data2023 <span class="sc">%&gt;%</span></span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"Indicator Name"</span>, <span class="at">values_from =</span> <span class="st">"Value"</span>)</span>
 <span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># now use a little sapply trick to select variables that don't have much missing data - here the proportion is 0.75 (the 0.25 in the function is 1-proportion desired)</span></span>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>gender_data_filtered <span class="ot">&lt;-</span> gender_data2022wide[,<span class="sc">!</span><span class="fu">sapply</span>(gender_data2022wide, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">is.na</span>(x)))<span class="sc">&gt;</span><span class="fl">0.25</span>]</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>gender_data_filtered <span class="ot">&lt;-</span> gender_data2023wide[,<span class="sc">!</span><span class="fu">sapply</span>(gender_data2023wide, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">is.na</span>(x)))<span class="sc">&gt;</span><span class="fl">0.25</span>]</span>
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># and lastly simplify the dataset by removing some of the topics we won't use</span></span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
@@ -441,13 +448,13 @@ dbl (64): 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
     One Sample t-test
 
 data:  Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)
-t = 12.495, df = 11, p-value = 7.667e-08
+t = 12.855, df = 11, p-value = 5.714e-08
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 48.54567 69.30399
+ 49.41461 69.83056
 sample estimates:
 mean of x 
- 58.92483 </code></pre>
+ 59.62258 </code></pre>
 </div>
 </div>
 <p>This first example returns a statistically significant, but not very interesting result. The default is to test whether the variable is different than zero. It is not surprising that female labor force participation is higher than zero.</p>
@@ -461,16 +468,16 @@ mean of x
     One Sample t-test
 
 data:  Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)
-t = 1.4864, df = 11, p-value = 0.1653
+t = 1.569, df = 11, p-value = 0.1449
 alternative hypothesis: true mean is not equal to 70
 95 percent confidence interval:
- 67.52371 82.77829
+ 67.77376 83.28024
 sample estimates:
 mean of x 
-   75.151 </code></pre>
+   75.527 </code></pre>
 </div>
 </div>
-<p>We refine the test by passing the option <span class="math inline">mu</span>=70, to test whether the male labor participation rate is significantly different than 70. With a <span class="math inline">p</span>&gt;.05 and a 95% confidence interval of (66,82), it is <em>not</em> significantly different than 70 in a statistical sense.</p>
+<p>We refine the test by passing the option <span class="math inline">mu</span>=70, to test whether the male labor participation rate is significantly different than 70. With a <span class="math inline">p</span>&gt;.05 and a 95% confidence interval of (67,83), it is <em>not</em> significantly different than 70 in a statistical sense.</p>
 <p>Note the use of options is a common R syntax technique. Base execution of the command without options gives sensible results, but one can pass many options to tweak the function’s behavior. Most of the things demanded by statisticians are available through these option tweaks. Typing <em>?t.test</em> (the question mark followed by the function name) will pull up the help that displays the possibilities.</p>
 <div class="cell">
 <details class="code-fold">
@@ -492,13 +499,13 @@ mean of x
     Paired t-test
 
 data:  Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate) and Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)
-t = -3.9856, df = 11, p-value = 0.002138
+t = -3.9943, df = 11, p-value = 0.002106
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -25.186732  -7.265602
+ -24.66817  -7.14066
 sample estimates:
 mean difference 
-      -16.22617 </code></pre>
+      -15.90442 </code></pre>
 </div>
 </div>
 <p>There is a statistically significant difference, with the 95% confidence interval of female participation being between 7 and 25 percentage points lower than male rates, and a mean difference of -16 points.</p>
@@ -533,14 +540,14 @@ mean difference
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"T statistic:"</span>, t_stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>T statistic: -2.348578772454398</code></pre>
+<pre><code>T statistic: -2.2375199095291447</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P-value:"</span>, p_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>P-value: 0.038583930428602614</code></pre>
+<pre><code>P-value: 0.046904605502055996</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -571,8 +578,8 @@ mean difference
 <div class="cell-output cell-output-stdout">
 <pre><code>                 male_high_labor
 female_high_labor FALSE TRUE
-            FALSE     2    5
-            TRUE      0    5</code></pre>
+            FALSE     2    6
+            TRUE      0    4</code></pre>
 </div>
 </div>
 <p>We can test whether this is a statistically significant pattern via the chi-squared test, implemented with:</p>
@@ -590,7 +597,7 @@ approximation may be incorrect</code></pre>
     Pearson's Chi-squared test with Yates' continuity correction
 
 data:  table(female_high_labor, male_high_labor)
-X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
+X-squared = 0.075, df = 1, p-value = 0.7842</code></pre>
 </div>
 </div>
 <p>Which is <em>not</em> statistically significant, probably due to the small size of the matrix.</p>
@@ -652,7 +659,7 @@ X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.794305</code></pre>
+<pre><code>[1] 0.617649</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -661,7 +668,7 @@ X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 126.54264  78.53920 107.33200  58.91776 134.74216</code></pre>
+<pre><code>[1] 139.84766  90.94718  70.35040 102.18553  96.30042</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -680,37 +687,37 @@ X-squared = 0.27429, df = 1, p-value = 0.6005</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Why won’t this work? The defaults and options of R commands are not very standardized. Instead try this option:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.5795293</code></pre>
+<pre><code>[1] -0.5703267</code></pre>
 </div>
 </div>
 <p>The <em>cor.test</em> function gives more complete output</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>,<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
 
-data:  GDP per capita (constant 2010 US$) and Fertility rate, total (births per woman)
-t = -2.2488, df = 10, p-value = 0.04828
+data:  GDP per capita (constant 2015 US$) and Fertility rate, total (births per woman)
+t = -2.1956, df = 10, p-value = 0.05283
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- -0.865553906 -0.008432122
+ -0.862064717  0.005314307
 sample estimates:
        cor 
--0.5795293 </code></pre>
+-0.5703267 </code></pre>
 </div>
 </div>
 </section>
@@ -723,48 +730,48 @@ sample estimates:
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
-    `GDP per capita (constant 2010 US$)`)
+    `GDP per capita (constant 2015 US$)`)
 
 Coefficients:
-                         (Intercept)  `GDP per capita (constant 2010 US$)`  
-                           5.123e+01                             4.685e-04  </code></pre>
+                         (Intercept)  `GDP per capita (constant 2015 US$)`  
+                           5.202e+01                             4.519e-04  </code></pre>
 </div>
 </div>
 <p>Which predicts about a 0.5 increase in the percentage labor participation of females for every $1000 rise in GDP. However, the presentation of the result is a bit odd. R only presents the coefficients by default. The <em>summary</em> command must be used to tease out the additional information that we expect in a regression table to evaluate fit and significance.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
-    `GDP per capita (constant 2010 US$)`)
+    `GDP per capita (constant 2015 US$)`)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--22.291 -10.311   4.305   8.679  16.604 
+-19.565 -10.689   3.864   8.156  19.525 
 
 Coefficients:
                                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                          5.123e+01  5.289e+00   9.687 2.13e-06 ***
-`GDP per capita (constant 2010 US$)` 4.685e-04  2.085e-04   2.247   0.0484 *  
+(Intercept)                          5.202e+01  5.198e+00  10.007 1.58e-06 ***
+`GDP per capita (constant 2015 US$)` 4.519e-04  2.001e-04   2.258   0.0475 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 13.97 on 10 degrees of freedom
-Multiple R-squared:  0.3355,    Adjusted R-squared:  0.2691 
-F-statistic:  5.05 on 1 and 10 DF,  p-value: 0.04841</code></pre>
+Residual standard error: 13.71 on 10 degrees of freedom
+Multiple R-squared:  0.3378,    Adjusted R-squared:  0.2715 
+F-statistic:   5.1 on 1 and 10 DF,  p-value: 0.0475</code></pre>
 </div>
 </div>
-<p>Which is not significant at the 0.05 level. Note that we must decide on the appropriate <span class="math inline">p</span>-value to test for in advance and resist the temptation to say that this is “almost significant”. Note that this is heavily influenced by the fact that we are using a small sample of 12 countries, which could be an argument to use a 0.10 signficance level.</p>
+<p>Which is significant at the 0.05 level. Note that we must decide on the appropriate <span class="math inline">p</span>-value to test for in advance and resist the temptation to say that this is “almost significant”. Note that this is heavily influenced by the fact that we are using a small sample of 12 countries, which could be an argument to use a 0.10 signficance level.</p>
 <p>Let’s check some additional relationships:</p>
 <div class="cell">
 <details class="code-fold">
@@ -779,72 +786,72 @@ lm(formula = `Labor force participation rate, female (% of female population age
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--31.482  -1.573   2.473   4.759  23.896 
+-28.406  -2.038   2.802   4.065  25.988 
 
 Coefficients:
                                            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)                                  84.981     12.334   6.890 4.25e-05
-`Fertility rate, total (births per woman)`  -11.723      5.243  -2.236   0.0494
+(Intercept)                                  83.269     11.438   7.280 2.66e-05
+`Fertility rate, total (births per woman)`  -10.804      4.898  -2.206   0.0519
                                               
 (Intercept)                                ***
-`Fertility rate, total (births per woman)` *  
+`Fertility rate, total (births per woman)` .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 13.99 on 10 degrees of freedom
-Multiple R-squared:  0.3333,    Adjusted R-squared:  0.2666 
-F-statistic: 4.999 on 1 and 10 DF,  p-value: 0.04936</code></pre>
+Residual standard error: 13.82 on 10 degrees of freedom
+Multiple R-squared:  0.3273,    Adjusted R-squared:   0.26 
+F-statistic: 4.865 on 1 and 10 DF,  p-value: 0.05193</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = `Fertility rate, total (births per woman)` ~ `GDP per capita (constant 2010 US$)`)
+lm(formula = `Fertility rate, total (births per woman)` ~ `GDP per capita (constant 2015 US$)`)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.1598 -0.5151  0.2188  0.5433  0.7865 
+-1.2918 -0.5261  0.1835  0.5335  1.0035 
 
 Coefficients:
                                        Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                           2.602e+00  2.604e-01   9.991  1.6e-06 ***
-`GDP per capita (constant 2010 US$)` -2.308e-05  1.026e-05  -2.249   0.0483 *  
+(Intercept)                           2.584e+00  2.778e-01   9.301 3.08e-06 ***
+`GDP per capita (constant 2015 US$)` -2.348e-05  1.070e-05  -2.196   0.0528 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.6876 on 10 degrees of freedom
-Multiple R-squared:  0.3359,    Adjusted R-squared:  0.2694 
-F-statistic: 5.057 on 1 and 10 DF,  p-value: 0.04828</code></pre>
+Residual standard error: 0.733 on 10 degrees of freedom
+Multiple R-squared:  0.3253,    Adjusted R-squared:  0.2578 
+F-statistic: 4.821 on 1 and 10 DF,  p-value: 0.05283</code></pre>
 </div>
 </div>
-<p>Also note that if want to run the regression without an intercept, we can just add a -1 to the equation.</p>
+<p>Here our p-values are significant at the 10% level but not the 5% level. Also note that if want to run the regression without an intercept, we can just add a -1 to the equation.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span><span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span><span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
-    `GDP per capita (constant 2010 US$)` - 1)
+    `GDP per capita (constant 2015 US$)` - 1)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--45.42  22.33  37.70  51.06  54.50 
+-45.89  24.87  37.89  50.74  56.68 
 
 Coefficients:
                                       Estimate Std. Error t value Pr(&gt;|t|)   
-`GDP per capita (constant 2010 US$)` 0.0017757  0.0004883   3.637  0.00391 **
+`GDP per capita (constant 2015 US$)` 0.0017497  0.0004822   3.628  0.00397 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 42.91 on 11 degrees of freedom
-Multiple R-squared:  0.5459,    Adjusted R-squared:  0.5047 
-F-statistic: 13.23 on 1 and 11 DF,  p-value: 0.003911</code></pre>
+Residual standard error: 43.39 on 11 degrees of freedom
+Multiple R-squared:  0.5448,    Adjusted R-squared:  0.5034 
+F-statistic: 13.16 on 1 and 11 DF,  p-value: 0.003969</code></pre>
 </div>
 </div>
 </section>
@@ -854,33 +861,33 @@ F-statistic: 13.23 on 1 and 11 DF,  p-value: 0.003911</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)` ~ 
-    `Fertility rate, total (births per woman)` + `GDP per capita (constant 2010 US$)`)
+    `Fertility rate, total (births per woman)` + `GDP per capita (constant 2015 US$)`)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--26.297  -4.967   3.314   6.118  21.839 
+-23.259  -4.659   3.096   5.191  24.219 
 
 Coefficients:
                                              Estimate Std. Error t value
-(Intercept)                                70.4503342 17.2103704   4.093
-`Fertility rate, total (births per woman)` -7.3868624  6.3067567  -1.171
-`GDP per capita (constant 2010 US$)`        0.0002980  0.0002512   1.186
+(Intercept)                                69.4191018 15.8793413   4.372
+`Fertility rate, total (births per woman)` -6.7351397  5.8180954  -1.158
+`GDP per capita (constant 2015 US$)`        0.0002937  0.0002396   1.226
                                            Pr(&gt;|t|)   
-(Intercept)                                  0.0027 **
-`Fertility rate, total (births per woman)`   0.2716   
-`GDP per capita (constant 2010 US$)`         0.2659   
+(Intercept)                                 0.00179 **
+`Fertility rate, total (births per woman)`  0.27682   
+`GDP per capita (constant 2015 US$)`        0.25127   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 13.71 on 9 degrees of freedom
-Multiple R-squared:  0.4234,    Adjusted R-squared:  0.2953 
-F-statistic: 3.305 on 2 and 9 DF,  p-value: 0.08392</code></pre>
+Residual standard error: 13.49 on 9 degrees of freedom
+Multiple R-squared:  0.4236,    Adjusted R-squared:  0.2955 
+F-statistic: 3.307 on 2 and 9 DF,  p-value: 0.08381</code></pre>
 </div>
 </div>
 </section>
@@ -890,7 +897,7 @@ F-statistic: 3.305 on 2 and 9 DF,  p-value: 0.08392</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>regoutput<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>)</span>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>regoutput<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>)</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(regoutput)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -903,10 +910,10 @@ F-statistic: 3.305 on 2 and 9 DF,  p-value: 0.08392</code></pre>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>regoutput<span class="sc">$</span>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>          1           2           3           4           5           6 
-  5.6933288   3.5491144 -26.2966144   3.0798884  21.8391887   6.5276402 
-          7           8           9          10          11          12 
-  5.9814379   8.0805563 -14.9933760  -0.5648145  -9.4097100  -3.4866397 </code></pre>
+<pre><code>         1          2          3          4          5          6          7 
+  3.582201   2.887776 -23.259257   3.303619  24.218814   5.172425   5.244711 
+         8          9         10         11         12 
+  8.434951 -16.056077  -1.281381  -9.053288  -3.194494 </code></pre>
 </div>
 </div>
 <p>Once we have store the regression output, numerous quick functions are available that build off of the regression results, such as <em>predict</em> for predicted values and <em>anova</em> for the Analysis of Variance.</p>
@@ -918,9 +925,9 @@ F-statistic: 3.305 on 2 and 9 DF,  p-value: 0.08392</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
-65.21567 72.62389 56.22061 71.93111 51.28281 50.12836 51.22556 62.97944 
+66.35780 72.98422 56.78426 72.19138 52.49719 51.61558 52.54329 63.02505 
        9       10       11       12 
-47.65238 53.64881 77.13971 47.04964 </code></pre>
+49.14208 53.61638 77.77329 46.94049 </code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -931,10 +938,10 @@ F-statistic: 3.305 on 2 and 9 DF,  p-value: 0.08392</code></pre>
 <pre><code>Analysis of Variance Table
 
 Response: Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)
-                                           Df  Sum Sq Mean Sq F value Pr(&gt;F)  
-`Fertility rate, total (births per woman)`  1  978.27  978.27  5.2022 0.0485 *
-`GDP per capita (constant 2010 US$)`        1  264.65  264.65  1.4073 0.2659  
-Residuals                                   9 1692.46  188.05                 
+                                           Df  Sum Sq Mean Sq F value  Pr(&gt;F)  
+`Fertility rate, total (births per woman)`  1  929.32  929.32  5.1104 0.05013 .
+`GDP per capita (constant 2015 US$)`        1  273.39  273.39  1.5034 0.25127  
+Residuals                                   9 1636.65  181.85                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -956,7 +963,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
     Shapiro-Wilk normality test
 
 data:  rstandard(regoutput)
-W = 0.93422, p-value = 0.427</code></pre>
+W = 0.93721, p-value = 0.4628</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -967,7 +974,7 @@ W = 0.93422, p-value = 0.427</code></pre>
     Exact one-sample Kolmogorov-Smirnov test
 
 data:  regoutput$residuals
-D = 0.5823, p-value = 0.000215
+D = 0.58139, p-value = 0.0002217
 alternative hypothesis: two-sided</code></pre>
 </div>
 <details class="code-fold">
@@ -979,7 +986,7 @@ alternative hypothesis: two-sided</code></pre>
     Exact one-sample Kolmogorov-Smirnov test
 
 data:  rstandard(regoutput)
-D = 0.184, p-value = 0.7471
+D = 0.18069, p-value = 0.7658
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
@@ -1028,7 +1035,7 @@ alternative hypothesis: two-sided</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>logistic_output <span class="ot">&lt;-</span> <span class="fu">glm</span>(female_high_labor <span class="sc">~</span> <span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2010 US$)</span><span class="st">`</span>, <span class="at">family=</span>binomial)</span>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>logistic_output <span class="ot">&lt;-</span> <span class="fu">glm</span>(female_high_labor <span class="sc">~</span> <span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span>, <span class="at">family=</span>binomial)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logistic_output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1036,29 +1043,23 @@ alternative hypothesis: two-sided</code></pre>
 <pre><code>
 Call:
 glm(formula = female_high_labor ~ `Fertility rate, total (births per woman)` + 
-    `GDP per capita (constant 2010 US$)`, family = binomial)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.2787  -0.6362  -0.3845   0.6530   2.2036  
+    `GDP per capita (constant 2015 US$)`, family = binomial)
 
 Coefficients:
                                              Estimate Std. Error z value
-(Intercept)                                 4.925e+00  3.387e+00   1.454
-`Fertility rate, total (births per woman)` -2.313e+00  1.340e+00  -1.726
-`GDP per capita (constant 2010 US$)`       -1.823e-05  4.076e-05  -0.447
-                                           Pr(&gt;|z|)  
-(Intercept)                                  0.1459  
-`Fertility rate, total (births per woman)`   0.0843 .
-`GDP per capita (constant 2010 US$)`         0.6547  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Intercept)                                 8.427e-01  2.532e+00   0.333
+`Fertility rate, total (births per woman)` -8.776e-01  1.011e+00  -0.868
+`GDP per capita (constant 2015 US$)`        1.489e-05  3.676e-05   0.405
+                                           Pr(&gt;|z|)
+(Intercept)                                   0.739
+`Fertility rate, total (births per woman)`    0.385
+`GDP per capita (constant 2015 US$)`          0.685
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 16.301  on 11  degrees of freedom
-Residual deviance: 11.227  on  9  degrees of freedom
-AIC: 17.227
+    Null deviance: 15.276  on 11  degrees of freedom
+Residual deviance: 13.306  on  9  degrees of freedom
+AIC: 19.306
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -1083,7 +1084,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co"># specify variables</span></span>
 <span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> gender_python.loc[:,<span class="st">"Labor force participation rate, female (</span><span class="sc">% o</span><span class="st">f female population ages 15-64) (modeled ILO estimate)"</span>]</span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>gdp <span class="op">=</span> gender_python.loc[:,<span class="st">"GDP per capita (constant 2010 US$)"</span>]</span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>gdp <span class="op">=</span> gender_python.loc[:,<span class="st">"GDP per capita (constant 2015 US$)"</span>]</span>
 <span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="co"># this step is important to put the data in Python-friendly form</span></span>
 <span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>labor2 <span class="op">=</span> labor.array.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
@@ -1093,7 +1094,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.intercept_, model.coef_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[-25782.0414102] [[716.19818691]]</code></pre>
+<pre><code>[-27728.21536913] [[747.3999527]]</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -1101,7 +1102,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared: </span><span class="sc">{</span>r_sq<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared: 0.33554087609678596</code></pre>
+<pre><code>R-squared: 0.33775699752387656</code></pre>
 </div>
 </div>
 </section>
@@ -1127,15 +1128,26 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1 rows containing missing values.</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>point_estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: A woman can work in a job deemed dangerous in the same way as a man...
+# A tibble: 1 × 1
+   stat
+  &lt;dbl&gt;
+1 0.545</code></pre>
+</div>
 </div>
 <p>Then run replicate samples that we will use to estimate the confidence interval.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="ot">&lt;-</span> gender_data_final <span class="sc">%&gt;%</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> <span class="st">`</span><span class="at">A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">50000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="ot">&lt;-</span> gender_data_final <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> <span class="st">`</span><span class="at">A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">50000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1 rows containing missing values.</code></pre>
@@ -1145,8 +1157,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1157,9 +1169,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualize</span>() <span class="sc">+</span></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> point_estimate, <span class="at">direction =</span> <span class="st">"two-sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualize</span>() <span class="sc">+</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> point_estimate, <span class="at">direction =</span> <span class="st">"two-sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1170,18 +1182,18 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_confidence_interval</span>(</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">point_estimate =</span> point_estimate,</span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"se"</span></span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>boot_dist_dangerous <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_confidence_interval</span>(</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">point_estimate =</span> point_estimate,</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"se"</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   lower_ci upper_ci
      &lt;dbl&gt;    &lt;dbl&gt;
-1    0.159    0.750</code></pre>
+1    0.252    0.838</code></pre>
 </div>
 </div>
 <p>Note that we are resampling from a small population of 12, so even with large replications, our confidence interval is wide. Using this technique on the type of country data we have is atypical, and is just for demonstration purposes. A more typical usage would be on survey data with individual responses selected from a larger population. Again to quote <em>IMS</em>, “bootstrapping is best suited for modeling studies where the data have been generated through random sampling from a population.”</p>
@@ -1192,14 +1204,20 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>labor_diff <span class="ot">&lt;-</span> <span class="st">`</span><span class="at">Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>labor_diff <span class="ot">&lt;-</span> <span class="st">`</span><span class="at">Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>labor_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  9.865  7.854 47.096 11.856  6.267 25.371 14.414  8.813 19.792 -3.810
+[11]  9.482 33.853</code></pre>
+</div>
 </div>
 <p>Then apply the bootstrap t-test from the <em>TOSTER</em> package, specifying 1000 replications.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boot_t_test</span>(labor_diff, <span class="at">R=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boot_t_test</span>(labor_diff, <span class="at">R=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1209,41 +1227,41 @@ data:  x
 p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
-  9.120673 30.125131
+  8.661397 30.066865
 sample estimates:
 mean of x 
- 16.22617 </code></pre>
+ 15.90442 </code></pre>
 </div>
 </div>
 </section>
 <section id="bootstrap-to-estimate-variability-of-the-slope-of-the-regression" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="bootstrap-to-estimate-variability-of-the-slope-of-the-regression"><span class="header-section-number">6.2</span> bootstrap to estimate variability of the slope of the regression</h2>
-<p>We can also bootstrap our way to some of the results of a regression model. Here we also use the <em>hypothesize</em> option of the <em>infer</em> package</p>
+<p>We can also bootstrap our way to some of the results of a regression model. Here we also use the <em>hypothesize</em> option of the <em>infer</em> package. Note that for this small sample size, the bootstrap estimate fluctuates quite a bit if you repeat the experiment.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>var_slope <span class="ot">&lt;-</span> gender_data_final <span class="sc">|&gt;</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">500</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"slope"</span>)</span>
-<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>var_slope <span class="sc">|&gt;</span> </span>
-<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ungroup the dataset</span></span>
-<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate summary statistics</span></span>
-<span id="cb90-11"><a href="#cb90-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb90-12"><a href="#cb90-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mean of stat</span></span>
-<span id="cb90-13"><a href="#cb90-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_stat =</span> <span class="fu">mean</span>(stat), </span>
-<span id="cb90-14"><a href="#cb90-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Std error of stat</span></span>
-<span id="cb90-15"><a href="#cb90-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">std_err_stat =</span> <span class="fu">sd</span>(stat)</span>
-<span id="cb90-16"><a href="#cb90-16" aria-hidden="true" tabindex="-1"></a>  )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>var_slope <span class="ot">&lt;-</span> gender_data_final <span class="sc">|&gt;</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="st">`</span><span class="at">Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">500</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"slope"</span>)</span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>var_slope <span class="sc">|&gt;</span> </span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ungroup the dataset</span></span>
+<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate summary statistics</span></span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mean of stat</span></span>
+<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_stat =</span> <span class="fu">mean</span>(stat), </span>
+<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Std error of stat</span></span>
+<span id="cb93-15"><a href="#cb93-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">std_err_stat =</span> <span class="fu">sd</span>(stat)</span>
+<span id="cb93-16"><a href="#cb93-16" aria-hidden="true" tabindex="-1"></a>  )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   mean_stat std_err_stat
       &lt;dbl&gt;        &lt;dbl&gt;
-1    0.0551         6.13</code></pre>
+1     0.209         5.87</code></pre>
 </div>
 </div>
 </section>
@@ -1253,23 +1271,23 @@ mean of x
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> bootstrap</span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> r.labor_diff</span>
-<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="co">#convert array to sequence</span></span>
-<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> (labor,)</span>
-<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate 95% bootstrapped confidence interval for median</span></span>
-<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a>bootstrap_ci <span class="op">=</span> bootstrap(data, np.mean, confidence_level<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">1</span>, method<span class="op">=</span><span class="st">'percentile'</span>)</span>
-<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-13"><a href="#cb92-13" aria-hidden="true" tabindex="-1"></a><span class="co">#view 95% boostrapped confidence interval</span></span>
-<span id="cb92-14"><a href="#cb92-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bootstrap_ci.confidence_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> bootstrap</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> r.labor_diff</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co">#convert array to sequence</span></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> (labor,)</span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate 95% bootstrapped confidence interval for median</span></span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>bootstrap_ci <span class="op">=</span> bootstrap(data, np.mean, confidence_level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">1</span>, method<span class="op">=</span><span class="st">'percentile'</span>)</span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a><span class="co">#view 95% boostrapped confidence interval</span></span>
+<span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bootstrap_ci.confidence_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>ConfidenceInterval(low=9.203395833333337, high=24.488916666666658)</code></pre>
+<pre><code>ConfidenceInterval(low=np.float64(8.982916666666675), high=np.float64(23.89338749999999))</code></pre>
 </div>
 </div>
 <p>There’s <a href="https://machinelearningmastery.com/calculate-bootstrap-confidence-intervals-machine-learning-results-python/">more that can be done</a> of course, but we’ll stop here.</p>
@@ -1280,239 +1298,242 @@ mean of x
 </main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1520,192 +1541,167 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 
 
 
 </body></html>
-
             
         </article>
     </main>

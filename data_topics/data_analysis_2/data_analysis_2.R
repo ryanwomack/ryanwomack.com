@@ -1,18 +1,28 @@
+# Data Analysis 2
+# Ryan Womack, ryan@ryanwomack.com
+# 2025-09-15 version
+# Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+## ----setup, include=FALSE-----------------------------------------------------
 
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis_2/")
 
 
-## 
-## install.packages("pak", dependencies=TRUE)
-## library(pak)
-## pkg_install("tidyverse")
-## pkg_install("reticulate")
-## pkg_install("infer")
-## pkg_install("TOSTER")
-## devtools::session_info()
-## 
 
+## ----install packages, eval=FALSE---------------------------------------------
+# 
+# install.packages("pak", dependencies=TRUE)
+# library(pak)
+# pkg_install("tidyverse")
+# pkg_install("reticulate")
+# pkg_install("infer")
+# pkg_install("TOSTER")
+# devtools::session_info()
+# 
+
+
+## ----tidyverse----------------------------------------------------------------
 
 library(tidyverse)
 library(infer)
@@ -22,6 +32,8 @@ library(reticulate)
 
 
 
+## ----download and import data-------------------------------------------------
+
 getOption("timeout")
 options(timeout=6000)
 download.file("https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip", "gender.zip")
@@ -29,6 +41,8 @@ unzip("gender.zip")
 gender_data <- read_csv("Gender_StatsCSV.csv")
 
 
+
+## ----data wrangling, results='hide'-------------------------------------------
 
 # clean the data to remove superfluous columns
 names(gender_data)
@@ -78,19 +92,28 @@ attach(gender_data_final)
 
 
 
+## ----t-test-------------------------------------------------------------------
+
 t.test(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`)
 
 
+
+## ----t-test mu----------------------------------------------------------------
 
 t.test(`Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)`, mu=70)
 
 
 
+## ----help---------------------------------------------------------------------
+
 ?t.test
 
 
 
+## ----t-test paired------------------------------------------------------------
+
 t.test(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`,`Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)`, paired = TRUE, alternative = "two.sided")
+
 
 
 ## 
@@ -124,14 +147,19 @@ t.test(`Labor force participation rate, female (% of female population ages 15-6
 ##     print("Fail to reject the null hypothesis; there is no significant difference between the sample mean and the hypothesized population mean.")
 ## 
 
+## ----labor--------------------------------------------------------------------
 
 table(female_high_labor,male_high_labor)
 
 
 
+## ----chisq--------------------------------------------------------------------
+
 chisq.test(table(female_high_labor,male_high_labor))
 
 
+
+## ----normal distribution------------------------------------------------------
 
 # the density of a standard normal distribution at the value 2 (2 above mean of zero)
 
@@ -163,26 +191,38 @@ rnorm(5, mean=100, sd=20)
 ?rnorm
 
 
-## 
-## cor(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`, na.rm=TRUE)
-## 
+
+## ----correlation incorrect, eval=FALSE----------------------------------------
+# 
+# cor(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`, na.rm=TRUE)
+# 
 
 
-cor(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`, use="complete.obs")
+## ----correlation correct------------------------------------------------------
 
-
-
-cor.test(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`)
-
-
-
-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`)
+cor(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`, use="complete.obs")
 
 
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`))
+## ----cor.test-----------------------------------------------------------------
+
+cor.test(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`)
 
 
+
+## ----linear regression--------------------------------------------------------
+
+lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`)
+
+
+
+## ----linear regression with summary-------------------------------------------
+
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`))
+
+
+
+## ----linear regression additional relationships-------------------------------
 
 summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`))
 
@@ -190,19 +230,27 @@ summary(lm(`Fertility rate, total (births per woman)`~`GDP per capita (constant 
 
 
 
+## ----linear regression with no intercept--------------------------------------
+
 summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`-1))
 
 
+
+## ----multiple linear regression-----------------------------------------------
 
 summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`))
 
 
 
-regoutput<-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`)
+## ----stored regression output-------------------------------------------------
+
+regoutput<-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`)
 names(regoutput)
 regoutput$residuals
 
 
+
+## ----stored regression output - quick functions-------------------------------
 
 # predicted values
 predict(regoutput)
@@ -212,6 +260,8 @@ anova(regoutput)
 
 
 
+## ----tests for normality------------------------------------------------------
+
 shapiro.test(rstandard(regoutput))
 
 ks.test(regoutput$residuals, 'pnorm')
@@ -220,13 +270,18 @@ ks.test(rstandard(regoutput), 'pnorm', mean=0, sd=1)
 
 
 
+## ----diagnostic plots---------------------------------------------------------
+
 plot(regoutput, pch=3)
 
 
 
+## ----logistic regression------------------------------------------------------
+
 logistic_output <- glm(female_high_labor ~ `Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`, family=binomial)
 
 summary(logistic_output)
+
 
 
 ## 
@@ -240,7 +295,7 @@ summary(logistic_output)
 ## 
 ## # specify variables
 ## labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
-## gdp = gender_python.loc[:,"GDP per capita (constant 2010 US$)"]
+## gdp = gender_python.loc[:,"GDP per capita (constant 2015 US$)"]
 ## 
 ## # this step is important to put the data in Python-friendly form
 ## labor2 = labor.array.reshape(-1, 1)
@@ -252,6 +307,7 @@ summary(logistic_output)
 ## print(f"R-squared: {r_sq}")
 ## 
 
+## ----point_estimate-----------------------------------------------------------
 
 point_estimate <- gender_data_final %>%
   specify(response = `A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)`) %>%
@@ -259,12 +315,16 @@ point_estimate <- gender_data_final %>%
 
 
 
+## ----bootstrap confidence interval--------------------------------------------
+
 boot_dist_dangerous <- gender_data_final %>%
   specify(response = `A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)`) %>%
   generate(reps = 50000, type = "bootstrap") %>%
   calculate(stat = "mean")
   
 
+
+## ----bootstrap replicates-----------------------------------------------------
 
 boot_dist_dangerous %>%
   visualize()
@@ -282,13 +342,19 @@ boot_dist_dangerous %>%
 
 
 
+## ----labor_diff---------------------------------------------------------------
+
 labor_diff <- `Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)` - `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`
 
 
 
+## ----boot_t_test--------------------------------------------------------------
+
 boot_t_test(labor_diff, R=1000)
 
 
+
+## ----boot slope---------------------------------------------------------------
 
 var_slope <- gender_data_final |>
   specify(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`) |>
@@ -306,6 +372,7 @@ var_slope |>
     # Std error of stat
     std_err_stat = sd(stat)
   )  
+
 
 
 ## 

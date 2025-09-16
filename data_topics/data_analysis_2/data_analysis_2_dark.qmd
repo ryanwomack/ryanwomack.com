@@ -1,7 +1,7 @@
 ---
 title: "Data Analysis 2"
 author: "Ryan Womack"
-date: "2024-10-03"
+date: "2025-09-15"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -20,6 +20,10 @@ format:
     papersize: A4
   docx: default
 theme: cyborg
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +33,7 @@ knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis_2/")
 
 ```
 
-Copyright Ryan Womack, 2024. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 **Data Analysis 2**
 
@@ -104,22 +108,22 @@ gender_data2 <-
 # clean the data to focus on a recent more complete time period
 gender_data3 <-
    gender_data2 %>%
-   pivot_longer(3:66, names_to = "Year", values_to = "Value")
+   pivot_longer(3:67, names_to = "Year", values_to = "Value")
 
 #filter by year
-gender_data2022 <-
+gender_data2023 <-
   gender_data3 %>%
-  filter(Year=="2022")
+  filter(Year=="2023")
 
-gender_data2022 <- gender_data2022[,-3]
+gender_data2023 <- gender_data2023[,-3]
 
-gender_data2022wide <-
-  gender_data2022 %>%
+gender_data2023wide <-
+  gender_data2023 %>%
   pivot_wider(names_from = "Indicator Name", values_from = "Value")
 
 # now use a little sapply trick to select variables that don't have much missing data - here the proportion is 0.75 (the 0.25 in the function is 1-proportion desired)
 
-gender_data_filtered <- gender_data2022wide[,!sapply(gender_data2022wide, function(x) mean(is.na(x)))>0.25]
+gender_data_filtered <- gender_data2023wide[,!sapply(gender_data2023wide, function(x) mean(is.na(x)))>0.25]
 
 # and lastly simplify the dataset by removing some of the topics we won't use
 
@@ -174,7 +178,7 @@ This first example returns a statistically significant, but not very interesting
 t.test(`Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)`, mu=70)
 
 ```
-We refine the test by passing the option $mu$=70, to test whether the male labor participation rate is significantly different than 70. With a $p$>.05 and a 95% confidence interval of (66,82), it is *not* significantly different than 70 in a statistical sense. 
+We refine the test by passing the option $mu$=70, to test whether the male labor participation rate is significantly different than 70. With a $p$>.05 and a 95% confidence interval of (67,83), it is *not* significantly different than 70 in a statistical sense. 
 
 Note the use of options is a common R syntax technique. Base execution of the command without options gives sensible results, but one can pass many options to tweak the function's behavior. Most of the things demanded by statisticians are available through these option tweaks. Typing _?t.test_ (the question mark followed by the function name) will pull up the help that displays the possibilities.
 
@@ -318,7 +322,7 @@ We can also perform simple correlations to evaluate the strength of a relationsh
 
 ```{r correlation incorrect, eval=FALSE}
 
-cor(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`, na.rm=TRUE)
+cor(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`, na.rm=TRUE)
 
 ```
 
@@ -326,7 +330,7 @@ Why won't this work? The defaults and options of R commands are not very standar
 
 ```{r correlation correct}
 
-cor(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`, use="complete.obs")
+cor(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`, use="complete.obs")
 
 ```
 
@@ -334,7 +338,7 @@ The _cor.test_ function gives more complete output
 
 ```{r cor.test}
 
-cor.test(`GDP per capita (constant 2010 US$)`,`Fertility rate, total (births per woman)`)
+cor.test(`GDP per capita (constant 2015 US$)`,`Fertility rate, total (births per woman)`)
 
 ```
 
@@ -348,7 +352,7 @@ We start at the beginning, with linear regresion and the _lm_ command.  Let's se
 
 ```{r linear regression}
 
-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`)
+lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`)
 
 ```
 
@@ -356,11 +360,11 @@ Which predicts about a 0.5 increase in the percentage labor participation of fem
 
 ```{r linear regression with summary}
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`))
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`))
 
 ```
 
-Which is not significant at the 0.05 level. Note that we must decide on the appropriate $p$-value to test for in advance and resist the temptation to say that this is "almost significant".  Note that this is heavily influenced by the fact that we are using a small sample of 12 countries, which could be an argument to use a 0.10 signficance level.
+Which is significant at the 0.05 level. Note that we must decide on the appropriate $p$-value to test for in advance and resist the temptation to say that this is "almost significant".  Note that this is heavily influenced by the fact that we are using a small sample of 12 countries, which could be an argument to use a 0.10 signficance level.
 
 Let's check some additional relationships:
 
@@ -368,15 +372,15 @@ Let's check some additional relationships:
 
 summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`))
 
-summary(lm(`Fertility rate, total (births per woman)`~`GDP per capita (constant 2010 US$)`))
+summary(lm(`Fertility rate, total (births per woman)`~`GDP per capita (constant 2015 US$)`))
 
 ```
 
-Also note that if want to run the regression without an intercept, we can just add a -1 to the equation.
+Here our p-values are significant at the 10% level but not the 5% level. Also note that if want to run the regression without an intercept, we can just add a -1 to the equation.
 
 ```{r linear regression with no intercept}
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`-1))
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`-1))
 
 ```
 
@@ -386,7 +390,7 @@ And if we need to explore *multiple regression*, with multiple explanatory varia
 
 ```{r multiple linear regression}
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`))
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`))
 
 ```
 
@@ -396,7 +400,7 @@ A very important feature of R is the flexibility that derives from the ability t
 
 ```{r stored regression output}
 
-regoutput<-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`)
+regoutput<-lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`)
 names(regoutput)
 regoutput$residuals
 
@@ -452,7 +456,7 @@ We can try this out with our categorized variable that labels female labor parti
 
 ```{r logistic regression}
 
-logistic_output <- glm(female_high_labor ~ `Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`, family=binomial)
+logistic_output <- glm(female_high_labor ~ `Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`, family=binomial)
 
 summary(logistic_output)
 
@@ -480,7 +484,7 @@ gender_python = r.gender_data_final
 
 # specify variables
 labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
-gdp = gender_python.loc[:,"GDP per capita (constant 2010 US$)"]
+gdp = gender_python.loc[:,"GDP per capita (constant 2015 US$)"]
 
 # this step is important to put the data in Python-friendly form
 labor2 = labor.array.reshape(-1, 1)
@@ -522,6 +526,8 @@ Note that |> is the "pipe" in base R (relatively newly introduced, so you won't 
 point_estimate <- gender_data_final %>%
   specify(response = `A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)`) %>%
   calculate(stat = "mean")
+
+point_estimate
 
 ```
 
@@ -568,6 +574,8 @@ First, instead of preserving the pairs, we get at the same idea by computing the
 
 labor_diff <- `Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)` - `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`
 
+labor_diff
+
 ```
 
 Then apply the bootstrap t-test from the _TOSTER_ package, specifying 1000 replications.
@@ -580,7 +588,7 @@ boot_t_test(labor_diff, R=1000)
 
 ## bootstrap to estimate variability of the slope of the regression 
 
-We can also bootstrap our way to some of the results of a regression model. Here we also use the _hypothesize_ option of the _infer_ package
+We can also bootstrap our way to some of the results of a regression model. Here we also use the _hypothesize_ option of the _infer_ package. Note that for this small sample size, the bootstrap estimate fluctuates quite a bit if you repeat the experiment.
 
 
 ```{r boot slope}

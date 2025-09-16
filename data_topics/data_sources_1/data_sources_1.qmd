@@ -20,6 +20,13 @@ format:
     papersize: A4
   docx: default
 theme: litera
+<<<<<<< HEAD
+=======
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+>>>>>>> bdb11ccd5bcece85c1e3d5c94794b1ea610dc7b5
 ---
 
 ```{r setup, include=FALSE}
