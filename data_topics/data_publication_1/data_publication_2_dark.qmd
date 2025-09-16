@@ -1,7 +1,7 @@
 ---
-title: "R_Packages"
+title: "Data Publication 2"
 author: "Ryan Womack"
-date: "2023-10-16"
+date: "2024-10-03"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -15,7 +15,7 @@ format:
       - top=30mm
       - left=30mm
   docx: default
-theme: cerulean #litera *journal *cerulean *slate solar
+theme: cyborg
 ---
 
 ```{r setup, include=FALSE}
@@ -23,19 +23,83 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
 ```
 
-**R Packages**
+Copyright Ryan Womack, 2023. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+This workshop first reviews repositories for data publication such as Dataverse, ICPSR, OSF, Zenodo, and more. Then we turn to a detailed discussion of building R packages.
+
+# Why Data Publication?
+
+Sharing data is a way to maximize the impact and usefulness of your research, and is increasingly mandated by research funders.
+
+Data should be shared in a manner that is [FAIR](https://www.go-fair.org/fair-principles/), enabling the data to be:
+
+- Findable, 
+- Accessible,
+- Interoperable, and
+- Reusable
+
+We should also [CARE](https://www.gida-global.org/care) for our data, respecting indigenous data governance, and managing our data according to the following principles:
+
+- Collective Benefit
+- Authority to Control
+- Responsibility
+- Ethics
+
+The NIH is the most recent major US funding agency to promulgate data sharing guidelines and requirements, so their materials are as good a place as any to get more information...
+
+[NIH on Sharing Scientific Data](https://sharing.nih.gov/data-management-and-sharing-policy/sharing-scientific-data/repositories-for-sharing-scientific-data)
+
+# Data Repositories
+
+## Generalist Repositories
+
+NIH lists several
+[Generalist Repositories](https://sharing.nih.gov/data-management-and-sharing-policy/sharing-scientific-data/generalist-repositories)
+which are all good places to deposit data when more specialized repositories are not available.
+
+- [_Dataverse_](https://dataverse.org/)
+- [Dryad](https://datadryad.org/)
+- [Figshare](https://figshare.com/)
+- [IEEE Dataport](https://ieee-dataport.org/)
+- [Mendeley Data](https://data.mendeley.com/)
+- [_OpenICPSR_](https://openicpsr.org) - social science emphasis, free to use for Rutgers due to our institutional membership in ICPSR
+- [_Open Science Framework_](https://osf.io/)
+- [Synapse](https://www.synapse.org/)
+- [Vivli](https://vivli.org/)
+- [_Zenodo_](https://zenodo.org/)
+
+A [comparison](https://doi.org/10.5281/zenodo.3946719) of many of these repositories is available.
+
+_italic_ entries are recommended for their ease of use and suitability for a wide range of data.
+
+## Specialized repositories
+
+Specialized repositories, if available, are the best place to deposit data with special characteristics.  These repositories are built to handle and showcase certain kinds of data.
+
+To discover specialized repositories, such as the [Protein Data Bank](https://www.rcsb.org), use
+
+[Re3data - the Registry of Research Data Repositories](https://www.re3data.org/)
+
+And for more information, use 
+
+[FAIRsharing.org](https://fairsharing.org/)
+
+# R package creation
+
+R Packages are an excellent way to distribute collections of data and code.  Following on the release of the 2nd edition of Hadley Wickham's [_R Packages_ book](https://r-pkgs.org), this workshop reviews the package creation process, covering prerequisites, the steps involved in creating a complete package, and following up on documentation and testing.
 
 ## The R packages book, by Wickham and Bryan
 
 This is a brief introduction to R package creation, taking as its text the book [R Packages, 2nd edition](https://r-pkgs.org) by Hadley Wickham and Jennifer Bryan.  This book is freely available on the web, so please consult for further details of topics that are only outlined here.  The second edition has been finalized in June 2023.
 
-### Install and load packages
+## Install and load packages
 
 The fundamental packages required to create an R package are _devtools_, _roxygen2_, and _testthat_.  Please install these with the following commands if they are not already available on your system.  These will not install by default if you just attempt to run this R markdown file.
 
 We will use the [_pak_](https://pak.r-lib.org/) package for installation as a more complete approach to package management. Replace the pkg commands with _install.packages()_ versions if you prefer.
 
 ```{r install packages, eval=FALSE}
+
 install.packages("pak", dependencies=TRUE)
 library(pak)
 pkg_install("devtools")
@@ -43,18 +107,27 @@ pkg_install("roxygen2")
 pkg_install("testthat")
 
 devtools::session_info()
+
 ```
+
 Let's load those libraries now.
+
 ```{r libraries}
+
 library(devtools)
 library(roxygen2)
 library(testthat)
+
 ```
+
 We can check that we're running recent enough versions of our software with the _packageVersion_ command for indivual packages, or _session_info_ for our entire setup.
+
 ```{r versions}
+
 packageVersion("devtools")
 
 devtools::session_info()
+
 ```
 
 ## Outline of the creation of a little package
@@ -85,16 +158,21 @@ We call _create_package_ to initiate a package.  We want to start this in its ow
 * Not end with '.'
 
 ```{r create package}
+
 create_package("/home/ryan/R/littlePackage")
+
 ```
 
 This will launch a new window.  To be able to continue using our script here, we have to reopen our code (here you could just use the .R script if you want to run two RStudio sessions - one for reading the guidance and one for the package).  We also have to reload our packages since this is a new session.
 
 ```{r reload packages}
+
 library(devtools)
 library(roxygen2)
 library(testthat)
+
 ```
+
 The "dot files" beginning with a period (.) are used to store a history of the R session and to tell R and git to ignore certain files.  Generally we can leave these files as is and let R worry about how to handle them.  You shouldn't need to modify these files in most circumstances.
 
 Likewise, the .Rproj file is usually left unmodified.  This helps RStudio manage the package folder as a project.
@@ -112,8 +190,10 @@ It is quite convenient to use _create_package_ to take care of all of this for u
 We won't go into any details about *git* or *github* usage, except to note that it is common and desirable to use this form of version control for your work, and also for sharing and collaboration.  To initiate the use of git in any R project (not just packages), use the command _use_git_.  To be sure we're committing the right directory, we use _proj_set_ to navigate to the directory for our package first.  Select the positive option when asked if you want to commit your files.  For the purpose of our demo, you don't have to restart RStudio at the prompt here, but if you want to use git for real, you should. If your RStudio resets again at this stage, you'll have to do _proj_set_ and reload the packages in lines 82-84 again.
 
 ```{r use git}
+
 proj_set("/home/ryan/R/littlePackage/")
 use_git()
+
 ```
 
 ### Writing a function
@@ -121,39 +201,51 @@ use_git()
 We are going to write a very basic function, just as an example.  Keep in mind that you can write functions to accomplish almost any task you want to in R, and write as many of them as you want.  Many packages have been born out of the gradual accumulation of useful functions.  Our function will be called _funkyadd_ and it just adds a little modification to addition.
 
 ```{r funkyadd}
+
 funkyadd <- function(x,y)
   {
   x+y+1
 }
+
 ```
 
 Just for fun, let's also create a _randomadd_ function that introduces true uncertainty into the addition process.
+
 ```{r randomadd}
+
 randomadd <- function(x,y)
   {
   x+y+round(rnorm(1,0,3),digits=0)
 }
+
 ```
 
 We can see these functions in action, attempting to add 6 and 9.
 
 ```{r examples}
+
 funkyadd(6,9)
 randomadd(6,9)
+
 ```
 
 We're not here to talk about functions, but about how functions are used in packages, so let's move on from these examples.  We use _use_r_ to add functions to our R directory for the our little package, as follows:
 
 ```{r use_r}
+
 use_r("funkyadd")
 use_r("randomadd")
+
 ```
+
 Copy and paste the function definitons into the editor window that pops up.  Namely, lines 124-127 for _funkyadd_ and lines 132-135 for _randomadd_.
 
 Now we run _load_all_ to bring our functions as we've defined them into the R workspace.  Note that we remove the previous manually created functions just to show that _load_all_ is working properly.  Note that the _library_ command only works for installed packages. Since we haven't finished with our package yet, we need to use _load_all_ instead.
 We also reconfirm that we're in the correct project directory.  Then we can check that the functions are in our workspace, now provided directly by the package definitions.
 [Note that at this point we're no longer going to print output from our commands in this summary text, due to a conflict between the package directory and our home directory.]
+
 ```{r load_all, eval=FALSE}
+
 rm(funkyadd)
 rm(randomadd)
 setwd("/home/ryan/R/littlePackage/")
@@ -161,6 +253,7 @@ proj_set("/home/ryan/R/littlePackage/")
 load_all()
 funkyadd(3,5)
 randomadd(3,5)
+
 ```
 
 In the actual development of a package, it is recommended to commit your changes using git as you go along, but we'll omit those steps for clarity of exposition here.
@@ -170,7 +263,9 @@ In the actual development of a package, it is recommended to commit your changes
 R has a function to look for any errors in your package.  In the terminal, you could type _R CMD check_.  Within R or Rstudio, use _check_
 
 ```{r check, eval=FALSE}
+
 check()
+
 ```
 We get a lot of output and a useful note and a warning in this case.
 
@@ -181,7 +276,9 @@ We get a lot of output and a useful note and a warning in this case.
 Run _use_mit_license_ to insert a complete current license for your package. Note the appearance of the LICENSE files after this. We could also use GPL or other licenses.  Use the _document_ command to make it finito.
 
 ```{r license, eval=FALSE}
+
 use_mit_license()
+
 ```
 
 If you use RStudio, open R/funkyadd.R in the source editor and put the cursor somewhere in the _funkyadd_ function definition. Now select *Code > Insert roxygen skeleton* from the RStudio menu. A very special comment should appear above your function, in which each line begins with #'. RStudio only inserts a barebones template, so you will need to edit it to add descriptive information after the #' @___ characters.
@@ -189,26 +286,34 @@ If you use RStudio, open R/funkyadd.R in the source editor and put the cursor so
 Now we run the _document_ command to generate Rdocumentation format files from our R commands.  We can repeat this process for _randomadd_.  Note that we could also create Rdocumentation (.Rd) files in a text editor, but the roxygen/document process saves us from learning a new set of markup tags.
 
 ```{r document, eval=FALSE}
+
 document()
 ?funkyadd
+library(help="littlePackage")
+
 ```
-Now we can get help on _funkyadd_ with the usual ?funkyadd syntax. The NAMESPACE file has also been updated by the _document_ command.
+Now we can get help on _funkyadd_ with the usual ?funkyadd syntax. The NAMESPACE file has also been updated by the _document_ command.  We can also view the overall package description with the _library(help="littlePackage")_ command
 
 We can now _check_ and _install_ the package to include it in our R space.  We can now load it with a _library_ command, although you may still want to _load_all_ to be safe.  Our functions should work now.
+
 ```{r check and install, eval=FALSE}
+
 check()
 install()
 library(littlePackage)
 load_all()
 randomadd(3,6)
+
 ```
 
 We can test our package systematically by loading _use_testthat_ and then running tests using _use_test_.  Note that we have to create our own tests to run them.  These might check, for example, that the results of certain functions fall into the values we expect them to take.  The _use_test_ function will insert properly named R files into a "tests" directory, but it is up to you to edit them into something sensible.  Once tests are created, you can run them all with the _test_ command.
 
 ```{r testthat, eval=FALSE}
+
 use_testthat()
 use_test("funkyadd")
 test()
+
 ```
 
 ### Some additional useful commands
@@ -226,8 +331,10 @@ These steps are highly recommended for a working package, but we won't try to re
 A final _check_ and _install_ once you are satisfied with all the edits on your package will finalize, rebuild, and install the package properly.
 
 ```{r check and install again, eval=FALSE}
+
 check()
 install()
+
 ```
 
 ### Review of command sequence
@@ -414,3 +521,6 @@ There are two roxygen tags that are especially important for documenting dataset
 Never @export a data set.
 
 Other uses for data are discussed in Chapter 7 of [R packages](https://r-pkgs.org)
+
+As always,
+*Enjoy R!*

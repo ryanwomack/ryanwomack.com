@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
 ```
 
-Copyright Ryan Womack, 2023. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Copyright Ryan Womack, 2024. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 This workshop first reviews repositories for data publication such as Dataverse, ICPSR, OSF, Zenodo, and more. Then we turn to a detailed discussion of building R packages.
 
