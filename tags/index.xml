@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Ryan Womack, Data Librarian</title>
-        <link>http://localhost:32927/tags/</link>
+        <link>https://ryanwomack.com/tags/</link>
         <description>Latest blog posts from Ryan Womack, Data Librarian</description>
 
         
@@ -16,21 +16,30 @@
         
 
         
-        <lastBuildDate>Tue, 26 Dec 2023 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Sat, 20 Sep 2025 00:00:00 +0000</lastBuildDate>
         
 
         
-        <atom:link href="http://localhost:32927/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://ryanwomack.com/tags/index.xml" rel="self" type="application/rss+xml" />
         
 
         
             
         <item>
+          <title>Disappointing Developments</title>
+          <link>https://ryanwomack.com/blog/2025/09/disappointing-developments/</link>
+          <pubDate>Sat, 20 Sep 2025 00:00:00 +0000</pubDate>
+          
+          <guid>https://ryanwomack.com/blog/2025/09/disappointing-developments/</guid>
+          <description>CalyxOS Well, it is not really anyone’s fault but Google’s. Yet we expect Google to be evil, so their removal of side-loading (a.k.a., being able to install the apps you want) and access to preview releases is not so surprising. However, this has caused CalyxOS to do something akin to suspending their operations. While they claim that they are doing this for security reasons and will return, it still means that they are out of action for several months.</description>
+        </item>
+            
+        <item>
           <title>The Enshittification of Gandi, or, more forced diversification</title>
-          <link>http://localhost:32927/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</link>
+          <link>https://ryanwomack.com/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</link>
           <pubDate>Tue, 26 Dec 2023 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</guid>
+          <guid>https://ryanwomack.com/blog/2023/12/the-enshittification-of-gandi-or-more-forced-diversification/</guid>
           <description>Enshittification has rapidly become enshrined as a fundamental principle of the economy of the internet. Once customers are hooked on various free and enhanced services funded by excess capital, the screws are turned and customers are bled as the service is monetized by reducing costs and quality.
 Now that it’s happened to me, it’s become personal.
 I was a Gandi customer for over 20 years, since my first ventures onto the internet with web hosting, still discoverable via the Wayback Machine (although I won’t give any further clues than that).</description>
@@ -38,20 +47,20 @@ I was a Gandi customer for over 20 years, since my first ventures onto the inter
             
         <item>
           <title>Spinning up new static site servers, or, diversification as risk management</title>
-          <link>http://localhost:32927/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</link>
+          <link>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</link>
           <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</guid>
+          <guid>https://ryanwomack.com/blog/2023/07/spinning-up-new-static-site-servers-or-diversification-as-risk-management/</guid>
           <description>As I mentioned in my last blog post, I am trying to broaden my knowledge and secure my web assets by learning a bit more about other services and migrating sites there, after realizing that it is perhaps not wise to remain reliant on AWS.
 This is a quick commentary on services that I learned about and tried (this post is one source of information). My needs are simple. All my sites are static, with mail hosting and any other services taken care of elsewhere.</description>
         </item>
             
         <item>
           <title>Diversification as Risk Management, or, Disaster with AWS</title>
-          <link>http://localhost:32927/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</link>
+          <link>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</link>
           <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</guid>
+          <guid>https://ryanwomack.com/blog/2023/07/diversification-as-risk-management-or-disaster-with-aws/</guid>
           <description>That title sounds a bit Rocky and Bullwinkle to me. But it is appropriate to the situation.
 I have migrated an older Wordpress post to this blog on AWS backup that provides some context or evidence of my past history with AWS.
 Let me try to tell this story as concisely as I can. For the TL;DR crowd, the takeaways are labeled this whole episode made me realize.
@@ -60,10 +69,10 @@ I had been using AWS to serve all of my various websites for a long time.</descr
             
         <item>
           <title>Missing Time Series</title>
-          <link>http://localhost:32927/blog/2023/06/missing-time-series/</link>
+          <link>https://ryanwomack.com/blog/2023/06/missing-time-series/</link>
           <pubDate>Sat, 10 Jun 2023 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2023/06/missing-time-series/</guid>
+          <guid>https://ryanwomack.com/blog/2023/06/missing-time-series/</guid>
           <description>I just posted a rather uncharacteristic video on YouTube about my deletion of videos. Usually I confine myself to either instructional videos or presentations, but this was just a rambling self-explanatory monologue.
 This is a text version of some similar thoughts.
 In my work, my personal organizing practice is to scan for files that are ten years old (or more) and reviewing them to either delete or permanently archive as a memento of the past.</description>
@@ -71,10 +80,10 @@ In my work, my personal organizing practice is to scan for files that are ten ye
             
         <item>
           <title>On job applications and interviews</title>
-          <link>http://localhost:32927/blog/2022/06/on-job-applications-and-interviews/</link>
+          <link>https://ryanwomack.com/blog/2022/06/on-job-applications-and-interviews/</link>
           <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2022/06/on-job-applications-and-interviews/</guid>
+          <guid>https://ryanwomack.com/blog/2022/06/on-job-applications-and-interviews/</guid>
           <description>About three years back, I had posted some tips for job applicants on my old blog, which I am reposting here for convenience.
 After having been on search committees yet again, I am compelled to write up some additional thoughts. The tips in the earlier post are still valid. This time, I may be a bit more pointed and direct about just a few items.
 interview etiquette - thank you notes I know that no one really gets consistent instructions about interview etiquette anymore.</description>
@@ -82,39 +91,39 @@ interview etiquette - thank you notes I know that no one really gets consistent 
             
         <item>
           <title>About the Sackler verdict</title>
-          <link>http://localhost:32927/blog/2021/09/about-the-sackler-verdict/</link>
+          <link>https://ryanwomack.com/blog/2021/09/about-the-sackler-verdict/</link>
           <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2021/09/about-the-sackler-verdict/</guid>
+          <guid>https://ryanwomack.com/blog/2021/09/about-the-sackler-verdict/</guid>
           <description>I am still torn up by the Sackler verdict, which absolves the Sackler family of guilt for deceptively promoting addictive and ultimately deadly drugs in order to boost their all-American profits. The result was over 500,000 all-American corpses due to overdose, and the judicial system’s recent verdict has only awarded approximately enough money to cover the funeral expenses of these corpses. The Sacklers get to pay these expenses over a decade while keeping their fortunes intact and being shielded from further prosecution.</description>
         </item>
             
         <item>
           <title>ryandata blog migration</title>
-          <link>http://localhost:32927/blog/2021/06/ryandata-blog-migration/</link>
+          <link>https://ryanwomack.com/blog/2021/06/ryandata-blog-migration/</link>
           <pubDate>Wed, 09 Jun 2021 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2021/06/ryandata-blog-migration/</guid>
+          <guid>https://ryanwomack.com/blog/2021/06/ryandata-blog-migration/</guid>
           <description>So, a couple of years ago, I wrote here to introduce the possibility of my blogging at this site. At that time, I said that I would be continuing to also post work-related announcements at ryandata.wordpress.com.
 Well, time has passed, and I am trying to simplify many things in my life. The need for a blog site announcing things has been superseded by the growing capabilities of our workshop calendar and the increasing accumulation of material on the graduate specialist libguide, in addition to supplemental resources like the graduate specialist github.</description>
         </item>
             
         <item>
           <title>Linux audio</title>
-          <link>http://localhost:32927/blog/2021/05/linux-audio/</link>
+          <link>https://ryanwomack.com/blog/2021/05/linux-audio/</link>
           <pubDate>Sat, 29 May 2021 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2021/05/linux-audio/</guid>
+          <guid>https://ryanwomack.com/blog/2021/05/linux-audio/</guid>
           <description>This is my small rant/ramble about my recent experience with Linux audio. Warning to the reader: I am not claiming there is anything of interest in the following - just getting it off my chest.
 I have been a Linux user since about 2000 or so, having performed countless installs. With few exceptions–I did waver from the path from about 2005 to 2007–I have always relied on Linux for my primary home/personal computing needs.</description>
         </item>
             
         <item>
           <title>IASSIST 2021</title>
-          <link>http://localhost:32927/blog/2021/05/iassist-2021/</link>
+          <link>https://ryanwomack.com/blog/2021/05/iassist-2021/</link>
           <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2021/05/iassist-2021/</guid>
+          <guid>https://ryanwomack.com/blog/2021/05/iassist-2021/</guid>
           <description>I am very happy to be back with my IASSIST colleagues this week at IASSIST 2021, even if it is virtual rather than in sunny Gothenburg, Sweden, as we had hoped to be last year.
 My own presentation on May 20 has been “flipped” so that there will be more time for interactive discussion during the live session.
 I am encouraging anyone with interest in the development of our graduate specialist program to view the slides and videos linked below.</description>
@@ -122,78 +131,78 @@ I am encouraging anyone with interest in the development of our graduate special
             
         <item>
           <title>Personal Statement</title>
-          <link>http://localhost:32927/blog/2021/04/personal-statement/</link>
+          <link>https://ryanwomack.com/blog/2021/04/personal-statement/</link>
           <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2021/04/personal-statement/</guid>
+          <guid>https://ryanwomack.com/blog/2021/04/personal-statement/</guid>
           <description>The image above is a wordcloud based on the word frequency in the personal statement that I used for promotion—my career in feline form.
 I was inspired by my colleague Francesca Giannetti’s post about the personal statement she used for her !successful! tenure applicaton at Rutgers. In her post, she discusses the benefit to be gained from sharing one’s own articulation of how one has built a professional identity in a new area of services.</description>
         </item>
             
         <item>
           <title>Unofficial and informal tips for job applicants</title>
-          <link>http://localhost:32927/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</link>
+          <link>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</link>
           <pubDate>Tue, 24 Sep 2019 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</guid>
+          <guid>https://ryanwomack.com/blog/2019/09/unofficial-and-informal-tips-for-job-applicants/</guid>
           <description>Having been involved in several hiring committees over recent years, it is sometimes a bit frustrating to not be able to give advice to applicants. We cannot do that in individual cases as a matter of HR policy. The decision-making process is confidential. But I hope that by offering some general observations I have made after reviewing many applications, that this might be of help to future seekers. We are, after all, trying to find the person who will provide the best job performance, not perform the best in the application process.</description>
         </item>
             
         <item>
           <title>Ryandata.wordpress.com</title>
-          <link>http://localhost:32927/blog/2019/07/ryandata.wordpress.com/</link>
+          <link>https://ryanwomack.com/blog/2019/07/ryandata.wordpress.com/</link>
           <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2019/07/ryandata.wordpress.com/</guid>
+          <guid>https://ryanwomack.com/blog/2019/07/ryandata.wordpress.com/</guid>
           <description>My blog has been located at RyanData.wordpress.com for many years.
 In the future, I will start posting about some of more personal thoughts about data and statistics directly on this site, but RyanData.wordpress.com will continue to be the place for Rutgers-related announcements of workshops and data developments.</description>
         </item>
             
         <item>
           <title>Mongolian Multivariate Statistics (at the Mongolian University of Life Sciences)</title>
-          <link>http://localhost:32927/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</link>
+          <link>https://ryanwomack.com/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</link>
           <pubDate>Sun, 18 Mar 2018 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</guid>
+          <guid>https://ryanwomack.com/blog/2018/03/mongolian-multivariate-statistics-at-the-mongolian-university-of-life-sciences/</guid>
           <description>Hong Kong to Ulaanbaatar flight MIAT Plane I was delighted to be invited to return to Mongolia again for a more in-depth visit to the Mongolian University of Life Sciences [Хөдөө Аж Ахуйн Их Сургууль]. I was honored by the invitation from the Dean of the School of Economics and Business [Эдийн засаг бизнесийн сургууль], B. Baasansukh, and P. Munkhtuya, Chair of the Department of Economic Statistics and Mathematical Modeling, to come and teach a one week Short Course on Applied Multivariate Statistical Methods with R [Олон хэмжээст статистикийн богино хэмжээний сургалт R программ дээр].</description>
         </item>
             
         <item>
           <title>PirateBox for Data Literacy</title>
-          <link>http://localhost:32927/blog/2017/07/piratebox-for-data-literacy/</link>
+          <link>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</link>
           <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2017/07/piratebox-for-data-literacy/</guid>
+          <guid>https://ryanwomack.com/blog/2017/07/piratebox-for-data-literacy/</guid>
           <description>Distributing files via PirateBox PirateBox with pen for scale A PirateBox is a wireless router that has been reconfigured to serve as a local fileserver. The PirateBox project develops software to do this. PirateBox makes it easy to share files with anyone within range of the router, and also supports a local anonymous discussion board for those within range.
 I did this for the TP-Link TL-MR3040, a commonly used piece of hardware for PirateBoxes.</description>
         </item>
             
         <item>
           <title>Data Science in Mongolia - Маш их сайн! (very good!)</title>
-          <link>http://localhost:32927/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</link>
+          <link>https://ryanwomack.com/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</link>
           <pubDate>Thu, 15 Jun 2017 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</guid>
+          <guid>https://ryanwomack.com/blog/2017/06/data-science-in-mongolia-%D0%BC%D0%B0%D1%88-%D0%B8%D1%85-%D1%81%D0%B0%D0%B9%D0%BD-very-good/</guid>
           <description>Data Science in Mongolia - Маш их сайн! (very good!)
 While it is the subject for another blog post or another blog, Mongol culture has long held my fascination. Thanks to a series of fortunate events, I had the opportunity to bring some of my favorite interests (data, statistics, R, Mongolian) all together to form an unforgettable experience in May 2017. During one week in Ulaanbaatar, I visited three of the oldest, largest, and most important Mongolian universities, as well as the nerve center of Mongolian data, the National Statistics Office.</description>
         </item>
             
         <item>
           <title>Traveling with a light digital footprint</title>
-          <link>http://localhost:32927/blog/2017/04/traveling-with-a-light-digital-footprint/</link>
+          <link>https://ryanwomack.com/blog/2017/04/traveling-with-a-light-digital-footprint/</link>
           <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2017/04/traveling-with-a-light-digital-footprint/</guid>
+          <guid>https://ryanwomack.com/blog/2017/04/traveling-with-a-light-digital-footprint/</guid>
           <description>Prepping for destination UB, I have decided to travel with a low cost digital devices with a more limited feature set, rather than leaving my electronic life exposed to loss, search, or seizure. To that end, I am taking with me a low-cost Mobal Phone [sic] and a cheap laptop, albeit reconfigured to run a premium operating system, Debian.
 The laptop is suitably tagged with the things that keep me running these days, R, Rutgers, and D Music.</description>
         </item>
             
         <item>
           <title>What is a Data Librarian?</title>
-          <link>http://localhost:32927/blog/2016/11/what-is-a-data-librarian/</link>
+          <link>https://ryanwomack.com/blog/2016/11/what-is-a-data-librarian/</link>
           <pubDate>Wed, 23 Nov 2016 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2016/11/what-is-a-data-librarian/</guid>
+          <guid>https://ryanwomack.com/blog/2016/11/what-is-a-data-librarian/</guid>
           <description>A while back I was asked this question, and it provoked an almost subterranean thought process in me. While I can’t promise a deep answer to this question, at least an answer has emerged.
 For me, librarianship itself is all about guiding people to knowledge.
 So, a data librarian is not necessarily someone who collects data and puts on a shelf or on a server (although that certainly can be done by data librarians).</description>
@@ -201,39 +210,39 @@ So, a data librarian is not necessarily someone who collects data and puts on a 
             
         <item>
           <title>A manual backup routine using AWS</title>
-          <link>http://localhost:32927/blog/2016/04/a-manual-backup-routine-using-aws/</link>
+          <link>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</link>
           <pubDate>Thu, 28 Apr 2016 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2016/04/a-manual-backup-routine-using-aws/</guid>
+          <guid>https://ryanwomack.com/blog/2016/04/a-manual-backup-routine-using-aws/</guid>
           <description>This post is also slightly off topic – not a data announcement, workshop, video, etc. But it does contain one specific instance of something that everyone should be thinking about – data backup. Everyone knows the rule of three – keep at least three backups of your precious files and make sure at least one of them is offsite in case of disaster.
 I needed to develop a new routine for my home computer backup after deciding to seize control of my system back from SpiderOak.</description>
         </item>
             
         <item>
           <title>Installing Debian/XFCE (Linux) on Dell XPS 13 9350</title>
-          <link>http://localhost:32927/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</link>
+          <link>https://ryanwomack.com/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</link>
           <pubDate>Thu, 14 Apr 2016 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</guid>
+          <guid>https://ryanwomack.com/blog/2016/04/installing-debian/xfce-linux-on-dell-xps-13-9350/</guid>
           <description>Well, this is off topic for the theme of the blog, but I felt the urge to record an expurgated version of my recent installation of Linux on a new Dell XPS 13 (9350), for the potential edification of the populace. I will try to make it brief, by my standards 🙂 (but I guess I failed..) This is not in any way an objective post, but I am just blowing off steam and letting my opinions fly.</description>
         </item>
             
         <item>
           <title>PLE (Personal Learning Environment)</title>
-          <link>http://localhost:32927/blog/2015/03/ple-personal-learning-environment/</link>
+          <link>https://ryanwomack.com/blog/2015/03/ple-personal-learning-environment/</link>
           <pubDate>Tue, 31 Mar 2015 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2015/03/ple-personal-learning-environment/</guid>
+          <guid>https://ryanwomack.com/blog/2015/03/ple-personal-learning-environment/</guid>
           <description>I am responding to a now defunct post by my colleague, Francesca Giannetti. The discussion there is about the PLE, or personal learning environment. I think it’s interesting to reflect on, because most of the time I am just marinating in my PLE rather than conscious of it.
 I find that I use different communication mechanisms for different purposes, and they have different time scales and impacts on my thinking. Enough generalities, let’s jump in!</description>
         </item>
             
         <item>
           <title>Benford&#39;s Law</title>
-          <link>http://localhost:32927/blog/2015/03/benfords-law/</link>
+          <link>https://ryanwomack.com/blog/2015/03/benfords-law/</link>
           <pubDate>Fri, 27 Mar 2015 00:00:00 +0000</pubDate>
           
-          <guid>http://localhost:32927/blog/2015/03/benfords-law/</guid>
+          <guid>https://ryanwomack.com/blog/2015/03/benfords-law/</guid>
           <description>I somehow skipped through life up to now without encountering Benford’s Law. Now that I have, I am flabbergasted that it is not more widely known, or maybe I’ve just been hanging with wrong crowd. Here’s a hint. If I have a set of measurements, like the population of countries, or a list of atomic weights, how often would you expect the first digit of the measurement to be 1? Well, it can’t start with a zero, but any of the other 9 digits is possible, right?</description>
         </item>
             
