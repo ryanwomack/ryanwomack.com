@@ -1,7 +1,7 @@
 ---
 title: "Data Visualization 2"
 author: "Ryan Womack"
-date: "2024-10-03"
+date: "2025-10-01"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -29,7 +29,7 @@ knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_visualization_2/
 
 ```
 
-Copyright Ryan Womack, 2024. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 **Data Visualization 2**
 
