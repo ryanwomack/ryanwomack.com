@@ -10,3 +10,5 @@ User-agent: Slurp
 User-agent: ia_archiver
 Allow: /
 
+Sitemap: https://ryanwomack.com/sitemap.xml
+
