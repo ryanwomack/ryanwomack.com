@@ -1,0 +1,237 @@
+---
+title: "Data Publication 1"
+author: "Ryan Womack"
+date: "2025-10-21"
+toc: true
+number-sections: true
+highlight-style: pygments
+output: html_document
+format:
+  html: 
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+  docx: default
+theme: cyborg
+---
+
+```{r initiate, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+_creating reproducible research and literate programming documents, using knitr, Sweave, Quarto, blogdown, and bookdown_
+
+Note that the [Data Publication 2](https://www.ryanwomack.com/data_topics/data_publication_2/data_publication_2.html) workshop covers data sharing and the creation of data packages.
+
+# Why Data Publication?
+
+This workshop discusses the initial creation of data publications that embody the best practices of reproducible research and literate programming. In the context of the R statistical programming environment, the knitr, Sweave, blogdown, and bookdown packages are illustrated.
+
+In brief, we want to ensure that the data behind a publication gets the same careful attention, visibility, and usefulness, as the written article (or other form of publication) that uses the data. This is necessary so that others can understand, validate, and possibly reuse the data in future research.
+
+# Setup
+
+To run the R packages referred to below, install them if you have not already done so.
+
+```{r setup}
+#| eval: false
+#| echo: true
+library(pak)
+pkg_install("blogdown")
+pkg_install("bookdown")
+```
+
+# Reproducibility
+
+##  Credibility in Science
+
+A foundational principle of the scientific method is that when we repeat or redo experiments and scientific analysis, we have the same findings, proving through repeated experimentation that a particular theory is confirmed in reality. To do this, the data and methods used in any one piece of research must be transparent and understood to other researchers. This requires not only publication, typically via a scholarly article, but that other researchers can repeat those steps themselves, through either _replication_ or _reproducibility_.
+
+**Replication**, or redoing the (physical) experiment from scratch, is expensive, and may not be possible due to the passage of time. 
+
+**Reproducibility** typically focuses on the computational aspects of data, combined with code, to produce results,
+
+Additionally, funders increasing require data to be made available to others, and the research community expects that data to be prepared in such a way that it is easy for other researchers to use. The days of "contact the author" to request data and code are passing.
+
+The following references provide more context:
+
+[Wikipedia on Reproducibility](https://en.wikipedia.org/wiki/Reproducibility)
+
+[*Science* on Replication and Reproducibility](https://www.science.org/toc/science/334/6060)
+
+A particularly notable case is described in the [Duke “starter set”](http://bioinformatics.mdanderson.org/Supplements/ReproRsch-All/Modified/StarterSet/index.html) and [article](http://science.sciencemag.org/content/353/6303/977?rss=1)
+
+## Data Management
+
+Good data management is essential for reproducibility. Consult the Rutgers University Libraries [Research Guide on Data Management](https://libguides.rutgers.edu/data-management) for more guidance from funders on data management and more detail on data management practices. Here we will focus on just a few principles for data preparation:
+
+- Keep raw data pristine and separate from any working data. In the event of any mistakes in data preparation, or later reconsideration of methods, having the original raw data available is essential.
+- Document your variables and data collection! Do this for yourself as well as for others. Think about writing about everything you might forget when revisiting the project three years later in response to a query. That will provide clear guidance to other users. It is easier to write this up at the beginning of a project, when the information is fresh in your mind, than to reconstruct it later. This may also help you with organizing the data, such as developing a consistent variable naming scheme and to think through making the data clear and usuable. Disciplinary practices vary, but the documentation can be in the form of a [codebook](https://researchmethodscommunity.sagepub.com/blog/what-is-a-codebook), [data dictionary](https://datamanagement.hms.harvard.edu/collect-analyze/documentation-metadata/data-dictionary), or a simple [readme](https://data.research.cornell.edu/data-management/sharing/readme/) (the links provide some examples of these).
+- If you can, avoid working in Excel, or any other editing environment where you prepare your data manually via point and click. It is very difficult to document the steps taken to clean and filter data in the this environment, and others may not be able to follow your work. Using written code to prepare the data allows others to easily reproduce your steps.
+- Store your data, code, and associated files in a standardized directory structure that is easy for others to understand. One tool to automate the creation of such a directory structure is the [ProjectTemplate](http://projecttemplate.net/) package.
+
+# Literate Programming
+
+Literate programming is "well-commented" code that explains itself. The concept originated with the [book by Donald Knuth](https://en.wikipedia.org/wiki/Literate_programming). The comment sections should describe what is going on in each section of the code so that someone new to the code can clearly understand what is happening at each stage. Certain environments make this easier. [Mathematica notebooks](https://www.wolfram.com/notebooks/), [Jupyter notebooks](https://jupyter.org/) for Python (and other languages) are examples.
+
+## Literate Programming in R
+
+In R, literate programming can be achieved with [LaTeX](https://www.latex-project.org/) in combination with [Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf), with *knitr* + *markdown/Rmarkdown* in RStudio, or with [Quarto](https://quarto.org).
+
+Using these tools:
+
+- we can embed R code and run it as the document is generated
+- code that is “tangled” in with text can be extracted, and formatted documents can be “woven” or "knitted" from the literate program
+- this always ensures that the latest data and results are actually incorporated
+- and helps to document and explain code in context (literate programming)
+- PDF, document, and HTML formats are easy to obtain
+- The [formatR](https://cran.r-project.org/web/packages/formatR/) package can clean up your code formatting
+
+## LaTeX and Sweave
+
+While beyond the scope of this workshop, [LaTeX](https://www.latex-project.org/) remains the most full-featured approach to publication-quality documents of any length and complexity, in which every feature can be controlled in detail, even if sometimes this requires a bit of elbow grease in tracking down and applying codes and styles. The [Sweave](https://stat.ethz.ch/R-manual/R-devel/library/utils/doc/Sweave.pdf) package allows the use of R code inside LaTeX documents, so that analysis, figures, and tables can be inserted accurately and automatically into the writeup. 
+
+## knitr and markdown/RMarkdown
+
+Just as the _markdown_ language is a simplified and easy-to-learn version of _html_ that still covers most of the major formatting needs that html is used for, _Rmarkdown_ is essentially markdown plus the ability to evaluate R code. And the _knitr_ package provide a quick yet powerful way to generate documents from Rmarkdown.
+
+- Markdown + [knitr](https://yihui.org/knitr/) has become a popular, lightweight replacement for LaTex + Sweave
+- RMarkdown (.Rmd) allows R code execution, math formatting in addition to regular Markdown (.md) functionality
+- has simple syntax and implementation
+- is well integrated into RStudio (one can also use plain markdown that renders on github natively)
+- we can publish documents with one click at [RPubs](http://rpubs.com/ryandata/217248)
+- and we can always fall back on LaTeX/Sweave for more complex document formatting
+
+See [Rmarkdown: the definitive guide](https://bookdown.org/yihui/rmarkdown/) and [knitr documentation](https://cran.r-project.org/web/packages/knitr/index.html) for the full details.
+
+## Quarto
+
+[Quarto](https://quarto.org) is a newer, cross-platform approach to generating documents. Importantly, any files in markdown and Rmarkdown will be compatible with Quarto and have no issue with document generation. So switching to Quarto is painless, and offers the benefit of enabling many more options in document and website preparation.
+
+These include the following (quoting the Quarto site):
+
+- **Dynamic Documents**: Generate dynamic output using Python, R, Julia, and Observable. Create reproducible documents that can be regenerated when underlying assumptions or data change.
+- **Beautiful Publications**: Publish high-quality articles, reports, presentations, websites, and books in HTML, PDF, MS Word, ePub, and more. Use a single source document to target multiple formats.
+- **Scientific Markdown**: Pandoc markdown has excellent support for LaTeX equations and citations. Quarto adds extensions for cross-references, figure panels, callouts, advanced page layout, and more.
+- **Authoring Tools**: Use your favorite tools including Positron, VS Code, RStudio, Jupyter Lab, or any text editor. Use the Quarto visual markdown editor for long-form documents.
+- **Interactivity**: Engage readers by adding interactive data exploration to your documents using Jupyter Widgets, htmlwidgets for R, Observable JS, and Shiny.
+- **Websites and Books**: Publish collections of documents as a blog or full website. Create books and manuscripts in both print formats (PDF and MS Word) and online formats (HTML and ePub).
+
+See [the Quarto reference guide](https://quarto.org/docs/reference/index.html) for more details
+
+At this point, the live workshop and screencast recording include a brief walkthrough/demo of editing and knitting output in RStudio.
+
+# Package management
+
+Once we have well-prepared data and well-prepared code, the computational side of reproducibility still deserves attention. We cannot fully reproduce an analysis unless we can verify it computationally. This can be a problem if other versions of software were used for the original work. Often, with commercial software, older versions are simply unavailable over time. As a result, open source software is an important enabler of reproducibility. Anyone can grab copies of the software to execute, and can get older versions if necessary for compatibility.
+
+## Tools for package management
+
+- You can record information about your computing environment (the _sessionInfo()_ command  in R), letting future users see the exact setup you used
+- The [renv](https://cran.r-project.org/web/packages/renv/index.html) package helps you create reproducible environments for your R projects. Use renv to make your R projects more isolated, portable and reproducible (replacing _packrat_)
+- The [Posit Package Manager](https://posit.co/blog/migrating-from-mran-to-posit-package-manager/) can be used to access older versions of packages, in combination with the [checkpoint](https://cran.r-project.org/web/packages/checkpoint/index.html) package
+- The [miniCRAN](https://cran.r-project.org/web/packages/miniCRAN/index.html) package can be used to create a small, managed repository of selected packages. See ["Create a local R package repository using miniCRAN"](https://learn.microsoft.com/en-us/sql/machine-learning/package-management/create-a-local-package-repository-using-minicran?view=sql-server-ver16)
+- Containerized software are more comprehensive solutions, not R specific, bundling all necessary software into a single, launchable app:
+   - [Reprozip](https://www.reprozip.org/) - containerization, tailored to reproducible research needs
+   - [Docker](https://docker.com) - leading general commericical containerization
+   - [Apptainer](https://apptainer.org/) (formerly Singularity) - open source equivalent of Docker
+
+## Code sharing and version control
+
+- The same forces (cloud computing, shared platforms, standards) are making collaboration easier than ever
+- [Github](https://github.com), [Gitlab](https://gitlab.com), [Bitbucket](https://bitbucket.org/), and others enable easy collaboration on programming, combined with version control
+- these come with significant side benefits for reproducibility due to availability of code
+- Rproject in RStudio can integrate with github and other tools, but is specific to RStudio
+
+## continued in Data Publication 2
+
+Check out the [Data Publication 2](https://www.ryanwomack.com/data_topics/data_publication_2/data_publication_2.html) workshop materials for more on data repositories for data sharing and creating packages in R to share data and code.
+
+# More publishing tools
+
+We continue with a brief examination of two packages, _blogdown_ and _bookdown_, that can help extend your data publication capabilities from single documents to larger, more complex websites and books, while continuing to use the same basic building blocks. Most importantly, these tools let you work with all of the data and statistical functionality of R.
+
+## blogdown
+
+The [blogdown](pkgs.rstudio.com/blogdown) package and its associated [book](https://bookdown.org/yihui/blogdown/) allow you to write blog posts/websites that can handle R markdown files natively.
+
+The code below is all that is needed to spin up a basic site.
+
+```
+library(blogdown)
+dir.create("/home/ryan/R/blogdownsite")
+setwd("/home/ryan/R/blogdownsite")
+new_site()
+serve_site()
+build_site()
+```
+
+You will want to edit the directory commands to match your local paths. Use _getwd()_ if you are not sure of your current working directory. Then create a new subfolder that is **empty** for blogdown to drop the site into. The _new_site()_ command will put a sample _hugo_ site, structured as a blog, into that folder. The _content_ folder is where you would edit to create/modify the posts themselves. The _serve_site()_ command builds a preview version of the site and displays it. The _build_site_ command creates a publishable version of the site, without previewing it.
+
+### Potential issues
+
+This section is only necessary if you are having issues getting your blog to display correctly.
+
+If you need the ./public directory, you may need to manually generate the public folder in the terminal, assuming the working directory is the root of your website repo:
+
+```
+hugo -d ./public
+```
+
+[From [https://github.com/rstudio/blogdown/issues/495](https://github.com/rstudio/blogdown/issues/495)
+
+The line below may be a useful addition to your .Rprofile 
+
+```
+options(blogdown.method = 'html')
+```
+or just delete your .Rprofile file before building your site, as one post recommends (https://stackoverflow.com/questions/71919138/blogdown-r-markdown-blog-post-doesnt-work)
+
+In fact, this latter method worked best for solving my issues.
+
+### Serving the site 
+
+To make the site available on the web, the _public_ folder generated by the _build_site()_ command must be put on a web server. There are many ways to do this that are out of the scope of this workshop.
+
+See this page for more on the [full process of setting up a blogdown site](https://www.apreshill.com/blog/2020-12-new-year-new-blogdown/)
+
+The _blogdown_ project is not as active as _bookdown_ (below). It relies heavily on [hugo](https://gohugo.io), and so making any substantive changes to default layouts and actions will require an understanding of _hugo_. Many users may find it easier to work with _hugo_ directly. The one advantage is that _blogdown_ will interpret .Rmd files for you. However, one can also process .Rmd files into html using _Quarto_ (discussed above), and use those results to generate a blog/website via _hugo_. As is typical in the open source world, you can pick the approach that suits you best.
+
+## bookdown
+
+The [bookdown](https://bookdown.org/home/) package and its associated [book](https://bookdown.org/yihui/bookdown/) by Yihui Xie allow you to generate book-length documentation, also including data, statistics, and mathematics as needed. This can convert a collection of .Rmd files into a structured html page and also output to PDF, with the .Rmd files becoming chapters. The bookdown package extends the already impressive functionality of [Pandoc](https://pandoc.org).
+
+To quote Yihui Xie, 
+
+> Merging all chapters into one Rmd file and knitting it is one way to render the book in bookdown. There is actually another way: you may knit each chapter in a separate R session, and bookdown will merge the Markdown output of all chapters to render the book. We call these two approaches “Merge and Knit” (M-K) and “Knit and Merge” (K-M), respectively.
+
+The implications of each approach are discussed [here](https://bookdown.org/yihui/bookdown/new-session.html).
+
+We will follow the [Get started](https://bookdown.org/yihui/bookdown/get-started.html) chapter to provide a quick demo.  Click "File -> New Project" in the RStudio menus, and select "Book Project using bookdown". After that, remember to change your working directory match the source files you just had RStudio create. You should also run _library(bookdown)_ and _library(rmarkdown)_ to be sure that your packages are available. The _render_site()_ command will generate the site if the automated preview does not work. The will put a directory called **_book** in your home directory (may not be immediately visible). We can also use the output_format option to generate a PDF, for example.
+
+```
+setwd("/home/ryan/R/bookdemo")
+library(bookdown)
+library(rmarkdown)
+render_site()
+render_site(output_format = 'bookdown::pdf_book', encoding = 'UTF-8')
+```
+
+Note that Quarto is also building up its [book functionality](https://quarto.org/docs/books/) and may supplant bookdown at some point.  Both approaches offer a quick publishing option: for Quarto to QuartoPubs, and for bookdown, to the bookdown.org site, but the fact that they generate a standard html directory means that the content can be served in any way you choose. As is typical in the open source world, keeping up with the best approach that combines familiarity, flexibility, adoption, and future-proofing is an ever-changing process as programs leapfrog each other and incorporate each other's features.
+
+The live session and screencast continue with a walkthrough of the book files and building process.  Obviously writing and formatting a full book project will be much more time-consuming, but this package hopefully helps ease many of those tasks. The ability to create parallel web and PDF documentation formats is a big plus!
+
+# Conclusion and continuation
+
+For more information and packages supporting reproducibility, see the [CRAN Task View for Reproducible Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
+
+Notably, the [**ropensci**](https://ropensci.org/) project has many packages for reproducibility and collaboration, with many tools that will enhance research productivity.
+
+Check out the [Data Publication 2](https://www.ryanwomack.com/data_topics/data_publication_2/data_publication_2.html) workshop materials for the continuation of this topic, which covers data repositories for data sharing and creating packages in R to share data and code.
+
+As always, _Enjoy R!_
