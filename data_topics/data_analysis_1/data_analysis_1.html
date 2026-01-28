@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ryan Womack">
+<meta name="dcterms.date" content="2026-01-26">
+
+<title>Data Analysis 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="data_analysis_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="data_analysis_1_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="data_analysis_1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="data_analysis_1_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="data_analysis_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="data_analysis_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="data_analysis_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="data_analysis_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="data_analysis_1_files/libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="data_analysis_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="data_analysis_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="data_analysis_1_files/libs/bootstrap/bootstrap-20dca6d41651323474e7872f6b51115e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a>
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">1.1</span> Installation</a></li>
+  </ul></li>
+  <li><a href="#setup-and-preparing-data" id="toc-setup-and-preparing-data" class="nav-link" data-scroll-target="#setup-and-preparing-data"><span class="header-section-number">2</span> Setup and preparing data</a>
+  <ul class="collapse">
+  <li><a href="#r-packages-required" id="toc-r-packages-required" class="nav-link" data-scroll-target="#r-packages-required"><span class="header-section-number">2.1</span> R packages required</a></li>
+  </ul></li>
+  <li><a href="#basics-of-the-r-language" id="toc-basics-of-the-r-language" class="nav-link" data-scroll-target="#basics-of-the-r-language"><span class="header-section-number">3</span> Basics of the R language</a>
+  <ul class="collapse">
+  <li><a href="#case-sensitivity" id="toc-case-sensitivity" class="nav-link" data-scroll-target="#case-sensitivity"><span class="header-section-number">3.1</span> Case sensitivity</a></li>
+  <li><a href="#console-as-calculator" id="toc-console-as-calculator" class="nav-link" data-scroll-target="#console-as-calculator"><span class="header-section-number">3.2</span> Console as calculator</a></li>
+  <li><a href="#sampling-and-probability" id="toc-sampling-and-probability" class="nav-link" data-scroll-target="#sampling-and-probability"><span class="header-section-number">3.3</span> Sampling and probability</a></li>
+  <li><a href="#creating-functions" id="toc-creating-functions" class="nav-link" data-scroll-target="#creating-functions"><span class="header-section-number">3.4</span> Creating functions</a></li>
+  <li><a href="#r-help" id="toc-r-help" class="nav-link" data-scroll-target="#r-help"><span class="header-section-number">3.5</span> R help</a></li>
+  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio"><span class="header-section-number">3.6</span> RStudio</a></li>
+  </ul></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="header-section-number">4</span> The <em>tidyverse</em></a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data"><span class="header-section-number">5</span> Importing data</a>
+  <ul class="collapse">
+  <li><a href="#readr" id="toc-readr" class="nav-link" data-scroll-target="#readr"><span class="header-section-number">5.1</span> readr</a></li>
+  <li><a href="#excel-import" id="toc-excel-import" class="nav-link" data-scroll-target="#excel-import"><span class="header-section-number">5.2</span> Excel import</a></li>
+  <li><a href="#importing-other-formats" id="toc-importing-other-formats" class="nav-link" data-scroll-target="#importing-other-formats"><span class="header-section-number">5.3</span> Importing other formats</a></li>
+  </ul></li>
+  <li><a href="#wrangling-your-data" id="toc-wrangling-your-data" class="nav-link" data-scroll-target="#wrangling-your-data"><span class="header-section-number">6</span> Wrangling your data</a>
+  <ul class="collapse">
+  <li><a href="#tibbles-and-data-frames" id="toc-tibbles-and-data-frames" class="nav-link" data-scroll-target="#tibbles-and-data-frames"><span class="header-section-number">6.1</span> tibbles and data frames</a></li>
+  <li><a href="#data.table" id="toc-data.table" class="nav-link" data-scroll-target="#data.table"><span class="header-section-number">6.2</span> data.table</a></li>
+  <li><a href="#world-bank-gender-statistics" id="toc-world-bank-gender-statistics" class="nav-link" data-scroll-target="#world-bank-gender-statistics"><span class="header-section-number">6.3</span> World Bank Gender Statistics</a></li>
+  <li><a href="#tidyr" id="toc-tidyr" class="nav-link" data-scroll-target="#tidyr"><span class="header-section-number">6.4</span> tidyr</a></li>
+  <li><a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise"><span class="header-section-number">6.5</span> summarise</a></li>
+  </ul></li>
+  <li><a href="#dplyr-the-heart-of-the-tidyverse" id="toc-dplyr-the-heart-of-the-tidyverse" class="nav-link" data-scroll-target="#dplyr-the-heart-of-the-tidyverse"><span class="header-section-number">7</span> dplyr, the heart of the tidyverse</a>
+  <ul class="collapse">
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">7.1</span> mutate</a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">7.2</span> select</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">7.3</span> filter</a></li>
+  <li><a href="#summarise-1" id="toc-summarise-1" class="nav-link" data-scroll-target="#summarise-1"><span class="header-section-number">7.4</span> summarise</a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">7.5</span> arrange</a></li>
+  </ul></li>
+  <li><a href="#additional-wrangling-tools" id="toc-additional-wrangling-tools" class="nav-link" data-scroll-target="#additional-wrangling-tools"><span class="header-section-number">8</span> Additional wrangling tools</a>
+  <ul class="collapse">
+  <li><a href="#purr" id="toc-purr" class="nav-link" data-scroll-target="#purr"><span class="header-section-number">8.1</span> purr</a></li>
+  <li><a href="#glue" id="toc-glue" class="nav-link" data-scroll-target="#glue"><span class="header-section-number">8.2</span> glue</a></li>
+  </ul></li>
+  <li><a href="#broom" id="toc-broom" class="nav-link" data-scroll-target="#broom"><span class="header-section-number">9</span> broom</a></li>
+  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science"><span class="header-section-number">10</span> R for Data Science</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2>
+<ul>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.docx"><i class="bi bi-file-word"></i>MS Word</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.qmd"><i class="bi bi-file-word"></i>Quarto</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.R"><i class="bi bi-file-text"></i>R script only</a>
+  </li>
+  <li>
+    <a href="https://www.youtube.com/playlist?list=PLCj1LhGni3hMISmOuBBvh5JHRaAbAl0Tq"><i class="bi bi-file-html"></i>Screencast video</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/data_analysis_1/data_analysis_1_dark.html"><i class="bi bi-file-html"></i>HTML - dark mode</a>
+  </li>
+</ul>
+</div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Analysis 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ryan Womack </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Copyright Ryan Womack, 2026. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+<p><strong>Data Analysis 1</strong></p>
+<p><em>overview, data methods, and data wrangling with R + comparison with Python</em></p>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>This workshop reviews the basics of importing, examining, and manipulating data (“data wrangling”) in R, with some brief comparisons to the Python approach to accomplishing the same tasks [Python examples will be integrated in upcoming versions.]</p>
+<section id="installation" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">1.1</span> Installation</h2>
+<p>This workshop does <em>not</em> cover the installation of R and RStudio, but assumes that you have a working copy available.</p>
+<p><em>R</em> is open source software for statistical analysis, available at <a href="https://r-project.org">R-project.org</a>. It is recommended to install R first. R commands can be executed by many editors and IDEs, directly in the terminal, or via script files. However, one of the most powerful and common methods, which we will use here, is to use the RStudio IDE.</p>
+<p><em>RStudio</em>, available from <a href="https://posit.co">Posit</a> as an <a href="https://posit.co/download/rstudio-desktop/">open source download</a>, is a tool for creating and running R code (and Python and a few other languages), with many helpful features and templates for working with the other formats and tools in the R ecosystem. RStudio will make use of your installed version of R, running as a layer on top. Posit is also developing <a href="https://posit.co/products/ide/positron/">Positron</a> as a newer IDE with more flexibility to work with R, Python, and other possible languages. This workshop does not use Positron, although the code should also work there.</p>
+<p>For immediate use without installation, try the following:</p>
+<ul>
+<li><p>R/RStudio is also available via <a href="https://it.rutgers.edu/computer-labs/">Rutgers OIT Computer Labs</a> and their <a href="https://it.rutgers.edu/virtual-computer-labs/">Virtual Lab</a>.</p></li>
+<li><p>The <a href="https://posit.cloud">Posit Cloud</a> is also a free service that allows you to use RStudio (with some limitations on time and memory) with the creation of an account.</p></li>
+</ul>
+<p>Please see the <a href="https://www.youtube.com/watch?v=ifOCC-9V_y0">Getting Started with R video</a> for more details (or other web tutorials and guides).</p>
+<p><a href="https://www.python.org/">Python</a> is also open-source, and can be used with various editors and tools, which are not detailed here.</p>
+</section>
+</section>
+<section id="setup-and-preparing-data" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Setup and preparing data</h1>
+<section id="r-packages-required" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="r-packages-required"><span class="header-section-number">2.1</span> R packages required</h2>
+<p>We will use the <a href="https://pak.r-lib.org/"><em>pak</em></a> package for installation as a more complete approach to package management. Replace the pkg commands with <em>install.packages()</em> versions if you prefer.</p>
+<p>This session relies on the <a href="https://tidyverse.org"><em>tidyverse</em></a> suite of packages for data manipulation as a preference, although the same tasks could be accomplished in base R using other functions. Install <em>pak</em> and <em>tidyverse</em> if you don’t already have them on your system. We will also need <em>reticulate</em> to run Python code chunks.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pak)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"reticulate"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Note that the <em>update.packages()</em> can be run periodically to check for newer versions of any packages installed.</p>
+<p>Now let’s load the tidyverse and reticulate (for Python support only)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="st">"/usr/bin/python3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="basics-of-the-r-language" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Basics of the R language</h1>
+<section id="case-sensitivity" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="case-sensitivity"><span class="header-section-number">3.1</span> Case sensitivity</h2>
+<p>R is case sensitive. While <em>Getwd()</em> will return an error when typed in the console, <em>getwd()</em> will show you the current working directory. On the other hand, <em>getwd</em> without parentheses will print the internal workings of the command. R is often terse and offers little feedback. A successful command may simply return you to a blank cursor, while an error may require some searching on <a href="https://stackexchange.com">Stack Exchange</a> or similar sites to discover how to fix it.</p>
+</section>
+<section id="console-as-calculator" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="console-as-calculator"><span class="header-section-number">3.2</span> Console as calculator</h2>
+<p>The console may be used as a calculator, providing answers for everything from 2+2 to 2^1000 (2 to the 1000th power). 2+2. However, 2^1024 will exceed the range of numbers that R can calculate, returning “Inf” for infinity. Most other functions such as ln or e that one would find on a scientific calculator are available.</p>
+</section>
+<section id="sampling-and-probability" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sampling-and-probability"><span class="header-section-number">3.3</span> Sampling and probability</h2>
+<p>R is built for statistics and has a full range of sampling capabilities and probability distributions. Parameters can be passed to customize these functions. See the <a href="https://cran.r-project.org/web/views/Distributions.html">CRAN Task View for Probability Distributions</a> for more details.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw ten numbers at random from the range 1 to 100</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 24 53  7 76 62 13 96 95 68  9</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw ten numbers from the standard normal distribution</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -1.6877126  0.2094790 -1.2668308  0.8049329  1.5238116 -0.4680209
+ [7]  1.8883174 -0.4081182 -0.5613338  0.6732555</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw ten numbers from a normal distribution with mean 100 and standard deviation 20</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  95.81910 120.83129 123.56143 101.52361  70.85218  75.64314  92.59156
+ [8] 125.64729 100.23488  92.27888</code></pre>
+</div>
+</div>
+<p>We can also sample from a data object, such as a list of respondent names. In addition to sampling from distributions, we can calculate values based on the probability distribution functions (PDF), cumulative distribution functions (CDF), and quantiles of these distributions in a very flexible manner. See the <a href="https://rstudio.github.io/r-manuals/r-intro/Probability-distributions.html">Introduction to R manual</a> for a brief discussion. There are also many other tutorials on the Web.</p>
+</section>
+<section id="creating-functions" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="creating-functions"><span class="header-section-number">3.4</span> Creating functions</h2>
+<p>Creating your own functions is easy. Name the function, use the assignment operator (&lt;-), then the <em>function</em> argument, enclosing the actual workings of the function in curly brackets {}. While the example below is simple, complex conditional statements of any length can be used within the brackets.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the function</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>funkyadd<span class="ot">&lt;-</span><span class="cf">function</span>(x,y)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">+</span>y<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># run the function with arguments</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">funkyadd</span>(<span class="dv">2</span>,<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>The ease of adding functions is one element in the flourishing of the large (22,000+) ecosystem of R packages, as individual researchers and users build the functions and tools to meet their analytical needs.</p>
+</section>
+<section id="r-help" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="r-help"><span class="header-section-number">3.5</span> R help</h2>
+<p>The R help system is easy to access. Use a question mark before the name of a specific function to pull up its manual page ( <em>?sample</em> or <em>?rnorm</em>). Use two question marks to search The help tab in the lower right quadrant of RStudio also allows full access to the built in help, including manuals and searching.</p>
+<p>Searching the internet for R help can be useful, since there are a wealth of tutorials, blog posts, and other material on general methods and specific R packages. It is helpful to add something like “R statistics” or “R software” or “R package” to your search to distinguish from all other uses of the letter R!</p>
+<p>Two subscription resources available to Rutgers students are the <a href="https://www.libraries.rutgers.edu/databases/oreilly">O’Reilly</a> collection of technology resources, including books, videos, and mini-courses, and <a href="https://www.libraries.rutgers.edu/databases/springer_link">Springer Nature</a>, which has a series called “Use R!” that provides practical guides to both general and specialized disciplinary methods for working with R. Just search for “Use R!” once logged in.</p>
+</section>
+<section id="rstudio" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="rstudio"><span class="header-section-number">3.6</span> RStudio</h2>
+<p>Here we also briefly review the basic layout of RStudio in the live demo or video.</p>
+</section>
+</section>
+<section id="the-tidyverse" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> The <em>tidyverse</em></h1>
+<p>We will be preferring <a href="https://tidyverse.org">tidyverse</a> commands and methods throughout this workshop. The tidyverse is a very functional and well-structured collection of packages, backed by Posit, that is an excellent entry point into the world of R. However, one should be aware that as with most things in R, there are multiple possible paths to accomplishing the same task. So do not feel limited to this approach.</p>
+</section>
+<section id="importing-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Importing data</h1>
+<section id="readr" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="readr"><span class="header-section-number">5.1</span> readr</h2>
+<p><em>readr</em> is the basic tidyverse package for importing plain text files of data into R.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># start with a tab-separated file</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://ryanwomack.com/data/myfile.txt"</span>, <span class="st">"myfile.txt"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"myfile.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 4 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (1): sex
+dbl (2): age, height
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mydata</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  sex     age height
+  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 M        22    170
+2 F        33    180
+3 M        44    190
+4 F        55    200</code></pre>
+</div>
+</div>
+<p><em>read_tsv</em> imports tab-separated text files. Later we will see <em>read_csv</em> which imports the most widely used comma-separated text file format. Among data formats, this is highly interoperable and error-proof, and is recommended for data sharing wherever appropriate.</p>
+<p>Instead of the underscore (_) typical of <em>tidyverse</em> data import commands, base R will use a period (.) separator, as in the <em>read.csv</em> command.</p>
+<p>See <a href="https://readr.tidyverse.org">readr.tidyverse.org</a> for complete details. While the defaults for these functions are reasonable, the options outlined there will help you to adjust the import process for your particular use case and to deal with any errors.</p>
+<p>As described on their site, the <em>tidyverse</em> is opinionated. In the case of data import, the <em>tidyverse</em> style commands will make fewer assumptions about data you are imported. If an inconsistency is encountered, it is more likely to throw an error and ask you to fix it, rather than silently choosing an option to resolve it. In base R data import, this results in the data import appearing to be “easy”, and then oddities later in the analysis appearing, resulting from assumptions like coercing all data to be a certain type. In the <em>tidyverse</em>, the initial data import may require more patience and tweaking, but the resulting data frame will behave exactly as you have chosen.</p>
+<p>Note that for any data we can import, we can also export in that format. For csv files, use the <em>write_csv</em> command.</p>
+</section>
+<section id="excel-import" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="excel-import"><span class="header-section-number">5.2</span> Excel import</h2>
+<p>The <a href="https://readxl.tidyverse.org"><em>readxl</em></a> package is used for .xls and .xlsx sheets. One thing to note is the number used to indicate which of the sheets in a file to import. If the sheet is named, that can also be used. The <a href="https://cran.r-project.org/web/packages/writexl/index.html"><em>writexl</em></a> package exports Excel-format files.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("readxl")</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://ryanwomack.com/data/mydata.xlsx"</span>, <span class="st">"mydata.xlsx"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mydata<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">"mydata.xlsx"</span>, <span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mydata</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  sex     age height
+  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 M        22    170
+2 F        33    180
+3 M        44    190
+4 F        55    200</code></pre>
+</div>
+</div>
+<p>There are other non-tidyverse alternatives to working with Excel files that you may encounter.</p>
+</section>
+<section id="importing-other-formats" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="importing-other-formats"><span class="header-section-number">5.3</span> Importing other formats</h2>
+<ul>
+<li><p>The <a href="https://haven.tidyverse.org/">haven</a> package is used to read and write SAS, Stata, and SPSS formats. The <a href="https://cran.r-project.org/web/packages/foreign/index.html">foreign</a> package is the traditional base R way of accomplishing these tasks.</p></li>
+<li><p><a href="https://googledrive.tidyverse.org/"><em>googledrive</em></a> allows you to interact with files on Google Drive from R.</p></li>
+<li><p><a href="https://rvest.tidyverse.org/"><em>rvest</em></a> for web scraping.</p></li>
+</ul>
+<p>The following are not in the core tidyverse, but are useful nevertheless.</p>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><em>jsonlite</em></a> for JSON files.</p></li>
+<li><p><a href="https://xml2.r-lib.org/"><em>xml2</em></a> for working with XML.</p></li>
+<li><p><a href="https://httr.r-lib.org/"><em>httr</em></a> for interacting with web APIs.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/feather/">feather</a> for sharing with Python and other languages.</p></li>
+<li><p><a href="https://dbi.r-dbi.org/"><em>DBI</em></a> for working with relational databases. To connect to a specific database, you’ll need to pair DBI with a specific backend like RSQLite, RPostgres, or odbc. Learn more at <a href="https://solutions.posit.co/connections/db/">https://solutions.posit.co/connections/db/</a>.</p></li>
+<li><p><a href="https://rclone.org/"><em>Rclone</em></a> for working with cloud sites like AWS, Box, Dropbox, and many more. Note that Rclone is not an R package (in spite of its name), but a standalone command line application. However, <em>rclone</em> commands can be run from with R or RStudio.</p></li>
+</ul>
+<p>There are even more things that can be done with data, since R has packages for nearly everything, but let’s move on to working with data, a.k.a. “data wrangling”.</p>
+</section>
+</section>
+<section id="wrangling-your-data" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Wrangling your data</h1>
+<section id="tibbles-and-data-frames" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="tibbles-and-data-frames"><span class="header-section-number">6.1</span> tibbles and data frames</h2>
+<p>To quote the <a href="https://tibble.tidyverse.org"><em>tibble</em></a> webpage, “tibbles are data.frames that are lazy and surly: they do less (i.e.&nbsp;they don’t change variable names or types, and don’t do partial matching) and complain more (e.g.&nbsp;when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced print() method which makes them easier to use with large datasets containing complex objects.”</p>
+<p>While the tibble is a “better-behaved” data.frame, at least in some ways <em>data.frame</em> is the traditional R data structure and many packages still expect it. We can convert back and forth between tibbles and data frames easily, however. The <em>as.data.frame</em> command converts a tibble to a data frame, while the <em>as_tibble</em> command converts a data frame to a tibble.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "as" functions in R convert back and forth between formats</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># "." notation in base R, "_" notation in tidyverse</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sex age height
+1   M  22    170
+2   F  33    180
+3   M  44    190
+4   F  55    200</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(iris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# ℹ 140 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="data.table" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data.table"><span class="header-section-number">6.2</span> data.table</h2>
+<p>The <a href="https://github.com/Rdatatable/data.table"><em>data.table</em></a> package is not a part of the tidyverse, but is important to be aware of. It is a high performance version of the data frame suitable for big data applications, using the <em>fread</em> command to import data.</p>
+</section>
+<section id="world-bank-gender-statistics" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="world-bank-gender-statistics"><span class="header-section-number">6.3</span> World Bank Gender Statistics</h2>
+<p>Now let’s grab some data. We will use a realistic data example, the <a href="https://genderdata.worldbank.org/">World Bank’s Gender Statistics database</a>, whose <a href="https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip">raw data</a> is directly downloadable. Other <a href="https://data.worldbank.org/">World Bank Open Data</a> is available as well. See <a href="https://genderdata.worldbank.org">genderdata.worldbank.org</a> for more background on the Gender Data portal. Note that we have to inspect the data and understand the variables first before manipulating in R – this is not an automatic process. The dataset we download is over 150MB in size.</p>
+<p>Our hypothetical researcher wants to isolate selected variables for selected countries for one recent year of data. We’ll work through this step by step to illustrate data commands at our disposal for wrangling.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note the timeout options below may be useful if you're on a slow connection or the World Bank site is slow to respond.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">"timeout"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout=</span><span class="dv">6000</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip"</span>, <span class="st">"gender.zip"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">"gender.zip"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># we read in the data with read_csv and examine it, then remove two unneeded columns with codes, using basic matrix notation</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Gender_StatsCSV.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 338405 Columns: 69
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (4): Country Name, Country Code, Indicator Name, Indicator Code
+dbl (65): 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gender_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Country Name"   "Country Code"   "Indicator Name" "Indicator Code"
+ [5] "1960"           "1961"           "1962"           "1963"          
+ [9] "1964"           "1965"           "1966"           "1967"          
+[13] "1968"           "1969"           "1970"           "1971"          
+[17] "1972"           "1973"           "1974"           "1975"          
+[21] "1976"           "1977"           "1978"           "1979"          
+[25] "1980"           "1981"           "1982"           "1983"          
+[29] "1984"           "1985"           "1986"           "1987"          
+[33] "1988"           "1989"           "1990"           "1991"          
+[37] "1992"           "1993"           "1994"           "1995"          
+[41] "1996"           "1997"           "1998"           "1999"          
+[45] "2000"           "2001"           "2002"           "2003"          
+[49] "2004"           "2005"           "2006"           "2007"          
+[53] "2008"           "2009"           "2010"           "2011"          
+[57] "2012"           "2013"           "2014"           "2015"          
+[61] "2016"           "2017"           "2018"           "2019"          
+[65] "2020"           "2021"           "2022"           "2023"          
+[69] "2024"          </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> gender_data[,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>)]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gender_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Country Name"   "Indicator Name" "1960"           "1961"          
+ [5] "1962"           "1963"           "1964"           "1965"          
+ [9] "1966"           "1967"           "1968"           "1969"          
+[13] "1970"           "1971"           "1972"           "1973"          
+[17] "1974"           "1975"           "1976"           "1977"          
+[21] "1978"           "1979"           "1980"           "1981"          
+[25] "1982"           "1983"           "1984"           "1985"          
+[29] "1986"           "1987"           "1988"           "1989"          
+[33] "1990"           "1991"           "1992"           "1993"          
+[37] "1994"           "1995"           "1996"           "1997"          
+[41] "1998"           "1999"           "2000"           "2001"          
+[45] "2002"           "2003"           "2004"           "2005"          
+[49] "2006"           "2007"           "2008"           "2009"          
+[53] "2010"           "2011"           "2012"           "2013"          
+[57] "2014"           "2015"           "2016"           "2017"          
+[61] "2018"           "2019"           "2020"           "2021"          
+[65] "2022"           "2023"           "2024"          </code></pre>
+</div>
+</div>
+</section>
+<section id="tidyr" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="tidyr"><span class="header-section-number">6.4</span> tidyr</h2>
+<p>The goal of <a href="https://tidyr.tidyverse.org">tidyr</a> is to help you create tidy data. Tidy data is data where:</p>
+<ul>
+<li>Every column is a variable.</li>
+<li>Every row is an observation.</li>
+<li>Every cell is a single value.</li>
+</ul>
+<p>First we use <em>pivot_longer</em> to create long format data. <a href="https://www.thedataschool.com.au/mipadmin/the-shape-of-data-long-vs-wide/">Long vs.&nbsp;Wide data explained</a>. Then we filter the data for a recent year (2023 has relatively complete data). The <em>pivot_wider</em> to restore the data to wide format.</p>
+<p>Note that we are also renaming the datasets as we go. This lets us easily go back to an earlier version if we mess anything up. As long as you have enough memory to do this, it is highly recommended.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot_longer</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>gender_data2 <span class="ot">&lt;-</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>   gender_data <span class="sc">|&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">pivot_longer</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">67</span>, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># filter</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>gender_data2023 <span class="ot">&lt;-</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  gender_data2 <span class="sc">|&gt;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year<span class="sc">==</span><span class="st">"2023"</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co"># we no longer need the Year variable, since all are 2023 </span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>gender_data2023 <span class="ot">&lt;-</span> gender_data2023[,<span class="sc">-</span><span class="dv">3</span>]</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot_wider</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="ot">&lt;-</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  gender_data2023 <span class="sc">|&gt;</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"Indicator Name"</span>, <span class="at">values_from =</span> <span class="st">"Value"</span>)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co"># write this version of the data to a file</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gender_data2023wide, <span class="st">"widedata.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>In much older R code, you will commonly see the “%&gt;%” characters used to pass commands from one line to the next. This is called the “pipe” and is functionality introduced by the <em>magrittr</em> package. Since this was used so much, it has been integrated into the <em>tidyverse</em> without the need for an additional package. The “|&gt;” character combination is the newer way of expressing this (although the older way will still work). When you see this, you can think of it as “and then” we pass to the next line. So “gender_data2023 |&gt; pivot_wider” means take the gender_data2023 data “and then” use the pivot_wider command on it. This kind of syntax is very human-readable and easy-to-understand for steps in data wrangling.</p>
+</section>
+<section id="summarise" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="summarise"><span class="header-section-number">6.5</span> summarise</h2>
+<p>Now that we have created the dataset, we can get descriptive statistics about our data with either <em>summary</em> (base R) or <em>summarise</em> (tidyverse), which allows us to be more specific about what we would like to examine.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender_data)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender_data2023)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender_data2023wide)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise is the tidyverse way, from dplyr</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="sc">|&gt;</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_if</span>(is.numeric, mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Results of this code chunk are not displayed here because they are too voluminous. Note that <em>ls()</em> lists items in the workspace, while <em>rm()</em> removes them. Do not execute the command below unless you are sure! It removes all files!</p>
+<p><em>rm(list = ls())</em></p>
+</section>
+</section>
+<section id="dplyr-the-heart-of-the-tidyverse" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> dplyr, the heart of the tidyverse</h1>
+<p>The tidyverse loads the following packages by defualt, as we’ve seen <a href="https://readr.tidyverse.org">readr</a>, <a href="https://tibble.tidyverse.org">tibble</a>, <a href="https://tidyr.tidyverse.org">tidyr</a></p>
+<p>We will look briefly at <a href="https://purr.tidyverse.org">purr</a>, <a href="https://forcats.tidyverse.org">forcats</a>, <a href="https://stringr.tidyverse.org">stringr</a>, and <a href="https://lubridate.tidyverse.org">lubridate</a> later.</p>
+<p><a href="https://ggplot2.tidyverse.org">ggplot2</a>, the primary data visualization tool of the tidyverse, is the subject of a later workshop.</p>
+<p>However, the <a href="https://dplyr.tidyverse.org">dplyr</a> package is one of the most useful and commonly used, providing a grammar of data manipulation, with a consistent set of verbs that help you solve the most common data manipulation challenges:</p>
+<ul>
+<li><p>mutate</p></li>
+<li><p>select</p></li>
+<li><p>filter</p></li>
+<li><p>summarise</p></li>
+<li><p>arrange</p></li>
+</ul>
+<p>We will look at these one by one. They are both straightforward and powerful when used with various options.</p>
+<section id="mutate" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="mutate"><span class="header-section-number">7.1</span> mutate</h2>
+<p><em>mutate</em> adds new variables that are functions of existing variables</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="ot">&lt;-</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  gender_data2023wide <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gdp_ratio =</span> (<span class="st">`</span><span class="at">GDP per capita (Current US$)</span><span class="st">`</span><span class="sc">/</span><span class="dv">10000</span>)<span class="sc">/</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we can use a function like drop_na to eliminate missing data from a variable</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="ot">&lt;-</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(gender_data2023wide, gdp_ratio)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gender_data2023wide<span class="sc">$</span>gdp_ratio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_analysis_1_files/figure-html/mutate-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="ot">&lt;-</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  gender_data2023wide <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hi_ratio =</span> gdp_ratio<span class="sc">&gt;</span><span class="fl">0.78</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(gender_data2023wide)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="select" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="select"><span class="header-section-number">7.2</span> select</h2>
+<p><em>select()</em> picks variables based on their names. There are several flexible methods for choosing matching names. Here our hypothetical research chooses only the variables beginning with GDP (not case-sensitive).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>gender_gdp <span class="ot">&lt;-</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender_data2023wide, <span class="fu">c</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>,<span class="fu">starts_with</span>(<span class="st">"GDP"</span>)))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>gender_gdp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 248 × 6
+   `Country Name`                     `GDP (current US$)` GDP growth (annual %…¹
+   &lt;chr&gt;                                            &lt;dbl&gt;                  &lt;dbl&gt;
+ 1 Africa Eastern and Southern                    1.13e12                  1.89 
+ 2 Africa Western and Central                     8.15e11                  3.36 
+ 3 Arab World                                     3.61e12                  1.50 
+ 4 Caribbean small states                         7.95e10                  9.01 
+ 5 Central Europe and the Baltics                 2.27e12                  0.763
+ 6 Early-demographic dividend                     1.51e13                  4.61 
+ 7 East Asia &amp; Pacific                            3.13e13                  4.19 
+ 8 East Asia &amp; Pacific (excluding hi…             2.16e13                  5.25 
+ 9 East Asia &amp; Pacific (IDA &amp; IBRD)               2.16e13                  5.25 
+10 Euro area                                      1.58e13                  0.419
+# ℹ 238 more rows
+# ℹ abbreviated name: ¹​`GDP growth (annual %)`
+# ℹ 3 more variables: `GDP per capita (constant 2015 US$)` &lt;dbl&gt;,
+#   `GDP per capita (Current US$)` &lt;dbl&gt;, gdp_ratio &lt;dbl&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gender_gdp, <span class="st">"gender_gdp.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="filter" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="filter"><span class="header-section-number">7.3</span> filter</h2>
+<p><em>filter</em> picks cases based on their values. Here we further reduce the size of the dataset to include only the GDP variables for a smaller list of 24 countries. We can also filter by criteria.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select countries of interest</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>country_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Armenia"</span>, <span class="st">"Azerbaijan"</span>, <span class="st">"Canada"</span>, <span class="st">"China"</span>, <span class="st">"France"</span>, <span class="st">"Georgia"</span>, <span class="st">"Germany"</span>, <span class="st">"India"</span>, <span class="st">"Italy"</span>, <span class="st">"Japan"</span>, <span class="st">"Kazakhstan"</span>, <span class="st">"Korea, Rep."</span>, <span class="st">"Kyrgyz Republic"</span>, <span class="st">"Mexico"</span>, <span class="st">"Mongolia"</span>, <span class="st">"Russian Federation"</span>, <span class="st">"Saudi Arabia"</span>, <span class="st">"Tajikistan"</span>, <span class="st">"Turkiye"</span>, <span class="st">"Turkmenistan"</span>, <span class="st">"United Arab Emirates"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"United States"</span>, <span class="st">"Uzbekistan"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>gender_data2023selected <span class="ot">&lt;-</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  gender_gdp <span class="sc">|&gt;</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span> <span class="sc">%in%</span> country_list)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gender_data2023selected, <span class="st">"gender_selected.csv"</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># filter by criteria</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>gender_data2023filtered <span class="ot">&lt;-</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  gender_data2023selected <span class="sc">|&gt;</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gdp_ratio<span class="sc">&gt;</span><span class="dv">2</span>)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>gender_data2023filtered</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 6
+  `Country Name`       `GDP (current US$)` `GDP growth (annual %)`
+  &lt;chr&gt;                              &lt;dbl&gt;                   &lt;dbl&gt;
+1 Canada                           2.17e12                   1.53 
+2 France                           3.05e12                   0.936
+3 Germany                          4.53e12                  -0.266
+4 Italy                            2.30e12                   0.715
+5 Japan                            4.21e12                   1.48 
+6 Korea, Rep.                      1.71e12                   1.36 
+7 United Arab Emirates             5.14e11                   3.62 
+8 United Kingdom                   3.37e12                   0.397
+9 United States                    2.77e13                   2.89 
+# ℹ 3 more variables: `GDP per capita (constant 2015 US$)` &lt;dbl&gt;,
+#   `GDP per capita (Current US$)` &lt;dbl&gt;, gdp_ratio &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="summarise-1" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="summarise-1"><span class="header-section-number">7.4</span> summarise</h2>
+<p><em>summarise</em> reduces multiple values down to a single summary.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(gdp_ratio), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">median =</span> <span class="fu">median</span>(gdp_ratio))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+   mean     n median
+  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;
+1  1.36   248  0.427</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usually, you'll want to group first</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>gender_data2023wide <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hi_ratio) <span class="sc">|&gt;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(gdp_ratio, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  hi_ratio  mean     n
+  &lt;lgl&gt;    &lt;dbl&gt; &lt;int&gt;
+1 FALSE    0.223   156
+2 TRUE     3.27     92</code></pre>
+</div>
+</div>
+</section>
+<section id="arrange" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="arrange"><span class="header-section-number">7.5</span> arrange</h2>
+<p><em>arrange</em> changes the ordering of the rows. It is the dplyr equivalent of <em>sort</em> in base R.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>gender_gdp <span class="ot">&lt;-</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  gender_gdp <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gdp_ratio))</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>gender_gdp<span class="sc">$</span>gdp_ratio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 14.343008120 12.160213987 11.514766055 10.512614509  9.464984945
+  [6]  8.805384572  7.566300959  6.925853359  6.733084524  6.384683729
+ [11]  6.249809209  5.444462636  5.091532349  5.028936865  5.025713160
+ [16]  4.638280778  4.593810165  4.563591795  4.515524892  4.326473979
+ [21]  4.322394665  4.303200675  4.244967712  4.192183447  4.086724563
+ [26]  4.016130831  3.880604845  3.864530712  3.861742830  3.832213035
+ [31]  3.790795414  3.720414576  3.393695661  3.306895100  3.273596661
+ [36]  3.255452036  3.153898087  3.129524745  3.118904117  2.991876143
+ [41]  2.986331259  2.819681302  2.784542934  2.692224972  2.631491574
+ [46]  2.631481996  2.424484973  2.354746253  2.300252248  2.235948100
+ [51]  2.178693574  2.159609995  2.121397667  1.912371702  1.901825837
+ [56]  1.889754525  1.882687421  1.824691932  1.772782415  1.755145137
+ [61]  1.667321958  1.655942839  1.633741814  1.613089610  1.605818444
+ [66]  1.585826681  1.517264617  1.501691045  1.497633992  1.477627750
+ [71]  1.462470992  1.393678278  1.362138619  1.296414238  1.273836602
+ [76]  1.216661830  1.076273280  1.004211893  0.982941877  0.982185314
+ [81]  0.978740663  0.959898173  0.945832182  0.904094633  0.881850170
+ [86]  0.877561428  0.867924404  0.848826709  0.833740147  0.830593390
+ [91]  0.804473854  0.795578428  0.762826450  0.760476626  0.755030484
+ [96]  0.743773567  0.743491245  0.734134529  0.723881186  0.720908921
+[101]  0.700795134  0.694101995  0.670028137  0.667989362  0.653704792
+[106]  0.640987602  0.636140308  0.603859763  0.603810037  0.596189615
+[111]  0.593655224  0.587155384  0.582975991  0.574952267  0.561604435
+[116]  0.526059175  0.503661637  0.473938107  0.463823714  0.460195379
+[121]  0.457661304  0.432201166  0.427645998  0.427603836  0.425582772
+[126]  0.402666903  0.398360700  0.392812591  0.382893628  0.371698961
+[131]  0.369602166  0.319401566  0.306046552  0.305939989  0.302278587
+[136]  0.286469757  0.271775385  0.266779110  0.263459449  0.262613495
+[141]  0.262115179  0.260115205  0.258164694  0.252456305  0.249169570
+[146]  0.244289644  0.242080623  0.229257534  0.228788708  0.225998449
+[151]  0.221316089  0.216245596  0.215631842  0.201557470  0.198542941
+[156]  0.197779770  0.193927258  0.192446310  0.187699540  0.183604751
+[161]  0.169233920  0.169123152  0.163631302  0.155441478  0.155324917
+[166]  0.144730270  0.143426946  0.137159566  0.135913190  0.130373755
+[171]  0.130223080  0.129098305  0.128107358  0.126900218  0.126900218
+[176]  0.125701443  0.117938869  0.117648554  0.113089016  0.104350001
+[181]  0.097754069  0.095710497  0.094485671  0.094212816  0.090698308
+[186]  0.090594110  0.085375869  0.082256251  0.080706189  0.079193411
+[191]  0.070176747  0.069673919  0.069199274  0.064222819  0.060857375
+[196]  0.059646814  0.059609778  0.058366817  0.058307171  0.057895652
+[201]  0.055504974  0.045152718  0.045072875  0.044474434  0.044278581
+[206]  0.043378103  0.041180324  0.040186509  0.038361976  0.037972266
+[211]  0.037868773  0.036913099  0.036886264  0.035767630  0.035655799
+[216]  0.035655799  0.035623315  0.035560188  0.034645067  0.034011989
+[221]  0.032448861  0.031245307  0.031064784  0.030804192  0.030600918
+[226]  0.027772701  0.026584664  0.025465817  0.025154524  0.023513777
+[231]  0.023402035  0.022170679  0.021086713  0.020232771  0.019990733
+[236]  0.018451415  0.018442828  0.016511612  0.016161087  0.014991588
+[241]  0.013079690  0.012807614  0.010531861  0.010467620  0.009743295
+[246]  0.008548717  0.008249815  0.003937563</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gender_gdp, <span class="st">"gender_gdp.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>See the <a href="https://dplyr.tidyverse.org/articles/">articles page</a> in the dplyr reference for more information about combining and controlling these operations (joining datasets, working across columns or rows of data, and more).</p>
+</section>
+</section>
+<section id="additional-wrangling-tools" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Additional wrangling tools</h1>
+<p>In addition to tidyr and dplyr, there are five tidyverse packages which are designed to work with specific types of data:</p>
+<ul>
+<li><p><a href="https://lubridate.tidyverse.org">lubridate</a> for dates and date-times.</p></li>
+<li><p><a href="https://hms.tidyverse.org">hms</a> for time-of-day values.</p></li>
+<li><p><a href="https://blob.tidyverse.org">blob</a> for storing blob (binary) data.</p></li>
+<li><p><a href="https://stringr.tidyverse.org">stringr</a> provides a cohesive set of functions designed to make working with strings as easy as possible.</p></li>
+<li><p><a href="https://forcats.tidyverse.org">forcats</a> provides a suite of useful tools that solve common problems with factors. R uses factors to handle categorical variables.</p></li>
+</ul>
+<p>Each of these provides very convenient functions for handling data that might otherwise be tricky with general methods.</p>
+<section id="purr" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="purr"><span class="header-section-number">8.1</span> purr</h2>
+<p>The <a href="https://purrr.tidyverse.org">purrr</a> package enhances R’s functional programming (FP) toolkit by providing a complete and consistent set of tools for working with functions and vectors. Once you master the basic concepts, purrr allows you to replace many for loops with code that is easier to write and more expressive.</p>
+<p>For example, the “map” family of commands allows you to apply a function to each element of a vector.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># an example of map in action</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(mtcars<span class="sc">$</span>cyl) <span class="sc">|&gt;</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(df) <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> df)) <span class="sc">|&gt;</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(summary) <span class="sc">|&gt;</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="st">"r.squared"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        4         6         8 
+0.5086326 0.4645102 0.4229655 </code></pre>
+</div>
+</div>
+</section>
+<section id="glue" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="glue"><span class="header-section-number">8.2</span> glue</h2>
+<p><a href="https://glue.tidyverse.org">glue</a> provides an alternative to base R’s <em>paste()</em> that makes it easier to combine data and strings.</p>
+</section>
+</section>
+<section id="broom" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> broom</h1>
+<p><a href="https://broom.tidyverse.org">broom</a> turns models into tidy data which you can then wrangle and visualise using the tools you already know. The key commands are <em>tidy</em>, <em>glance</em>, and <em>augment</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'backports':
+  method                    from 
+  as.character.Rconcordance tools
+  print.Rconcordance        tools</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>regoutput<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, gender_data2023wide)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># base R regression summary</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regoutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `GDP per capita (constant 2015 US$)` ~ `Fertility rate, total (births per woman)`, 
+    data = gender_data2023wide)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-27105 -12784  -5230   4234 205446 
+
+Coefficients:
+                                           Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                                   38008       3139  12.108  &lt; 2e-16
+`Fertility rate, total (births per woman)`    -8944       1163  -7.689  3.6e-13
+                                              
+(Intercept)                                ***
+`Fertility rate, total (births per woman)` ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 22020 on 245 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.1944,    Adjusted R-squared:  0.1911 
+F-statistic: 59.12 on 1 and 245 DF,  p-value: 3.599e-13</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># broom variants</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(regoutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term                                     estimate std.error statistic  p.value
+  &lt;chr&gt;                                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)                                38008.     3139.     12.1  9.27e-27
+2 `Fertility rate, total (births per woma…   -8944.     1163.     -7.69 3.60e-13</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(regoutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared  sigma statistic  p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.194         0.191 22023.      59.1 3.60e-13     1 -2819. 5645. 5655.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(regoutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 247 × 9
+   .rownames GDP per capita (constant 2…¹ Fertility rate, tota…² .fitted  .resid
+   &lt;chr&gt;                            &lt;dbl&gt;                  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 1                                1413.                   4.22    230.   1183.
+ 2 2                                1842.                   4.50  -2220.   4062.
+ 3 3                                6321.                   3.09  10373.  -4052.
+ 4 4                               16395.                   1.83  21625.  -5230.
+ 5 5                               16514.                   1.41  25422.  -8907.
+ 6 6                                3878.                   2.30  17453. -13575.
+ 7 7                               12738.                   1.34  26063. -13325.
+ 8 8                                9665.                   1.36  25832. -16166.
+ 9 9                                9774.                   1.36  25878. -16104.
+10 10                              37909.                   1.38  25694.  12214.
+# ℹ 237 more rows
+# ℹ abbreviated names: ¹​`GDP per capita (constant 2015 US$)`,
+#   ²​`Fertility rate, total (births per woman)`
+# ℹ 4 more variables: .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a grouped example</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>regressions <span class="ot">&lt;-</span> gender_data2023wide <span class="sc">|&gt;</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hi_ratio) <span class="sc">|&gt;</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">|&gt;</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fit =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">GDP per capita (constant 2015 US$)</span><span class="st">`</span><span class="sc">~</span><span class="st">`</span><span class="at">Fertility rate, total (births per woman)</span><span class="st">`</span>, <span class="at">data=</span>.x,)),</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">tidied =</span> <span class="fu">map</span>(fit, tidy),</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">glanced =</span> <span class="fu">map</span>(fit, glance),</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">augmented =</span> <span class="fu">map</span>(fit, augment)</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>regressions <span class="sc">|&gt;</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(tidied)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 10
+# Groups:   hi_ratio [2]
+  hi_ratio data     fit    term   estimate std.error statistic  p.value glanced 
+  &lt;lgl&gt;    &lt;list&gt;   &lt;list&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;list&gt;  
+1 FALSE    &lt;tibble&gt; &lt;lm&gt;   (Inte…    9061.      492.    18.4   1.00e-40 &lt;tibble&gt;
+2 FALSE    &lt;tibble&gt; &lt;lm&gt;   `Fert…   -1700.      154.   -11.0   3.49e-21 &lt;tibble&gt;
+3 TRUE     &lt;tibble&gt; &lt;lm&gt;   (Inte…   33294.    13839.     2.41  1.82e- 2 &lt;tibble&gt;
+4 TRUE     &lt;tibble&gt; &lt;lm&gt;   `Fert…    2937.     9109.     0.322 7.48e- 1 &lt;tibble&gt;
+# ℹ 1 more variable: augmented &lt;list&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>regressions <span class="sc">|&gt;</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(glanced)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 17
+# Groups:   hi_ratio [2]
+  hi_ratio data     fit    tidied   r.squared adj.r.squared  sigma statistic
+  &lt;lgl&gt;    &lt;list&gt;   &lt;list&gt; &lt;list&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+1 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble&gt;   0.441          0.437   2295.   121.   
+2 TRUE     &lt;tibble&gt; &lt;lm&gt;   &lt;tibble&gt;   0.00117       -0.0101 30174.     0.104
+# ℹ 9 more variables: p.value &lt;dbl&gt;, df &lt;dbl&gt;, logLik &lt;dbl&gt;, AIC &lt;dbl&gt;,
+#   BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;, augmented &lt;list&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>regressions <span class="sc">|&gt;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(augmented)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 247 × 14
+# Groups:   hi_ratio [2]
+   hi_ratio data     fit    tidied           glanced  GDP per capita (constant…¹
+   &lt;lgl&gt;    &lt;list&gt;   &lt;list&gt; &lt;list&gt;           &lt;list&gt;                        &lt;dbl&gt;
+ 1 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      1413.
+ 2 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      1842.
+ 3 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      6321.
+ 4 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      3878.
+ 5 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      9665.
+ 6 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      9774.
+ 7 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      8270.
+ 8 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                     10043.
+ 9 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                      1693.
+10 FALSE    &lt;tibble&gt; &lt;lm&gt;   &lt;tibble [2 × 5]&gt; &lt;tibble&gt;                       998.
+# ℹ 237 more rows
+# ℹ abbreviated name: ¹​`GDP per capita (constant 2015 US$)`
+# ℹ 8 more variables: `Fertility rate, total (births per woman)` &lt;dbl&gt;,
+#   .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;, .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;,
+#   .std.resid &lt;dbl&gt;, .rownames &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="r-for-data-science" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> R for Data Science</h1>
+<p>Consult the <a href="https://r4ds.hadley.nz/">R for Data Science book</a> to learn more about data wrangling. Also check out <a href="https://www.tidymodels.org/">tidymodels</a> a collection of packages for modeling and machine learning using tidyverse principles.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

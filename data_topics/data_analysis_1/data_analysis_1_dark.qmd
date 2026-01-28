@@ -1,0 +1,547 @@
+---
+title: "Data Analysis 1"
+author: "Ryan Womack"
+date: "2026-01-26"
+toc:toc: true true
+number-sections: true
+highlight-style: pygments
+output: html_document
+format:
+  html: 
+    toc: true
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+    fontfamily: libertinus
+    colorlinks: true
+    papersize: A4
+  docx: default
+theme: cyborg
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis_1/")
+```
+
+Copyright Ryan Womack, 2026. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+**Data Analysis 1**
+
+_overview, data methods, and data wrangling with R + comparison with Python_
+
+# Overview
+
+This workshop reviews the basics of importing, examining, and manipulating data ("data wrangling") in R, with some brief comparisons to the Python approach to accomplishing the same tasks [Python examples will be integrated in upcoming versions.]
+
+## Installation
+
+This workshop does _not_ cover the installation of R and RStudio, but assumes that you have a working copy available.
+
+*R* is open source software for statistical analysis, available at [R-project.org](https://r-project.org). It is recommended to install R first. R commands can be executed by many editors and IDEs, directly in the terminal, or via script files.  However, one of the most powerful and common methods, which we will use here, is to use the RStudio IDE.
+
+*RStudio*, available from [Posit](https://posit.co) as an [open source download](https://posit.co/download/rstudio-desktop/), is a tool for creating and running R code (and Python and a few other languages), with many helpful features and templates for working with the other formats and tools in the R ecosystem. RStudio will make use of your installed version of R, running as a layer on top. Posit is also developing [Positron](https://posit.co/products/ide/positron/) as a newer IDE with more flexibility to work with R, Python, and other possible languages. This workshop does not use Positron, although the code should also work there.
+
+For immediate use without installation, try the following:
+
+- R/RStudio is also available via [Rutgers OIT Computer Labs](https://it.rutgers.edu/computer-labs/) and their [Virtual Lab](https://it.rutgers.edu/virtual-computer-labs/).
+
+- The [Posit Cloud](https://posit.cloud) is also a free service that allows you to use RStudio (with some limitations on time and memory) with the creation of an account.
+
+Please see the [Getting Started with R video](https://www.youtube.com/watch?v=ifOCC-9V_y0) for more details (or other web tutorials and guides).
+
+[Python](https://www.python.org/) is also open-source, and can be used with various editors and tools, which are not detailed here.
+
+# Setup and preparing data
+
+## R packages required
+
+We will use the [_pak_](https://pak.r-lib.org/) package for installation as a more complete approach to package management. Replace the pkg commands with _install.packages()_ versions if you prefer.
+
+This session relies on the [_tidyverse_](https://tidyverse.org) suite of packages for data manipulation as a preference, although the same tasks could be accomplished in base R using other functions. Install _pak_ and _tidyverse_ if you don't already have them on your system. We will also need _reticulate_ to run Python code chunks.
+
+```{r install packages, eval=FALSE}
+
+install.packages("pak", dependencies=TRUE)
+library(pak)
+pkg_install("tidyverse")
+pkg_install("reticulate")
+devtools::session_info()
+
+```
+
+Note that the _update.packages()_ can be run periodically to check for newer versions of any packages installed.
+
+Now let's load the tidyverse and reticulate (for Python support only)
+
+```{r tidyverse}
+
+library(tidyverse)
+# Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")
+library(reticulate)
+use_python("/usr/bin/python3")
+
+```
+
+# Basics of the R language
+
+## Case sensitivity
+
+R is case sensitive. While _Getwd()_ will return an error when typed in the console, _getwd()_ will show you the current working directory. On the other hand, _getwd_ without parentheses will print the internal workings of the command. R is often terse and offers little feedback. A successful command may simply return you to a blank cursor, while an error may require some searching on [Stack Exchange](https://stackexchange.com) or similar sites to discover how to fix it.
+
+## Console as calculator
+
+The console may be used as a calculator, providing answers for everything from 2+2 to 2^1000 (2 to the 1000th power).
+2+2. However, 2^1024 will exceed the range of numbers that R can calculate, returning "Inf" for infinity. Most other functions such as ln or e that one would find on a scientific calculator are available.
+
+## Sampling and probability
+
+R is built for statistics and has a full range of sampling capabilities and probability distributions. Parameters can be passed to customize these functions. See the [CRAN Task View for Probability Distributions](https://cran.r-project.org/web/views/Distributions.html) for more details. 
+
+```{r statistics}
+
+# draw ten numbers at random from the range 1 to 100
+
+sample(1:100,10)
+
+# draw ten numbers from the standard normal distribution
+
+rnorm(10)
+
+# draw ten numbers from a normal distribution with mean 100 and standard deviation 20
+
+rnorm(10, mean=100, sd=20)
+
+```
+
+We can also sample from a data object, such as a list of respondent names. In addition to sampling from distributions, we can calculate values based on the probability distribution functions (PDF), cumulative distribution functions (CDF), and quantiles of these distributions in a very flexible manner. See the [Introduction to R manual](https://rstudio.github.io/r-manuals/r-intro/Probability-distributions.html) for a brief discussion. There are also many other tutorials on the Web.
+
+## Creating functions
+
+Creating your own functions is easy. Name the function, use the assignment operator (<-), then the _function_ argument, enclosing the actual workings of the function in curly brackets {}. While the example below is simple, complex conditional statements of any length can be used within the brackets.
+
+```{r functions}
+
+# define the function
+
+funkyadd<-function(x,y)
+{
+  x+y+1
+}
+
+# run the function with arguments
+
+funkyadd(2,2)
+
+```
+
+The ease of adding functions is one element in the flourishing of the large (22,000+) ecosystem of R packages, as individual researchers and users build the functions and tools to meet their analytical needs.
+
+## R help
+
+The R help system is easy to access. Use a question mark before the name of a specific function to pull up its manual page ( _?sample_ or _?rnorm_). Use two question marks to search  The help tab in the lower right quadrant of RStudio also allows full access to the built in help, including manuals and searching.
+
+Searching the internet for R help can be useful, since there are a wealth of tutorials, blog posts, and other material on general methods and specific R packages. It is helpful to add something like "R statistics" or "R software" or "R package" to your search to distinguish from all other uses of the letter R!
+
+Two subscription resources available to Rutgers students are the [O'Reilly](https://www.libraries.rutgers.edu/databases/oreilly) collection of technology resources, including books, videos, and mini-courses, and [Springer Nature](https://www.libraries.rutgers.edu/databases/springer_link), which has a series called "Use R!" that provides practical guides to both general and specialized disciplinary methods for working with R. Just search for "Use R!" once logged in.
+
+## RStudio
+
+Here we also briefly review the basic layout of RStudio in the live demo or video.
+
+# The _tidyverse_
+
+We will be preferring [tidyverse](https://tidyverse.org) commands and methods throughout this workshop. The tidyverse is a very functional and well-structured collection of packages, backed by Posit, that is an excellent entry point into the world of R. However, one should be aware that as with most things in R, there are multiple possible paths to accomplishing the same task. So do not feel limited to this approach.
+
+# Importing data
+
+## readr
+
+_readr_ is the basic tidyverse package for importing plain text files of data into R.
+
+```{r readr}
+
+# start with a tab-separated file
+
+download.file("https://ryanwomack.com/data/myfile.txt", "myfile.txt")
+mydata <- read_tsv("myfile.txt")
+mydata
+
+```
+
+_read_tsv_ imports tab-separated text files. Later we will see _read_csv_ which imports the most widely used comma-separated text file format. Among data formats, this is highly interoperable and error-proof, and is recommended for data sharing wherever appropriate.
+
+Instead of the underscore (_) typical of _tidyverse_ data import commands, base R will use a period (.) separator, as in the _read.csv_ command.
+
+See [readr.tidyverse.org](https://readr.tidyverse.org) for complete details. While the defaults for these functions are reasonable, the options outlined there will help you to adjust the import process for your particular use case and to deal with any errors.
+
+As described on their site, the _tidyverse_ is opinionated. In the case of data import, the _tidyverse_ style commands will make fewer assumptions about data you are imported. If an inconsistency is encountered, it is more likely to throw an error and ask you to fix it, rather than silently choosing an option to resolve it. In base R data import, this results in the data import appearing to be "easy", and then oddities later in the analysis appearing, resulting from assumptions like coercing all data to be a certain type. In the _tidyverse_, the initial data import may require more patience and tweaking, but the resulting data frame will behave exactly as you have chosen.
+
+Note that for any data we can import, we can also export in that format. For csv files, use the _write_csv_ command.
+
+## Excel import
+
+The [_readxl_](https://readxl.tidyverse.org) package is used for .xls and .xlsx sheets. One thing to note is the number used to indicate which of the sheets in a file to import. If the sheet is named, that can also be used. The [_writexl_](https://cran.r-project.org/web/packages/writexl/index.html) package exports Excel-format files.
+
+```{r readxl}
+
+# install.packages("readxl")
+library(readxl)
+
+download.file("https://ryanwomack.com/data/mydata.xlsx", "mydata.xlsx")
+mydata<-read_excel("mydata.xlsx", 1)
+mydata
+
+```
+There are other non-tidyverse alternatives to working with Excel files that you may encounter.
+
+## Importing other formats
+
+- The [haven](https://haven.tidyverse.org/) package is used to read and write SAS, Stata, and SPSS formats. The [foreign](https://cran.r-project.org/web/packages/foreign/index.html) package is the traditional base R way of accomplishing these tasks.
+
+- [_googledrive_](https://googledrive.tidyverse.org/) allows you to interact with files on Google Drive from R.
+
+- [_rvest_](https://rvest.tidyverse.org/) for web scraping.
+
+The following are not in the core tidyverse, but are useful nevertheless.
+
+- [_jsonlite_](https://cran.r-project.org/web/packages/jsonlite/index.html) for JSON files.
+
+- [_xml2_](https://xml2.r-lib.org/) for working with XML.
+
+- [_httr_](https://httr.r-lib.org/) for interacting with web APIs.
+
+- [feather](https://cran.r-project.org/web/packages/feather/) for sharing with Python and other languages.
+
+- [_DBI_](https://dbi.r-dbi.org/) for working with relational databases. To connect to a specific database, you’ll need to pair DBI with a specific backend like RSQLite, RPostgres, or odbc. Learn more at [https://solutions.posit.co/connections/db/](https://solutions.posit.co/connections/db/).
+
+- [_Rclone_](https://rclone.org/) for working with cloud sites like AWS, Box, Dropbox, and many more. Note that Rclone is not an R package (in spite of its name), but a standalone command line application. However, _rclone_ commands can be run from with R or RStudio.
+
+There are even more things that can be done with data, since R has packages for nearly everything, but let's move on to working with data, a.k.a. "data wrangling".
+
+# Wrangling your data
+
+##  tibbles and data frames
+
+To quote the [_tibble_](https://tibble.tidyverse.org) webpage, "tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced print() method which makes them easier to use with large datasets containing complex objects."
+
+While the tibble is a "better-behaved" data.frame, at least in some ways _data.frame_ is the traditional R data structure and many packages still expect it.  We can convert back and forth between tibbles and data frames easily, however. The _as.data.frame_ command converts a tibble to a data frame, while the _as_tibble_ command converts a data frame to a tibble.
+
+```{r tibble}
+
+library(tibble)
+
+# "as" functions in R convert back and forth between formats
+
+# "." notation in base R, "_" notation in tidyverse
+
+as.data.frame(mydata)
+as_tibble(iris)
+
+```
+
+## data.table
+
+The [_data.table_](https://github.com/Rdatatable/data.table) package is not a part of the tidyverse, but is important to be aware of. It is a high performance version of the data frame suitable for big data applications, using the _fread_ command to import data.
+
+## World Bank Gender Statistics
+
+Now let's grab some data. We will use a realistic data example, the [World Bank's Gender Statistics database](https://genderdata.worldbank.org/), whose [raw data](https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip) is directly downloadable. Other [World Bank Open Data](https://data.worldbank.org/) is available as well. See [genderdata.worldbank.org](https://genderdata.worldbank.org) for more background on the Gender Data portal. Note that we have to inspect the data and understand the variables first before manipulating in R -- this is not an automatic process. The dataset we download is over 150MB in size.
+
+Our hypothetical researcher wants to isolate selected variables for selected countries for one recent year of data. We'll work through this step by step to illustrate data commands at our disposal for wrangling.
+
+```{r gender data}
+
+# note the timeout options below may be useful if you're on a slow connection or the World Bank site is slow to respond.
+
+getOption("timeout")
+options(timeout=6000)
+
+download.file("https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip", "gender.zip")
+
+unzip("gender.zip")
+
+# we read in the data with read_csv and examine it, then remove two unneeded columns with codes, using basic matrix notation
+
+gender_data <- read_csv("Gender_StatsCSV.csv")
+names(gender_data)
+gender_data <- gender_data[,c(-2,-4)]
+names(gender_data)
+
+```
+## tidyr
+
+The goal of [tidyr](https://tidyr.tidyverse.org) is to help you create tidy data. Tidy data is data where:
+
+- Every column is a variable.
+- Every row is an observation.
+- Every cell is a single value.
+
+First we use _pivot_longer_ to create long format data. [Long vs. Wide data explained](https://www.thedataschool.com.au/mipadmin/the-shape-of-data-long-vs-wide/). Then we filter the data for a recent year (2023 has relatively complete data). The _pivot_wider_ to restore the data to wide format.
+
+Note that we are also renaming the datasets as we go. This lets us easily go back to an earlier version if we mess anything up. As long as you have enough memory to do this, it is highly recommended.
+
+```{r pivot}
+
+# pivot_longer
+
+gender_data2 <-
+   gender_data |>
+   pivot_longer(3:67, names_to = "Year", values_to = "Value")
+
+# filter
+
+gender_data2023 <-
+  gender_data2 |>
+  filter(Year=="2023")
+
+# we no longer need the Year variable, since all are 2023 
+
+gender_data2023 <- gender_data2023[,-3]
+
+# pivot_wider
+
+gender_data2023wide <-
+  gender_data2023 |>
+  pivot_wider(names_from = "Indicator Name", values_from = "Value")
+
+# write this version of the data to a file
+
+write_csv(gender_data2023wide, "widedata.csv")
+
+```
+
+In much older R code, you will commonly see the "%>%" characters used to pass commands from one line to the next. This is called the "pipe" and is functionality introduced by the _magrittr_ package. Since this was used so much, it has been integrated into the _tidyverse_ without the need for an additional package. The "|>" character combination is the newer way of expressing this (although the older way will still work). When you see this, you can think of it as "and then" we pass to the next line. So "gender_data2023 |> pivot_wider" means take the gender_data2023 data "and then" use the pivot_wider command on it. This kind of syntax is very human-readable and easy-to-understand for steps in data wrangling.
+
+## summarise  
+
+Now that we have created the dataset, we can get descriptive statistics about our data with either _summary_ (base R) or _summarise_ (tidyverse), which allows us to be more specific about what we would like to examine.
+
+```{r summary, echo=TRUE, results=FALSE}
+
+ls()
+summary(gender_data)
+summary(gender_data2023)
+summary(gender_data2023wide)
+
+# summarise is the tidyverse way, from dplyr
+
+gender_data2023wide |>
+  summarise_if(is.numeric, mean, na.rm=TRUE)
+
+```
+Results of this code chunk are not displayed here because they are too voluminous. Note that _ls()_ lists items in the workspace, while _rm()_ removes them. Do not execute the command below unless you are sure! It removes all files!
+
+_rm(list = ls())_
+
+# dplyr, the heart of the tidyverse
+
+The tidyverse loads the following packages by defualt, as we've seen
+[readr](https://readr.tidyverse.org), [tibble](https://tibble.tidyverse.org), [tidyr](https://tidyr.tidyverse.org)
+
+We will look briefly at [purr](https://purr.tidyverse.org), [forcats](https://forcats.tidyverse.org), [stringr](https://stringr.tidyverse.org), and [lubridate](https://lubridate.tidyverse.org) later.
+
+[ggplot2](https://ggplot2.tidyverse.org), the primary data visualization tool of the tidyverse, is the subject of a later workshop.
+
+However, the [dplyr](https://dplyr.tidyverse.org) package is one of the most useful and commonly used, providing a grammar of data manipulation, with a consistent set of verbs that help you solve the most common data manipulation challenges:
+
+- mutate
+
+- select
+
+- filter
+
+- summarise
+
+- arrange
+
+We will look at these one by one. They are both straightforward and powerful when used with various options.
+
+## mutate
+
+_mutate_ adds new variables that are functions of existing variables
+
+```{r mutate}
+
+gender_data2023wide <-
+  gender_data2023wide |>
+  mutate(gdp_ratio = (`GDP per capita (Current US$)`/10000)/`Fertility rate, total (births per woman)`)
+
+# we can use a function like drop_na to eliminate missing data from a variable
+
+gender_data2023wide <-
+  drop_na(gender_data2023wide, gdp_ratio)
+
+plot(gender_data2023wide$gdp_ratio)
+
+gender_data2023wide <-
+  gender_data2023wide |>
+  mutate(hi_ratio = gdp_ratio>0.78)
+
+attach(gender_data2023wide)
+
+```
+
+## select
+
+_select()_ picks variables based on their names. There are several flexible methods for choosing matching names.  Here our hypothetical research chooses only the variables beginning with GDP (not case-sensitive).
+
+```{r select}
+
+gender_gdp <-
+  select(gender_data2023wide, c(`Country Name`,starts_with("GDP")))
+
+gender_gdp
+write_csv(gender_gdp, "gender_gdp.csv")
+
+```
+
+## filter
+
+_filter_ picks cases based on their values. Here we further reduce the size of the dataset to include only the GDP variables for a smaller list of 24 countries. We can also filter by criteria.
+
+```{r filter}
+
+# select countries of interest
+
+country_list <- c("Armenia", "Azerbaijan", "Canada", "China", "France", "Georgia", "Germany", "India", "Italy", "Japan", "Kazakhstan", "Korea, Rep.", "Kyrgyz Republic", "Mexico", "Mongolia", "Russian Federation", "Saudi Arabia", "Tajikistan", "Turkiye", "Turkmenistan", "United Arab Emirates", "United Kingdom", "United States", "Uzbekistan")
+
+gender_data2023selected <-
+  gender_gdp |>
+  filter(`Country Name` %in% country_list)
+
+write_csv(gender_data2023selected, "gender_selected.csv")
+
+# filter by criteria
+
+gender_data2023filtered <-
+  gender_data2023selected |>
+  filter(gdp_ratio>2)
+
+gender_data2023filtered
+
+```
+
+## summarise
+
+_summarise_ reduces multiple values down to a single summary.
+
+```{r summarise}
+
+gender_data2023wide |>
+  summarise(mean = mean(gdp_ratio), n = n(), median = median(gdp_ratio))
+
+# Usually, you'll want to group first
+
+gender_data2023wide |>
+  group_by(hi_ratio) |>
+  summarise(mean = mean(gdp_ratio, na.rm=TRUE), n = n())
+
+```
+
+## arrange
+
+_arrange_ changes the ordering of the rows. It is the dplyr equivalent of _sort_ in base R.
+
+```{r arrange}
+
+gender_gdp <-
+  gender_gdp |>
+  arrange(desc(gdp_ratio))
+
+gender_gdp$gdp_ratio
+write_csv(gender_gdp, "gender_gdp.csv")
+
+```
+
+See the [articles page](https://dplyr.tidyverse.org/articles/) in the dplyr reference for more information about combining and controlling these operations (joining datasets, working across columns or rows of data, and more).
+
+# Additional wrangling tools
+
+In addition to tidyr and dplyr, there are five tidyverse packages which are designed to work with specific types of data:
+
+- [lubridate](https://lubridate.tidyverse.org) for dates and date-times.
+
+- [hms](https://hms.tidyverse.org) for time-of-day values.
+
+- [blob](https://blob.tidyverse.org) for storing blob (binary) data.
+
+- [stringr](https://stringr.tidyverse.org) provides a cohesive set of functions designed to make working with strings as easy as possible.
+
+- [forcats](https://forcats.tidyverse.org) provides a suite of useful tools that solve common problems with factors. R uses factors to handle categorical variables.
+
+Each of these provides very convenient functions for handling data that might otherwise be tricky with general methods.
+
+## purr
+
+The [purrr](https://purrr.tidyverse.org) package enhances R’s functional programming (FP) toolkit by providing a complete and consistent set of tools for working with functions and vectors. Once you master the basic concepts, purrr allows you to replace many for loops with code that is easier to write and more expressive. 
+
+For example, the "map" family of commands allows you to apply a function to each element of a vector.
+
+```{r purr}
+
+# an example of map in action
+
+mtcars |>
+  split(mtcars$cyl) |> 
+  map(\(df) lm(mpg ~ wt, data = df)) |>
+  map(summary) |>
+  map_dbl("r.squared")
+
+```
+
+## glue
+
+[glue](https://glue.tidyverse.org) provides an alternative to base R's _paste()_ that makes it easier to combine data and strings.
+
+# broom
+
+[broom](https://broom.tidyverse.org) turns models into tidy data which you can then wrangle and visualise using the tools you already know. The key commands are _tidy_, _glance_, and _augment_
+
+```{r broom}
+
+library(broom)
+
+regoutput<-lm(`GDP per capita (constant 2015 US$)`~`Fertility rate, total (births per woman)`, gender_data2023wide)
+
+# base R regression summary
+summary(regoutput)
+
+# broom variants
+tidy(regoutput)
+glance(regoutput)
+augment(regoutput)
+
+# a grouped example
+
+regressions <- gender_data2023wide |>
+  group_by(hi_ratio) |>
+  nest() |>
+  mutate(
+    fit = map(data, ~ lm(`GDP per capita (constant 2015 US$)`~`Fertility rate, total (births per woman)`, data=.x,)),
+    tidied = map(fit, tidy),
+    glanced = map(fit, glance),
+    augmented = map(fit, augment)
+  )
+
+regressions |>
+  unnest(tidied)
+
+regressions |>
+  unnest(glanced)
+
+regressions |>
+  unnest(augmented)
+
+```
+
+# R for Data Science
+
+Consult the [R for Data Science book](https://r4ds.hadley.nz/) to learn more about data wrangling. Also check out [tidymodels](https://www.tidymodels.org/) a collection of packages for modeling and machine learning using tidyverse principles.
