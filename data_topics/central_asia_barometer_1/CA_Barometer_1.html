@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ryan Womack">
+<meta name="dcterms.date" content="2026-03-17">
+
+<title>Central Asia Barometer Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="CA_Barometer_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="CA_Barometer_1_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="CA_Barometer_1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="CA_Barometer_1_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="CA_Barometer_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="CA_Barometer_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="CA_Barometer_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="CA_Barometer_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="CA_Barometer_1_files/libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="CA_Barometer_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="CA_Barometer_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="CA_Barometer_1_files/libs/bootstrap/bootstrap-20dca6d41651323474e7872f6b51115e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a>
+  <ul class="collapse">
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.1</span> Definitions</a></li>
+  </ul></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">2</span> Installation</a>
+  <ul class="collapse">
+  <li><a href="#r-help" id="toc-r-help" class="nav-link" data-scroll-target="#r-help"><span class="header-section-number">2.1</span> R help</a></li>
+  </ul></li>
+  <li><a href="#setup-and-preparing-data" id="toc-setup-and-preparing-data" class="nav-link" data-scroll-target="#setup-and-preparing-data"><span class="header-section-number">3</span> Setup and preparing data</a>
+  <ul class="collapse">
+  <li><a href="#r-packages-required" id="toc-r-packages-required" class="nav-link" data-scroll-target="#r-packages-required"><span class="header-section-number">3.1</span> R packages required</a></li>
+  <li><a href="#python-support" id="toc-python-support" class="nav-link" data-scroll-target="#python-support"><span class="header-section-number">3.2</span> Python support</a></li>
+  </ul></li>
+  <li><a href="#central-asia-barometer" id="toc-central-asia-barometer" class="nav-link" data-scroll-target="#central-asia-barometer"><span class="header-section-number">4</span> Central Asia Barometer</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-data" id="toc-understanding-the-data" class="nav-link" data-scroll-target="#understanding-the-data"><span class="header-section-number">4.1</span> Understanding the data</a></li>
+  </ul></li>
+  <li><a href="#download-and-import-data" id="toc-download-and-import-data" class="nav-link" data-scroll-target="#download-and-import-data"><span class="header-section-number">5</span> Download and import data</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="header-section-number">6</span> Data Wrangling</a>
+  <ul class="collapse">
+  <li><a href="#selection-and-naming" id="toc-selection-and-naming" class="nav-link" data-scroll-target="#selection-and-naming"><span class="header-section-number">6.1</span> Selection and naming</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">6.2</span> Descriptive statistics</a></li>
+  <li><a href="#recoding-data" id="toc-recoding-data" class="nav-link" data-scroll-target="#recoding-data"><span class="header-section-number">6.3</span> Recoding data</a></li>
+  </ul></li>
+  <li><a href="#plots---data-visualization" id="toc-plots---data-visualization" class="nav-link" data-scroll-target="#plots---data-visualization"><span class="header-section-number">7</span> Plots - Data Visualization</a>
+  <ul class="collapse">
+  <li><a href="#illustrative-plots" id="toc-illustrative-plots" class="nav-link" data-scroll-target="#illustrative-plots"><span class="header-section-number">7.1</span> Illustrative plots</a></li>
+  </ul></li>
+  <li><a href="#further-statistical-analysis" id="toc-further-statistical-analysis" class="nav-link" data-scroll-target="#further-statistical-analysis"><span class="header-section-number">8</span> Further statistical analysis</a>
+  <ul class="collapse">
+  <li><a href="#logistic-regresssion" id="toc-logistic-regresssion" class="nav-link" data-scroll-target="#logistic-regresssion"><span class="header-section-number">8.1</span> Logistic regresssion</a></li>
+  </ul></li>
+  <li><a href="#other-possibilities" id="toc-other-possibilities" class="nav-link" data-scroll-target="#other-possibilities"><span class="header-section-number">9</span> Other possibilities</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science"><span class="header-section-number">10.1</span> R for Data Science</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="CA_Barometer_1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="CA_Barometer_1.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Central Asia Barometer Data Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ryan Womack </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 17, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Copyright Ryan Womack, 2026. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+<p><strong>Central Asia Barometer Data Analysis</strong></p>
+<p><em>data wrangling, exploratory data analysis and data visualization of Central Asia Barometer Data</em></p>
+<p><em>first developed for presentation at <a href="https://auca.kg">American University of Central Asia</a>, Spring 2026</em></p>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>This workshop illustrates working with data, starting from the basics of importing and setting up data, and moving on to descriptive statistics, basic analysis, and data visualization. Coding is primarily in R, but also with some Python examples. Both R and Python are excellent tools for data analysis, so to some extent your choice is a matter of preference and familiarity. The R language emerged from statistics and added computing functionality, whereas Python is a general purpose computing language to which heavy doses of statistical capabilities have been added.</p>
+<section id="definitions" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="definitions"><span class="header-section-number">1.1</span> Definitions</h2>
+<p><em>Statistics</em> is the broad field that provides rigorous tools for data analysis through mathematics. Although we may think of <em>machine learning</em> as a computer science topic, the fundamental theory behind machine learning is mostly statistics. Machine learning (ML) refers to many possible methods of using computing on a foundation of mathematical models, in order to understand and make predictions from data. <em>Artificial intelligence</em> is also part of machine learning, and until the rise in popularity of <em>Generative AI</em>, AI/ML usually referred to a broad suite of analytical techniques. Generative AI (GenAI) refers more narrowly to the AI that makes probabilistic guesses on the basis of massive training data, typically using <em>Large Language Models</em> (LLMs). Since GenAI does not provide reproducible, replicable results, it is not as useful for reliable research results. <em>Vibe coding</em>, or using GenAI to develop computer code and syntax, may have some applications, but is difficult to use without basic understanding of the programming languages in question. For ongoing projects that require steady modifications to an expanding codebase, GenAI is weaker at creating code that does not alter the structure of the project.</p>
+</section>
+</section>
+<section id="installation" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Installation</h1>
+<p>This workshop does <em>not</em> cover the installation of R and RStudio, but assumes that you have a working copy available.</p>
+<p><em>R</em> is open source software for statistical analysis, available at <a href="https://r-project.org">R-project.org</a>. It is recommended to install R first. R commands can be executed by many editors and IDEs, directly in the terminal, or via script files. However, one of the most powerful and common methods, which we will use here, is to use the RStudio IDE.</p>
+<p><em>RStudio</em>, available from <a href="https://posit.co">Posit</a> as an <a href="https://posit.co/download/rstudio-desktop/">open source download</a>, is a tool for creating and running R code (and Python and a few other languages), with many helpful features and templates for working with the other formats and tools in the R ecosystem. RStudio will make use of your installed version of R, running as a layer on top. Posit is also developing <a href="https://posit.co/products/ide/positron/">Positron</a> as a newer IDE with more flexibility to work with R, Python, and other possible languages. This workshop does not use Positron, although the code should also work there.</p>
+<p>Both RStudio and Positron are introducing AI suggestion tools built into their interfaces that claim to work with and understand the specific code of your project. These should be preferred to using external services like ChatGPT.</p>
+<p>For immediate use without installation, try the following:</p>
+<ul>
+<li>The <a href="https://posit.cloud">Posit Cloud</a> is also a free service that allows you to use RStudio (with some limitations on time and memory) with the creation of an account.</li>
+</ul>
+<p>Please see the <a href="https://www.youtube.com/watch?v=ifOCC-9V_y0">Getting Started with R video</a> for more details (or other web tutorials and guides).</p>
+<p><a href="https://www.python.org/">Python</a> is also open-source, and can be used with various editors and tools, which are not detailed here.</p>
+<section id="r-help" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="r-help"><span class="header-section-number">2.1</span> R help</h2>
+<p>The R help system is easy to access. Use a question mark before the name of a specific function to pull up its manual page ( <em>?sample</em> or <em>?rnorm</em>). Use two question marks to search The help tab in the lower right quadrant of RStudio also allows full access to the built in help, including manuals and searching.</p>
+<p>Searching the internet for R help can be useful, since there are a wealth of tutorials, blog posts, and other material on general methods and specific R packages. It is helpful to add something like “R statistics” or “R software” or “R package” to your search to distinguish from all other uses of the letter R!</p>
+</section>
+</section>
+<section id="setup-and-preparing-data" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Setup and preparing data</h1>
+<section id="r-packages-required" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="r-packages-required"><span class="header-section-number">3.1</span> R packages required</h2>
+<p>We will use the <a href="https://pak.r-lib.org/"><em>pak</em></a> package for installation as a more complete approach to package management. Replace the pkg commands with <em>install.packages()</em> versions if you prefer.</p>
+<p>This session relies on the <a href="https://tidyverse.org"><em>tidyverse</em></a> suite of packages for data manipulation as a preference, although the same tasks could be accomplished in base R using other functions. Install <em>pak</em> and <em>tidyverse</em> if you don’t already have them on your system. We will also need <em>reticulate</em> to run Python code chunks.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pak)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pkg_install</span>(<span class="st">"reticulate"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Note that the <em>update.packages()</em> command can be run periodically to check for newer versions of any packages installed.</p>
+<p>Load the packages so that we can work with them.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.0     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="python-support" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="python-support"><span class="header-section-number">3.2</span> Python support</h2>
+<p>Now let’s load reticulate (for Python support only). We must set the correct location of python corresponding to our system.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="st">"/usr/bin/python3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="central-asia-barometer" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Central Asia Barometer</h1>
+<p>As you are probably aware, the <a href="https://ca-barometer.org/">Central Asia Barometer</a> project conducts polls and surveys across the countries of Central Asia (Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, and Uzbekistan) and releases the results on a regular basis. Except for the latest wave of data, the CA Barometer data is freely downloadable from their website after providing a contact e-mail. These surveys examine contemporary political and social attitudes, and allow for longitudinal comparisons over time and cross-country comparisons.</p>
+<p>For this initial workshop, we will get familiar with the CA Barometer by looking at recent data (2022) for one country (Kyrgyzstan). The second workshop will extend and deepen our understanding by adding additional years and countries to our analysis, and explore more complex data manipulation and analysis.</p>
+<section id="understanding-the-data" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="understanding-the-data"><span class="header-section-number">4.1</span> Understanding the data</h2>
+<p>Before worrying about coding or statistical analysis, the first step in working with real-world data is to develop an understanding of its structure and meaning. We want to know what data has been collected, how it has been organized, and think about what kinds of questions it can answer. Only then can we know how to properly proceed with analyzing it.</p>
+<p>For CA Barometer, this means looking at the <a href="https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-questionnaire-2022-autumn.pdf">Questionnaire (for the 2022 wave)</a> and the <a href="https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-methods-report-2022-autumn.pdf">Methods Report</a> for that year.</p>
+</section>
+</section>
+<section id="download-and-import-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Download and import data</h1>
+<p>We download data from <a href="https://ca-barometer.org/">Central Asia Barometer</a> at <a href="https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xls">https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx</a></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx"</span>, <span class="st">"CAB_2022.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"CAB_2022.csv"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mydata</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,518 × 158
+      MM1  MM2b  MM3a MM3b  MM4          MM5 MM6      MM7 MM8                
+    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dttm&gt;             
+ 1 100017   778     6 CATI  Kyrgyzstan   329 Female     1 2022-11-01 00:00:00
+ 2 100028   771     6 CATI  Kyrgyzstan   163 Female     1 2022-11-01 00:00:00
+ 3 100035   505     6 CATI  Kyrgyzstan   329 Female     1 2022-11-01 00:00:00
+ 4 100036   509     6 CATI  Kyrgyzstan   311 Female     1 2022-11-01 00:00:00
+ 5 100048   706     6 CATI  Kyrgyzstan   329 Female     1 2022-11-01 00:00:00
+ 6 100054   504     6 CATI  Kyrgyzstan   329 Female     1 2022-11-01 00:00:00
+ 7 100085   502     6 CATI  Kyrgyzstan   210 Female     1 2022-11-01 00:00:00
+ 8 100086   708     6 CATI  Kyrgyzstan   251 Female     1 2022-11-01 00:00:00
+ 9 100087   500     6 CATI  Kyrgyzstan   329 Female     1 2022-11-01 00:00:00
+10 100099   553     6 CATI  Kyrgyzstan   329 Female     1 2022-11-01 00:00:00
+# ℹ 1,508 more rows
+# ℹ 149 more variables: MM9 &lt;dttm&gt;, MM10 &lt;chr&gt;, MM11 &lt;chr&gt;, MM12 &lt;dttm&gt;,
+#   MM13 &lt;dttm&gt;, MM14 &lt;chr&gt;, A1a &lt;chr&gt;, A1b &lt;chr&gt;, A2 &lt;chr&gt;, A3a &lt;chr&gt;,
+#   A3b &lt;chr&gt;, A4a &lt;chr&gt;, A4b &lt;chr&gt;, A4c &lt;chr&gt;, A4d &lt;chr&gt;, A4e &lt;chr&gt;,
+#   A4f &lt;chr&gt;, A5a &lt;chr&gt;, A5b &lt;chr&gt;, A5c &lt;chr&gt;, A5d &lt;chr&gt;, A6 &lt;chr&gt;, A7 &lt;chr&gt;,
+#   B1 &lt;chr&gt;, B2 &lt;chr&gt;, B3 &lt;chr&gt;, B4a &lt;chr&gt;, B4b &lt;chr&gt;, B5a &lt;chr&gt;, B5b &lt;chr&gt;,
+#   B6a &lt;chr&gt;, B6b &lt;chr&gt;, B6c &lt;chr&gt;, B6d &lt;chr&gt;, B6e &lt;chr&gt;, B7 &lt;chr&gt;, …</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="data-wrangling" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Data Wrangling</h1>
+<section id="selection-and-naming" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="selection-and-naming"><span class="header-section-number">6.1</span> Selection and naming</h2>
+<p>We select interesting variables from the questionnaire to analyze. We’ll also change their names to something more memorable.</p>
+<p>We want to study across several dimensions:</p>
+<ul>
+<li>language, region, income, sex</li>
+</ul>
+<p>and relate this to opinions. We can spend some time looking at the questionnaire to see how these variables are labeled.</p>
+<p>Note that MM4 is the country code, but we have already loaded the Kyrgyz file, so we don’t need to explicitly select this. Also note that ethnic group is already labeled ‘EthnicGrp’. Other variables we will make more intuitive to access by renaming them.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "MM1"       "MM2b"      "MM3a"      "MM3b"      "MM4"       "MM5"      
+  [7] "MM6"       "MM7"       "MM8"       "MM9"       "MM10"      "MM11"     
+ [13] "MM12"      "MM13"      "MM14"      "A1a"       "A1b"       "A2"       
+ [19] "A3a"       "A3b"       "A4a"       "A4b"       "A4c"       "A4d"      
+ [25] "A4e"       "A4f"       "A5a"       "A5b"       "A5c"       "A5d"      
+ [31] "A6"        "A7"        "B1"        "B2"        "B3"        "B4a"      
+ [37] "B4b"       "B5a"       "B5b"       "B6a"       "B6b"       "B6c"      
+ [43] "B6d"       "B6e"       "B7"        "B8"        "B9a"       "B9b"      
+ [49] "B9c"       "B9d"       "B10"       "B11a"      "B11b"      "B12"      
+ [55] "B13"       "B14"       "B15a"      "B15b"      "B15c"      "B15d"     
+ [61] "B16"       "D1"        "D2a"       "D2b"       "E1a"       "E1b"      
+ [67] "E1c"       "E1d"       "E1e"       "E2a"       "E2b"       "E2c"      
+ [73] "E2d"       "E2e"       "E3"        "E4a"       "E4b"       "E5a"      
+ [79] "E5b"       "E5c"       "E6a"       "E6b"       "E7a"       "E7b"      
+ [85] "E7c"       "E8a"       "E8b"       "E8c"       "E8d"       "E8e"      
+ [91] "E9a"       "E9b"       "E10"       "E11"       "E12"       "E13"      
+ [97] "E14"       "E15a"      "E15b"      "E15c"      "E16"       "E17"      
+[103] "E19a"      "E19b"      "E19c"      "E20a"      "E20b"      "E20c"     
+[109] "E21"       "G1a"       "G1b"       "G2"        "G3a"       "G3b"      
+[115] "G4"        "G5"        "G6"        "G7"        "G8"        "G9"       
+[121] "H1"        "H2"        "H3"        "H4"        "H5a"       "H5b"      
+[127] "DD1"       "DD2"       "DD3"       "DD4"       "DD5"       "DD6a"     
+[133] "DD6b"      "DD6c"      "DD7a"      "DD7b"      "DD7c"      "DD8"      
+[139] "DD9a"      "DD9b"      "DD9c"      "DD9d"      "DD10"      "DD11"     
+[145] "DD12"      "DD13"      "DD14"      "DD15"      "DD16"      "DD17"     
+[151] "DD18a"     "DD18b"     "DD19"      "DD20"      "EthnicGrp" "AgeGrp"   
+[157] "FinalWgt1" "FinalWgt2"</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="st">'Sex'</span><span class="ot">=</span><span class="st">'DD1'</span>, <span class="st">'Region'</span><span class="ot">=</span><span class="st">'MM10'</span>, <span class="st">'Language'</span><span class="ot">=</span><span class="st">'DD11'</span>,<span class="st">'Income'</span><span class="ot">=</span><span class="st">'DD8'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from mydata (pos = 3):
+
+    A1a, A1b, A2, A3a, A3b, A4a, A4b, A4c, A4d, A4e, A4f, A5a, A5b,
+    A5c, A5d, A6, A7, AgeGrp, B1, B10, B11a, B11b, B12, B13, B14, B15a,
+    B15b, B15c, B15d, B16, B2, B3, B4a, B4b, B5a, B5b, B6a, B6b, B6c,
+    B6d, B6e, B7, B8, B9a, B9b, B9c, B9d, D1, D2a, D2b, DD10, DD12,
+    DD13, DD14, DD15, DD16, DD17, DD18a, DD18b, DD19, DD2, DD20, DD3,
+    DD4, DD5, DD6a, DD6b, DD6c, DD7a, DD7b, DD7c, DD9a, DD9b, DD9c,
+    DD9d, E10, E11, E12, E13, E14, E15a, E15b, E15c, E16, E17, E19a,
+    E19b, E19c, E1a, E1b, E1c, E1d, E1e, E20a, E20b, E20c, E21, E2a,
+    E2b, E2c, E2d, E2e, E3, E4a, E4b, E5a, E5b, E5c, E6a, E6b, E7a,
+    E7b, E7c, E8a, E8b, E8c, E8d, E8e, E9a, E9b, EthnicGrp, FinalWgt1,
+    FinalWgt2, G1a, G1b, G2, G3a, G3b, G4, G5, G6, G7, G8, G9, H1, H2,
+    H3, H4, H5a, H5b, MM1, MM11, MM12, MM13, MM14, MM2b, MM3a, MM3b,
+    MM4, MM5, MM6, MM7, MM8, MM9</code></pre>
+</div>
+</div>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">6.2</span> Descriptive statistics</h2>
+<p>Let’s take a look at several of these variables and see how they’re distributed. A simple <em>table</em> command will do the trick for getting initial familiarity with the data. While some large datasets are difficult to gain intuitive understanding of, for this kind of social science data, nothing beats spending time looking over the data before getting into more complex analysis. We may also discover outliers or issues to remedy before moving forward.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sex
+Female   Male 
+   750    768 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Region)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Region
+      Batkenskaja           Bishkek         Chujskaja Dzhalal-Abadskaja 
+              105               399               228               222 
+  Issyk-Kul'skaja        Narynskaja          Osh City          Oshskaja 
+              142                83                65               214 
+        Talaskaja 
+               60 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Language)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Language
+Don't Know (vol.)            Kazakh            Kyrgyz      Other (vol.) 
+                2                 1              1280                14 
+   Refused (vol.)           Russian             Tajik           Turkmen 
+                1               154                 1                 2 
+            Uzbek 
+               63 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Income)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Income
+ 10,001 - 12,000 som  12,001 - 16,000 som  16,001 - 20,000 som 
+                  71                  136                  160 
+   2,801 - 4,100 som  20,001 - 28,000 som    4,101 - 6,000 som 
+                  33                  185                   46 
+   6,001 - 8,000 som   8,001 - 10,000 som    Don't Know (vol.) 
+                  36                   96                   84 
+ Less than 2,801 som More than 28,000 som       Refused (vol.) 
+                  40                  570                   61 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(EthnicGrp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>EthnicGrp
+ Kyrgyz   Other Russian   Uzbek 
+   1315      62      63      78 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Sex,Language)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Language
+Sex      Don't Know (vol.) Kazakh Kyrgyz Other (vol.) Refused (vol.) Russian
+  Female                 1      0    627            5              1      92
+  Male                   1      1    653            9              0      62
+        Language
+Sex      Tajik Turkmen Uzbek
+  Female     1       1    22
+  Male       0       1    41</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Income, Sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Sex
+Income                 Female Male
+  10,001 - 12,000 som      36   35
+  12,001 - 16,000 som      71   65
+  16,001 - 20,000 som      84   76
+  2,801 - 4,100 som        17   16
+  20,001 - 28,000 som      95   90
+  4,101 - 6,000 som        30   16
+  6,001 - 8,000 som        21   15
+  8,001 - 10,000 som       56   40
+  Don't Know (vol.)        49   35
+  Less than 2,801 som      17   23
+  More than 28,000 som    251  319
+  Refused (vol.)           23   38</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(E17)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>E17
+ A few more months   A few more weeks About another week      Another month 
+               333                 21                 27                 65 
+      Another year  Don't know (vol.)   More than a year     Refused (vol.) 
+               279                373                209                 16 
+ Several more days  Two years or more 
+                32                163 </code></pre>
+</div>
+</div>
+</section>
+<section id="recoding-data" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="recoding-data"><span class="header-section-number">6.3</span> Recoding data</h2>
+<p>One issue that we discover is that Income is reported in categories, by range. If we want to treat Income as a number, we will have to recode it. We set each range to its rough midpoint in the code below, using the <em>recode_values</em> command.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>Income_Numeric <span class="ot">&lt;-</span> <span class="fu">recode_values</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  Income,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Less than 2,801 som"</span> <span class="sc">~</span> <span class="dv">1400</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2,801 - 4,100 som"</span> <span class="sc">~</span> <span class="dv">3400</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"4,101 - 6,000 som"</span> <span class="sc">~</span> <span class="dv">5000</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6,001 - 8,000 som"</span> <span class="sc">~</span> <span class="dv">7000</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"8,001 - 10,000 som"</span> <span class="sc">~</span> <span class="dv">9000</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"10,001 - 12,000 som"</span> <span class="sc">~</span> <span class="dv">11000</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"12,001 - 16,000 som"</span> <span class="sc">~</span> <span class="dv">14000</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"16,001 - 20,000 som"</span> <span class="sc">~</span> <span class="dv">18000</span>,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"20,001 - 28,000 som"</span> <span class="sc">~</span> <span class="dv">24000</span>,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"More than 28,000 som"</span> <span class="sc">~</span> <span class="dv">40000</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"Don't Know (vol.)"</span>, <span class="st">"Refused (vol.)"</span>) <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>We reattach the data to make sure the new variable, Income_Numeric, is easily available, then check how it turned out.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from mydata (pos = 3):
+
+    A1a, A1b, A2, A3a, A3b, A4a, A4b, A4c, A4d, A4e, A4f, A5a, A5b,
+    A5c, A5d, A6, A7, AgeGrp, B1, B10, B11a, B11b, B12, B13, B14, B15a,
+    B15b, B15c, B15d, B16, B2, B3, B4a, B4b, B5a, B5b, B6a, B6b, B6c,
+    B6d, B6e, B7, B8, B9a, B9b, B9c, B9d, D1, D2a, D2b, DD10, DD12,
+    DD13, DD14, DD15, DD16, DD17, DD18a, DD18b, DD19, DD2, DD20, DD3,
+    DD4, DD5, DD6a, DD6b, DD6c, DD7a, DD7b, DD7c, DD9a, DD9b, DD9c,
+    DD9d, E10, E11, E12, E13, E14, E15a, E15b, E15c, E16, E17, E19a,
+    E19b, E19c, E1a, E1b, E1c, E1d, E1e, E20a, E20b, E20c, E21, E2a,
+    E2b, E2c, E2d, E2e, E3, E4a, E4b, E5a, E5b, E5c, E6a, E6b, E7a,
+    E7b, E7c, E8a, E8b, E8c, E8d, E8e, E9a, E9b, EthnicGrp, FinalWgt1,
+    FinalWgt2, G1a, G1b, G2, G3a, G3b, G4, G5, G6, G7, G8, G9, H1, H2,
+    H3, H4, H5a, H5b, Income, Language, MM1, MM11, MM12, MM13, MM14,
+    MM2b, MM3a, MM3b, MM4, MM5, MM6, MM7, MM8, MM9, Region, Sex</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from mydata (pos = 4):
+
+    A1a, A1b, A2, A3a, A3b, A4a, A4b, A4c, A4d, A4e, A4f, A5a, A5b,
+    A5c, A5d, A6, A7, AgeGrp, B1, B10, B11a, B11b, B12, B13, B14, B15a,
+    B15b, B15c, B15d, B16, B2, B3, B4a, B4b, B5a, B5b, B6a, B6b, B6c,
+    B6d, B6e, B7, B8, B9a, B9b, B9c, B9d, D1, D2a, D2b, DD10, DD12,
+    DD13, DD14, DD15, DD16, DD17, DD18a, DD18b, DD19, DD2, DD20, DD3,
+    DD4, DD5, DD6a, DD6b, DD6c, DD7a, DD7b, DD7c, DD9a, DD9b, DD9c,
+    DD9d, E10, E11, E12, E13, E14, E15a, E15b, E15c, E16, E17, E19a,
+    E19b, E19c, E1a, E1b, E1c, E1d, E1e, E20a, E20b, E20c, E21, E2a,
+    E2b, E2c, E2d, E2e, E3, E4a, E4b, E5a, E5b, E5c, E6a, E6b, E7a,
+    E7b, E7c, E8a, E8b, E8c, E8d, E8e, E9a, E9b, EthnicGrp, FinalWgt1,
+    FinalWgt2, G1a, G1b, G2, G3a, G3b, G4, G5, G6, G7, G8, G9, H1, H2,
+    H3, H4, H5a, H5b, MM1, MM11, MM12, MM13, MM14, MM2b, MM3a, MM3b,
+    MM4, MM5, MM6, MM7, MM8, MM9</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Income_Numeric, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24995.78</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Income_Numeric)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="CA_Barometer_1_files/figure-html/Income_Numeric-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(Sex) <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(<span class="at">Inc =</span> <span class="fu">mean</span>(Income_Numeric, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  Sex       Inc
+  &lt;chr&gt;   &lt;dbl&gt;
+1 Female 23753.
+2 Male   26208.</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-tests or chi-sq for significance</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># try a t-test</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># is income significantly different by sex - yes</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Income_Numeric<span class="sc">~</span>Sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Income_Numeric by Sex
+t = -3.3228, df = 1370.6, p-value = 0.0009147
+alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
+95 percent confidence interval:
+ -3904.313 -1005.607
+sample estimates:
+mean in group Female   mean in group Male 
+            23753.10             26208.06 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="plots---data-visualization" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Plots - Data Visualization</h1>
+<p>We can pick any general issue to focus on, such as which messenger app people use. Actually, in Kyrgyzstan everyone uses WhatsApp, so perhaps not so interesting! Let’s pick something more general, like whether the country is going in the right or wrong direction.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(DD1,A3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        A3a
+DD1      Do not use chat rooms or messengers Don't Know (vol.) Other (vol.)
+  Female                                  16                 2            1
+  Male                                    22                 1            7
+        A3a
+DD1      Telegram Viber WhatsApp
+  Female       41     0      690
+  Male         52     1      685</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(D1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>D1
+Don't Know (vol.)    Refused (vol.)   Right direction   Wrong direction 
+              138                16              1157               207 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(D1, Sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Sex
+D1                  Female Male
+  Don't Know (vol.)     72   66
+  Refused (vol.)         9    7
+  Right direction      579  578
+  Wrong direction       90  117</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(D1, Region)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Region
+D1                  Batkenskaja Bishkek Chujskaja Dzhalal-Abadskaja
+  Don't Know (vol.)           5      40        22                19
+  Refused (vol.)              1       2         5                 3
+  Right direction            90     266       162               181
+  Wrong direction             9      91        39                19
+                   Region
+D1                  Issyk-Kul'skaja Narynskaja Osh City Oshskaja Talaskaja
+  Don't Know (vol.)               6          8        8       18        12
+  Refused (vol.)                  3          0        0        2         0
+  Right direction               125         69       53      173        38
+  Wrong direction                 8          6        4       21        10</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(D1, Language)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Language
+D1                  Don't Know (vol.) Kazakh Kyrgyz Other (vol.) Refused (vol.)
+  Don't Know (vol.)                 1      0    112            1              0
+  Refused (vol.)                    0      0     10            0              1
+  Right direction                   1      1   1009           11              0
+  Wrong direction                   0      0    149            2              0
+                   Language
+D1                  Russian Tajik Turkmen Uzbek
+  Don't Know (vol.)      20     0       0     4
+  Refused (vol.)          4     0       0     1
+  Right direction        79     1       2    53
+  Wrong direction        51     0       0     5</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(D1, Income_Numeric)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Income_Numeric
+D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
+  Don't Know (vol.)    3    1    3    2   11     6     7    17    15    50
+  Refused (vol.)       0    2    0    0    1     1     2     0     1     7
+  Right direction     31   26   38   30   78    56   115   125   147   414
+  Wrong direction      6    4    5    4    6     8    12    18    22    99</code></pre>
+</div>
+</div>
+<p>Recode to drop ‘Don’t Know’ and ‘Refused’</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>D1_recode <span class="ot">&lt;-</span> <span class="fu">recode_values</span>(</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  D1,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a> <span class="st">"Right direction"</span> <span class="sc">~</span> <span class="st">"Right"</span>,</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a> <span class="st">"Wrong direction"</span> <span class="sc">~</span> <span class="st">"Wrong"</span>,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"Don't Know (vol.)"</span>, <span class="st">"Refused (vol.)"</span>) <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>D1_recode <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mydata<span class="sc">$</span>D1_recode)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from mydata (pos = 3):
+
+    A1a, A1b, A2, A3a, A3b, A4a, A4b, A4c, A4d, A4e, A4f, A5a, A5b,
+    A5c, A5d, A6, A7, AgeGrp, B1, B10, B11a, B11b, B12, B13, B14, B15a,
+    B15b, B15c, B15d, B16, B2, B3, B4a, B4b, B5a, B5b, B6a, B6b, B6c,
+    B6d, B6e, B7, B8, B9a, B9b, B9c, B9d, D1, D2a, D2b, DD10, DD12,
+    DD13, DD14, DD15, DD16, DD17, DD18a, DD18b, DD19, DD2, DD20, DD3,
+    DD4, DD5, DD6a, DD6b, DD6c, DD7a, DD7b, DD7c, DD9a, DD9b, DD9c,
+    DD9d, E10, E11, E12, E13, E14, E15a, E15b, E15c, E16, E17, E19a,
+    E19b, E19c, E1a, E1b, E1c, E1d, E1e, E20a, E20b, E20c, E21, E2a,
+    E2b, E2c, E2d, E2e, E3, E4a, E4b, E5a, E5b, E5c, E6a, E6b, E7a,
+    E7b, E7c, E8a, E8b, E8c, E8d, E8e, E9a, E9b, EthnicGrp, FinalWgt1,
+    FinalWgt2, G1a, G1b, G2, G3a, G3b, G4, G5, G6, G7, G8, G9, H1, H2,
+    H3, H4, H5a, H5b, Income, Income_Numeric, Language, MM1, MM11,
+    MM12, MM13, MM14, MM2b, MM3a, MM3b, MM4, MM5, MM6, MM7, MM8, MM9,
+    Region, Sex</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from mydata (pos = 4):
+
+    A1a, A1b, A2, A3a, A3b, A4a, A4b, A4c, A4d, A4e, A4f, A5a, A5b,
+    A5c, A5d, A6, A7, AgeGrp, B1, B10, B11a, B11b, B12, B13, B14, B15a,
+    B15b, B15c, B15d, B16, B2, B3, B4a, B4b, B5a, B5b, B6a, B6b, B6c,
+    B6d, B6e, B7, B8, B9a, B9b, B9c, B9d, D1, D2a, D2b, DD10, DD12,
+    DD13, DD14, DD15, DD16, DD17, DD18a, DD18b, DD19, DD2, DD20, DD3,
+    DD4, DD5, DD6a, DD6b, DD6c, DD7a, DD7b, DD7c, DD9a, DD9b, DD9c,
+    DD9d, E10, E11, E12, E13, E14, E15a, E15b, E15c, E16, E17, E19a,
+    E19b, E19c, E1a, E1b, E1c, E1d, E1e, E20a, E20b, E20c, E21, E2a,
+    E2b, E2c, E2d, E2e, E3, E4a, E4b, E5a, E5b, E5c, E6a, E6b, E7a,
+    E7b, E7c, E8a, E8b, E8c, E8d, E8e, E9a, E9b, EthnicGrp, FinalWgt1,
+    FinalWgt2, G1a, G1b, G2, G3a, G3b, G4, G5, G6, G7, G8, G9, H1, H2,
+    H3, H4, H5a, H5b, Income, Language, MM1, MM11, MM12, MM13, MM14,
+    MM2b, MM3a, MM3b, MM4, MM5, MM6, MM7, MM8, MM9, Region, Sex</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from mydata (pos = 5):
+
+    A1a, A1b, A2, A3a, A3b, A4a, A4b, A4c, A4d, A4e, A4f, A5a, A5b,
+    A5c, A5d, A6, A7, AgeGrp, B1, B10, B11a, B11b, B12, B13, B14, B15a,
+    B15b, B15c, B15d, B16, B2, B3, B4a, B4b, B5a, B5b, B6a, B6b, B6c,
+    B6d, B6e, B7, B8, B9a, B9b, B9c, B9d, D1, D2a, D2b, DD10, DD12,
+    DD13, DD14, DD15, DD16, DD17, DD18a, DD18b, DD19, DD2, DD20, DD3,
+    DD4, DD5, DD6a, DD6b, DD6c, DD7a, DD7b, DD7c, DD9a, DD9b, DD9c,
+    DD9d, E10, E11, E12, E13, E14, E15a, E15b, E15c, E16, E17, E19a,
+    E19b, E19c, E1a, E1b, E1c, E1d, E1e, E20a, E20b, E20c, E21, E2a,
+    E2b, E2c, E2d, E2e, E3, E4a, E4b, E5a, E5b, E5c, E6a, E6b, E7a,
+    E7b, E7c, E8a, E8b, E8c, E8d, E8e, E9a, E9b, EthnicGrp, FinalWgt1,
+    FinalWgt2, G1a, G1b, G2, G3a, G3b, G4, G5, G6, G7, G8, G9, H1, H2,
+    H3, H4, H5a, H5b, MM1, MM11, MM12, MM13, MM14, MM2b, MM3a, MM3b,
+    MM4, MM5, MM6, MM7, MM8, MM9</code></pre>
+</div>
+</div>
+<section id="illustrative-plots" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="illustrative-plots"><span class="header-section-number">7.1</span> Illustrative plots</h2>
+<p>Here are a few illustrative plots. We’re not trying to make them pretty at this point, just trying to quickly understand our data.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some illustrative plots</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mydata, <span class="fu">aes</span>(<span class="at">x=</span>Income_Numeric, <span class="at">y=</span>Region))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 145 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="CA_Barometer_1_files/figure-html/illustrative%20plots-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mydata, <span class="fu">aes</span>(<span class="at">x=</span>Region, <span class="at">y=</span>Income_Numeric))<span class="sc">+</span><span class="fu">geom_jitter</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 145 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="CA_Barometer_1_files/figure-html/illustrative%20plots-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Income_Numeric<span class="sc">~</span>D1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="CA_Barometer_1_files/figure-html/illustrative%20plots-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Income_Numeric<span class="sc">~</span>D1_recode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="CA_Barometer_1_files/figure-html/illustrative%20plots-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x=</span>D1_recode))<span class="sc">+</span><span class="fu">facet_grid</span>(<span class="sc">~</span>Sex)<span class="sc">+</span><span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="CA_Barometer_1_files/figure-html/illustrative%20plots-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="further-statistical-analysis" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Further statistical analysis</h1>
+<section id="logistic-regresssion" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="logistic-regresssion"><span class="header-section-number">8.1</span> Logistic regresssion</h2>
+<p>As an example of statistical analysis, we can try a logistic regression to predict the answer to the right direction question. Logistic regression is the suitable method for when the outcome is a binary choice (yes/no, true/false, right/wrong).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>logistic_output <span class="ot">&lt;-</span> <span class="fu">glm</span>(D1_recode <span class="sc">~</span> Sex <span class="sc">+</span> Language <span class="sc">+</span> Income_Numeric, <span class="at">family=</span>binomial, <span class="at">data=</span>mydata)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logistic_output)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = D1_recode ~ Sex + Language + Income_Numeric, family = binomial, 
+    data = mydata)
+
+Coefficients:
+                       Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)          -1.504e+01  8.827e+02  -0.017  0.98641   
+SexMale               3.881e-01  1.688e-01   2.298  0.02154 * 
+LanguageKazakh       -2.200e-01  1.248e+03   0.000  0.99986   
+LanguageKyrgyz        1.246e+01  8.827e+02   0.014  0.98874   
+LanguageOther (vol.)  1.258e+01  8.827e+02   0.014  0.98863   
+LanguageRussian       1.390e+01  8.827e+02   0.016  0.98744   
+LanguageTajik         6.654e-02  1.248e+03   0.000  0.99996   
+LanguageTurkmen      -4.101e-01  1.080e+03   0.000  0.99970   
+LanguageUzbek         1.178e+01  8.827e+02   0.013  0.98935   
+Income_Numeric        1.692e-05  6.179e-06   2.739  0.00617 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1042.64  on 1243  degrees of freedom
+Residual deviance:  983.01  on 1234  degrees of freedom
+  (274 observations deleted due to missingness)
+AIC: 1003
+
+Number of Fisher Scoring iterations: 13</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="other-possibilities" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Other possibilities</h1>
+<p>These are some notes on additional interesting variables in the data, although feel free to pick your own and explore.</p>
+<p>b13 - russians in area - interesting vs region</p>
+<p>e17 how long with conflict with Ukr last (2022 survey , interesting)</p>
+<p>g3b general presidential favorability - breakdowns</p>
+</section>
+<section id="conclusion" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Conclusion</h1>
+<p>There is no one stopping point for data analysis. Keep going until you have a full understanding of the data and its interaction with the questions you seek to answer. The second part of this workshop series will illustrate more advanced methods and combinations of data.</p>
+<p>See <a href="https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html">Data Analysis 1</a> and <a href="https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html">Data Analysis 2</a> for further discussion of data analysis techniques.</p>
+<section id="r-for-data-science" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="r-for-data-science"><span class="header-section-number">10.1</span> R for Data Science</h2>
+<p>Consult the <a href="https://r4ds.hadley.nz/">R for Data Science book</a> to learn more about data wrangling. Also check out <a href="https://www.tidymodels.org/">tidymodels</a> a collection of packages for modeling and machine learning using tidyverse principles.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
