@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
@@ -6,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Womack">
-<meta name="dcterms.date" content="2026-03-17">
+<meta name="dcterms.date" content="2026-03-31">
 
 <title>Central Asia Barometer Data Analysis</title>
 <style>
@@ -95,7 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setup-and-preparing-data" id="toc-setup-and-preparing-data" class="nav-link" data-scroll-target="#setup-and-preparing-data"><span class="header-section-number">3</span> Setup and preparing data</a>
   <ul class="collapse">
   <li><a href="#r-packages-required" id="toc-r-packages-required" class="nav-link" data-scroll-target="#r-packages-required"><span class="header-section-number">3.1</span> R packages required</a></li>
-  <li><a href="#python-support" id="toc-python-support" class="nav-link" data-scroll-target="#python-support"><span class="header-section-number">3.2</span> Python support</a></li>
+  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="header-section-number">3.2</span> Versions</a></li>
+  <li><a href="#kyrgyz-and-russian-language" id="toc-kyrgyz-and-russian-language" class="nav-link" data-scroll-target="#kyrgyz-and-russian-language"><span class="header-section-number">3.3</span> Kyrgyz and Russian language</a></li>
+  <li><a href="#python-support" id="toc-python-support" class="nav-link" data-scroll-target="#python-support"><span class="header-section-number">3.4</span> Python support</a></li>
   </ul></li>
   <li><a href="#central-asia-barometer" id="toc-central-asia-barometer" class="nav-link" data-scroll-target="#central-asia-barometer"><span class="header-section-number">4</span> Central Asia Barometer</a>
   <ul class="collapse">
@@ -137,10 +140,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.R"><i class="bi bi-file-text"></i>R script only</a>
   </li>
   <li>
+    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.py"><i class="bi bi-file-text"></i>Python script only</a>
+  </li>
+  <li>
     <a href="https://www.youtube.com/playlist?list=PLCj1LhGni3hNwXh3DBhtHxxuE9KlE1za9"><i class="bi bi-file-html"></i>Screencast video</a>
   </li>
   <li>
     <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_dark.html"><i class="bi bi-file-html"></i>HTML - dark mode</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ky.html"><i class="bi bi-file-html"></i>HTML - Кыргызча</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ru.html"><i class="bi bi-file-html"></i>HTML - Русский</a>
   </li>
 </ul>
 </div>
@@ -167,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 17, 2026</p>
+      <p class="date">March 31, 2026</p>
     </div>
   </div>
   
@@ -248,9 +260,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="python-support" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="python-support"><span class="header-section-number">3.2</span> Python support</h2>
-<p>Now let’s load reticulate (for Python support only). We must set the correct location of python corresponding to our system.</p>
+<section id="versions" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="versions"><span class="header-section-number">3.2</span> Versions</h2>
+<p>The links to the right provide alternate modes of accessing this content. You can choose Light or Dark mode HTML, a downloadable PDF, or a Word Docx format file all representing the same content. Code files with R (.R) or Python (.py) are also available, if you’d like to isolate the code from the description.</p>
+</section>
+<section id="kyrgyz-and-russian-language" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="kyrgyz-and-russian-language"><span class="header-section-number">3.3</span> Kyrgyz and Russian language</h2>
+<p>Also, machine-translated versions of this content in Russian and Kyrgyz are linked on the right.</p>
+</section>
+<section id="python-support" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="python-support"><span class="header-section-number">3.4</span> Python support</h2>
+<p>Now let’s load <em>reticulate</em> (for Python support only). We must set the correct location of python corresponding to our system.</p>
+<p>A Python file is provided for those who want to try out the same data steps in Python. Note that the Python file was machine-translated from R.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -616,15 +637,15 @@ mean in group Female   mean in group Male
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(DD1,A3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Sex,A3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        A3a
-DD1      Do not use chat rooms or messengers Don't Know (vol.) Other (vol.)
+Sex      Do not use chat rooms or messengers Don't Know (vol.) Other (vol.)
   Female                                  16                 2            1
   Male                                    22                 1            7
         A3a
-DD1      Telegram Viber WhatsApp
+Sex      Telegram Viber WhatsApp
   Female       41     0      690
   Male         52     1      685</code></pre>
 </div>
@@ -884,13 +905,13 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <section id="other-possibilities" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Other possibilities</h1>
 <p>These are some notes on additional interesting variables in the data, although feel free to pick your own and explore.</p>
-<p>b13 - russians in area - interesting vs region</p>
-<p>e17 how long with conflict with Ukr last (2022 survey , interesting)</p>
-<p>g3b general presidential favorability - breakdowns</p>
+<p>Question B13 - <em>“Have Russians been emigrating to your area?”</em> could be analyzed by region</p>
+<p>Question E17 - <em>“How long will conflict with Ukraine last?”</em> asked in 2022</p>
+<p>Question G3b - <em>“Attitude toward President Japarov?”</em> what breakdowns would be interesting here?</p>
 </section>
 <section id="conclusion" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Conclusion</h1>
-<p>There is no one stopping point for data analysis. Keep going until you have a full understanding of the data and its interaction with the questions you seek to answer. The second part of this workshop series will illustrate more advanced methods and combinations of data.</p>
+<p>There is no one stopping point for data analysis. Keep going until you have a full understanding of the data and its interaction with the questions you seek to answer. The second part of this workshop series, <a href="https://ryanwomack.com/data_topics/central_asia_barometer_2/CA_Barometer_2.html">Central Asia Barometer 2</a>, will illustrate more advanced methods and combinations of data.</p>
 <p>See <a href="https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html">Data Analysis 1</a> and <a href="https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html">Data Analysis 2</a> for further discussion of data analysis techniques.</p>
 <section id="r-for-data-science" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="r-for-data-science"><span class="header-section-number">10.1</span> R for Data Science</h2>

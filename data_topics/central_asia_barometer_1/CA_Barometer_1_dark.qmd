@@ -1,7 +1,7 @@
 ---
 title: "Central Asia Barometer Data Analysis"
 author: "Ryan Womack"
-date: "2026-03-17"
+date: "2026-03-31"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -22,8 +22,7 @@ format:
 theme: cyborg
 include-in-header: 
   text: |
-    \usepackage{fvextra}
-    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+    
 ---
 
 ```{r setup, include=FALSE}
@@ -100,9 +99,20 @@ library(readxl)
 library(tidyverse)
 
 ```
+
+## Versions
+
+The links to the right provide alternate modes of accessing this content. You can choose Light or Dark mode HTML, a downloadable PDF, or a Word Docx format file all representing the same content.  Code files with R (.R) or Python (.py) are also available, if you'd like to isolate the code from the description.
+
+## Kyrgyz and Russian language
+
+Also, machine-translated versions of this content in Russian and Kyrgyz are linked on the right.
+
 ## Python support
 
-Now let's load reticulate (for Python support only). We must set the correct location of python corresponding to our system.
+Now let's load _reticulate_ (for Python support only). We must set the correct location of python corresponding to our system.
+
+A Python file is provided for those who want to try out the same data steps in Python. Note that the Python file was machine-translated from R. 
 
 ```{r tidyverse}
 
@@ -234,7 +244,7 @@ We can pick any general issue to focus on, such as which messenger app people us
 
 ```{r researching what to plot}
 
-table(DD1,A3a)
+table(Sex,A3a)
 
 table(D1)
 table(D1, Sex)
@@ -293,15 +303,15 @@ summary(logistic_output)
 
 These are some notes on additional interesting variables in the data, although feel free to pick your own and explore.
 
-b13 - russians in area - interesting vs region
+Question B13 - _"Have Russians been emigrating to your area?"_ could be analyzed by region
 
-e17 how long with conflict with Ukr last (2022 survey , interesting)
+Question E17 - _"How long will conflict with Ukraine last?"_ asked in 2022
 
-g3b general presidential favorability - breakdowns
+Question G3b - _"Attitude toward President Japarov?"_ what breakdowns would be interesting here?
 
 # Conclusion
 
-There is no one stopping point for data analysis. Keep going until you have a full understanding of the data and its interaction with the questions you seek to answer.  The second part of this workshop series will illustrate more advanced methods and combinations of data.
+There is no one stopping point for data analysis. Keep going until you have a full understanding of the data and its interaction with the questions you seek to answer.  The second part of this workshop series, [Central Asia Barometer 2](https://ryanwomack.com/data_topics/central_asia_barometer_2/CA_Barometer_2.html), will illustrate more advanced methods and combinations of data.
 
 See [Data Analysis 1](https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html) and [Data Analysis 2](https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html) for further discussion of data analysis techniques.
 

@@ -9,7 +9,7 @@
 <meta name="author" content="Ryan Womack">
 <meta name="dcterms.date" content="2026-03-31">
 
-<title>Central Asia Barometer Data Analysis</title>
+<title>Анализ данных Барометра Центральной Азии</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,18 +60,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="CA_Barometer_1_dark_files/libs/clipboard/clipboard.min.js"></script>
-<script src="CA_Barometer_1_dark_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="CA_Barometer_1_dark_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="CA_Barometer_1_dark_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="CA_Barometer_1_dark_files/libs/quarto-html/popper.min.js"></script>
-<script src="CA_Barometer_1_dark_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="CA_Barometer_1_dark_files/libs/quarto-html/anchor.min.js"></script>
-<link href="CA_Barometer_1_dark_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="CA_Barometer_1_dark_files/libs/quarto-html/quarto-syntax-highlighting-dark-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="CA_Barometer_1_dark_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="CA_Barometer_1_dark_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="CA_Barometer_1_dark_files/libs/bootstrap/bootstrap-5e521cc435542587c10154c8f161752b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="CA_Barometer_1_ru_files/libs/clipboard/clipboard.min.js"></script>
+<script src="CA_Barometer_1_ru_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="CA_Barometer_1_ru_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="CA_Barometer_1_ru_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="CA_Barometer_1_ru_files/libs/quarto-html/popper.min.js"></script>
+<script src="CA_Barometer_1_ru_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="CA_Barometer_1_ru_files/libs/quarto-html/anchor.min.js"></script>
+<link href="CA_Barometer_1_ru_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="CA_Barometer_1_ru_files/libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="CA_Barometer_1_ru_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="CA_Barometer_1_ru_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="CA_Barometer_1_ru_files/libs/bootstrap/bootstrap-20dca6d41651323474e7872f6b51115e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 
@@ -82,59 +82,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Оглавление</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a>
+  <li><a href="#обзор" id="toc-обзор" class="nav-link active" data-scroll-target="#обзор"><span class="header-section-number">1</span> Обзор</a>
   <ul class="collapse">
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.1</span> Definitions</a></li>
+  <li><a href="#определения" id="toc-определения" class="nav-link" data-scroll-target="#определения"><span class="header-section-number">1.1</span> Определения</a></li>
   </ul></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">2</span> Installation</a>
+  <li><a href="#установка" id="toc-установка" class="nav-link" data-scroll-target="#установка"><span class="header-section-number">2</span> Установка</a>
   <ul class="collapse">
-  <li><a href="#r-help" id="toc-r-help" class="nav-link" data-scroll-target="#r-help"><span class="header-section-number">2.1</span> R help</a></li>
+  <li><a href="#r-помощь" id="toc-r-помощь" class="nav-link" data-scroll-target="#r-помощь"><span class="header-section-number">2.1</span> R помощь</a></li>
   </ul></li>
-  <li><a href="#setup-and-preparing-data" id="toc-setup-and-preparing-data" class="nav-link" data-scroll-target="#setup-and-preparing-data"><span class="header-section-number">3</span> Setup and preparing data</a>
+  <li><a href="#настройка-и-подготовка-данных" id="toc-настройка-и-подготовка-данных" class="nav-link" data-scroll-target="#настройка-и-подготовка-данных"><span class="header-section-number">3</span> Настройка и подготовка данных</a>
   <ul class="collapse">
-  <li><a href="#r-packages-required" id="toc-r-packages-required" class="nav-link" data-scroll-target="#r-packages-required"><span class="header-section-number">3.1</span> R packages required</a></li>
-  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="header-section-number">3.2</span> Versions</a></li>
-  <li><a href="#kyrgyz-and-russian-language" id="toc-kyrgyz-and-russian-language" class="nav-link" data-scroll-target="#kyrgyz-and-russian-language"><span class="header-section-number">3.3</span> Kyrgyz and Russian language</a></li>
-  <li><a href="#python-support" id="toc-python-support" class="nav-link" data-scroll-target="#python-support"><span class="header-section-number">3.4</span> Python support</a></li>
+  <li><a href="#необходимые-пакеты-r" id="toc-необходимые-пакеты-r" class="nav-link" data-scroll-target="#необходимые-пакеты-r"><span class="header-section-number">3.1</span> Необходимые пакеты R</a></li>
+  <li><a href="#версии" id="toc-версии" class="nav-link" data-scroll-target="#версии"><span class="header-section-number">3.2</span> Версии</a></li>
+  <li><a href="#кыргызский-и-русский-языки" id="toc-кыргызский-и-русский-языки" class="nav-link" data-scroll-target="#кыргызский-и-русский-языки"><span class="header-section-number">3.3</span> Кыргызский и русский языки</a></li>
+  <li><a href="#поддержка-python" id="toc-поддержка-python" class="nav-link" data-scroll-target="#поддержка-python"><span class="header-section-number">3.4</span> поддержка Python</a></li>
   </ul></li>
-  <li><a href="#central-asia-barometer" id="toc-central-asia-barometer" class="nav-link" data-scroll-target="#central-asia-barometer"><span class="header-section-number">4</span> Central Asia Barometer</a>
+  <li><a href="#барометр-центральной-азии" id="toc-барометр-центральной-азии" class="nav-link" data-scroll-target="#барометр-центральной-азии"><span class="header-section-number">4</span> Барометр Центральной Азии</a>
   <ul class="collapse">
-  <li><a href="#understanding-the-data" id="toc-understanding-the-data" class="nav-link" data-scroll-target="#understanding-the-data"><span class="header-section-number">4.1</span> Understanding the data</a></li>
+  <li><a href="#понимание-данных" id="toc-понимание-данных" class="nav-link" data-scroll-target="#понимание-данных"><span class="header-section-number">4.1</span> Понимание данных</a></li>
   </ul></li>
-  <li><a href="#download-and-import-data" id="toc-download-and-import-data" class="nav-link" data-scroll-target="#download-and-import-data"><span class="header-section-number">5</span> Download and import data</a></li>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="header-section-number">6</span> Data Wrangling</a>
+  <li><a href="#загрузка-и-импорт-данных" id="toc-загрузка-и-импорт-данных" class="nav-link" data-scroll-target="#загрузка-и-импорт-данных"><span class="header-section-number">5</span> Загрузка и импорт данных</a></li>
+  <li><a href="#обработка-данных" id="toc-обработка-данных" class="nav-link" data-scroll-target="#обработка-данных"><span class="header-section-number">6</span> Обработка данных</a>
   <ul class="collapse">
-  <li><a href="#selection-and-naming" id="toc-selection-and-naming" class="nav-link" data-scroll-target="#selection-and-naming"><span class="header-section-number">6.1</span> Selection and naming</a></li>
-  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">6.2</span> Descriptive statistics</a></li>
-  <li><a href="#recoding-data" id="toc-recoding-data" class="nav-link" data-scroll-target="#recoding-data"><span class="header-section-number">6.3</span> Recoding data</a></li>
+  <li><a href="#выбор-и-наименование" id="toc-выбор-и-наименование" class="nav-link" data-scroll-target="#выбор-и-наименование"><span class="header-section-number">6.1</span> Выбор и наименование</a></li>
+  <li><a href="#описательная-статистика" id="toc-описательная-статистика" class="nav-link" data-scroll-target="#описательная-статистика"><span class="header-section-number">6.2</span> Описательная статистика</a></li>
+  <li><a href="#перекодирование-данных" id="toc-перекодирование-данных" class="nav-link" data-scroll-target="#перекодирование-данных"><span class="header-section-number">6.3</span> Перекодирование данных</a></li>
   </ul></li>
-  <li><a href="#plots---data-visualization" id="toc-plots---data-visualization" class="nav-link" data-scroll-target="#plots---data-visualization"><span class="header-section-number">7</span> Plots - Data Visualization</a>
+  <li><a href="#графики---визуализация-данных" id="toc-графики---визуализация-данных" class="nav-link" data-scroll-target="#графики---визуализация-данных"><span class="header-section-number">7</span> Графики - Визуализация данных</a>
   <ul class="collapse">
-  <li><a href="#illustrative-plots" id="toc-illustrative-plots" class="nav-link" data-scroll-target="#illustrative-plots"><span class="header-section-number">7.1</span> Illustrative plots</a></li>
+  <li><a href="#иллюстративные-графики" id="toc-иллюстративные-графики" class="nav-link" data-scroll-target="#иллюстративные-графики"><span class="header-section-number">7.1</span> Иллюстративные графики</a></li>
   </ul></li>
-  <li><a href="#further-statistical-analysis" id="toc-further-statistical-analysis" class="nav-link" data-scroll-target="#further-statistical-analysis"><span class="header-section-number">8</span> Further statistical analysis</a>
+  <li><a href="#дальнейший-статистический-анализ" id="toc-дальнейший-статистический-анализ" class="nav-link" data-scroll-target="#дальнейший-статистический-анализ"><span class="header-section-number">8</span> Дальнейший статистический анализ</a>
   <ul class="collapse">
-  <li><a href="#logistic-regresssion" id="toc-logistic-regresssion" class="nav-link" data-scroll-target="#logistic-regresssion"><span class="header-section-number">8.1</span> Logistic regresssion</a></li>
+  <li><a href="#логистическая-регрессия" id="toc-логистическая-регрессия" class="nav-link" data-scroll-target="#логистическая-регрессия"><span class="header-section-number">8.1</span> Логистическая регрессия</a></li>
   </ul></li>
-  <li><a href="#other-possibilities" id="toc-other-possibilities" class="nav-link" data-scroll-target="#other-possibilities"><span class="header-section-number">9</span> Other possibilities</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10</span> Conclusion</a>
+  <li><a href="#другие-возможности" id="toc-другие-возможности" class="nav-link" data-scroll-target="#другие-возможности"><span class="header-section-number">9</span> Другие возможности</a></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение"><span class="header-section-number">10</span> Заключение</a>
   <ul class="collapse">
-  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science"><span class="header-section-number">10.1</span> R for Data Science</a></li>
+  <li><a href="#r-для-анализа-данных-книга-r-for-data-science" id="toc-r-для-анализа-данных-книга-r-for-data-science" class="nav-link" data-scroll-target="#r-для-анализа-данных-книга-r-for-data-science"><span class="header-section-number">10.1</span> R для анализа данных [книга <em>R for Data Science</em>]</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2>
+<div class="quarto-alternate-formats"><h2>Другие форматы</h2>
 <ul>
  <li>
-  <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
+  <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ru.pdf"><i class="bi bi-file-pdf"></i>PDF</a>
  </li>
  <li>
-  <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.docx"><i class="bi bi-file-word"></i>MS Word</a>
+  <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ru.docx"><i class="bi bi-file-word"></i>MS Word</a>
   </li>
   <li>
-    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.qmd"><i class="bi bi-file-word"></i>Quarto</a>
+    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ru.qmd"><i class="bi bi-file-word"></i>Quarto</a>
   </li>
   <li>
     <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.R"><i class="bi bi-file-text"></i>R script only</a>
@@ -146,13 +146,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a href="https://www.youtube.com/playlist?list=PLCj1LhGni3hNwXh3DBhtHxxuE9KlE1za9"><i class="bi bi-file-html"></i>Screencast video</a>
   </li>
   <li>
-    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.html"><i class="bi bi-file-html"></i>HTML - light mode</a>
+    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_dark_ru.html"><i class="bi bi-file-html"></i>HTML - темный режим</a>
+  </li>
+  <li>
+    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.html"><i class="bi bi-file-html"></i>HTML - English</a>
   </li>
   <li>
     <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ky.html"><i class="bi bi-file-html"></i>HTML - Кыргызча</a>
-  </li>
-  <li>
-    <a href="https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1_ru.html"><i class="bi bi-file-html"></i>HTML - Русский</a>
   </li>
 </ul>
 </div>
@@ -162,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Central Asia Barometer Data Analysis</h1>
+<h1 class="title">Анализ данных Барометра Центральной Азии</h1>
 </div>
 
 
@@ -191,42 +191,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Copyright Ryan Womack, 2026. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
-<p><strong>Central Asia Barometer Data Analysis</strong></p>
-<p><em>data wrangling, exploratory data analysis and data visualization of Central Asia Barometer Data</em></p>
-<p><em>first developed for presentation at <a href="https://auca.kg">American University of Central Asia</a>, Spring 2026</em></p>
-<section id="overview" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
-<p>This workshop illustrates working with data, starting from the basics of importing and setting up data, and moving on to descriptive statistics, basic analysis, and data visualization. Coding is primarily in R, but also with some Python examples. Both R and Python are excellent tools for data analysis, so to some extent your choice is a matter of preference and familiarity. The R language emerged from statistics and added computing functionality, whereas Python is a general purpose computing language to which heavy doses of statistical capabilities have been added.</p>
-<section id="definitions" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="definitions"><span class="header-section-number">1.1</span> Definitions</h2>
-<p><em>Statistics</em> is the broad field that provides rigorous tools for data analysis through mathematics. Although we may think of <em>machine learning</em> as a computer science topic, the fundamental theory behind machine learning is mostly statistics. Machine learning (ML) refers to many possible methods of using computing on a foundation of mathematical models, in order to understand and make predictions from data. <em>Artificial intelligence</em> is also part of machine learning, and until the rise in popularity of <em>Generative AI</em>, AI/ML usually referred to a broad suite of analytical techniques. Generative AI (GenAI) refers more narrowly to the AI that makes probabilistic guesses on the basis of massive training data, typically using <em>Large Language Models</em> (LLMs). Since GenAI does not provide reproducible, replicable results, it is not as useful for reliable research results. <em>Vibe coding</em>, or using GenAI to develop computer code and syntax, may have some applications, but is difficult to use without basic understanding of the programming languages in question. For ongoing projects that require steady modifications to an expanding codebase, GenAI is weaker at creating code that does not alter the structure of the project.</p>
+<p>Copyright Ryan Womack, 2026. Данная работа распространяется под лицензией <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+<p><strong>Анализ данных Барометра Центральной Азии</strong></p>
+<p><em>Обработка данных, разведочный анализ данных и визуализация данных Центральноазиатского Барометра.</em></p>
+<p><em>первоначально разработано для презентации на <a href="https://auca.kg">Американский Университет Центральной Азии</a>, Весна 2026</em></p>
+<p>[Обратите внимание: русский текст переведен с английского с помощью машинного перевода]</p>
+<section id="обзор" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Обзор</h1>
+<p>Этот семинар посвящен работе с данными, начиная с основ импорта и подготовки данных и заканчивая описательной статистикой, базовым анализом и визуализацией данных. Программирование ведется преимущественно на языке R, но также используются некоторые примеры на Python. И R, и Python — отличные инструменты для анализа данных, поэтому в некоторой степени ваш выбор зависит от предпочтений и уровня знакомства с языком. Язык R возник из области статистики и дополнил ее вычислительными функциями, в то время как Python — это универсальный язык программирования, к которому были добавлены значительные возможности статистического анализа.</p>
+<section id="определения" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="определения"><span class="header-section-number">1.1</span> Определения</h2>
+<p><em>Статистика</em> — это широкая область, предоставляющая строгие инструменты для анализа данных с помощью математики. Хотя мы можем рассматривать <em>машинное обучение</em> как тему информатики, фундаментальная теория машинного обучения в основном основана на статистике. Машинное обучение (МL) относится ко многим возможным методам использования вычислительных ресурсов на основе математических моделей для понимания данных и прогнозирования на их основе. <em>Искусственный интеллект</em> (AI) также является частью машинного обучения, и до роста популярности <em>генеративного AI</em> (Generative AI) AI/ML обычно обозначали широкий набор аналитических методов. Генеративный AI (GenAI) в более узком смысле относится к ИИ, который делает вероятностные предположения на основе больших объемов обучающих данных, обычно используя <em>большие языковые модели</em> (LLM). Поскольку GenAI не обеспечивает воспроизводимых результатов, он не так полезен для получения надежных результатов исследований. <em>Vibe coding</em>, программирование с использованием GenAI, или разработка компьютерного кода и синтаксиса, может иметь некоторые применения, но его сложно использовать без базового понимания соответствующих языков программирования. В случае текущих проектов, требующих постоянных изменений в расширяющейся кодовой базе, GenAI хуже справляется с созданием кода, который не меняет структуру проекта.</p>
 </section>
 </section>
-<section id="installation" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Installation</h1>
-<p>This workshop does <em>not</em> cover the installation of R and RStudio, but assumes that you have a working copy available.</p>
-<p><em>R</em> is open source software for statistical analysis, available at <a href="https://r-project.org">R-project.org</a>. It is recommended to install R first. R commands can be executed by many editors and IDEs, directly in the terminal, or via script files. However, one of the most powerful and common methods, which we will use here, is to use the RStudio IDE.</p>
-<p><em>RStudio</em>, available from <a href="https://posit.co">Posit</a> as an <a href="https://posit.co/download/rstudio-desktop/">open source download</a>, is a tool for creating and running R code (and Python and a few other languages), with many helpful features and templates for working with the other formats and tools in the R ecosystem. RStudio will make use of your installed version of R, running as a layer on top. Posit is also developing <a href="https://posit.co/products/ide/positron/">Positron</a> as a newer IDE with more flexibility to work with R, Python, and other possible languages. This workshop does not use Positron, although the code should also work there.</p>
-<p>Both RStudio and Positron are introducing AI suggestion tools built into their interfaces that claim to work with and understand the specific code of your project. These should be preferred to using external services like ChatGPT.</p>
-<p>For immediate use without installation, try the following:</p>
+<section id="установка" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Установка</h1>
+<p>Данный семинар <em>не</em> охватывает установку R и RStudio, но предполагает наличие у вас рабочей копии этих программ.</p>
+<p><em>R</em> — это программное обеспечение с открытым исходным кодом для статистического анализа, доступное по адресу <a href="https://r-project.org">R-project.org</a>. Рекомендуется сначала установить R. Команды R можно выполнять во многих редакторах и IDE, непосредственно в терминале или через скриптовые файлы. Однако один из самых мощных и распространенных методов, который мы будем использовать здесь, — это использование IDE RStudio.</p>
+<p><em>RStudio</em>, доступный на <a href="https://posit.co">Posit</a> в виде <a href="https://posit.co/download/rstudio-desktop/">загрузки с открытым исходным кодом</a>, — это инструмент для создания и запуска кода на языке R (а также на Python и нескольких других языках), обладающий множеством полезных функций и шаблонов для работы с другими форматами и инструментами в экосистеме R. RStudio будет использовать установленную вами версию R, работая как надстройка над ней. Posit также разрабатывает <a href="https://posit.co/products/ide/positron/">Positron</a> — более новую IDE с большей гибкостью для работы с R, Python и другими возможными языками. В этом мастер-классе не используется Positron, хотя код должен работать и там.</p>
+<p>И RStudio, и Positron внедряют в свои интерфейсы инструменты подсказок на основе искусственного интеллекта, которые, как утверждается, работают с конкретным кодом вашего проекта и понимают его. Их следует предпочитать использованию сторонних сервисов, таких как ChatGPT.</p>
+<p>Для немедленного использования без установки попробуйте следующее:</p>
 <ul>
-<li>The <a href="https://posit.cloud">Posit Cloud</a> is also a free service that allows you to use RStudio (with some limitations on time and memory) with the creation of an account.</li>
+<li><a href="https://posit.cloud">Posit Cloud</a> — это также бесплатный сервис, позволяющий использовать RStudio (с некоторыми ограничениями по времени и памяти) после создания учетной записи.</li>
 </ul>
-<p>Please see the <a href="https://www.youtube.com/watch?v=ifOCC-9V_y0">Getting Started with R video</a> for more details (or other web tutorials and guides).</p>
-<p><a href="https://www.python.org/">Python</a> is also open-source, and can be used with various editors and tools, which are not detailed here.</p>
-<section id="r-help" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="r-help"><span class="header-section-number">2.1</span> R help</h2>
-<p>The R help system is easy to access. Use a question mark before the name of a specific function to pull up its manual page ( <em>?sample</em> or <em>?rnorm</em>). Use two question marks to search The help tab in the lower right quadrant of RStudio also allows full access to the built in help, including manuals and searching.</p>
-<p>Searching the internet for R help can be useful, since there are a wealth of tutorials, blog posts, and other material on general methods and specific R packages. It is helpful to add something like “R statistics” or “R software” or “R package” to your search to distinguish from all other uses of the letter R!</p>
+<p>Более подробную информацию можно найти в видеоролике <a href="https://www.youtube.com/watch?v=ifOCC-9V_y0">Начало работы с R</a> (или в других веб-уроках и руководствах).</p>
+<p><a href="https://www.python.org/">Python</a> также является языком с открытым исходным кодом и может использоваться с различными редакторами и инструментами, которые здесь не описаны подробно.</p>
+<section id="r-помощь" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="r-помощь"><span class="header-section-number">2.1</span> R помощь</h2>
+<p>Система справки R легкодоступна. Используйте вопросительный знак перед именем конкретной функции, чтобы открыть ее страницу руководства ( <em>?sample</em> или <em>?rnorm</em>). Используйте два вопросительных знака для поиска. Вкладка «Справка» в правом нижнем углу RStudio также предоставляет полный доступ к встроенной справке, включая руководства и поиск.</p>
+<p>Поиск в интернете справки по R может быть полезен, поскольку существует множество руководств, статей в блогах и других материалов по общим методам и конкретным пакетам R. Полезно добавить к поисковому запросу что-то вроде «статистика R», «программное обеспечение R» или «пакет R», чтобы отличать его от всех других случаев использования буквы R!</p>
 </section>
 </section>
-<section id="setup-and-preparing-data" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Setup and preparing data</h1>
-<section id="r-packages-required" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="r-packages-required"><span class="header-section-number">3.1</span> R packages required</h2>
-<p>We will use the <a href="https://pak.r-lib.org/"><em>pak</em></a> package for installation as a more complete approach to package management. Replace the pkg commands with <em>install.packages()</em> versions if you prefer.</p>
-<p>This session relies on the <a href="https://tidyverse.org"><em>tidyverse</em></a> suite of packages for data manipulation as a preference, although the same tasks could be accomplished in base R using other functions. Install <em>pak</em> and <em>tidyverse</em> if you don’t already have them on your system. We will also need <em>reticulate</em> to run Python code chunks.</p>
+<section id="настройка-и-подготовка-данных" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Настройка и подготовка данных</h1>
+<section id="необходимые-пакеты-r" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="необходимые-пакеты-r"><span class="header-section-number">3.1</span> Необходимые пакеты R</h2>
+<p>Для установки мы будем использовать пакет <a href="https://pak.r-lib.org/"><em>pak</em></a>, поскольку это более полный подход к управлению пакетами. При желании замените команды pkg на версии, созданные с помощью <em>install.packages()</em>.</p>
+<p>В этом занятии предпочтительно используется набор пакетов <a href="https://tidyverse.org"><em>tidyverse</em></a> для обработки данных, хотя те же задачи можно выполнить в базовом R с помощью других функций. Установите <em>pak</em> и <em>tidyverse</em>, если они еще не установлены в вашей системе. Нам также понадобится <em>reticulate</em> для запуска фрагментов кода Python.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -238,8 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Note that the <em>update.packages()</em> command can be run periodically to check for newer versions of any packages installed.</p>
-<p>Load the packages so that we can work with them.</p>
+<p>Обратите внимание, что команду <em>update.packages()</em> можно периодически запускать для проверки наличия более новых версий установленных пакетов.</p>
+<p>Загрузите пакеты, чтобы мы могли с ними работать.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -260,18 +261,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="versions" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="versions"><span class="header-section-number">3.2</span> Versions</h2>
-<p>The links to the right provide alternate modes of accessing this content. You can choose Light or Dark mode HTML, a downloadable PDF, or a Word Docx format file all representing the same content. Code files with R (.R) or Python (.py) are also available, if you’d like to isolate the code from the description.</p>
+<section id="версии" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="версии"><span class="header-section-number">3.2</span> Версии</h2>
+<p>Ссылки справа предоставляют альтернативные способы доступа к этому контенту. Вы можете выбрать светлый или темный режим HTML, загрузить PDF-файл или файл Word в формате Docx — все они будут содержать один и тот же контент. Также доступны файлы кода на языке R (.R) или Python (.py), если вы хотите отделить код от описания.</p>
 </section>
-<section id="kyrgyz-and-russian-language" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="kyrgyz-and-russian-language"><span class="header-section-number">3.3</span> Kyrgyz and Russian language</h2>
-<p>Also, machine-translated versions of this content in Russian and Kyrgyz are linked on the right.</p>
+<section id="кыргызский-и-русский-языки" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="кыргызский-и-русский-языки"><span class="header-section-number">3.3</span> Кыргызский и русский языки</h2>
+<p>Кроме того, справа приведены ссылки на машинный перевод этого контента на русский и киргизский языки.</p>
 </section>
-<section id="python-support" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="python-support"><span class="header-section-number">3.4</span> Python support</h2>
-<p>Now let’s load <em>reticulate</em> (for Python support only). We must set the correct location of python corresponding to our system.</p>
-<p>A Python file is provided for those who want to try out the same data steps in Python. Note that the Python file was machine-translated from R.</p>
+<section id="поддержка-python" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="поддержка-python"><span class="header-section-number">3.4</span> поддержка Python</h2>
+<p>Теперь загрузим <em>reticulate</em> (только для поддержки Python). Необходимо указать правильное местоположение Python, соответствующее нашей системе.</p>
+<p>Для тех, кто хочет попробовать выполнить те же шаги обработки данных на Python, предоставляется файл Python. Обратите внимание, что файл Python был переведен машинным способом из R.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -282,19 +283,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="central-asia-barometer" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Central Asia Barometer</h1>
-<p>As you are probably aware, the <a href="https://ca-barometer.org/">Central Asia Barometer</a> project conducts polls and surveys across the countries of Central Asia (Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, and Uzbekistan) and releases the results on a regular basis. Except for the latest wave of data, the CA Barometer data is freely downloadable from their website after providing a contact e-mail. These surveys examine contemporary political and social attitudes, and allow for longitudinal comparisons over time and cross-country comparisons.</p>
-<p>For this initial workshop, we will get familiar with the CA Barometer by looking at recent data (2022) for one country (Kyrgyzstan). The second workshop will extend and deepen our understanding by adding additional years and countries to our analysis, and explore more complex data manipulation and analysis.</p>
-<section id="understanding-the-data" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="understanding-the-data"><span class="header-section-number">4.1</span> Understanding the data</h2>
-<p>Before worrying about coding or statistical analysis, the first step in working with real-world data is to develop an understanding of its structure and meaning. We want to know what data has been collected, how it has been organized, and think about what kinds of questions it can answer. Only then can we know how to properly proceed with analyzing it.</p>
-<p>For CA Barometer, this means looking at the <a href="https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-questionnaire-2022-autumn.pdf">Questionnaire (for the 2022 wave)</a> and the <a href="https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-methods-report-2022-autumn.pdf">Methods Report</a> for that year.</p>
+<section id="барометр-центральной-азии" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Барометр Центральной Азии</h1>
+<p>Как вам, вероятно, известно, проект <a href="https://ca-barometer.org/">Барометр Центральной Азии</a> проводит опросы и исследования в странах Центральной Азии (Казахстан, Кыргызстан, Таджикистан, Туркменистан и Узбекистан) и регулярно публикует результаты. За исключением последней волны данных, данные Барометра Центральной Азии можно бесплатно скачать с их веб-сайта, указав контактный адрес электронной почты. Эти опросы изучают современные политические и социальные взгляды и позволяют проводить долгосрочные сравнения, а также межстрановые сравнения.</p>
+<p>На этом первом семинаре мы познакомимся с Барометром Центральной Азии, рассмотрев последние данные (2022 год) по одной стране (Кыргызстан). Второй семинар расширит и углубит наше понимание, добавив к анализу дополнительные годы и страны, а также изучив более сложные методы обработки и анализа данных.</p>
+<section id="понимание-данных" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="понимание-данных"><span class="header-section-number">4.1</span> Понимание данных</h2>
+<p>Прежде чем заниматься программированием или статистическим анализом, первым шагом в работе с реальными данными является понимание их структуры и смысла. Нам нужно знать, какие данные были собраны, как они организованы, и подумать, на какие вопросы они могут ответить. Только тогда мы сможем понять, как правильно приступить к их анализу.</p>
+<p>Для CA Barometer это означает изучение <a href="https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-questionnaire-2022-autumn.pdf">Анкеты (для опроса 2022 года)</a> и <a href="https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-methods-report-2022-autumn.pdf">Отчета о методах</a> за этот год.</p>
 </section>
 </section>
-<section id="download-and-import-data" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Download and import data</h1>
-<p>We download data from <a href="https://ca-barometer.org/">Central Asia Barometer</a> at <a href="https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xls">https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx</a></p>
+<section id="загрузка-и-импорт-данных" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Загрузка и импорт данных</h1>
+<p>Мы загружаем данные из <a href="https://ca-barometer.org/">Центральноазиатского барометра</a> по адресу <a href="https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xls">https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx</a></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -330,17 +331,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="data-wrangling" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Data Wrangling</h1>
-<section id="selection-and-naming" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="selection-and-naming"><span class="header-section-number">6.1</span> Selection and naming</h2>
-<p>We select interesting variables from the questionnaire to analyze. We’ll also change their names to something more memorable.</p>
-<p>We want to study across several dimensions:</p>
+<section id="обработка-данных" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Обработка данных</h1>
+<section id="выбор-и-наименование" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="выбор-и-наименование"><span class="header-section-number">6.1</span> Выбор и наименование</h2>
+<p>Для анализа мы выберем интересные переменные из анкеты. Также мы изменим их названия на более запоминающиеся.</p>
+<p>Мы хотим провести исследование по нескольким параметрам:</p>
 <ul>
-<li>language, region, income, sex</li>
+<li>язык, регион, доход, пол</li>
 </ul>
-<p>and relate this to opinions. We can spend some time looking at the questionnaire to see how these variables are labeled.</p>
-<p>Note that MM4 is the country code, but we have already loaded the Kyrgyz file, so we don’t need to explicitly select this. Also note that ethnic group is already labeled ‘EthnicGrp’. Other variables we will make more intuitive to access by renaming them.</p>
+<p>и связать это с мнениями. Мы можем потратить некоторое время на изучение анкеты, чтобы увидеть, как обозначены эти переменные.</p>
+<p>Обратите внимание, что MM4 — это код страны, но мы уже загрузили файл по Киргизии, поэтому нам не нужно явно его выбирать. Также обратите внимание, что этническая группа уже обозначена как «EthnicGrp». Доступ к другим переменным мы сделаем более интуитивно понятным, переименовав их.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -399,9 +400,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="descriptive-statistics" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">6.2</span> Descriptive statistics</h2>
-<p>Let’s take a look at several of these variables and see how they’re distributed. A simple <em>table</em> command will do the trick for getting initial familiarity with the data. While some large datasets are difficult to gain intuitive understanding of, for this kind of social science data, nothing beats spending time looking over the data before getting into more complex analysis. We may also discover outliers or issues to remedy before moving forward.</p>
+<section id="описательная-статистика" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="описательная-статистика"><span class="header-section-number">6.2</span> Описательная статистика</h2>
+<p>Давайте рассмотрим несколько из этих переменных и посмотрим, как они распределены. Простая команда <em>table</em> поможет вам получить первоначальное представление о данных. Хотя некоторые большие наборы данных сложно интуитивно понять, для такого рода данных в социальных науках нет ничего лучше, чем потратить время на изучение данных, прежде чем переходить к более сложному анализу. Мы также можем обнаружить выбросы или проблемы, которые необходимо исправить, прежде чем двигаться дальше.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -511,9 +512,9 @@ Income                 Female Male
 </div>
 </div>
 </section>
-<section id="recoding-data" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="recoding-data"><span class="header-section-number">6.3</span> Recoding data</h2>
-<p>One issue that we discover is that Income is reported in categories, by range. If we want to treat Income as a number, we will have to recode it. We set each range to its rough midpoint in the code below, using the <em>recode_values</em> command.</p>
+<section id="перекодирование-данных" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="перекодирование-данных"><span class="header-section-number">6.3</span> Перекодирование данных</h2>
+<p>Одна из обнаруженных проблем заключается в том, что доход отображается по категориям, в виде диапазонов. Если мы хотим рассматривать доход как число, нам придется его перекодировать. В приведенном ниже коде мы устанавливаем для каждого диапазона приблизительное среднее значение, используя команду <em>recode_values</em>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -533,7 +534,7 @@ Income                 Female Male
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>We reattach the data to make sure the new variable, Income_Numeric, is easily available, then check how it turned out.</p>
+<p>Мы повторно подключаем данные, чтобы убедиться, что новая переменная Income_Numeric легкодоступна, а затем проверяем, как всё получилось.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -587,7 +588,7 @@ Income                 Female Male
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CA_Barometer_1_dark_files/figure-html/Income_Numeric-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="CA_Barometer_1_ru_files/figure-html/Income_Numeric-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -631,9 +632,9 @@ mean in group Female   mean in group Male
 </div>
 </section>
 </section>
-<section id="plots---data-visualization" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Plots - Data Visualization</h1>
-<p>We can pick any general issue to focus on, such as which messenger app people use. Actually, in Kyrgyzstan everyone uses WhatsApp, so perhaps not so interesting! Let’s pick something more general, like whether the country is going in the right or wrong direction.</p>
+<section id="графики---визуализация-данных" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Графики - Визуализация данных</h1>
+<p>Мы можем выбрать любую общую тему для обсуждения, например, какое приложение для обмена сообщениями используют люди. На самом деле, в Кыргызстане все пользуются WhatsApp, так что, возможно, это не так интересно! Давайте выберем что-нибудь более общее, например, движется ли страна в правильном или неправильном направлении.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -719,7 +720,7 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
   Wrong direction      6    4    5    4    6     8    12    18    22    99</code></pre>
 </div>
 </div>
-<p>Recode to drop ‘Don’t Know’ and ‘Refused’</p>
+<p>Измените код, удалив слова «Не знаю» и «Отказано».</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -787,9 +788,9 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
     MM4, MM5, MM6, MM7, MM8, MM9</code></pre>
 </div>
 </div>
-<section id="illustrative-plots" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="illustrative-plots"><span class="header-section-number">7.1</span> Illustrative plots</h2>
-<p>Here are a few illustrative plots. We’re not trying to make them pretty at this point, just trying to quickly understand our data.</p>
+<section id="иллюстративные-графики" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="иллюстративные-графики"><span class="header-section-number">7.1</span> Иллюстративные графики</h2>
+<p>Вот несколько наглядных графиков. На данном этапе мы не стремимся сделать их красивыми, а просто хотим быстро понять наши данные.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -803,7 +804,7 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CA_Barometer_1_dark_files/figure-html/illustrative%20plots-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="CA_Barometer_1_ru_files/figure-html/illustrative%20plots-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -818,7 +819,7 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CA_Barometer_1_dark_files/figure-html/illustrative%20plots-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="CA_Barometer_1_ru_files/figure-html/illustrative%20plots-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -829,7 +830,7 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CA_Barometer_1_dark_files/figure-html/illustrative%20plots-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="CA_Barometer_1_ru_files/figure-html/illustrative%20plots-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -840,7 +841,7 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CA_Barometer_1_dark_files/figure-html/illustrative%20plots-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="CA_Barometer_1_ru_files/figure-html/illustrative%20plots-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -851,18 +852,18 @@ D1                  1400 3400 5000 7000 9000 11000 14000 18000 24000 40000
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="CA_Barometer_1_dark_files/figure-html/illustrative%20plots-5.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="CA_Barometer_1_ru_files/figure-html/illustrative%20plots-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="further-statistical-analysis" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Further statistical analysis</h1>
-<section id="logistic-regresssion" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="logistic-regresssion"><span class="header-section-number">8.1</span> Logistic regresssion</h2>
-<p>As an example of statistical analysis, we can try a logistic regression to predict the answer to the right direction question. Logistic regression is the suitable method for when the outcome is a binary choice (yes/no, true/false, right/wrong).</p>
+<section id="дальнейший-статистический-анализ" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Дальнейший статистический анализ</h1>
+<section id="логистическая-регрессия" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="логистическая-регрессия"><span class="header-section-number">8.1</span> Логистическая регрессия</h2>
+<p>В качестве примера статистического анализа можно попробовать использовать логистическую регрессию для прогнозирования правильного ответа на вопрос о направлении движения. Логистическая регрессия — подходящий метод, когда результат представляет собой бинарный выбор (да/нет, верно/неверно, правильно/неверно).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -902,20 +903,20 @@ Number of Fisher Scoring iterations: 13</code></pre>
 </div>
 </section>
 </section>
-<section id="other-possibilities" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Other possibilities</h1>
-<p>These are some notes on additional interesting variables in the data, although feel free to pick your own and explore.</p>
-<p>Question B13 - <em>“Have Russians been emigrating to your area?”</em> could be analyzed by region</p>
-<p>Question E17 - <em>“How long will conflict with Ukraine last?”</em> asked in 2022</p>
-<p>Question G3b - <em>“Attitude toward President Japarov?”</em> what breakdowns would be interesting here?</p>
+<section id="другие-возможности" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Другие возможности</h1>
+<p>Это лишь некоторые заметки о дополнительных интересных переменных в данных, хотя вы можете выбрать свои собственные и изучить их подробнее.</p>
+<p>Вопрос B13 — «Эмигрируют ли русские в ваш регион?» — можно проанализировать по регионам.</p>
+<p>Вопрос E17 — «Как долго продлится конфликт с Украиной?» — задан в 2022 году.</p>
+<p>Вопрос G3b — «Отношение к президенту Жапарову?» — какие аспекты были бы интересны для анализа?</p>
 </section>
-<section id="conclusion" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Conclusion</h1>
-<p>There is no one stopping point for data analysis. Keep going until you have a full understanding of the data and its interaction with the questions you seek to answer. The second part of this workshop series, <a href="https://ryanwomack.com/data_topics/central_asia_barometer_2/CA_Barometer_2.html">Central Asia Barometer 2</a>, will illustrate more advanced methods and combinations of data.</p>
-<p>See <a href="https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html">Data Analysis 1</a> and <a href="https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html">Data Analysis 2</a> for further discussion of data analysis techniques.</p>
-<section id="r-for-data-science" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="r-for-data-science"><span class="header-section-number">10.1</span> R for Data Science</h2>
-<p>Consult the <a href="https://r4ds.hadley.nz/">R for Data Science book</a> to learn more about data wrangling. Also check out <a href="https://www.tidymodels.org/">tidymodels</a> a collection of packages for modeling and machine learning using tidyverse principles.</p>
+<section id="заключение" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Заключение</h1>
+<p>В анализе данных нет единой точки остановки. Продолжайте, пока не получите полное понимание данных и их взаимодействия с вопросами, на которые вы пытаетесь ответить. Во второй части этой серии семинаров, <a href="https://ryanwomack.com/data_topics/central_asia_barometer_2/CA_Barometer_2.html">Барометр Центральной Азии 2</a>, будут рассмотрены более сложные методы и комбинации данных.</p>
+<p>Дополнительные сведения о методах анализа данных см. в разделах <a href="https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html">Анализ данных 1</a> и <a href="https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html">Анализ данных 2</a>.</p>
+<section id="r-для-анализа-данных-книга-r-for-data-science" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="r-для-анализа-данных-книга-r-for-data-science"><span class="header-section-number">10.1</span> R для анализа данных [книга <em>R for Data Science</em>]</h2>
+<p>Для получения дополнительной информации об обработке данных обратитесь к книге <a href="https://r4ds.hadley.nz/">R for Data Science</a>. Также ознакомьтесь с пакетом <a href="https://www.tidymodels.org/">tidymodels</a>, предназначенным для моделирования и машинного обучения с использованием принципов tidyverse.</p>
 </section>
 </section>
 
