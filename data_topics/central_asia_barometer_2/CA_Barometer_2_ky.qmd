@@ -1,0 +1,999 @@
+---
+title: "Борбордук Азиянын барометрдик маалыматтарын талдоо, уландысы"
+author: "Ryan Womack"
+date: "2026-04-07"
+toc:toc: true true
+number-sections: true
+highlight-style: pygments
+output: html_document
+format:
+  html: 
+    toc: true
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+    fontfamily: libertinus
+    colorlinks: true
+    papersize: A4
+  docx: default
+theme: litera
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+knitr::opts_chunk$set(root.dir = "/home/ryan/womack/documents/ryan/Central_Asia/Central_Asia_Barometer/")
+```
+
+Copyright Ryan Womack, 2026. Бул эмгек [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) лицензиясынын алкагында таратылат.
+
+**Борбордук Азия Барометринин маалыматтарын талдоо**
+
+_Борбордук Азия Барометринин маалыматтарын иштетүү, чалгындоочу маалыматтарды талдоо жана маалыматтарды визуалдаштыруу._
+
+_башында Борбордук Азиядагы Америка Университетинде презентациялоо үчүн иштелип чыккан(https://auca.kg), Жаз 2026_
+
+[Эскертүү: кыргызча текст машиналык котормо аркылуу англис тилинен которулду.]
+
+# Жалпы маалымат
+
+Бул семинар маалыматтар менен иштөөнү көрсөтөт, анын уландысы [Борбордук Азиянын Барометри 1](https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.html), анда бир толкун жана Борбордук Азиянын Барометри өлкөсү менен иштөө киргизилген (2022-жылы Кыргызстан). Экинчи бөлүктө бир нече толкун жана маалыматтар өлкөлөрү менен иштөө көрсөтүлөт, татаал маалыматтарды бириктирүү жана тазалоо, кошумча графикалык варианттар көрсөтүлөт жана статистикалык анализ үчүн баштапкы чекиттерди сунуштайт. Коддоо R тилинде, бирок ал жердеги кадамдарды кайталоону каалагандар үчүн материалдын Python версиясы (машиналык которулган) жеткиликтүү. R жана Python экөө тең маалыматтарды талдоо үчүн эң сонун куралдар, андыктан кандайдыр бир деңгээлде сиздин тандооңуз артыкчылык жана тааныштык маселеси. R тили статистикадан келип чыккан жана эсептөө функцияларын кошкон, ал эми Python - бул жалпы максаттагы эсептөө тили, ага статистикалык мүмкүнчүлүктөрдүн чоң дозалары кошулган.
+
+# Орнотуу
+
+Бул семинар R жана RStudio программаларын орнотууну _камтыбайт_, бирок сизде бул программалардын иштеп жаткан көчүрмөсү бар деп болжолдойт.
+
+*R* - статистикалык анализ үчүн ачык булактуу программалык камсыздоо, аны [R-project.org](https://r-project.org) дарегинен тапса болот. Алгач R орнотуу сунушталат. R буйруктарын көптөгөн редакторлордо жана IDEлерде, түздөн-түз терминалда же скрипт файлдары аркылуу аткарууга болот. Бирок, биз бул жерде колдоно турган эң күчтүү жана кеңири таралган ыкмалардын бири - RStudio IDE.
+
+*RStudio*, [Posit](https://posit.co) сайтынан [ачык булактуу жүктөп алуу](https://posit.co/download/rstudio-desktop/) катары жеткиликтүү, R тилинде (ошондой эле Python жана башка бир нече тилдерде) код жазуу жана иштетүү үчүн курал болуп саналат, R экосистемасындагы башка форматтар жана куралдар менен иштөө үчүн көптөгөн пайдалуу функциялары жана шаблондору бар. RStudio сиз орноткон R версиясын колдонот, анын үстүндө катмар катары иштейт. Posit ошондой эле R, Python жана башка мүмкүн болгон тилдер менен иштөө үчүн көбүрөөк ийкемдүүлүккө ээ жаңы IDE болгон [Positron](https://posit.co/products/ide/positron/) иштеп чыгууда. Бул семинарда Positron колдонулбайт, бирок код ал жерде да иштеши керек.
+
+RStudio жана Positron экөө тең долбооруңуздун белгилүү бир коду менен иштейбиз жана түшүнөбүз деп ырастаган AI менен иштеген сунуштоо куралдарын интерфейстерине интеграциялашат. Булар ChatGPT сыяктуу үчүнчү тараптын кызматтарына караганда артыкчылыктуу болушу керек.
+
+Орнотпостон дароо колдонуу үчүн төмөнкүлөрдү колдонуп көрүңүз:
+
+- [Posit Cloud](https://posit.cloud) ошондой эле аккаунт түзгөндөн кийин RStudio'ну (убакыт жана эс тутум чектөөлөрү менен) колдонууга мүмкүндүк берген акысыз кызмат.
+
+Көбүрөөк маалымат алуу үчүн, [R менен баштоо](https://www.youtube.com/watch?v=ifOCC-9V_y0) видеосун (же башка веб-окуу куралдарын жана колдонмолорду) көрүңүз.
+
+[Python](https://www.python.org/) дагы ачык булактуу тил болуп саналат жана бул жерде кеңири сүрөттөлгөн эмес ар кандай редакторлор жана куралдар менен колдонулушу мүмкүн.
+
+## R жардамы
+
+Система справки R легкодоступна. Белгилүү бир функциянын аталышынын алдындагы суроо белгисин колдонуп, анын колдонмо барагын ачыңыз (_?sample_ же _?rnorm_). Издөө үчүн эки суроо белгисин колдонуңуз. RStudio программасынын төмөнкү оң бурчундагы "Жардам" өтмөгү ошондой эле окуу куралдарын жана издөөнү кошо алганда, орнотулган жардамга толук мүмкүнчүлүк берет.
+
+R жардамын интернеттен издөө пайдалуу болушу мүмкүн, анткени жалпы ыкмалар жана белгилүү бир R пакеттери боюнча көптөгөн окуу куралдары, блог макалалары жана башка ресурстар бар. R тамгасынын башка колдонулуштарынан айырмалоо үчүн издөө сурамыңызга "R статистикасы", "R программалык камсыздоосу" же "R пакети" сыяктуу нерселерди кошуу пайдалуу!
+
+# Маалыматтарды даярдоо жана орнотуу
+
+## Керектүү R пакеттери
+
+Орнотуу үчүн биз [_pak_](https://pak.r-lib.org/) пакетин колдонобуз, анткени ал пакеттерди башкарууга толук мамиле. Кааласаңыз, pkg буйруктарын _install.packages()_ аркылуу түзүлгөн версиялар менен алмаштырыңыз.
+
+Бул окуу куралында маалыматтарды иштетүү үчүн [_tidyverse_](https://tidyverse.org) пакеттер топтому колдонулат, бирок ошол эле тапшырмаларды R базасында башка функцияларды колдонуу менен аткарууга болот. Эгер алар сиздин системаңызда орнотула элек болсо, _pak_ жана _tidyverse_ орнотуңуз. Python кодунун үзүндүлөрүн иштетүү үчүн бизге _reticulate_ да керек болот.
+
+Графика үчүн _ggplot2_ көпчүлүк ишти аткарат, бирок _lattice_ жана бир нече адистештирилген жардамчы пакеттер да колдонулат.
+
+```{r install packages, eval=FALSE}
+
+install.packages("pak", dependencies=TRUE)
+library(pak)
+pkg_install("tidyverse")
+pkg_install("readxl")
+pkg_install("reticulate")
+pkg_install("ggplot2") # including in tidyverse, but just making this explicit
+pkg_install("lattice")
+
+# helper packages
+
+pkg_install("ggthemes")
+pkg_install("cowplot")
+pkg_install("gridExtra")
+pkg_install("RColorBrewer")
+pkg_install("png")
+pkg_install("paletteer")
+pkg_install("ggiraph")
+
+# pkg_install("ggridges")
+# pkg_install("ggvis")
+# pkg_install("gganimate")
+# pkg_install("gapminder")
+# pkg_install("hexbin")
+# pkg_install("gifski")
+
+devtools::session_info()
+
+```
+
+Орнотулган пакеттердин жаңы версияларын текшерүү үчүн _update.packages()_ буйругун мезгил-мезгили менен иштете аларыңызды эске алыңыз.
+
+Пакеттерди жүктөп алыңыз, ошондо биз алар менен иштей алабыз.
+
+```{r load packages, eval=TRUE, echo=TRUE}
+
+library(readxl)
+library(tidyverse)
+library(lattice)
+library(ggthemes)
+library(cowplot)
+library(gridExtra)
+library(RColorBrewer)
+library(png)
+library(paletteer)
+library(ggiraph)
+
+```
+
+## Версиялар
+
+Оң жактагы шилтемелер бул мазмунга жетүүнүн альтернативдүү жолдорун сунуштайт. Сиз ачык же караңгы HTML режимин тандай аласыз, PDF жүктөп алсаңыз же Word документин .docx форматында жүктөп алсаңыз болот — баары бирдей мазмунду камтыйт. Эгерде сиз кодду сүрөттөмөдөн бөлгүңүз келсе, R (.R) же Python (.py) тилдериндеги код файлдары да жеткиликтүү.
+
+## Кыргыз жана орус тилдеринде
+
+Мындан тышкары, бул мазмундун орус жана кыргыз тилдерине машиналык котормолоруна шилтемелер оң жакта берилген.
+
+## Python колдоосу
+
+Эми _reticulate_ файлын жүктөп алалы (Python колдоосу үчүн гана). Системаңыз үчүн туура Python жайгашкан жерин көрсөтүшүңүз керек.
+
+Pythonдо ушул эле маалыматтарды иштетүү кадамдарын колдонуп көргүсү келгендер үчүн Python файлы берилет. Python файлы R тилинен машина менен которулганын эске алыңыз.
+
+```{r tidyverse}
+
+# Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")
+library(reticulate)
+use_python("/usr/bin/python3")
+
+```
+
+# Борбордук Азия Барометри
+
+Мурунку семинарда талкуулангандай, [Борбордук Азия Барометри](https://ca-barometer.org/) долбоору Борбордук Азия өлкөлөрүндө (Казакстан, Кыргызстан, Тажикстан, Түркмөнстан жана Өзбекстан) сурамжылоолорду жана сурамжылоолорду жүргүзүп, жыйынтыктарын үзгүлтүксүз жарыялап турат. Акыркы маалыматтар толкунунан тышкары, CA Barometer маалыматтарын байланыш электрондук почтасын бергенден кийин алардын веб-сайтынан акысыз жүктөп алууга болот. Бул сурамжылоолор заманбап саясий жана социалдык мамилелерди изилдейт жана убакыттын өтүшү менен жана өлкөлөр аралык салыштырууларды жүргүзүүгө мүмкүндүк берет.
+
+Бул семинарда биз тогуз файлды, Казакстан, Кыргызстан жана Өзбекстан боюнча сурамжылоонун жыйынтыктарын, тиешелүүлүгүнө жараша 2018, 2020 жана 2022-жылдардын күзүн чагылдырган 4, 8 жана 12-толкундар үчүн бириктиребиз. Бардык өлкөлөрдү андан да көп толкундар аркылуу бириктирүүгө аракет кылгандан көрө, башкарууга оңой болгону менен, бул бизге өлкөлөр жана убакыттын өтүшү менен салыштыруулардын татаалдыгын сезүүгө мүмкүндүк берет.
+
+## Маалыматтарды түшүнүү
+
+Коддоо же статистикалык анализ жөнүндө кабатыр болбостон, реалдуу дүйнөдөгү маалыматтар менен иштөөнүн биринчи кадамы - алардын түзүлүшүн жана маанисин түшүнүү. Биз кандай маалыматтар чогултулганын, кантип уюштурулганын билгибиз келет жана ал кандай суроолорго жооп бере алары жөнүндө ойлонушубуз керек. Ошондо гана биз аларды кантип туура талдоону улантууну биле алабыз.
+
+CA Барометри үчүн бул көптөгөн файлдарды карап чыгууну билдирет. Мурдагыдай эле, шилтемелер жеткиликтүү боло электе, сиз CA Барометри сайтындагы форманы толтурушуңуз керек болот. Толук тизме төмөндө келтирилген:
+
+*2018 - Wave 4*
+
+[Методдор жөнүндө отчет](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-methods-report-eng-2018-autumn.docx)
+
+Анкеталар: [ENG](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-2018-autumn.docx), [Kazakh](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-kz-kazakhstan-2018-autumn.docx), [Kyrgyz](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-kg-kyrgyzstan-2018-autumn.docx), [Uzbek](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-uz-turkmenistan-2018-autumn.docx)
+
+Маалыматтар: [Kazakhstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kazakhstan-2018-autumn.xlsx), [Kyrgyzstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kyrgyzstan-2018-autumn.xlsx), [Uzbekistan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-uzbekistan-2018-autumn.xlsx)
+
+*2020 - Wave 8*
+
+[Методдор жөнүндө отчет](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-methods-report-eng-2020-autumn.docx)
+
+Анкеталар: [ENG](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-questionnaire-eng-2020-autumn.doc), [RUS](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-questionnaire-rus-2020-autumn.doc)
+
+Маалыматтар: [Kazakhstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kazakhstan-2020-autumn.xlsx), [Kyrgyzstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kyrgyzstan-2020-autumn.xlsx), [Uzbekistan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-uzbekistan-2020-autumn.xlsx)
+
+*2022 - Wave 12*
+
+[Методдор жөнүндө отчет](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-methods-report-2022-autumn.pdf)
+
+Анкетаны: [ENG](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-questionnaire-2022-autumn.pdf)
+
+Маалыматтар: [Kazakhstan]((https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kazakhstan-kazakhstan-2022-autumn.xlsx)), [Kyrgyzstan](https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx), [Uzbekistan](https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-uzbekistan-uzbekistan-2022-autumn.xlsx)
+
+# Маалыматтарды жүктөп алуу жана импорттоо
+
+Биз жогорудагы шилтемелерди колдонуп, [Борбордук Азия Dарометри](https://ca-barometer.org/) сайтынан маалыматтарды жүктөп алабыз. Эскертүү шилтемелери кошумча түрдө Тажикстан жана Түркмөнстан үчүн берилген, бирок биз аларды бул семинарда колдонбойбуз.
+
+```{r download and import}
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx", "CAB_2022_KG.csv")
+data_22_KG <- read_excel("CAB_2022_KG.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kazakhstan-kazakhstan-2022-autumn.xlsx", "CAB_2022_KZ.csv")
+data_22_KZ <- read_excel("CAB_2022_KZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-uzbekistan-uzbekistan-2022-autumn.xlsx", "CAB_2022_UZ.csv")
+data_22_UZ <- read_excel("CAB_2022_UZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-turkmenistan-turkmenistan-2022-autumn.xlsx", "CAB_2022_TM.csv")
+data_22_TM <- read_excel("CAB_2022_TM.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-tajikistan-tajikistan-2022-autumn.xlsx", "CAB_2022_TJ.csv")
+data_22_TJ <- read_excel("CAB_2022_TJ.csv")
+
+# download 2020 data
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kyrgyzstan-2020-autumn.xlsx", "CAB_2020_KG.csv")
+data_20_KG <- read_excel("CAB_2020_KG.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kazakhstan-2020-autumn.xlsx", "CAB_2020_KZ.csv")
+data_20_KZ <- read_excel("CAB_2020_KZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-uzbekistan-2020-autumn.xlsx", "CAB_2020_UZ.csv")
+data_20_UZ <- read_excel("CAB_2020_UZ.csv")
+
+# no 2020 Turkmenistan data
+# download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-turkmenistan-2020-autumn.xlsx", "CAB_2020_TM.csv")
+# data_20_TM <- read_excel("CAB_2020_TM.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-tajikistan-2020-autumn.xlsx", "CAB_2020_TJ.csv")
+data_20_TJ <- read_excel("CAB_2020_TJ.csv")
+
+# download 2018 data
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kyrgyzstan-2018-autumn.xlsx", "CAB_2018_KG.csv")
+data_18_KG <- read_excel("CAB_2018_KG.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kazakhstan-2018-autumn.xlsx", "CAB_2018_KZ.csv")
+data_18_KZ <- read_excel("CAB_2018_KZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-uzbekistan-2018-autumn.xlsx", "CAB_2018_UZ.csv")
+data_18_UZ <- read_excel("CAB_2018_UZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-turkmenistan-2018-autumn.xlsx", "CAB_2018_TM.csv")
+data_18_TM <- read_excel("CAB_2018_TM.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-tajikistan-2018-autumn.xlsx", "CAB_2018_TJ.csv")
+data_18_TJ <- read_excel("CAB_2018_TJ.csv")
+
+```
+
+# Маалыматтарды бириктирүү
+
+Эми маалыматтарды бириктиришибиз керек. Жолдо баратып, бир ырааттуу файлга бириктирүү үчүн тазаланышы керек болгон кээ бир карама-каршылыктарды аныктайбыз. Мисалы, Country кээде кыскартылып, кээде MM4 өзгөрмөсү катары көрсөтүлөт.
+
+```{r mutate Country}
+
+data_22_KG <- mutate(data_22_KG, Country = 'Kyrgyzstan')
+data_20_KG <- mutate(data_20_KG, Country = 'Kyrgyzstan')
+
+# data_18_KG <- mutate(data_18_KG, Country = 'KG')
+
+data_22_KZ <- mutate(data_22_KZ, Country = 'Kazakhstan')
+data_20_KZ <- mutate(data_20_KZ, Country = 'Kazakhstan')
+
+# data_18_KZ <- mutate(data_18_KZ, Country = 'KZ')
+
+data_22_UZ <- mutate(data_22_UZ, Country = 'Uzbekistan')
+data_20_UZ <- mutate(data_20_UZ, Country = 'Uzbekistan')
+
+# data_18_UZ <- mutate(data_18_UZ, Country = 'UZ')
+
+data_22_TM <- mutate(data_22_TM, Country = 'Turkmenistan')
+
+# data_20_TM <- mutate(data_20_TM, Country = 'TM')
+# data_18_TM <- mutate(data_18_TM, Country = 'TM')
+
+data_22_TJ <- mutate(data_22_TJ, Country = 'Tajikistan')
+data_20_TJ <- mutate(data_20_TJ, Country = 'Tajikistan')
+
+# data_18_TJ <- mutate(data_18_TJ, Country = 'TJ')
+```
+
+## rbind менен аракет кылып жатам
+
+_rbind_ буйругу маалымат саптарынын жөнөкөй, түзмө-түз айкалыштары үчүн пайдалуу (_cbind_ тилкелерди бириктирүүгө барабар). Бирок, бул ыкма бардык өзгөрмөлөр бириктириле турган маалымат топтомдорунун ортосунда кемчиликсиз дал келишин талап кылат. Муну жасаганда биз кээ бир айырмачылыктарды табабыз.
+
+```{r rbind, eval=FALSE}
+
+data_2022 <- rbind(data_22_KZ, data_22_KG, data_22_UZ)
+
+```
+
+Бул катаны жаратат, андыктан _setdiff_ менен маалымат топтомдорунун ортосундагы айырмачылыктарды изилдейли. Андан кийин _full_join_ функциясын колдонуп, бардык өзгөрмөлөрдү камтыган бириктирилген маалымат топтомун түзөбүз. Бул Year файлындагы шайкеш келбеген форматтар көйгөйүн жаратат, ал "Маалыматтарды тазалоо" бөлүмүндө оңдолот.
+
+```{r setdiff, eval=FALSE}
+
+setdiff(names(data_22_KG),names(data_22_KZ))
+setdiff(names(data_22_KG),names(data_22_UZ))
+setdiff(names(data_22_KZ),names(data_22_UZ))
+
+my_test_join <- full_join(data_22_KG, data_22_KZ)
+
+```
+
+# Маалыматтарды тазалоо
+
+Маалыматтарды изилдеп жатып, биз жылдардын форматталышы сыяктуу карама-каршылыктарды байкайбыз. Ошондой эле, датасы 2018-жылы MM6, бирок "Жыл" деп белгиленген -- ал анкеталарды карап чыгышыбыз керек! Бизге бул деталдуу деңгээлдеги маалымат маанилүү эмес, андыктан маалыматтарга окшош "Жыл" өзгөрмөсүн киргизели. Бул өзгөрмөнүн түрүн да жокко чыгарат, бирок биз аны эки жолу текшере алабыз. Акырында, ырааттуулук үчүн баарынын атын "Жыл" деп өзгөртүңүз.
+
+```{r clean year}
+
+# data_22_KG$MM8
+# data_22_KZ$MM8
+# data_20_KG$MM8
+# data_20_KZ$MM8
+# data_18_KG$MM6
+# data_18_KZ$MM6
+
+data_22_KG$MM8 <- 2022
+data_22_KZ$MM8 <- 2022
+data_22_UZ$MM8 <- 2022
+
+data_20_KG$MM8 <- 2020
+data_20_KZ$MM8 <- 2020
+data_20_UZ$MM8 <- 2020
+
+class(data_22_KG$MM8)
+mode(data_22_KG$MM8)
+
+class(data_22_KZ$MM8)
+mode(data_22_KZ$MM8)
+
+# data_18_KG$Year
+# data_18_KZ$Year
+
+class(data_18_KG$Year)
+mode(data_18_KG$Year)
+
+# try again
+
+my_test_join <- full_join(data_22_KG, data_22_KZ)
+
+# works now
+
+data_22_KG <- data_22_KG |> rename('Year'='MM8')
+data_22_KZ <- data_22_KZ |> rename('Year'='MM8')
+data_22_UZ <- data_22_UZ |> rename('Year'='MM8')
+
+```
+
+# Маалыматтарды талашуу
+
+## Өзгөрмөлөрдү тандоо
+
+Биз 9 файлды бириктирип, 3 жыл x 3 өлкө боюнча маалымат топтомдорунун бүтүндөй тобу менен бириктирип, иштей алабыз. Андан кийин биз бардык өзгөрмөлөргө кире алабыз. Бирок шайкештикти аныктоо үчүн бул көп жумушту талап кылат. Узак мөөнөттүү долбоор үчүн муну жасоо жакшы болушу мүмкүн, бирок биз дагы эле эксперимент жүргүзүп жатабыз.
+
+Андыктан, нерселерди кичирээк масштабда алуу үчүн, алгач кызыктырган өзгөрмөлөрүбүздү тандап алалы. Аларды алдын ала тазалап, өзгөрмөлөрдүн шайкештигин текшеребиз. Андан кийин жыйынтыкты түшүнүктүү жана карап чыгууга ыңгайлуу кылуу үчүн кичирээк тандоолорду бириктиребиз.
+
+Биз бардык жылдар боюнча салыштырууга боло турган нерселерди бөлүп көрсөтүү үчүн алгач 2018-жылдагы кичирээк сурамжылоону карап чыгабыз. Суроолор өздөрү, алардын энбелгиси жана аталышы убакыттын өтүшү менен өзгөрөт.
+
+2018-жылы кызыктуу суроо "сиз топтогон акчаңызды кайсы валютада сактайсыз?" болду. (DD9d), бирок тилекке каршы, бул суроо 2020 жана 2022-жылдарга чейин улантылган жок.
+
+Акыр-аягы, биз анкеталарды бир топ карап чыгабыз, бирок олуттуу узак мөөнөттүү изилдөөчү убакыттын жана өлкөлөрдүн ичинде эң шайкеш жана туруктуу маалыматтарды бөлүп көрсөтүүгө аракет кылып жатып, муну андан да көп жасайт.
+
+Дагы бир кызыктуу суроо - үй-бүлөнүн акча которуулардан алган кирешесинин пайызы (DD9a). Бул суроо 2020-жылы берилбесе да, биз аны 2018-жыл менен 2022-жылга салыштыруу үчүн алабыз.
+
+Башка стандарттуу өзгөрмөлөр - жынысы (DD1), жашы (DD2), үй-бүлөлүк абалы (DD3), билими (DD4) жана жумуш менен камсыз болуу абалы (DD6a).
+
+Өлкөнүн тургундары төмөнкү өлкөлөргө канчалык жакшы карай тургандыгы боюнча суроолор бар: Кытай (E1a), Россия (E1b) жана АКШ (E1c).
+
+Ошондой эле төмөнкү жаңылык булактарына болгон ишеним деңгээли боюнча суроолор: Телевидение (A2a), Гезит (A2b), Радио (A2c). Бирок бул суроо кийинки толкундарда ырааттуу түрдө улана бербейт, ошондуктан биз "Жаңылыктардын негизги булагы" (A1a) жөнүндө маалыматты колдонобуз.
+
+Дагы бир пайдалуу демографиялык өзгөрмө - үйдө сүйлөгөн тил. Бул өзгөрмө 2018 жана 2022-жылдары DD11, ал эми 2020-жылы DD9 катары коддолгон. Бул маалыматтарды тазалоодо биз жасашыбыз керек болгон кичинекей оңдоолордун түрү.
+
+Көңүл буруу үчүн, биз өлкөнүн каржылык абалы жакшырып же начарлап баратканын (2018-жылы B4a же B2) жана жеке үй-бүлөнүн абалы жакшырып же начарлап баратканын (2018-жылы B4b же B5a) карайбыз.
+
+Акырында, биз өлкөнүн туура же туура эмес багытта баратабы (D1) деген суроону карайбыз.
+
+Ошондой эле, биз Өлкө жана Жыл өзгөрмөлөрүн кошушубуз керек болот.
+
+Тандалган өзгөрмөлөрдүн акыркы тизмеси
+DD1 Жынысы DD2 Жашы DD3 Үй-бүлөлүк абалы (статусу) DD4 Билими DD6a Жумуш орду
+
+D1 Багыты (Туура же Туура эмес)
+
+E1a Кытай_Жакшы_Көрсөткүчү
+E1b Россия_Жакшы_Көрсөткүчү
+E1c АКШ_Жакшы_Көрсөткүчү
+
+DD9a Которуу (2018, 2022-жылдардагы акча которуулар)
+
+A1a Негизги_Жаңылыктар (Булак)
+
+DD11 Тил (Үйдө) 2020-жылы DD9
+
+B4a Өлкө_Фин_Отуруу (2018-жылы B2)
+B4b Үй-бүлө_Фин_Отуруу (2018-жылы B5a)
+
+кошумча Өлкөнү, Жылды сактаңыз
+
+Алгач маалымат файлдарын _full_join_ менен бириктиребиз, ошондо ар бир жыл үчүн бирден көп өлкөлүү файл болот. 2018-жылдагы өзбек HHLandlines өзгөрмөсүндө башкалар менен шайкеш келүү үчүн кайра форматтоону талап кылган дагы бир кичинекей көйгөйдү таптык. Типтүү маалыматтарды тазалоо!
+
+```{r full join}
+
+mydata2022 <- full_join(data_22_KG, data_22_KZ)
+mydata2022 <- full_join(mydata2022, data_22_UZ)
+mydata2020 <- full_join(data_20_KG, data_20_KZ)
+mydata2020 <- full_join(mydata2020, data_20_UZ)
+mydata2018 <- full_join(data_18_KG, data_18_KZ)
+# mydata2018 <- full_join(mydata2018, data_18_UZ)
+
+# a problem with $$HHLandlines in last line
+data_18_UZ$HHLandlines <- as.character(data_18_UZ$HHLandlines)
+mydata2018 <- full_join(mydata2018, data_18_UZ)
+
+```
+
+Аттарын текшерип, андан кийин аларды ыңгайлуураак текст аттарына өзгөртүңүз. Андан кийин кызыктырган өзгөрмөлөрдүн тизмесин тандаңыз. Төмөндөгү коддо маалыматтардагы өзгөчөлүктөрдөн улам бир нече кошумча кичинекей бурулуштар бар. Айрыкча, 2018-жылдагы маалыматтардагы айрым аталыштар күтүлбөгөн учурлар, анткени алар мурунтан эле текст аттарын колдонушат, жөн гана башкача жана документтештирилбеген!
+
+```{r renaming}
+
+names(mydata2018)
+names(mydata2020)
+names(mydata2022)
+
+mydata2022 <- mydata2022 |> rename('Sex'='DD1', 'Age'='DD2', 'Marital'='DD3',
+                                   'Education'='DD4', 'Employment'='DD6a', 
+                                   'Direction'='D1', 'China_Favor'='E1a',
+                                   'Russia_Favor'='E1b','USA_Favor'='E1c',
+                                   'Main_News'='A1a', 'Remit'='DD9a',
+                                   'Language'='DD11','Country_Fin_Sit'='B4a',
+                                   'Family_Fin_Sit'='B4b')
+
+mydata2022_select <- mydata2022 |> select('Sex', 'Age', 'Marital', 'Education', 
+                                          'Employment', 'Direction', 'China_Favor',
+                                          'Russia_Favor','USA_Favor', 'Main_News', 
+                                          'Remit', 'Language','Country_Fin_Sit',
+                                          'Family_Fin_Sit', 'Country', 'Year')
+
+# note we rename Year here from MM8
+
+mydata2020 <- mydata2020 |> rename('Sex'='DD1', 'Age'='DD2', 'Marital'='DD3',
+                                   'Education'='DD4', 'Employment'='DD6a', 
+                                   'Direction'='D1', 'China_Favor'='E1a',
+                                   'Russia_Favor'='E1b','USA_Favor'='E1c',
+                                   'Main_News'='A1a', 'Language'='DD9',
+                                   'Country_Fin_Sit'='B4a', 'Family_Fin_Sit'='B4b',
+                                   'Year'='MM8')
+
+mydata2020_select <- mydata2020 |> select('Sex', 'Age', 'Marital', 'Education', 
+                                          'Employment', 'Direction', 'China_Favor',
+                                          'Russia_Favor','USA_Favor', 'Main_News', 
+                                          'Language','Country_Fin_Sit',
+                                          'Family_Fin_Sit', 'Country', 'Year')
+
+# need to add a blank 'Remit' variable here
+
+mydata2020_select <- mydata2020_select |> mutate(Remit=NA)
+
+# and 2018 data already uses the names, but formatted differently
+# codebook is not satisfactory, does not describe these labels, have to judge by answers in some cases
+# note the 'LangExtra' to avoid repeating a name
+
+mydata2018 <- mydata2018 |> rename('Sex'='Gender', 'Marital'='MarriageStat2',
+                                   'Education'='EducLevel_M', 'Employment'='Work', 
+                                   'Direction'='RiteRong_M', 'China_Favor'='OpinionChina',
+                                   'Russia_Favor'='OpinionRussia','USA_Favor'='OpinionUSA',
+                                   'Main_News'='MainNews_M', 'Language'='Homelang','LangExtra'='Language',
+                                   'Country_Fin_Sit'='TodayEcSit_M', 'Family_Fin_Sit'='Lastyear_M',
+                                   'Remit'='IncomeOut')
+
+mydata2018_select <- mydata2018 |> select('Sex', 'Age', 'Marital', 'Education', 
+                                          'Employment', 'Direction', 'China_Favor',
+                                          'Russia_Favor','USA_Favor', 'Main_News', 
+                                          'Language','Country_Fin_Sit', 'Remit',
+                                          'Family_Fin_Sit', 'Country', 'Year')
+
+```
+
+Биз көбүрөөк толук бириктирүүлөрдү колдонуп көрсөк болот, бирок өзгөрмөлөрдүн аттарын үч жылдын ичинде ырааттуу болушу үчүн кол менен баштапкы абалга келтиргендиктен, бул жерде биз жөн гана _rbind_ буйругун колдонуп, үч файлды бириктирип чаптап, андан кийин күтүлгөндөй чыкканын эки жолу текшере алабыз.
+
+```{r rbind again}
+
+my_final_data <- rbind(mydata2018_select, mydata2020_select, mydata2022_select)
+str(my_final_data)
+summary(my_final_data)
+
+attach(my_final_data)
+
+```
+
+## Сүрөттөмө статистика
+
+Келгиле, бул өзгөрмөлөрдүн бир нечесин карап чыгып, алардын кандайча бөлүштүрүлгөнүн карап көрөлү. Жөнөкөй _table_ буйругу маалыматтар менен алгачкы таанышуу үчүн жардам берет. Айрым чоң маалымат топтомдорун интуитивдик түшүнүү кыйын болсо да, мындай коомдук илим маалыматтары үчүн татаалыраак анализге өтүүдөн мурун маалыматтарды карап чыгууга убакыт короткондон өткөн эч нерсе жок. Ошондой эле, алдыга жылуудан мурун четтөөлөрдү же чечиле турган маселелерди табышыбыз мүмкүн. Биз сандык формага мажбурлоо керек болгон акча которуу (Remit) өзгөрмөсүндөгү көйгөйдү аныктайбыз.
+
+_table_ буйругунда эки өзгөрмөнү тизмектеп, каалаган кайчылаш өтмөктөрдү иштете алабыз. Көптөгөн айкалыштарды изилдөөгө болот (бул жерде көрсөтүлгөн эмес).
+
+```{r descriptives}
+
+table(Sex)
+table(Age)
+table(Marital)
+table(Education)
+table(Employment)
+table(Direction)
+table(China_Favor)
+table(Sex)
+table(Russia_Favor)
+table(USA_Favor)
+table(Main_News)
+table(Country_Fin_Sit)
+table(Remit)
+
+# fix the problem with Remit
+
+my_final_data$Remit<-as.numeric(Remit)
+attach(my_final_data)
+
+table(Remit)
+
+table(Family_Fin_Sit)
+table(Country)
+table(Year)
+
+table(Direction, Sex)
+
+table(Marital, Employment)
+
+table(Marital, Education)
+
+table(Education, Employment)
+
+```
+
+## Кайра коддоо
+
+Маалыматтарды көрсөтүүнү жөнөкөйлөтүү үчүн биз тазалашыбыз керек болгон кээ бир көйгөйлөрдү байкадык, мисалы, "Билбейм" жана "Баш тарттым" жоопторун бир NA (жеткиликтүү эмес) энбелгисине кыскартуу үчүн кайра коддоо. Бул бизге визуализацияларды маанилүү категорияларга бурууга жардам берет.
+
+Ошондой эле, бул жерде көрүп турган жарым-жартылай карама-каршы жооптордун бир нече категорияларын жөнөкөйлөтүү үчүн дагы кеңири кайра коддоо жасайлы.
+
+```{r recode}
+
+my_final_data$Marital_recode <- replace_values(
+  Marital,
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+my_final_data$Employment_recode <- replace_values(
+  Employment,
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+my_final_data$Employment_recode2 <- replace_values(
+  Employment,
+  c("Working part-time", "Working full-time") ~ "Working",
+  c("Unemployed and not actively seeking employment", "Unemployed and actively seeking employment") ~ "Unemployed",
+  c("A housewife / househusband","A housewife") ~ "Housewife",
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+my_final_data$Direction_recode <- replace_values(
+  Direction,
+  c("Don't Know (vol.)", "Refused (vol.)", "Not asked") ~ NA
+)
+
+my_final_data$Family_Fin_Sit_recode <- replace_values(
+  Family_Fin_Sit,
+  c("Much better", "Much Better", "Become Better", "Somewhat better", "Somewhat Better") ~ "Better",
+  c("About the same", "Stayed the Same") ~ "Same",
+  c("Become Worse","Much Worse", "Much worse", "Somewhat Worse", "Somewhat worse") ~ "Worse",
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+attach(my_final_data)
+
+table(Marital_recode,Employment_recode)
+
+```
+
+# Хи-квадрат тести
+
+Бир нече элементтерден турган кайчылаш өтмөк болгондо, [хи-квадраттык тест](https://en.wikipedia.org/wiki/Chi-squared_test) уячалар боюнча жыштык санынын кокустук чачырандынын же статистикалык жактан маанилүү экендигин текшере алат. Бул маалыматтардагы кандайдыр бир үлгүнү же кокустук эмес байланышты түшүндүрбөстөн көрсөтөт. Rдеги башка статистикалык куралдар сыяктуу эле, статистикалык тесттер менен иштөө үчүн көптөгөн варианттар жана альтернативалар бар. Биз бул жерде үстүртөн гана сөз кылып жаткан жокпуз, тескерисинче, бул мүмкүнчүлүктөрдү эскертүү үчүн муну кошуп жатабыз.
+
+```{r chisq-test}
+
+chisq.test(table(Direction,Sex))
+
+```
+
+# Маалыматтарды визуалдаштыруу
+
+Эми маалыматтарды визуалдык түрдө изилдөөгө убакыт келди. Биз айрым өзгөрмөлөрдү, атап айтканда, өлкөнүн багытына көңүл буруп, изилдейбиз. Чындыгында, бул учурда, биз үч өлкөнү тең үч жылдын ичинде камтыгандыктан, бул өлкөлөр.
+
+## Чачыранды графиктер
+
+Биз чачыранды графиктерден баштайбыз. Биздин маалыматтарда Remit чачыранды графиктер үчүн жок дегенде бир өзгөрмө жакшы. Көпчүлүгү категориялык болгондуктан жакшы эмес.
+
+```{r first plot}
+
+plot(Remit~Year)
+
+```
+
+Анчалык кызыктуу эмеспи? Балким, регрессия сызыгын кошсоңуз болот? Дагы деле анчалык кызыктуу эмес.
+
+```{r regression line}
+
+plot(Remit~Year)
+abline(lm(Remit~Year), col="red")
+
+```
+
+Жок дегенде, ар түрдүүлүгүн эске алган бир нерсени тандап алалы.
+
+```{r against Age}
+
+plot(Remit~Age)
+
+```
+
+## lattice
+
+Эми _lattice_ пакетин колдонуп, маалыматтарды дагы бир аз талдап көрөлү. Бул маалыматтарды топтоо үчүн абдан жөнөкөй синтаксиси бар бир пакет.
+
+```{r lattice}
+
+xyplot(Remit~Age, groups=Country, auto.key=list(space="right"))
+
+xyplot(Remit~Age | Country, groups=Language, auto.key=list(space="right"))
+
+xyplot(Remit~Age | Country, groups=Marital, pch=10, auto.key=list(space="right"))
+
+```
+
+## ggplot
+
+Эми R тилиндеги эң популярдуу визуалдаштыруу куралдарынын бири болгон _ggplot_ программасын колдонууну изилдейли. Ал жок дегенде эки себептен улам популярдуу. Биринчиден, көпчүлүк графиктердин демейки жүрүм-туруму салыштырмалуу татаал жана жакшы визуалдаштыруу принциптерин колдонот. Экинчиден, синтаксис элементтеринин бири-бири менен өз ара аракеттенүү ыкмасынан улам ал абдан ыңгайлаштырылуучу жана ийкемдүү.
+
+Алгач, "эстетиканы", "Графика грамматикасы" синтаксисинин көрүнүш жана сезим элементин, андан кийин графиктерибизди тактоо жана жакшыртуу үчүн энбелгилерди колдонууну карап көрөлү.
+
+```{r aesthetics}
+
+ggplot(my_final_data, aes(y=Remit, x=Age))  + facet_grid(.~Country) + geom_point(aes(color=Sex))
+
+ggplot(my_final_data, aes(y=Remit, x=Age))  + facet_grid(Country~.) + geom_point(aes(color=Marital))
+
+ggplot(my_final_data, aes(y=Remit, x=Age))  + facet_grid(Country~.) + geom_point(aes(color=Marital))+
+labs(x="age", y="% remittances", title="Remittance as percentage of income")
+
+ggplot(my_final_data, aes(x=Remit, y=Age))  + facet_grid(.~Country) + geom_point(aes(color=Marital))+
+  labs(x="age", y="% remittances", title="Remittance as percentage of income")
+
+# point size
+
+ggplot(my_final_data, aes(x=Remit, y=Age))  + facet_grid(.~Country) + geom_point(aes(color=Marital), size=3)+
+  labs(x="age", y="% remittances", title="Remittance as percentage of income")
+
+```
+
+## Тилкелүү диаграммалар
+
+geom_point параметрлеринин бир бөлүгү болгон чекиттин өлчөмүн өзгөртүү үчүн акыркы өзгөртүүгө көңүл буруңуз. Бирок, биздин маалыматтарыбыздын көпчүлүгү категориялык болгондуктан, биз тилкелүү диаграммалар менен иштөөдө маалыматтарыбыздын так сүрөтүн алабыз, абдан жөнөкөй, кызыксыз мисалдардан ggplotтун күчүн колдонуп, татаалыраак маалыматты жеткирүү жана өлкөлөрүбүздү жана убакыт мезгилдерибизди салыштыруу үчүн көрүнүшүн жана сезимин өзгөртөбүз.
+
+## Түстөр 
+
+[_RColorBrewer_]( https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) пакети бизге масштабдуу жана көлөкөлүү түстөр топтомун оңой колдонууга мүмкүндүк берет. Эгерде биз түстөрдүн тизмесин (бул учурда өлкөлөрдүн желектерине дал келүү) берүү үчүн _scale_fill_manual_ колдонгубуз келсе, бизге ылайыктуу түстөрдү табуу үчүн [R Color Picker](https://r-charts.com/colors/) колдоно алабыз. Акырында, [ggplots'тогу түстөр менен иштеген](https://r-graph-gallery.com/ggplot2-color.html) баракчасы көптөгөн маалыматтарды берет.
+
+```{r barchart}
+
+ggplot(my_final_data, aes(x=Sex)) + geom_bar(position="stack") 
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") 
+
+country_colors <- c("turquoise1","firebrick1","seagreen3")
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") + scale_fill_brewer(palette = "Accent")
+
+```
+
+_paletteer_ пакети түс тандоосуна баш айландыруучу тандоо массивин киргизет, бирок аны башкарууга ыңгайлуу кылуу үчүн [Tools](https://r-graph-gallery.com/package/paletteer.html), анын ичинде [Color Palette Finder](https://r-graph-gallery.com/color-palette-finder.html) функцияларын камтыйт. Палитранын аталыштары кээде алар берген түстөргө дал келет. _samarkand2_ палитрасы Регистандагы плиткалардын түстөрүнө дал келеби деп ойлойсуз?
+
+```{r paletteer}
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") +scale_fill_paletteer_d("nationalparkcolors::Hawaii")
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") +scale_fill_paletteer_d("IslamicArt::samarqand2")
+
+# try also 
+# IslamicArt::samarqand
+# nbapalettes::lakers
+# MoMAColors::OKeeffe
+
+```
+
+Келгиле, "Ыңгайлуулук" рейтингдерин карап чыгып, дисплейди өзүбүзгө ылайыкташтырып, маалыматтарды изилдөөнү уланталы.
+
+```{r exploration}
+
+ggplot(my_final_data, aes(China_Favor, fill=Country))+ geom_bar(position="stack") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(China_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(Russia_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(USA_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors)
+
+```
+
+Биз графикти экспорттоп, аны дайындоо операторун (<-) колдонуп, R тилинде объект катары сактай алабыз. Бул бизге сүрөттөрдү ар кандай контексттерде оңой кайра колдонууга, ал тургай аларды экспорттоого жана өзгөртүүгө мүмкүндүк берет.
+
+```{r saving objects}
+
+China <- ggplot(my_final_data, aes(China_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+
+Russia <- ggplot(my_final_data, aes(Russia_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+
+USA <- ggplot(my_final_data, aes(USA_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+
+```
+
+Эми биз _gridExtra_ пакетин жана анын _grid.arrange_ буйругун колдонуп, үч жагымдуулук графиктерин бир графикке бириктиребиз.
+
+```{r grid}
+
+grid.arrange(China,Russia,USA, ncol=1, nrow=3)
+
+```
+
+Биз графиктерди компьютерибиздеги статикалык сакталган файлдарга экспорттой алабыз. Процессти _pdf_ сыяктуу буйрук менен баштайбыз, ал эми _jpeg_ буйругун колдонуп, .jpg файлына жөнөтөбүз. Андан кийин графика буйругун аткарабыз (чындыгында PDF кошумча барактарда бир нече графиктерди камтый алат). Бул графиктер экранда көрүнбөйт, анткени алар файлга жөнөтүлүп жатат. Андан кийин _dev.off_ буйругун иштетип, чыгарууну файлга багыттоону токтотобуз. Андан кийин графиктер экранда кайрадан пайда болот.
+
+```{r export}
+
+pdf(file="output.pdf")
+ggplot(my_final_data, aes(USA_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+dev.off()
+
+jpeg(file="output.jpg", width = 800, height = 600, quality=100)
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") +scale_fill_paletteer_d("IslamicArt::samarqand2")
+dev.off()
+
+```
+
+## Гистограмма
+
+Башка мүмкүнчүлүктөрдү көрсөтүү үчүн, гистограммаларды жана аларды кантип тууралоону карап көрөлү. Бул жерде биз _theme_ опциясын колдонууну да көрсөтөбүз.
+
+
+```{r histogram}
+
+ggplot(my_final_data, aes(Age))+geom_histogram(aes(fill = after_stat(count)))+facet_grid(Country~.)
+
+ggplot(my_final_data, aes(Age)) + facet_grid(Country~.) + geom_bar(position="dodge", fill="olivedrab")+theme(panel.background = element_rect(fill='lightsteelblue1', colour='darkblue'))
+
+ggplot(my_final_data, aes(Age)) + facet_grid(Country~.) + geom_bar(position="dodge")+theme(panel.background = element_rect(fill='white', colour='black'))
+
+ggplot(my_final_data, aes(Age)) + facet_grid(Country~.) + geom_bar(position="dodge")+ scale_fill_brewer(palette="Reds")
+
+ggplot(my_final_data, aes(Employment_recode, fill=as.factor(Marital_recode))) +facet_grid(Country~.) + geom_bar(position="dodge") + theme(panel.background = element_rect(fill='beige', colour='darkblue'))
+
+ggplot(my_final_data, aes(Employment_recode, fill=as.factor(Marital_recode))) +facet_grid(Country~.) + geom_bar(position="dodge") + theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Work status", y="Count", title="Employment by Marital Status") + coord_flip()
+
+ggplot(my_final_data, aes(Employment_recode2, fill=as.factor(Marital_recode))) +facet_grid(Country~.) + geom_bar(position="dodge") + theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Work status", y="Count", title="Employment by Marital Status") + coord_flip()
+
+ggplot(my_final_data, aes(Employment_recode2, fill=Country)) +facet_grid(Marital_recode~.) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors)+theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Work status", y="Count", title="Employment by Marital Status")
+
+```
+
+Багыттоо суроосун кененирээк изилдеп көрүңүз:
+
+```{r direction by factors}
+
+# Direction by factors
+
+ggplot(my_final_data, aes(Direction, fill=Country)) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors)+theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction?") 
+
+ggplot(my_final_data, aes(Direction, fill=Country)) + facet_grid(Year~.) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors)+theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction?") 
+
+ggplot(my_final_data, aes(Direction_recode, fill=Country)) + facet_grid(Family_Fin_Sit_recode~.) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors) + theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction vs. Family situation?")
+
+```
+
+## Күчтү колдонуу
+
+Биз графиканын грамматикасынын күчүн колдонуп, синтаксис компоненттерин ар кандай объекттерге дайындап, андан кийин аларды бириктире алабыз. Бул бизге кодду иретке келтирүүгө жана өзгөртүүлөрдү жана түзөтүүлөрдү жөнөкөйлөтүүгө жардам берет (мисалы, бардык графиктердин темасын бир эле учурда өзгөртүү менен).
+
+```{r power}
+
+mydata <- ggplot(my_final_data, aes(Direction_recode, fill=Country)) + facet_grid(Family_Fin_Sit_recode~.) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction vs. Family situation?") + scale_fill_manual(values=country_colors)
+
+mytheme <- theme(panel.background = element_rect(fill='beige', colour='darkblue'))
+  
+mychart <- geom_bar(position="dodge")
+
+mydata + mytheme + mychart
+
+```
+
+## Башка участоктор
+
+Башка көптөгөн графиктер ggplot2 аркылуу жеткиликтүү. Төмөндө кутуча диаграммасы көрсөтүлгөн. Башкаларын [ggplot2 шилтеме барагынан] (https://ggplot2.tidyverse.org/reference/index.html#geoms) жана [ggplot2 кеңейтүүлөрүнөн] (https://exts.ggplot2.tidyverse.org/gallery/) тапса болот. _ggextra_ пакети чачыранды диаграммалардын четтерине кутуча диаграммаларын кошо аларын эске алыңыз. Темалар [_ggtheme_](https://ggplot2.tidyverse.org/reference/ggtheme.html) жана _cowplot_ сыяктуу пакеттерде бар экенин эске алыңыз.
+
+```{r box plot}
+
+ggplot(my_final_data, aes(x=Remit, y=Country)) + geom_boxplot()
+
+ggplot(my_final_data, aes(x=Remit, y=Country)) + geom_boxplot() + coord_flip()
+
+ggplot(my_final_data, aes(x=Remit, y=Country, fill=Country)) + geom_boxplot() + coord_flip() +
+  theme_minimal_grid() + scale_fill_manual(values=country_colors)
+
+```
+
+## Темалар
+
+ggthemes (төмөндө көрсөтүлгөн), ggsci, ggthemr жана башкалар сыяктуу кошумча пакеттер бизге графиктерибиздин көрүнүшүн жана сезимин максатыбызга ылайыкташтыруу үчүн тез өзгөртүүгө жардам берет.
+
+```{r themes}
+
+lastplot <- ggplot(my_final_data, aes(x=Remit,y=Age))  + geom_point(aes(color=Country)) + stat_smooth() + 
+  labs(x="Remittance %", y="Age", title="Age vs Remittance") 
+
+lastplot + theme_bw()
+lastplot + theme_cowplot()
+lastplot + theme_dark()
+lastplot + theme_economist()
+lastplot + theme_fivethirtyeight()
+lastplot + theme_tufte()
+lastplot + theme_wsj()
+
+# then with Rcolorbrewer
+
+lastplot + theme_economist() + scale_color_brewer(palette = "Set3")
+lastplot + theme_tufte() + scale_color_brewer(palette = "Dark2")
+
+```
+
+## Интерактивдүүлүк
+
+Графка интерактивдүүлүктү киргизүүнүн кыскача схемасын беребиз. Толугу менен интерактивдүү сайттарды, атап айтканда, Shiny for R (жана азыр Python) сайттарын куруу үчүн куралдар бар. Көбүрөөк маалымат алуу үчүн менин [Маалыматтарды визуалдаштыруу 2](https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.html) семинарымды караңыз.
+
+```{r ggiraph}
+
+myplot <- ggplot(
+  data = my_final_data,
+  mapping = aes(
+    x = Remit, y = Age,
+    # here we add interactive aesthetics
+    tooltip = paste(Country,Marital)
+  )
+) +
+  geom_point_interactive(
+    size = 1, hover_nearest = TRUE
+  )
+
+interactive_plot <- girafe(ggobj = myplot)
+htmltools::save_html(interactive_plot, "/home/ryan/R/ggiraph-2.html")
+
+```
+
+## Убакыттын өтүшү менен салыштыруу үчүн маалыматтарды иштетүү
+
+"Багыт" суроосундагы убакыттын өтүшү менен өзгөрүүнү же бул маалыматтар топтомундагы башка өзгөрмөлөрдү изилдөө сыяктуу бир нерсе жасоо үчүн, биз жогорудагы барчарттарда колдонуп жаткан чийки эсептөөлөрдөн тышкары маалыматтарды иштетүү үчүн бир аз иш жасашыбыз керек.
+
+Бул мисалда, өлкөсү туура багытта бара жатат деп ойлогон адамдардын пайызы эсептөөлөрдү чыгарып, NAларды алып салуу менен эсептейт ("Туура" жана "Туура эмес" жоопторду гана карап). Код муну тогуз өлкө жана жыл айкалышынын ар бири үчүн жасайт, андан кийин жыйынтыктарды кичинекей матрицага чаптайт, ошондо биз жыйынтыктарды түзө алабыз.
+
+Бул маселени чечүүнүн бир ыкмасы, башка бир нече мүмкүнчүлүктөрдүн арасында. Мисалы, жазууларды кайталоону жеңилдетүү жана бул коддоонун айрымдарын автоматташтыруу үчүн маалыматтардын атын өзгөртүп жана кайра түзүмдөштүрсө болот. Ошондой эле, пропорциялар боюнча математиканы жеңилдетүү үчүн маалыматтарды бинардык ооба/жок, 0-1 жоопторуна кайра коддосо болот. Төмөндөгү ыкмада категориялык маалыматтарды иштетүү үчүн түзүлгөн tidyverse _forcats_ пакети пайда болот. Менин математикалык мээм үчүн матрицаны кол менен түзүү муну чечүүнүн эң ачык жолу окшойт.
+
+```{r build a matrix}
+
+# compute percentages
+
+my_final_data$Direction_recode <- as.factor(Direction_recode)
+
+attach(my_final_data)
+
+mean(as.numeric(Direction_recode), na.rm=TRUE)
+
+levels(my_final_data$Direction_recode)
+
+# forcats
+
+fct_count(Direction_recode, sort = FALSE, prop = TRUE)
+
+mytable <- fct_count(Direction_recode, sort = FALSE, prop = FALSE)
+
+Direction_percent <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+# fct_match(Direction_recode, "Right direction")
+
+# Now do a matrix of these 
+
+Uz18<- my_final_data |> filter(Country=="Uzbekistan" & Year==2018)
+Uz20<- my_final_data |> filter(Country=="Uzbekistan" & Year==2020)
+Uz22<- my_final_data |> filter(Country=="Uzbekistan" & Year==2022)
+
+Kz18<- my_final_data |> filter(Country=="Kazakhstan" & Year==2018)
+Kz20<- my_final_data |> filter(Country=="Kazakhstan" & Year==2020)
+Kz22<- my_final_data |> filter(Country=="Kazakhstan" & Year==2022)
+
+Kg18<- my_final_data |> filter(Country=="Kyrgyzstan" & Year==2018)
+Kg20<- my_final_data |> filter(Country=="Kyrgyzstan" & Year==2020)
+Kg22<- my_final_data |> filter(Country=="Kyrgyzstan" & Year==2022)
+
+# setup our matrix
+
+Direction_pct_matrix <- data.frame(matrix(0,3,3))
+rownames(Direction_pct_matrix) = c("Kazakhstan", "Kyrgyzstan", "Uzbekistan")
+colnames(Direction_pct_matrix) = c("2018", "2020", "2022")
+
+mytable <- fct_count(Kz18$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[1,1] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kz20$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[1,2] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kz22$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[1,3] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kg18$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[2,1] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kg20$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[2,2] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kg22$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[2,3] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Uz18$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[3,1] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Uz20$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[3,2] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+# this was the not asked question in Uzbekistan in 2022, so leave it alone, code as NA
+
+mytable <- fct_count(Uz22$Direction_recode, sort = FALSE, prop = FALSE)
+
+Direction_pct_matrix[3,3] <- NA
+
+Direction_pct_matrix <- cbind(Direction_pct_matrix, Country=c("Kazakhstan", "Kyrgyzstan", "Uzbekistan"))
+
+Direction_long <- pivot_longer(Direction_pct_matrix, !Country, names_to="Year", values_to = "Value")
+
+Direction_long$Year <- as.numeric(Direction_long$Year)
+
+ggplot(Direction_long, aes(x=Year, y=Value, color=Country)) +
+  geom_line() 
+
+ggplot(Direction_long, aes(x=Year, y=Value, color=Country)) +
+  geom_line() + theme_tufte() + scale_color_brewer(palette = "Dark2") +
+  labs(title="Right Direction over time", y="Percentage")
+  
+```
+
+# Андан ары статистикалык талдоо
+
+## Кадамдык регрессия
+
+Статистикалык анализдин дагы бир кыскача мисалы катары, туура багыт суроосуна жоопту алдын ала айтуу үчүн этап-этабы менен регрессияны колдонуп көрсөк болот. Логистикалык регрессия - бул натыйжа экилик тандоо болгондо (ооба/жок, чын/жалган, туура/туура эмес) ылайыктуу ыкма.
+
+```{r regression}
+
+lm(data=my_final_data, Remit ~ .)
+
+lm(data=my_final_data, Remit ~ Year)
+
+regression_output <- lm(Remit ~ Sex + Language, data=my_final_data)
+summary(regression_output)
+
+regression_output_all_demographic <- lm(Remit ~ Sex + Age + Language + Employment + Education + Country + Year, data=my_final_data)
+summary(regression_output_all_demographic)
+
+backward_model <- step(regression_output_all_demographic, direction = "backward")
+
+# Print the summary of the selected model
+
+summary(backward_model)
+
+```
+
+# Башка мүмкүнчүлүктөр
+
+Биз машиналык үйрөнүү алгоритмдерине да токтоло элекпиз. Аларды бул бир аз башаламан реалдуу дүйнөдөгү маалыматтар менен натыйжалуу колдонуу үчүн маалыматтарды ого бетер кылдат тазалоо талап кылынат. Бирок кластерлөө, дарактар жана кокустук токойлор жана башка ыкмалар сыяктуу нерселер маалыматтарды натыйжалуу топтоштурууга, үлгүлөрдү табууга жана божомолдорду жасоого мүмкүндүк берет. Төмөндө айтылган [tidymodels](https://www.tidymodels.org/) пакетин караңыз.
+
+# Жыйынтык
+
+Маалыматтарды талдоо үчүн бирдиктүү токтоо чекит жок. Маалыматтарды жана алардын жооп издеген суроолоруңуз менен өз ара аракеттенүүсүн толук түшүнгөнгө чейин уланта бериңиз!
+
+Маалыматтарды талдоо ыкмаларын кененирээк талкуулоо үчүн [Маалыматтарды талдоо 1](https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html) жана [Маалыматтарды талдоо 2](https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html) караңыз.
+
+## Маалымат таануу үчүн R [китеп _R for Data Science_]
+
+Маалыматтарды иштетүү боюнча көбүрөөк маалымат алуу үчүн [R for Data Science](https://r4ds.hadley.nz/) китебин караңыз. Ошондой эле tidyverse принциптерин колдонуп моделдөө жана машиналык окутуу үчүн иштелип чыккан [tidymodels пакетин](https://www.tidymodels.org/) карап көрүңүз.
