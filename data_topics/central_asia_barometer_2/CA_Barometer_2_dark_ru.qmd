@@ -1,0 +1,1007 @@
+---
+title: "Анализ данных «Барометра Центральной Азии», продолжение"
+author: "Ryan Womack"
+date: "2026-04-07"
+toc:toc: true true
+number-sections: true
+highlight-style: pygments
+output: html_document
+format:
+  html: 
+    toc: true
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+    fontfamily: libertinus
+    colorlinks: true
+    papersize: A4
+  docx: default
+theme: cyborg
+include-in-header: 
+  text: |
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+knitr::opts_chunk$set(root.dir = "/home/ryan/womack/documents/ryan/Central_Asia/Central_Asia_Barometer/")
+```
+
+Copyright Ryan Womack, 2026. Данная работа распространяется под лицензией [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+**Анализ данных Барометра Центральной Азии, продолжение**
+
+_Обработка данных, разведочный анализ данных и визуализация данных Центральноазиатского Барометра._
+
+_первоначально разработано для презентации на [Американский Университет Центральной Азии](https://auca.kg), Весна 2026_
+
+[Обратите внимание: русский текст переведен с английского с помощью машинного перевода]
+
+# Обзор
+
+Этот семинар иллюстрирует работу с данными, продолжая материал [Барометр Центральной Азии 1](https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.html), в котором была представлена ​​работа с данными по одной волне и стране из Барометра Центральной Азии (Кыргызстан в 2022 году). Вторая часть иллюстрирует работу с данными по нескольким волнам и странам, демонстрируя более сложные методы объединения и очистки данных, дополнительные возможности построения графиков и предлагая отправные точки для статистического анализа. Код написан на языке R, но для тех, кто хочет повторить шаги, доступна версия материала на Python (машинный перевод). И R, и Python — отличные инструменты для анализа данных, поэтому в некоторой степени ваш выбор — это вопрос предпочтений и знакомства с языком. Язык R возник из статистики и добавил вычислительные возможности, в то время как Python — это универсальный язык программирования, к которому были добавлены значительные статистические возможности.
+
+# Установка
+
+Данный семинар _не_ охватывает установку R и RStudio, но предполагает наличие у вас рабочей копии этих программ.
+
+*R* — это программное обеспечение с открытым исходным кодом для статистического анализа, доступное по адресу [R-project.org](https://r-project.org). Рекомендуется сначала установить R. Команды R можно выполнять во многих редакторах и IDE, непосредственно в терминале или через скриптовые файлы. Однако один из самых мощных и распространенных методов, который мы будем использовать здесь, — это использование IDE RStudio.
+
+*RStudio*, доступный на [Posit](https://posit.co) в виде [загрузки с открытым исходным кодом](https://posit.co/download/rstudio-desktop/), — это инструмент для создания и запуска кода на языке R (а также на Python и нескольких других языках), обладающий множеством полезных функций и шаблонов для работы с другими форматами и инструментами в экосистеме R. RStudio будет использовать установленную вами версию R, работая как надстройка над ней. Posit также разрабатывает [Positron](https://posit.co/products/ide/positron/) — более новую IDE с большей гибкостью для работы с R, Python и другими возможными языками. В этом мастер-классе не используется Positron, хотя код должен работать и там.
+
+И RStudio, и Positron внедряют в свои интерфейсы инструменты подсказок на основе искусственного интеллекта, которые, как утверждается, работают с конкретным кодом вашего проекта и понимают его. Их следует предпочитать использованию сторонних сервисов, таких как ChatGPT.
+
+Для немедленного использования без установки попробуйте следующее:
+
+- [Posit Cloud](https://posit.cloud) — это также бесплатный сервис, позволяющий использовать RStudio (с некоторыми ограничениями по времени и памяти) после создания учетной записи.
+
+Более подробную информацию можно найти в видеоролике [Начало работы с R](https://www.youtube.com/watch?v=ifOCC-9V_y0) (или в других веб-уроках и руководствах).
+
+[Python](https://www.python.org/) также является языком с открытым исходным кодом и может использоваться с различными редакторами и инструментами, которые здесь не описаны подробно.
+
+## R помощь
+
+Система справки R легкодоступна. Используйте вопросительный знак перед именем конкретной функции, чтобы открыть ее страницу руководства ( _?sample_ или _?rnorm_). Используйте два вопросительных знака для поиска. Вкладка «Справка» в правом нижнем углу RStudio также предоставляет полный доступ к встроенной справке, включая руководства и поиск.
+
+Поиск в интернете справки по R может быть полезен, поскольку существует множество руководств, статей в блогах и других материалов по общим методам и конкретным пакетам R. Полезно добавить к поисковому запросу что-то вроде «статистика R», «программное обеспечение R» или «пакет R», чтобы отличать его от всех других случаев использования буквы R!
+
+# Настройка и подготовка данных
+
+## Необходимые пакеты R
+
+Для установки мы будем использовать пакет [_pak_](https://pak.r-lib.org/), поскольку это более полный подход к управлению пакетами. При желании замените команды pkg на версии, созданные с помощью _install.packages()_.
+
+В этом занятии предпочтительно используется набор пакетов [_tidyverse_](https://tidyverse.org) для обработки данных, хотя те же задачи можно выполнить в базовом R с помощью других функций. Установите _pak_ и _tidyverse_, если они еще не установлены в вашей системе. Нам также понадобится _reticulate_ для запуска фрагментов кода Python.
+
+Для построения графиков большую часть работы выполнит пакет _ggplot2_, но также будут использоваться _lattice_ и несколько специализированных вспомогательных пакетов.
+
+```{r install packages, eval=FALSE}
+
+install.packages("pak", dependencies=TRUE)
+library(pak)
+pkg_install("tidyverse")
+pkg_install("readxl")
+pkg_install("reticulate")
+pkg_install("ggplot2") # including in tidyverse, but just making this explicit
+pkg_install("lattice")
+
+# helper packages
+
+pkg_install("ggthemes")
+pkg_install("cowplot")
+pkg_install("gridExtra")
+pkg_install("RColorBrewer")
+pkg_install("png")
+pkg_install("paletteer")
+pkg_install("ggiraph")
+
+# pkg_install("ggridges")
+# pkg_install("ggvis")
+# pkg_install("gganimate")
+# pkg_install("gapminder")
+# pkg_install("hexbin")
+# pkg_install("gifski")
+
+devtools::session_info()
+
+```
+
+Обратите внимание, что команду _update.packages()_ можно периодически запускать для проверки наличия более новых версий установленных пакетов.
+
+Загрузите пакеты заранее, чтобы мы могли с ними работать.
+
+```{r load packages, eval=TRUE, echo=TRUE}
+
+library(readxl)
+library(tidyverse)
+library(lattice)
+library(ggthemes)
+library(cowplot)
+library(gridExtra)
+library(RColorBrewer)
+library(png)
+library(paletteer)
+library(ggiraph)
+
+```
+
+## Версии
+
+Ссылки справа предоставляют альтернативные способы доступа к этому контенту. Вы можете выбрать светлый или темный режим HTML, загрузить PDF-файл или файл Word в формате Docx — все они будут содержать один и тот же контент. Также доступны файлы кода на языке R (.R) или Python (.py), если вы хотите отделить код от описания.
+
+## Кыргызский и русский языки
+
+Кроме того, справа приведены ссылки на машинный перевод этого контента на русский и киргизский языки.
+
+## поддержка Python
+
+Теперь загрузим _reticulate_ (только для поддержки Python). Необходимо указать правильное местоположение Python, соответствующее нашей системе.
+
+Для тех, кто хочет попробовать выполнить те же шаги обработки данных на Python, прилагается файл Python. Обратите внимание, что файл Python был переведен с языка R машинным способом и, вероятно, нуждается в доработке!
+
+```{r tidyverse}
+
+# Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")
+library(reticulate)
+use_python("/usr/bin/python3")
+
+```
+
+# Барометр Центральной Азии
+
+Как обсуждалось на предыдущем семинаре, проект [Барометр Центральной Азии](https://ca-barometer.org/) проводит опросы и исследования в странах Центральной Азии (Казахстан, Кыргызстан, Таджикистан, Туркменистан и Узбекистан) и регулярно публикует результаты. За исключением последней волны данных, данные Барометра Центральной Азии можно бесплатно загрузить с их веб-сайта, указав контактный адрес электронной почты. Эти опросы изучают современные политические и социальные взгляды и позволяют проводить долгосрочные сравнения, а также межстрановые сравнения.
+
+На этом семинаре мы объединим девять файлов с результатами опросов по Казахстану, Кыргызстану и Узбекистану за 4, 8 и 12 волны, представляющие осень 2018, 2020 и 2022 годов соответственно. Хотя это более управляемо, чем попытка объединить данные по всем странам за еще большее количество волн, это дает нам представление о большей сложности, связанной со сравнениями между странами и во времени.
+
+## Анализ данных
+
+Прежде чем приступать к программированию или статистическому анализу, первым шагом в работе с реальными данными является понимание их структуры и смысла. Нам нужно знать, какие данные были собраны, как они организованы, и подумать, на какие вопросы они могут ответить. Только тогда мы сможем понять, как правильно приступить к их анализу.
+
+Для CA Barometer это означает изучение множества файлов. Как и прежде, вам нужно будет заполнить форму на сайте CA Barometer, прежде чем ссылки станут доступны. Полный список приведен ниже:
+
+*2018 - Wave 4*
+
+[Отчет о методах работы](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-methods-report-eng-2018-autumn.docx)
+
+Questionnaires: [ENG](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-2018-autumn.docx), [Kazakh](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-kz-kazakhstan-2018-autumn.docx), [Kyrgyz](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-kg-kyrgyzstan-2018-autumn.docx), [Uzbek](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-questionnaire-eng-uz-turkmenistan-2018-autumn.docx)
+
+Data: [Kazakhstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kazakhstan-2018-autumn.xlsx), [Kyrgyzstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kyrgyzstan-2018-autumn.xlsx), [Uzbekistan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-uzbekistan-2018-autumn.xlsx)
+
+*2020 - Wave 8*
+
+[Отчет о методах работы](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-methods-report-eng-2020-autumn.docx)
+
+Анкеты: [ENG](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-questionnaire-eng-2020-autumn.doc), [RUS](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-questionnaire-rus-2020-autumn.doc)
+
+Данные: [Kazakhstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kazakhstan-2020-autumn.xlsx), [Kyrgyzstan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kyrgyzstan-2020-autumn.xlsx), [Uzbekistan](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-uzbekistan-2020-autumn.xlsx)
+
+*2022 - Wave 12*
+
+[Отчет о методах работы](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-methods-report-2022-autumn.pdf)
+
+Анкета: [ENG](https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-12-questionnaire-2022-autumn.pdf)
+
+Данные: [Kazakhstan]((https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kazakhstan-kazakhstan-2022-autumn.xlsx)), [Kyrgyzstan](https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx), [Uzbekistan](https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-uzbekistan-uzbekistan-2022-autumn.xlsx)
+
+# Загрузка и импорт данных
+
+Мы загружаем данные из [Центральноазиатского барометра](https://ca-barometer.org/), используя ссылки выше. Обратите внимание, что также предоставлены ссылки на Таджикистан и Туркменистан, но мы не будем использовать их на этом семинаре.
+
+```{r download and import}
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx", "CAB_2022_KG.csv")
+data_22_KG <- read_excel("CAB_2022_KG.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kazakhstan-kazakhstan-2022-autumn.xlsx", "CAB_2022_KZ.csv")
+data_22_KZ <- read_excel("CAB_2022_KZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-uzbekistan-uzbekistan-2022-autumn.xlsx", "CAB_2022_UZ.csv")
+data_22_UZ <- read_excel("CAB_2022_UZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-turkmenistan-turkmenistan-2022-autumn.xlsx", "CAB_2022_TM.csv")
+data_22_TM <- read_excel("CAB_2022_TM.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-tajikistan-tajikistan-2022-autumn.xlsx", "CAB_2022_TJ.csv")
+data_22_TJ <- read_excel("CAB_2022_TJ.csv")
+
+# download 2020 data
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kyrgyzstan-2020-autumn.xlsx", "CAB_2020_KG.csv")
+data_20_KG <- read_excel("CAB_2020_KG.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-kazakhstan-2020-autumn.xlsx", "CAB_2020_KZ.csv")
+data_20_KZ <- read_excel("CAB_2020_KZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-uzbekistan-2020-autumn.xlsx", "CAB_2020_UZ.csv")
+data_20_UZ <- read_excel("CAB_2020_UZ.csv")
+
+# no 2020 Turkmenistan data
+# download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-turkmenistan-2020-autumn.xlsx", "CAB_2020_TM.csv")
+# data_20_TM <- read_excel("CAB_2020_TM.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-8-excel-tajikistan-2020-autumn.xlsx", "CAB_2020_TJ.csv")
+data_20_TJ <- read_excel("CAB_2020_TJ.csv")
+
+# download 2018 data
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kyrgyzstan-2018-autumn.xlsx", "CAB_2018_KG.csv")
+data_18_KG <- read_excel("CAB_2018_KG.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-kazakhstan-2018-autumn.xlsx", "CAB_2018_KZ.csv")
+data_18_KZ <- read_excel("CAB_2018_KZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-uzbekistan-2018-autumn.xlsx", "CAB_2018_UZ.csv")
+data_18_UZ <- read_excel("CAB_2018_UZ.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-turkmenistan-2018-autumn.xlsx", "CAB_2018_TM.csv")
+data_18_TM <- read_excel("CAB_2018_TM.csv")
+
+download.file("https://ca-barometer.org/assets/files/projects/central-asia-barometer-survey-wave-4-excel-tajikistan-2018-autumn.xlsx", "CAB_2018_TJ.csv")
+data_18_TJ <- read_excel("CAB_2018_TJ.csv")
+
+```
+
+# Объединение данных
+
+Теперь нам нужно объединить данные. В процессе мы обнаруживаем некоторые несоответствия, которые необходимо устранить, чтобы объединить данные в один согласованный файл. Например, страна иногда обозначается аббревиатурой, а иногда — переменной MM4.
+
+```{r mutate Country}
+
+data_22_KG <- mutate(data_22_KG, Country = 'Kyrgyzstan')
+data_20_KG <- mutate(data_20_KG, Country = 'Kyrgyzstan')
+
+# data_18_KG <- mutate(data_18_KG, Country = 'KG')
+
+data_22_KZ <- mutate(data_22_KZ, Country = 'Kazakhstan')
+data_20_KZ <- mutate(data_20_KZ, Country = 'Kazakhstan')
+
+# data_18_KZ <- mutate(data_18_KZ, Country = 'KZ')
+
+data_22_UZ <- mutate(data_22_UZ, Country = 'Uzbekistan')
+data_20_UZ <- mutate(data_20_UZ, Country = 'Uzbekistan')
+
+# data_18_UZ <- mutate(data_18_UZ, Country = 'UZ')
+
+data_22_TM <- mutate(data_22_TM, Country = 'Turkmenistan')
+
+# data_20_TM <- mutate(data_20_TM, Country = 'TM')
+# data_18_TM <- mutate(data_18_TM, Country = 'TM')
+
+data_22_TJ <- mutate(data_22_TJ, Country = 'Tajikistan')
+data_20_TJ <- mutate(data_20_TJ, Country = 'Tajikistan')
+
+# data_18_TJ <- mutate(data_18_TJ, Country = 'TJ')
+```
+
+## Пытаюсь использовать rbind.
+
+Команда _rbind_ полезна для простых, буквальных комбинаций строк данных (_cbind_ эквивалентна объединению столбцов). Однако этот метод требует, чтобы все переменные идеально совпадали между объединяемыми наборами данных. При попытке это сделать мы обнаруживаем некоторые несоответствия.
+
+```{r rbind, eval=FALSE}
+
+data_2022 <- rbind(data_22_KZ, data_22_KG, data_22_UZ)
+
+```
+
+Это приводит к ошибке, поэтому давайте изучим различия между наборами данных с помощью _setdiff_. Затем используем _full_join_ для создания объединенного набора данных, включающего все переменные. Это выявит проблему с несовместимыми форматами в файле «Год», которая будет исправлена ​​в разделе «Очистка данных».
+
+```{r setdiff, eval=FALSE}
+
+setdiff(names(data_22_KG),names(data_22_KZ))
+setdiff(names(data_22_KG),names(data_22_UZ))
+setdiff(names(data_22_KZ),names(data_22_UZ))
+
+my_test_join <- full_join(data_22_KG, data_22_KZ)
+
+```
+
+# Очистка данных
+
+При более детальном изучении данных мы обнаруживаем несоответствия, например, форматирование лет. Кроме того, дата — MM6 за 2018 год, но обозначена как «Год» — нужно быть внимательными при заполнении анкет! Нас не интересует такой уровень детализации, поэтому давайте добавим в данные аналогичную переменную «Год». Это также перезапишет тип переменной, но мы можем это проверить. Наконец, переименуем все переменные в «Год» для единообразия.
+
+```{r clean year}
+
+# data_22_KG$MM8
+# data_22_KZ$MM8
+# data_20_KG$MM8
+# data_20_KZ$MM8
+# data_18_KG$MM6
+# data_18_KZ$MM6
+
+data_22_KG$MM8 <- 2022
+data_22_KZ$MM8 <- 2022
+data_22_UZ$MM8 <- 2022
+
+data_20_KG$MM8 <- 2020
+data_20_KZ$MM8 <- 2020
+data_20_UZ$MM8 <- 2020
+
+class(data_22_KG$MM8)
+mode(data_22_KG$MM8)
+
+class(data_22_KZ$MM8)
+mode(data_22_KZ$MM8)
+
+# data_18_KG$Year
+# data_18_KZ$Year
+
+class(data_18_KG$Year)
+mode(data_18_KG$Year)
+
+# try again
+
+my_test_join <- full_join(data_22_KG, data_22_KZ)
+
+# works now
+
+data_22_KG <- data_22_KG |> rename('Year'='MM8')
+data_22_KZ <- data_22_KZ |> rename('Year'='MM8')
+data_22_UZ <- data_22_UZ |> rename('Year'='MM8')
+
+```
+
+# Обработка данных
+
+## Выбор переменных
+
+Мы могли бы объединить и работать со всей группой наборов данных, соединив 9 файлов, охватывающих 3 года и 3 страны. Тогда у нас был бы доступ ко всем переменным. Но это, вероятно, потребует много работы для обеспечения совместимости. Возможно, это было бы полезно для долгосрочного проекта, но мы пока просто экспериментируем.
+
+Итак, чтобы рассмотреть ситуацию в меньшем масштабе, давайте сначала выберем интересующие нас переменные. Мы предварительно очистим их и проверим на совместимость. Затем объединим эти меньшие выборки, чтобы сделать результаты более понятными и удобными для просмотра.
+
+Сначала мы рассмотрим меньший опрос 2018 года, чтобы попытаться выделить сопоставимые показатели за все годы. Сами вопросы, их обозначения и названия со временем меняются.
+
+В 2018 году интересным вопросом был «в какой валюте вы храните свои сбережения?» (DD9d), но, к сожалению, этот вопрос не был включен в опросы 2020 и 2022 годов.
+
+В итоге мы довольно подробно изучаем анкеты, но серьезный исследователь, работающий в долгосрочной перспективе, сделает это еще больше, пытаясь выделить наиболее совместимые и стабильные данные за разные периоды времени и по разным странам.
+
+Еще один интересный вопрос — это процент дохода, который домохозяйство получает от денежных переводов (DD9a). Хотя этот вопрос не задавался в 2020 году, мы учтем его для сравнения данных за 2018 и 2022 годы.
+
+Другие стандартные переменные: пол (DD1), возраст (DD2), семейное положение (DD3), образование (DD4) и статус занятости (DD6a).
+
+Есть вопросы о том, насколько положительно жители страны относятся к следующим странам: Китаю (E1a), России (E1b) и США (E1c).
+
+Также есть вопросы об уровне доверия к следующим источникам новостей: телевидение (A2a), газеты (A2b), радио (A2c). Однако этот вопрос не повторяется в последующих волнах опроса, поэтому мы используем информацию об «Основном источнике новостей» (A1a).
+
+Еще одна полезная демографическая переменная — язык, на котором говорят дома. Эта переменная кодируется как DD11 в 2018 и 2022 годах, но как DD9 в 2020 году. Это тот тип небольших исправлений, которые мы должны провести при очистке данных.
+
+Чтобы оценить настроения, мы рассмотрим, улучшается или ухудшается финансовое положение страны (B4a, или B2 в 2018 году) по сравнению с улучшением или ухудшением положения отдельной семьи (B4b, или B5a в 2018 году).
+
+Наконец, мы зафиксируем вопрос о том, движется ли страна в правильном или неправильном направлении (D1).
+
+Нам также необходимо включить переменные «Страна» и «Год».
+
+Мой окончательный список выбранных переменных
+
+DD1 Пол
+
+DD2 Возраст
+
+DD3 Семейное положение
+
+DD4 Образование
+
+DD6a Занятость
+
+D1 Направление (Правильное или Неправильное)
+
+E1a Благосклонность Китая
+E1b Благосклонность России
+E1c Благосклонность США
+
+DD9a Денежные переводы (Денежные переводы в 2018, 2022 годах)
+
+A1a Основные новости (Источник)
+
+DD11 Язык (родной) DD9 в 2020 году
+
+B4a Финансовое положение страны (B2 в 2018 году)
+
+B4b Финансовое положение семьи (B5a в 2018 году)
+
+плюс сохранить страну, год
+
+Сначала мы объединим файлы данных с помощью _full_join_, чтобы у нас был один многострановый файл для каждого года. Мы обнаружили еще одну небольшую проблему с узбекской переменной HHLandlines за 2018 год, которую необходимо переформатировать для обеспечения согласованности с другими. Типичная процедура очистки данных!
+
+```{r full join}
+
+mydata2022 <- full_join(data_22_KG, data_22_KZ)
+mydata2022 <- full_join(mydata2022, data_22_UZ)
+mydata2020 <- full_join(data_20_KG, data_20_KZ)
+mydata2020 <- full_join(mydata2020, data_20_UZ)
+mydata2018 <- full_join(data_18_KG, data_18_KZ)
+# mydata2018 <- full_join(mydata2018, data_18_UZ)
+
+# a problem with $$HHLandlines in last line
+data_18_UZ$HHLandlines <- as.character(data_18_UZ$HHLandlines)
+mydata2018 <- full_join(mydata2018, data_18_UZ)
+
+```
+
+Проверьте имена, а затем переименуйте их в более понятные текстовые названия. Затем выберите список интересующих вас переменных. В приведенном ниже коде есть несколько дополнительных нюансов, обусловленных особенностями данных. Особенно неожиданны некоторые особенности именования в данных за 2018 год, поскольку там уже используются текстовые названия, просто по-другому и без документации!
+
+```{r renaming}
+
+names(mydata2018)
+names(mydata2020)
+names(mydata2022)
+
+mydata2022 <- mydata2022 |> rename('Sex'='DD1', 'Age'='DD2', 'Marital'='DD3',
+                                   'Education'='DD4', 'Employment'='DD6a', 
+                                   'Direction'='D1', 'China_Favor'='E1a',
+                                   'Russia_Favor'='E1b','USA_Favor'='E1c',
+                                   'Main_News'='A1a', 'Remit'='DD9a',
+                                   'Language'='DD11','Country_Fin_Sit'='B4a',
+                                   'Family_Fin_Sit'='B4b')
+
+mydata2022_select <- mydata2022 |> select('Sex', 'Age', 'Marital', 'Education', 
+                                          'Employment', 'Direction', 'China_Favor',
+                                          'Russia_Favor','USA_Favor', 'Main_News', 
+                                          'Remit', 'Language','Country_Fin_Sit',
+                                          'Family_Fin_Sit', 'Country', 'Year')
+
+# note we rename Year here from MM8
+
+mydata2020 <- mydata2020 |> rename('Sex'='DD1', 'Age'='DD2', 'Marital'='DD3',
+                                   'Education'='DD4', 'Employment'='DD6a', 
+                                   'Direction'='D1', 'China_Favor'='E1a',
+                                   'Russia_Favor'='E1b','USA_Favor'='E1c',
+                                   'Main_News'='A1a', 'Language'='DD9',
+                                   'Country_Fin_Sit'='B4a', 'Family_Fin_Sit'='B4b',
+                                   'Year'='MM8')
+
+mydata2020_select <- mydata2020 |> select('Sex', 'Age', 'Marital', 'Education', 
+                                          'Employment', 'Direction', 'China_Favor',
+                                          'Russia_Favor','USA_Favor', 'Main_News', 
+                                          'Language','Country_Fin_Sit',
+                                          'Family_Fin_Sit', 'Country', 'Year')
+
+# need to add a blank 'Remit' variable here
+
+mydata2020_select <- mydata2020_select |> mutate(Remit=NA)
+
+# and 2018 data already uses the names, but formatted differently
+# codebook is not satisfactory, does not describe these labels, have to judge by answers in some cases
+# note the 'LangExtra' to avoid repeating a name
+
+mydata2018 <- mydata2018 |> rename('Sex'='Gender', 'Marital'='MarriageStat2',
+                                   'Education'='EducLevel_M', 'Employment'='Work', 
+                                   'Direction'='RiteRong_M', 'China_Favor'='OpinionChina',
+                                   'Russia_Favor'='OpinionRussia','USA_Favor'='OpinionUSA',
+                                   'Main_News'='MainNews_M', 'Language'='Homelang','LangExtra'='Language',
+                                   'Country_Fin_Sit'='TodayEcSit_M', 'Family_Fin_Sit'='Lastyear_M',
+                                   'Remit'='IncomeOut')
+
+mydata2018_select <- mydata2018 |> select('Sex', 'Age', 'Marital', 'Education', 
+                                          'Employment', 'Direction', 'China_Favor',
+                                          'Russia_Favor','USA_Favor', 'Main_News', 
+                                          'Language','Country_Fin_Sit', 'Remit',
+                                          'Family_Fin_Sit', 'Country', 'Year')
+
+```
+
+Мы могли бы попробовать выполнить больше полных объединений, но поскольку мы уже вручную изменили имена переменных, чтобы они были согласованы для всех трех лет, здесь мы можем просто выполнить прямое объединение трех файлов с помощью _rbind_, а затем еще раз проверить, что все получилось так, как ожидалось.
+
+```{r rbind again}
+
+my_final_data <- rbind(mydata2018_select, mydata2020_select, mydata2022_select)
+str(my_final_data)
+summary(my_final_data)
+
+attach(my_final_data)
+
+```
+
+## Описательная статистика
+
+Давайте рассмотрим несколько из этих переменных и посмотрим, как они распределены. Простая команда _table_ поможет вам получить первоначальное представление о данных. Хотя некоторые большие наборы данных сложно интуитивно понять, для такого рода данных в социальных науках ничто не сравнится с тем, чтобы потратить время на изучение данных, прежде чем переходить к более сложному анализу. Мы также можем обнаружить выбросы или проблемы, которые необходимо исправить, прежде чем двигаться дальше. Мы обнаруживаем проблему с переменной «Денежный перевод» (Remit), которую необходимо преобразовать в числовой формат.
+
+Мы можем запустить любые перекрестные таблицы, перечислив две переменные в команде _table_. Можно исследовать множество комбинаций (здесь не показано).
+
+```{r descriptives}
+
+table(Sex)
+table(Age)
+table(Marital)
+table(Education)
+table(Employment)
+table(Direction)
+table(China_Favor)
+table(Sex)
+table(Russia_Favor)
+table(USA_Favor)
+table(Main_News)
+table(Country_Fin_Sit)
+table(Remit)
+
+# fix the problem with Remit
+
+my_final_data$Remit<-as.numeric(Remit)
+attach(my_final_data)
+
+table(Remit)
+
+table(Family_Fin_Sit)
+table(Country)
+table(Year)
+
+table(Direction, Sex)
+
+table(Marital, Employment)
+
+table(Marital, Education)
+
+table(Education, Employment)
+
+```
+
+## Перекодирование
+
+Мы заметили некоторые проблемы, которые также хотим исправить, чтобы упростить представление данных, например, перекодировать ответы, объединив их в одну метку «Не знаю» и «Отказано» (NA — недоступно). Это поможет нам сосредоточить визуализацию на значимых категориях.
+
+Давайте также проведем более обширную перекодировку, чтобы упростить некоторые из многочисленных категорий полупротиворечивых ответов, которые мы здесь видим.
+
+```{r recode}
+
+my_final_data$Marital_recode <- replace_values(
+  Marital,
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+my_final_data$Employment_recode <- replace_values(
+  Employment,
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+my_final_data$Employment_recode2 <- replace_values(
+  Employment,
+  c("Working part-time", "Working full-time") ~ "Working",
+  c("Unemployed and not actively seeking employment", "Unemployed and actively seeking employment") ~ "Unemployed",
+  c("A housewife / househusband","A housewife") ~ "Housewife",
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+my_final_data$Direction_recode <- replace_values(
+  Direction,
+  c("Don't Know (vol.)", "Refused (vol.)", "Not asked") ~ NA
+)
+
+my_final_data$Family_Fin_Sit_recode <- replace_values(
+  Family_Fin_Sit,
+  c("Much better", "Much Better", "Become Better", "Somewhat better", "Somewhat Better") ~ "Better",
+  c("About the same", "Stayed the Same") ~ "Same",
+  c("Become Worse","Much Worse", "Much worse", "Somewhat Worse", "Somewhat worse") ~ "Worse",
+  c("Don't Know (vol.)", "Refused (vol.)") ~ NA
+)
+
+attach(my_final_data)
+
+table(Marital_recode,Employment_recode)
+
+```
+
+# Критерий хи-квадрат
+
+Когда у нас есть перекрестная таблица с несколькими элементами, [критерий хи-квадрат](https://en.wikipedia.org/wiki/Chi-squared_test) может проверить, является ли частота встречаемости элементов в ячейках результатом случайного рассеяния или статистически значимой. Это указывает на наличие определенной закономерности или неслучайной связи в данных, не объясняя ее. Как и другие статистические инструменты в R, существует богатый набор опций и альтернатив для работы со статистическими тестами. Мы здесь даже не затрагиваем поверхность этих возможностей, но включаем это как напоминание о них.
+
+```{r chisq-test}
+
+chisq.test(table(Direction,Sex))
+
+```
+
+# Визуализация данных
+
+Теперь пришло время визуально проанализировать данные. Мы рассмотрим некоторые переменные, в частности, сосредоточимся на направлении развития страны. В данном случае речь идет о странах, поскольку мы включаем все три страны за все три года.
+
+## Диаграммы рассеяния
+
+Начнём с диаграмм рассеяния. В наших данных переменная «Remit» как минимум одна подходит для диаграмм рассеяния. Большинство других переменных не подходят, поскольку являются категориальными.
+
+```{r first plot}
+
+plot(Remit~Year)
+
+```
+
+Не очень интересно, правда? Может, добавить линию регрессии? Всё равно не очень интересно.
+
+```{r regression line}
+
+plot(Remit~Year)
+abline(lm(Remit~Year), col="red")
+
+```
+
+Давайте хотя бы выберем что-нибудь, на фоне чего можно строить планы, что будет хоть немного разнообразным.
+
+```{r against Age}
+
+plot(Remit~Age)
+
+```
+
+## lattice
+
+Теперь давайте воспользуемся пакетом _lattice_ для дальнейшего анализа наших данных. Это один из пакетов с очень простым синтаксисом для группировки данных.
+
+```{r lattice}
+
+xyplot(Remit~Age, groups=Country, auto.key=list(space="right"))
+
+xyplot(Remit~Age | Country, groups=Language, auto.key=list(space="right"))
+
+xyplot(Remit~Age | Country, groups=Marital, pch=10, auto.key=list(space="right"))
+
+```
+
+## ggplot
+
+Теперь давайте изучим использование _ggplot_, одного из самых, если не самого, популярных инструментов визуализации в R. Он популярен как минимум по двум причинам. Во-первых, поведение большинства графиков по умолчанию достаточно сложное и использует хорошие принципы визуализации. Во-вторых, он очень настраиваемый и гибкий благодаря тому, как элементы синтаксиса взаимодействуют друг с другом.
+
+Сначала давайте рассмотрим использование «эстетики», элемента внешнего вида и стиля синтаксиса «Грамматики графики», а затем использование меток для уточнения и улучшения наших графиков.
+
+```{r aesthetics}
+
+ggplot(my_final_data, aes(y=Remit, x=Age))  + facet_grid(.~Country) + geom_point(aes(color=Sex))
+
+ggplot(my_final_data, aes(y=Remit, x=Age))  + facet_grid(Country~.) + geom_point(aes(color=Marital))
+
+ggplot(my_final_data, aes(y=Remit, x=Age))  + facet_grid(Country~.) + geom_point(aes(color=Marital))+
+labs(x="age", y="% remittances", title="Remittance as percentage of income")
+
+ggplot(my_final_data, aes(x=Remit, y=Age))  + facet_grid(.~Country) + geom_point(aes(color=Marital))+
+  labs(x="age", y="% remittances", title="Remittance as percentage of income")
+
+# point size
+
+ggplot(my_final_data, aes(x=Remit, y=Age))  + facet_grid(.~Country) + geom_point(aes(color=Marital), size=3)+
+  labs(x="age", y="% remittances", title="Remittance as percentage of income")
+
+```
+
+## Столбчатая диаграмма
+
+Обратите внимание на последнюю настройку, изменяющую размер точки, которая является частью параметров geom_point. Но, поскольку большая часть наших данных является категориальной, мы получим более наглядное представление о наших данных, работая с гистограммами, переходя от самых простых и скучных примеров к примерам, где мы используем возможности ggplot для изменения внешнего вида и отображения более сложной информации, а также для сравнения стран и временных периодов.
+
+## Цвета 
+
+Пакет [_RColorBrewer_]( https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) позволяет легко применять красиво масштабированные и затененные наборы цветов. Мы можем использовать [R Color Picker](https://r-charts.com/colors/), чтобы найти подходящие цвета, если хотим использовать _scale_fill_manual_ для предоставления списка цветов (в данном случае, соответствующих флагам стран). Наконец, страница [посвященная цветам в ggplots](https://r-graph-gallery.com/ggplot2-color.html) предоставляет множество полезной информации.
+
+```{r barchart}
+
+ggplot(my_final_data, aes(x=Sex)) + geom_bar(position="stack") 
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") 
+
+country_colors <- c("turquoise1","firebrick1","seagreen3")
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") + scale_fill_brewer(palette = "Accent")
+
+```
+
+Пакет _paletteer_ предлагает головокружительное множество вариантов выбора цвета, но также предоставляет [инструменты](https://r-graph-gallery.com/package/paletteer.html), включая [инструмент поиска цветовой палитры](https://r-graph-gallery.com/color-palette-finder.html), которые делают этот выбор более удобным. Названия палитр иногда совпадают с цветами, которые они предоставляют. Как вы думаете, палитра _samarqand2_ соответствует цветам плиток в Регистан?
+
+
+```{r paletteer}
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") +scale_fill_paletteer_d("nationalparkcolors::Hawaii")
+
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") +scale_fill_paletteer_d("IslamicArt::samarqand2")
+
+# try also 
+# IslamicArt::samarqand
+# nbapalettes::lakers
+# MoMAColors::OKeeffe
+
+```
+
+Давайте продолжим изучение данных, рассмотрев рейтинги благосклонности и настроив отображение по своему вкусу.
+
+```{r exploration}
+
+ggplot(my_final_data, aes(China_Favor, fill=Country))+ geom_bar(position="stack") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(China_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(Russia_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors)
+
+ggplot(my_final_data, aes(USA_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors)
+
+```
+
+Мы можем экспортировать график и сохранить его как объект в R, используя оператор присваивания (<-). Это позволит нам легко повторно использовать изображения в различных контекстах, даже экспортировать и изменять их.
+
+```{r saving objects}
+
+China <- ggplot(my_final_data, aes(China_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+
+Russia <- ggplot(my_final_data, aes(Russia_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+
+USA <- ggplot(my_final_data, aes(USA_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+
+```
+
+Теперь мы воспользуемся пакетом _gridExtra_ и его командой _grid.arrange_, чтобы объединить три графика благоприятности в один.
+
+```{r grid}
+
+grid.arrange(China,Russia,USA, ncol=1, nrow=3)
+
+```
+
+Мы можем экспортировать графики в статические файлы, сохраняемые на нашем компьютере. Процесс запускается командой, например, _pdf_ для отправки результата в PDF-файл или _jpeg_ для отправки в файл .jpg. Затем выполняется команда для работы с графикой (фактически, PDF-файл может содержать несколько графиков на дополнительных страницах). Эти графики не отображаются на экране, поскольку они отправляются в файл. Затем выполняется команда _dev.off_ для прекращения перенаправления вывода в файл. После этого графики снова появятся на экране.
+
+```{r export}
+
+pdf(file="output.pdf")
+ggplot(my_final_data, aes(USA_Favor, fill=Country))+ geom_bar(position="dodge") + scale_fill_manual(values = country_colors) + coord_flip()
+dev.off()
+
+jpeg(file="output.jpg", width = 800, height = 600, quality=100)
+ggplot(my_final_data, aes(x=Sex, fill=Country)) + geom_bar(position="stack") +scale_fill_paletteer_d("IslamicArt::samarqand2")
+dev.off()
+
+```
+
+## Гистограмма
+
+Чтобы показать другие возможности, рассмотрим гистограммы и способы их настройки. Здесь мы также продемонстрируем использование опции _theme_.
+
+```{r histogram}
+
+ggplot(my_final_data, aes(Age))+geom_histogram(aes(fill = after_stat(count)))+facet_grid(Country~.)
+
+ggplot(my_final_data, aes(Age)) + facet_grid(Country~.) + geom_bar(position="dodge", fill="olivedrab")+theme(panel.background = element_rect(fill='lightsteelblue1', colour='darkblue'))
+
+ggplot(my_final_data, aes(Age)) + facet_grid(Country~.) + geom_bar(position="dodge")+theme(panel.background = element_rect(fill='white', colour='black'))
+
+ggplot(my_final_data, aes(Age)) + facet_grid(Country~.) + geom_bar(position="dodge")+ scale_fill_brewer(palette="Reds")
+
+ggplot(my_final_data, aes(Employment_recode, fill=as.factor(Marital_recode))) +facet_grid(Country~.) + geom_bar(position="dodge") + theme(panel.background = element_rect(fill='beige', colour='darkblue'))
+
+ggplot(my_final_data, aes(Employment_recode, fill=as.factor(Marital_recode))) +facet_grid(Country~.) + geom_bar(position="dodge") + theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Work status", y="Count", title="Employment by Marital Status") + coord_flip()
+
+ggplot(my_final_data, aes(Employment_recode2, fill=as.factor(Marital_recode))) +facet_grid(Country~.) + geom_bar(position="dodge") + theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Work status", y="Count", title="Employment by Marital Status") + coord_flip()
+
+ggplot(my_final_data, aes(Employment_recode2, fill=Country)) +facet_grid(Marital_recode~.) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors)+theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Work status", y="Count", title="Employment by Marital Status")
+
+```
+
+Внимательно изучите вопрос о направлении движения:
+
+```{r direction by factors}
+
+# Direction by factors
+
+ggplot(my_final_data, aes(Direction, fill=Country)) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors)+theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction?") 
+
+ggplot(my_final_data, aes(Direction, fill=Country)) + facet_grid(Year~.) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors)+theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction?") 
+
+ggplot(my_final_data, aes(Direction_recode, fill=Country)) + facet_grid(Family_Fin_Sit_recode~.) + geom_bar(position="dodge") + scale_fill_manual(values=country_colors) + theme(panel.background = element_rect(fill='beige', colour='darkblue')) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction vs. Family situation?")
+
+```
+
+## Используя силу
+
+Мы можем использовать возможности грамматики графики и присваивать компоненты синтаксиса различным объектам, а затем объединять их в строки. Это может помочь нам упростить код и внести изменения и правки (например, изменив тему всех графиков одновременно).
+
+```{r power}
+
+mydata <- ggplot(my_final_data, aes(Direction_recode, fill=Country)) + facet_grid(Family_Fin_Sit_recode~.) + 
+  labs(x="Response", y="Count", title="Going in Right or Wrong Direction vs. Family situation?") + scale_fill_manual(values=country_colors)
+
+mytheme <- theme(panel.background = element_rect(fill='beige', colour='darkblue'))
+  
+mychart <- geom_bar(position="dodge")
+
+mydata + mytheme + mychart
+
+```
+
+## Другие сюжеты
+
+Множество других графиков доступно через ggplot2. Ниже показана диаграмма размаха. Другие можно найти на [справочной странице ggplot2](https://ggplot2.tidyverse.org/reference/index.html#geoms) и в [расширениях для ggplot2](https://exts.ggplot2.tidyverse.org/gallery/). Обратите внимание, что пакет _ggextra_ может добавлять диаграммы размаха по краям диаграмм рассеяния. Обратите внимание, что темы существуют в таких пакетах, как [_ggtheme_](https://ggplot2.tidyverse.org/reference/ggtheme.html) и _cowplot_.
+
+```{r box plot}
+
+ggplot(my_final_data, aes(x=Remit, y=Country)) + geom_boxplot()
+
+ggplot(my_final_data, aes(x=Remit, y=Country)) + geom_boxplot() + coord_flip()
+
+ggplot(my_final_data, aes(x=Remit, y=Country, fill=Country)) + geom_boxplot() + coord_flip() +
+  theme_minimal_grid() + scale_fill_manual(values=country_colors)
+
+```
+
+## Темы
+
+Дополнительные пакеты, такие как ggthemes (показан ниже), ggsci, ggthemr и другие, помогают нам быстро изменять внешний вид наших графиков в соответствии с нашими целями.
+
+```{r themes}
+
+lastplot <- ggplot(my_final_data, aes(x=Remit,y=Age))  + geom_point(aes(color=Country)) + stat_smooth() + 
+  labs(x="Remittance %", y="Age", title="Age vs Remittance") 
+
+lastplot + theme_bw()
+lastplot + theme_cowplot()
+lastplot + theme_dark()
+lastplot + theme_economist()
+lastplot + theme_fivethirtyeight()
+lastplot + theme_tufte()
+lastplot + theme_wsj()
+
+# then with Rcolorbrewer
+
+lastplot + theme_economist() + scale_color_brewer(palette = "Set3")
+lastplot + theme_tufte() + scale_color_brewer(palette = "Dark2")
+
+```
+
+## Интерактивность
+
+Мы быстро покажем, как добавить немного интерактивности в график. Существуют инструменты для создания полностью интерактивных сайтов, в частности Shiny для R (а теперь и для Python). Подробнее см. мой мастер-класс [Визуализация данных 2](https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.html).
+
+```{r ggiraph}
+
+myplot <- ggplot(
+  data = my_final_data,
+  mapping = aes(
+    x = Remit, y = Age,
+    # here we add interactive aesthetics
+    tooltip = paste(Country,Marital)
+  )
+) +
+  geom_point_interactive(
+    size = 1, hover_nearest = TRUE
+  )
+
+interactive_plot <- girafe(ggobj = myplot)
+htmltools::save_html(interactive_plot, "/home/ryan/R/ggiraph-2.html")
+
+```
+
+## Обработка данных для сравнения во времени
+
+Для того чтобы, например, изучить изменения во времени в вопросе «Направление» — или в любой другой переменной в этом наборе данных — нам нужно немного поработать над обработкой данных, выходящей за рамки исходных значений, которые мы использовали в приведенных выше столбчатых диаграммах.
+
+В этом примере процент людей, считающих, что их страна движется в правильном направлении, рассчитывается путем извлечения значений и отбрасывания пропущенных значений (рассматриваются только ответы «Правильно» и «Неправильно»). Код делает это для каждой из девяти комбинаций страны и года, а затем вставляет результаты в небольшую матрицу, чтобы мы могли построить график.
+
+Это один из подходов к решению проблемы, среди нескольких других возможностей. Например, можно переименовать и реструктурировать данные, чтобы упростить итерацию по записям и автоматизировать часть этого кодирования. Можно также перекодировать данные в бинарные ответы «да/нет», 0-1, чтобы упростить математические вычисления с пропорциями. В приведенном ниже подходе используется пакет tidyverse _forcats_, предназначенный для работы с категориальными данными. Для моего стиля математических вычислений ручное построение матрицы кажется наиболее понятным способом решения этой задачи.
+
+```{r build a matrix}
+
+# compute percentages
+
+my_final_data$Direction_recode <- as.factor(Direction_recode)
+
+attach(my_final_data)
+
+mean(as.numeric(Direction_recode), na.rm=TRUE)
+
+levels(my_final_data$Direction_recode)
+
+# forcats
+
+fct_count(Direction_recode, sort = FALSE, prop = TRUE)
+
+mytable <- fct_count(Direction_recode, sort = FALSE, prop = FALSE)
+
+Direction_percent <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+# fct_match(Direction_recode, "Right direction")
+
+# Now do a matrix of these 
+
+Uz18<- my_final_data |> filter(Country=="Uzbekistan" & Year==2018)
+Uz20<- my_final_data |> filter(Country=="Uzbekistan" & Year==2020)
+Uz22<- my_final_data |> filter(Country=="Uzbekistan" & Year==2022)
+
+Kz18<- my_final_data |> filter(Country=="Kazakhstan" & Year==2018)
+Kz20<- my_final_data |> filter(Country=="Kazakhstan" & Year==2020)
+Kz22<- my_final_data |> filter(Country=="Kazakhstan" & Year==2022)
+
+Kg18<- my_final_data |> filter(Country=="Kyrgyzstan" & Year==2018)
+Kg20<- my_final_data |> filter(Country=="Kyrgyzstan" & Year==2020)
+Kg22<- my_final_data |> filter(Country=="Kyrgyzstan" & Year==2022)
+
+# setup our matrix
+
+Direction_pct_matrix <- data.frame(matrix(0,3,3))
+rownames(Direction_pct_matrix) = c("Kazakhstan", "Kyrgyzstan", "Uzbekistan")
+colnames(Direction_pct_matrix) = c("2018", "2020", "2022")
+
+mytable <- fct_count(Kz18$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[1,1] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kz20$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[1,2] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kz22$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[1,3] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kg18$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[2,1] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kg20$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[2,2] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Kg22$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[2,3] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Uz18$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[3,1] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+mytable <- fct_count(Uz20$Direction_recode, sort = FALSE, prop = FALSE)
+Direction_pct_matrix[3,2] <- mytable[1,2]/(mytable[1,2]+mytable[2,2])
+
+# this was the not asked question in Uzbekistan in 2022, so leave it alone, code as NA
+
+mytable <- fct_count(Uz22$Direction_recode, sort = FALSE, prop = FALSE)
+
+Direction_pct_matrix[3,3] <- NA
+
+Direction_pct_matrix <- cbind(Direction_pct_matrix, Country=c("Kazakhstan", "Kyrgyzstan", "Uzbekistan"))
+
+Direction_long <- pivot_longer(Direction_pct_matrix, !Country, names_to="Year", values_to = "Value")
+
+Direction_long$Year <- as.numeric(Direction_long$Year)
+
+ggplot(Direction_long, aes(x=Year, y=Value, color=Country)) +
+  geom_line() 
+
+ggplot(Direction_long, aes(x=Year, y=Value, color=Country)) +
+  geom_line() + theme_tufte() + scale_color_brewer(palette = "Dark2") +
+  labs(title="Right Direction over time", y="Percentage")
+  
+```
+
+# Дальнейший статистический анализ
+
+## Пошаговая регрессия
+
+В качестве еще одного краткого примера статистического анализа мы можем попробовать пошаговую регрессию для прогнозирования ответа на вопрос о правильном направлении. Логистическая регрессия — подходящий метод, когда результат представляет собой бинарный выбор (да/нет, верно/неверно, правильно/неверно).
+
+```{r regression}
+
+lm(data=my_final_data, Remit ~ .)
+
+lm(data=my_final_data, Remit ~ Year)
+
+regression_output <- lm(Remit ~ Sex + Language, data=my_final_data)
+summary(regression_output)
+
+regression_output_all_demographic <- lm(Remit ~ Sex + Age + Language + Employment + Education + Country + Year, data=my_final_data)
+summary(regression_output_all_demographic)
+
+backward_model <- step(regression_output_all_demographic, direction = "backward")
+
+# Print the summary of the selected model
+
+summary(backward_model)
+
+```
+
+# Другие возможности
+
+Мы даже не затронули алгоритмы машинного обучения. Для их эффективного использования с этими несколько несовершенными данными из реального мира потребуется еще более тщательная очистка данных. Но такие методы, как кластеризация, деревья решений, случайные леса и другие, могут эффективно группировать данные, выявлять закономерности и делать прогнозы. См. пакет [tidymodels](https://www.tidymodels.org/), упомянутый ниже.
+
+# Заключение
+
+В анализе данных нет единой точки остановки. Продолжайте, пока не получите полное понимание данных и их взаимодействия с вопросами, на которые вы хотите ответить!
+
+Дополнительные сведения о методах анализа данных см. в разделах [Анализ данных 1](https://www.ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html) и [Анализ данных 2](https://www.ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html).
+
+## R for Data Science
+
+Для получения дополнительной информации об обработке данных обратитесь к книге [R for Data Science](https://r4ds.hadley.nz/). Также ознакомьтесь с пакетом [tidymodels](https://www.tidymodels.org/), предназначенным для моделирования и машинного обучения с использованием принципов tidyverse.

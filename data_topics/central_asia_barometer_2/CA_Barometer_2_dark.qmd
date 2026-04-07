@@ -40,7 +40,7 @@ _first developed for presentation at [American University of Central Asia](https
 
 # Overview
 
-This workshop illustrates working with data, continuing from [Central Asia Barometer 1](https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.html), which introduced working with a single wave and country of Central Asia Barometer data (Kygryzstan in 2022). The second part illustrates working with multiple waves and countries of data, illustrating more complex data merging and cleaning, additional graphics options, and suggests starting points for statistical analysis. Coding is in R, but a Python version of the material (machine-translated) is available for those who wish to replicate the steps there. Both R and Python are excellent tools for data analysis, so to some extent your choice is a matter of preference and familiarity. The R language emerged from statistics and added computing functionality, whereas Python is a general purpose computing language to which heavy doses of statistical capabilities have been added.
+This workshop illustrates working with data, continuing from [Central Asia Barometer 1](https://ryanwomack.com/data_topics/central_asia_barometer_1/CA_Barometer_1.html), which introduced working with a single wave and country of Central Asia Barometer data (Kyrgyzstan in 2022). The second part illustrates working with multiple waves and countries of data, illustrating more complex data merging and cleaning, additional graphics options, and suggests starting points for statistical analysis. Coding is in R, but a Python version of the material (machine-translated) is available for those who wish to replicate the steps there. Both R and Python are excellent tools for data analysis, so to some extent your choice is a matter of preference and familiarity. The R language emerged from statistics and added computing functionality, whereas Python is a general purpose computing language to which heavy doses of statistical capabilities have been added.
 
 # Installation
 
@@ -341,7 +341,7 @@ data_22_UZ <- data_22_UZ |> rename('Year'='MM8')
 
 ```
 
-# Data Wrangling
+# Data wrangling
 
 ## Selection of variables
 
@@ -586,7 +586,7 @@ chisq.test(table(Direction,Sex))
 
 ```
 
-# Data Visualization
+# Data visualization
 
 Now it is time to explore the data visually. We explore some variables, in particular focusing on the direction the country is going in. Actually in this case, it is countries, since we are including all three countries, over all three years. 
 
