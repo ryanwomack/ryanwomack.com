@@ -1,27 +1,53 @@
-## ----setup, include=FALSE-----------------------------------------------------
+#' ---
+#' title: Central Asia Barometer Data Analysis
+#' author: Ryan Womack
+#' date: '2026-03-31'
+#' toc:toc: true true
+#' number-sections: true
+#' highlight-style: pygments
+#' output: html_document
+#' format:
+#'   html:
+#'     toc: true
+#'     code-fold: true
+#'     html-math-method: katex
+#'   pdf:
+#'     geometry:
+#'     - top=30mm
+#'     - left=30mm
+#'     fontfamily: libertinus
+#'     colorlinks: true
+#'     papersize: A4
+#'   docx: default
+#' theme: litera
+#' include-in-header:
+#'   text: |
+#'     \usepackage{fvextra}
+#'     \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+#' ---
+#' 
+
+
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/womack/documents/ryan/Central_Asia/Central_Asia_Barometer/")
 
 
-## ----install packages, eval=FALSE---------------------------------------------
-# 
-# install.packages("pak", dependencies=TRUE)
-# library(pak)
-# pkg_install("tidyverse")
-# pkg_install("readxl")
-# pkg_install("reticulate")
-# devtools::session_info()
-# 
+
+install.packages("pak", dependencies=TRUE)
+library(pak)
+pkg_install("tidyverse")
+pkg_install("readxl")
+pkg_install("reticulate")
+devtools::session_info()
 
 
-## ----load packages, eval=TRUE, echo=TRUE--------------------------------------
+
 
 library(readxl)
 library(tidyverse)
 
 
 
-## ----tidyverse----------------------------------------------------------------
 
 # Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")
 library(reticulate)
@@ -29,7 +55,6 @@ use_python("/usr/bin/python3")
 
 
 
-## ----download and import------------------------------------------------------
 
 download.file("https://ca-barometer.org/assets/files/projects/cab-survey-wave-12-excel-kyrgyzstan-kyrgyzstan-2022-autumn.xlsx", "CAB_2022.csv")
 mydata <- read_excel("CAB_2022.csv")
@@ -38,7 +63,6 @@ attach(mydata)
 
 
 
-## ----renaming-----------------------------------------------------------------
 
 names(mydata)
 mydata <- mydata |> rename('Sex'='DD1', 'Region'='MM10', 'Language'='DD11','Income'='DD8')
@@ -46,7 +70,6 @@ attach(mydata)
 
 
 
-## ----descriptives-------------------------------------------------------------
 
 table(Sex)
 table(Region)
@@ -59,7 +82,6 @@ table(E17)
 
 
 
-## ----recode-------------------------------------------------------------------
 
 mydata$Income_Numeric <- recode_values(
   Income,
@@ -78,7 +100,6 @@ mydata$Income_Numeric <- recode_values(
 
 
 
-## ----Income_Numeric-----------------------------------------------------------
 
 attach(mydata)
 
@@ -93,7 +114,6 @@ summarize(Inc = mean(Income_Numeric, na.rm=TRUE))
 
 
 
-## ----t-test-------------------------------------------------------------------
 
 # t-tests or chi-sq for significance
 
@@ -104,9 +124,8 @@ t.test(Income_Numeric~Sex)
 
 
 
-## ----researching what to plot-------------------------------------------------
 
-table(DD1,A3a)
+table(Sex,A3a)
 
 table(D1)
 table(D1, Sex)
@@ -115,7 +134,6 @@ table(D1, Language)
 table(D1, Income_Numeric)
 
 
-## ----plot recode--------------------------------------------------------------
 
 mydata$D1_recode <- recode_values(
   D1,
@@ -130,7 +148,6 @@ attach(mydata)
 
 
 
-## ----illustrative plots-------------------------------------------------------
 
 # Some illustrative plots
 ggplot(data=mydata, aes(x=Income_Numeric, y=Region))+geom_point()
@@ -142,7 +159,6 @@ ggplot(mydata, aes(x=D1_recode))+facet_grid(~Sex)+geom_bar()
 
 
 
-## ----logistic-----------------------------------------------------------------
 
 logistic_output <- glm(D1_recode ~ Sex + Language + Income_Numeric, family=binomial, data=mydata)
 summary(logistic_output)
