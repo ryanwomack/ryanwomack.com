@@ -1,7 +1,7 @@
 # Data Analysis 1
 # Ryan Womack, ryan@ryanwomack.com
 # 2026-09-09 version
-# Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+# Copyright Ryan Womack, 2026. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 
 ## ----setup, include=FALSE-----------------------------------------------------
