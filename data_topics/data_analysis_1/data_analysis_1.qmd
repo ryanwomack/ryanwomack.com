@@ -1,7 +1,7 @@
 ---
 title: "Data Analysis 1"
 author: "Ryan Womack"
-date: "2026-01-26"
+date: "2026-09-09"
 toc:toc: true true
 number-sections: true
 highlight-style: pygments
@@ -18,8 +18,13 @@ format:
     fontfamily: libertinus
     colorlinks: true
     papersize: A4
+    extra_dependencies: ["fvextra"]
   docx: default
 theme: litera
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
 ```{r setup, include=FALSE}
@@ -35,7 +40,7 @@ _overview, data methods, and data wrangling with R + comparison with Python_
 
 # Overview
 
-This workshop reviews the basics of importing, examining, and manipulating data ("data wrangling") in R, with some brief comparisons to the Python approach to accomplishing the same tasks [Python examples will be integrated in upcoming versions.]
+This workshop reviews the basics of importing, examining, and manipulating data ("data wrangling") in R, with some brief comparisons to the Python approach to accomplishing the same tasks.
 
 ## Installation
 
@@ -280,7 +285,7 @@ The goal of [tidyr](https://tidyr.tidyverse.org) is to help you create tidy data
 - Every row is an observation.
 - Every cell is a single value.
 
-First we use _pivot_longer_ to create long format data. [Long vs. Wide data explained](https://www.thedataschool.com.au/mipadmin/the-shape-of-data-long-vs-wide/). Then we filter the data for a recent year (2023 has relatively complete data). The _pivot_wider_ to restore the data to wide format.
+First we use _pivot_longer_ to create long format data. [Long vs. Wide data explained](https://www.thedataschool.com.au/mipadmin/the-shape-of-data-long-vs-wide/). Then we filter the data for a recent year (2024 has relatively complete data). The _pivot_wider_ to restore the data to wide format.
 
 Note that we are also renaming the datasets as we go. This lets us easily go back to an earlier version if we mess anything up. As long as you have enough memory to do this, it is highly recommended.
 
@@ -290,31 +295,31 @@ Note that we are also renaming the datasets as we go. This lets us easily go bac
 
 gender_data2 <-
    gender_data |>
-   pivot_longer(3:67, names_to = "Year", values_to = "Value")
+   pivot_longer(3:68, names_to = "Year", values_to = "Value")
 
 # filter
 
-gender_data2023 <-
+gender_data2024 <-
   gender_data2 |>
-  filter(Year=="2023")
+  filter(Year=="2024")
 
-# we no longer need the Year variable, since all are 2023 
+# we no longer need the Year variable, since all are 2024 
 
-gender_data2023 <- gender_data2023[,-3]
+gender_data2024 <- gender_data2024[,-3]
 
 # pivot_wider
 
-gender_data2023wide <-
-  gender_data2023 |>
+gender_data2024wide <-
+  gender_data2024 |>
   pivot_wider(names_from = "Indicator Name", values_from = "Value")
 
 # write this version of the data to a file
 
-write_csv(gender_data2023wide, "widedata.csv")
+write_csv(gender_data2024wide, "widedata.csv")
 
 ```
 
-In much older R code, you will commonly see the "%>%" characters used to pass commands from one line to the next. This is called the "pipe" and is functionality introduced by the _magrittr_ package. Since this was used so much, it has been integrated into the _tidyverse_ without the need for an additional package. The "|>" character combination is the newer way of expressing this (although the older way will still work). When you see this, you can think of it as "and then" we pass to the next line. So "gender_data2023 |> pivot_wider" means take the gender_data2023 data "and then" use the pivot_wider command on it. This kind of syntax is very human-readable and easy-to-understand for steps in data wrangling.
+In much older R code, you will commonly see the "%>%" characters used to pass commands from one line to the next. This is called the "pipe" and is functionality introduced by the _magrittr_ package. Since this was used so much, it has been integrated into the _tidyverse_ without the need for an additional package. The "|>" character combination is the newer way of expressing this (although the older way will still work). When you see this, you can think of it as "and then" we pass to the next line. So "gender_data2024 |> pivot_wider" means take the gender_data2024 data "and then" use the pivot_wider command on it. This kind of syntax is very human-readable and easy-to-understand for steps in data wrangling.
 
 ## summarise  
 
@@ -324,12 +329,12 @@ Now that we have created the dataset, we can get descriptive statistics about ou
 
 ls()
 summary(gender_data)
-summary(gender_data2023)
-summary(gender_data2023wide)
+summary(gender_data2024)
+summary(gender_data2024wide)
 
 # summarise is the tidyverse way, from dplyr
 
-gender_data2023wide |>
+gender_data2024wide |>
   summarise_if(is.numeric, mean, na.rm=TRUE)
 
 ```
@@ -366,22 +371,22 @@ _mutate_ adds new variables that are functions of existing variables
 
 ```{r mutate}
 
-gender_data2023wide <-
-  gender_data2023wide |>
+gender_data2024wide <-
+  gender_data2024wide |>
   mutate(gdp_ratio = (`GDP per capita (Current US$)`/10000)/`Fertility rate, total (births per woman)`)
 
 # we can use a function like drop_na to eliminate missing data from a variable
 
-gender_data2023wide <-
-  drop_na(gender_data2023wide, gdp_ratio)
+gender_data2024wide <-
+  drop_na(gender_data2024wide, gdp_ratio)
 
-plot(gender_data2023wide$gdp_ratio)
+plot(gender_data2024wide$gdp_ratio)
 
-gender_data2023wide <-
-  gender_data2023wide |>
+gender_data2024wide <-
+  gender_data2024wide |>
   mutate(hi_ratio = gdp_ratio>0.78)
 
-attach(gender_data2023wide)
+attach(gender_data2024wide)
 
 ```
 
@@ -392,7 +397,7 @@ _select()_ picks variables based on their names. There are several flexible meth
 ```{r select}
 
 gender_gdp <-
-  select(gender_data2023wide, c(`Country Name`,starts_with("GDP")))
+  select(gender_data2024wide, c(`Country Name`,starts_with("GDP")))
 
 gender_gdp
 write_csv(gender_gdp, "gender_gdp.csv")
@@ -409,19 +414,19 @@ _filter_ picks cases based on their values. Here we further reduce the size of t
 
 country_list <- c("Armenia", "Azerbaijan", "Canada", "China", "France", "Georgia", "Germany", "India", "Italy", "Japan", "Kazakhstan", "Korea, Rep.", "Kyrgyz Republic", "Mexico", "Mongolia", "Russian Federation", "Saudi Arabia", "Tajikistan", "Turkiye", "Turkmenistan", "United Arab Emirates", "United Kingdom", "United States", "Uzbekistan")
 
-gender_data2023selected <-
+gender_data2024selected <-
   gender_gdp |>
   filter(`Country Name` %in% country_list)
 
-write_csv(gender_data2023selected, "gender_selected.csv")
+write_csv(gender_data2024selected, "gender_selected.csv")
 
 # filter by criteria
 
-gender_data2023filtered <-
-  gender_data2023selected |>
+gender_data2024filtered <-
+  gender_data2024selected |>
   filter(gdp_ratio>2)
 
-gender_data2023filtered
+gender_data2024filtered
 
 ```
 
@@ -431,12 +436,12 @@ _summarise_ reduces multiple values down to a single summary.
 
 ```{r summarise}
 
-gender_data2023wide |>
+gender_data2024wide |>
   summarise(mean = mean(gdp_ratio), n = n(), median = median(gdp_ratio))
 
 # Usually, you'll want to group first
 
-gender_data2023wide |>
+gender_data2024wide |>
   group_by(hi_ratio) |>
   summarise(mean = mean(gdp_ratio, na.rm=TRUE), n = n())
 
@@ -505,7 +510,7 @@ mtcars |>
 
 library(broom)
 
-regoutput<-lm(`GDP per capita (constant 2015 US$)`~`Fertility rate, total (births per woman)`, gender_data2023wide)
+regoutput<-lm(`GDP per capita (constant 2015 US$)`~`Fertility rate, total (births per woman)`, gender_data2024wide)
 
 # base R regression summary
 summary(regoutput)
@@ -517,7 +522,7 @@ augment(regoutput)
 
 # a grouped example
 
-regressions <- gender_data2023wide |>
+regressions <- gender_data2024wide |>
   group_by(hi_ratio) |>
   nest() |>
   mutate(
@@ -538,6 +543,60 @@ regressions |>
 
 ```
 
+# Using Python in RStudio, regression example
+
+We will be giving a flavor of the Python approach to these problems, without going in depth. Python is covered in other workshops in greater detail.
+
+Running Python in RStudio requires the _reticulate_ package. Your Python installation should also have _numpy_ and _scipy_ installed. Python will not have direct access to the R data structures, so we use a simplified example here from [Builtin.com](https://builtin.com/data-science/t-test-python)
+
+How to pass data from R to Python and vice-versa is described in this [blog post by Dima Diachkov](https://medium.com/data-and-beyond/how-to-seamlessly-integrate-python-into-r-rmarkdown-codes-2fe09cfdd0ee)
+
+Note that our code chunk is labeled Python. For more _reticulate_ package, see [this post](https://www.r-bloggers.com/2022/04/getting-started-with-python-using-r-and-reticulate/)
+
+Also note that it is also possible to invoke R from a Python environment using [rpy2](https://pypi.org/project/rpy2/)
+
+We will give a quick look at regression in Python, via the [scikit-learn package](https://scikit-learn.org/stable/) which provides Linear Regression and many other machine learning techniques. The [statsmodels](https://www.statsmodels.org/) package provides detailed regression output.
+
+```{python t-test python}
+
+import numpy as np
+import pandas as pd
+from scipy import stats
+from sklearn.linear_model import LinearRegression
+import statsmodels.formula.api as smf
+
+# import from R
+gender_python = r.gender_data2024wide
+
+# print(gender_python)
+
+# select variables
+
+labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+GDP = gender_python.loc[:,"GDP per capita (Current US$)"]
+
+# build data frame
+
+model = LinearRegression()
+df = pd.DataFrame({'labor': labor, 'GDP': GDP})
+
+# remove missing values
+
+df_drop = df.dropna()
+print(df_drop)
+
+X = df_drop[['GDP']]
+y = df_drop['labor']
+model = LinearRegression().fit(X, y)
+print(f"Coefficients: {model.coef_}, Intercept: {model.intercept_}")
+
+# from statsmodels
+
+model2 = smf.ols(formula='labor ~ GDP',
+                data=df).fit()
+print(model2.summary())
+
+```
 # R for Data Science
 
 Consult the [R for Data Science book](https://r4ds.hadley.nz/) to learn more about data wrangling. Also check out [tidymodels](https://www.tidymodels.org/) a collection of packages for modeling and machine learning using tidyverse principles.

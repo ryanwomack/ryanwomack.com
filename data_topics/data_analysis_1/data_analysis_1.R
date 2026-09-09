@@ -113,27 +113,27 @@ names(gender_data)
 
 gender_data2 <-
    gender_data |>
-   pivot_longer(3:67, names_to = "Year", values_to = "Value")
+   pivot_longer(3:68, names_to = "Year", values_to = "Value")
 
 # filter
 
-gender_data2023 <-
+gender_data2024 <-
   gender_data2 |>
-  filter(Year=="2023")
+  filter(Year=="2024")
 
-# we no longer need the Year variable, since all are 2023 
+# we no longer need the Year variable, since all are 2024 
 
-gender_data2023 <- gender_data2023[,-3]
+gender_data2024 <- gender_data2024[,-3]
 
 # pivot_wider
 
-gender_data2023wide <-
-  gender_data2023 |>
+gender_data2024wide <-
+  gender_data2024 |>
   pivot_wider(names_from = "Indicator Name", values_from = "Value")
 
 # write this version of the data to a file
 
-write_csv(gender_data2023wide, "widedata.csv")
+write_csv(gender_data2024wide, "widedata.csv")
 
 
 
@@ -141,41 +141,41 @@ write_csv(gender_data2023wide, "widedata.csv")
 
 ls()
 summary(gender_data)
-summary(gender_data2023)
-summary(gender_data2023wide)
+summary(gender_data2024)
+summary(gender_data2024wide)
 
 # summarise is the tidyverse way, from dplyr
 
-gender_data2023wide |>
+gender_data2024wide |>
   summarise_if(is.numeric, mean, na.rm=TRUE)
 
 
 
 ## ----mutate-------------------------------------------------------------------
 
-gender_data2023wide <-
-  gender_data2023wide |>
+gender_data2024wide <-
+  gender_data2024wide |>
   mutate(gdp_ratio = (`GDP per capita (Current US$)`/10000)/`Fertility rate, total (births per woman)`)
 
 # we can use a function like drop_na to eliminate missing data from a variable
 
-gender_data2023wide <-
-  drop_na(gender_data2023wide, gdp_ratio)
+gender_data2024wide <-
+  drop_na(gender_data2024wide, gdp_ratio)
 
-plot(gender_data2023wide$gdp_ratio)
+plot(gender_data2024wide$gdp_ratio)
 
-gender_data2023wide <-
-  gender_data2023wide |>
+gender_data2024wide <-
+  gender_data2024wide |>
   mutate(hi_ratio = gdp_ratio>0.78)
 
-attach(gender_data2023wide)
+attach(gender_data2024wide)
 
 
 
 ## ----select-------------------------------------------------------------------
 
 gender_gdp <-
-  select(gender_data2023wide, c(`Country Name`,starts_with("GDP")))
+  select(gender_data2024wide, c(`Country Name`,starts_with("GDP")))
 
 gender_gdp
 write_csv(gender_gdp, "gender_gdp.csv")
@@ -188,30 +188,30 @@ write_csv(gender_gdp, "gender_gdp.csv")
 
 country_list <- c("Armenia", "Azerbaijan", "Canada", "China", "France", "Georgia", "Germany", "India", "Italy", "Japan", "Kazakhstan", "Korea, Rep.", "Kyrgyz Republic", "Mexico", "Mongolia", "Russian Federation", "Saudi Arabia", "Tajikistan", "Turkiye", "Turkmenistan", "United Arab Emirates", "United Kingdom", "United States", "Uzbekistan")
 
-gender_data2023selected <-
+gender_data2024selected <-
   gender_gdp |>
   filter(`Country Name` %in% country_list)
 
-write_csv(gender_data2023selected, "gender_selected.csv")
+write_csv(gender_data2024selected, "gender_selected.csv")
 
 # filter by criteria
 
-gender_data2023filtered <-
-  gender_data2023selected |>
+gender_data2024filtered <-
+  gender_data2024selected |>
   filter(gdp_ratio>2)
 
-gender_data2023filtered
+gender_data2024filtered
 
 
 
 ## ----summarise----------------------------------------------------------------
 
-gender_data2023wide |>
+gender_data2024wide |>
   summarise(mean = mean(gdp_ratio), n = n(), median = median(gdp_ratio))
 
 # Usually, you'll want to group first
 
-gender_data2023wide |>
+gender_data2024wide |>
   group_by(hi_ratio) |>
   summarise(mean = mean(gdp_ratio, na.rm=TRUE), n = n())
 
@@ -244,7 +244,7 @@ mtcars |>
 
 library(broom)
 
-regoutput<-lm(`GDP per capita (constant 2015 US$)`~`Fertility rate, total (births per woman)`, gender_data2023wide)
+regoutput<-lm(`GDP per capita (constant 2015 US$)`~`Fertility rate, total (births per woman)`, gender_data2024wide)
 
 # base R regression summary
 summary(regoutput)
@@ -256,7 +256,7 @@ augment(regoutput)
 
 # a grouped example
 
-regressions <- gender_data2023wide |>
+regressions <- gender_data2024wide |>
   group_by(hi_ratio) |>
   nest() |>
   mutate(
@@ -276,3 +276,42 @@ regressions |>
   unnest(augmented)
 
 
+
+## 
+## import numpy as np
+## import pandas as pd
+## from scipy import stats
+## from sklearn.linear_model import LinearRegression
+## import statsmodels.formula.api as smf
+## 
+## # import from R
+## gender_python = r.gender_data2024wide
+## 
+## # print(gender_python)
+## 
+## # select variables
+## 
+## labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+## GDP = gender_python.loc[:,"GDP per capita (Current US$)"]
+## 
+## # build data frame
+## 
+## model = LinearRegression()
+## df = pd.DataFrame({'labor': labor, 'GDP': GDP})
+## 
+## # remove missing values
+## 
+## df_drop = df.dropna()
+## print(df_drop)
+## 
+## X = df_drop[['GDP']]
+## y = df_drop['labor']
+## model = LinearRegression().fit(X, y)
+## print(f"Coefficients: {model.coef_}, Intercept: {model.intercept_}")
+## 
+## # from statsmodels
+## 
+## model2 = smf.ols(formula='labor ~ GDP',
+##                 data=df).fit()
+## print(model2.summary())
+## 
