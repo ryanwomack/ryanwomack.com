@@ -1,9 +1,3 @@
-# Data Analysis 1
-# Ryan Womack, ryan@ryanwomack.com
-# 2026-09-09 version
-# Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-
 ## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis_1/")
