@@ -1,8 +1,3 @@
-# Data Analysis 2
-# Ryan Womack, ryan@ryanwomack.com
-# 2025-09-15 version
-# Copyright Ryan Womack, 2025. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
 ## ----setup, include=FALSE-----------------------------------------------------
 
 knitr::opts_chunk$set(echo = TRUE)
@@ -58,22 +53,22 @@ gender_data2 <-
 # clean the data to focus on a recent more complete time period
 gender_data3 <-
    gender_data2 %>%
-   pivot_longer(3:66, names_to = "Year", values_to = "Value")
+   pivot_longer(3:68, names_to = "Year", values_to = "Value")
 
 #filter by year
-gender_data2022 <-
+gender_data2024 <-
   gender_data3 %>%
-  filter(Year=="2022")
+  filter(Year=="2024")
 
-gender_data2022 <- gender_data2022[,-3]
+gender_data2024 <- gender_data2024[,-3]
 
-gender_data2022wide <-
-  gender_data2022 %>%
+gender_data2024wide <-
+  gender_data2024 %>%
   pivot_wider(names_from = "Indicator Name", values_from = "Value")
 
 # now use a little sapply trick to select variables that don't have much missing data - here the proportion is 0.75 (the 0.25 in the function is 1-proportion desired)
 
-gender_data_filtered <- gender_data2022wide[,!sapply(gender_data2022wide, function(x) mean(is.na(x)))>0.25]
+gender_data_filtered <- gender_data2024wide[,!sapply(gender_data2024wide, function(x) mean(is.na(x)))>0.25]
 
 # and lastly simplify the dataset by removing some of the topics we won't use
 
@@ -89,7 +84,6 @@ gender_data_final$female_high_labor <- gender_data_final$`Labor force participat
 gender_data_final$male_high_labor <- gender_data_final$`Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)`>70 
 
 attach(gender_data_final)
-
 
 
 ## ----t-test-------------------------------------------------------------------
@@ -226,19 +220,19 @@ summary(lm(`Labor force participation rate, female (% of female population ages 
 
 summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`))
 
-summary(lm(`Fertility rate, total (births per woman)`~`GDP per capita (constant 2010 US$)`))
+summary(lm(`Fertility rate, total (births per woman)`~`GDP per capita (constant 2015 US$)`))
 
 
 
 ## ----linear regression with no intercept--------------------------------------
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2010 US$)`-1))
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`GDP per capita (constant 2015 US$)`-1))
 
 
 
 ## ----multiple linear regression-----------------------------------------------
 
-summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`))
+summary(lm(`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`~`Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`))
 
 
 
@@ -278,7 +272,7 @@ plot(regoutput, pch=3)
 
 ## ----logistic regression------------------------------------------------------
 
-logistic_output <- glm(female_high_labor ~ `Fertility rate, total (births per woman)`+`GDP per capita (constant 2010 US$)`, family=binomial)
+logistic_output <- glm(female_high_labor ~ `Fertility rate, total (births per woman)`+`GDP per capita (constant 2015 US$)`, family=binomial)
 
 summary(logistic_output)
 
@@ -310,15 +304,17 @@ summary(logistic_output)
 ## ----point_estimate-----------------------------------------------------------
 
 point_estimate <- gender_data_final %>%
-  specify(response = `A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)`) %>%
+  specify(response = `Fertility rate, total (births per woman)`) %>%
   calculate(stat = "mean")
+
+point_estimate
 
 
 
 ## ----bootstrap confidence interval--------------------------------------------
 
 boot_dist_dangerous <- gender_data_final %>%
-  specify(response = `A woman can work in a job deemed dangerous in the same way as a man (1=yes; 0=no)`) %>%
+  specify(response = `Fertility rate, total (births per woman)`) %>%
   generate(reps = 50000, type = "bootstrap") %>%
   calculate(stat = "mean")
   
@@ -345,6 +341,8 @@ boot_dist_dangerous %>%
 ## ----labor_diff---------------------------------------------------------------
 
 labor_diff <- `Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)` - `Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`
+
+labor_diff
 
 
 
