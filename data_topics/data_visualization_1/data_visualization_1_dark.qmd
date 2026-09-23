@@ -1,0 +1,1001 @@
+---
+title: "Data Visualization 1"
+author: "Ryan Womack"
+date: "2026-09-22"
+toc:toc: true true
+number-sections: true
+highlight-style: pygments
+output: html_document
+format:
+  html: 
+    toc: true
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+    fontfamily: libertinus
+    colorlinks: true
+    papersize: A4
+    prefer-html: false
+  docx: default
+theme: cyborg
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(root.dir = "/home/ryan/R/data_topics/data_analysis_2/")
+
+```
+
+Copyright Ryan Womack, 2026. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+**Data Visualization 1**
+
+_visualization methods with R + comparison with Python_
+
+# Overview
+
+This workshop provides an overview of data visualization in R, primarily using _ggplot2_. For comparison purposes, an alternative Python approach using _matplotlib_ and _seaborn_ is illustrated in some cases.
+
+Note that "packages" in R are the equivalent of "modules" in Python.
+
+# Setup and preparing data
+
+## R packages required
+
+We will use the [_pak_](https://pak.r-lib.org/) package for installation as a more complete approach to package management. Replace the pkg commands with _install.packages()_ versions if you prefer.
+
+This session relies on the [_tidyverse_](https://tidyverse.org) suite of packages for data manipulation as a preference, although the same tasks could be accomplished in base R. We will focus on _ggplot2_ and its related ecosystem of extensions and helper packages. A few of the packages are used only for very brief illustration purposes, including one that uses github installaion. You can skip that if you're not familiar with this methods. Install _pak_ and _tidyverse_ if you don't already have them on your system. We will also need _reticulate_ to run Python code chunks. The other packages are listed in the code below:
+
+```{r install packages, eval=FALSE}
+
+install.packages("pak", dependencies=TRUE)
+library(pak)
+pkg_install("tidyverse")
+pkg_install("reticulate")
+pkg_install("gganimate")
+pkg_install("ggridges")
+pkg_install("ggthemes")
+pkg_install("magick")
+pkg_install("RColorBrewer")
+pkg_install("hexbin")
+pkg_install("ggiraph")
+pkg_install("patchwork")
+pkg_install("sf")
+pkg_install("plotly")
+
+# less important
+
+pkg_install("Ecdat")
+pkg_install("remotes")
+remotes::install_github("R-CoderDotCom/ggcats@main")
+
+devtools::session_info()
+
+```
+
+Now let's load the needed packages and _reticulate_ (for Python support only). For _reticulate_, you will need to edit the path to match where Python resides on your system.
+
+```{r library loading}
+
+library(tidyverse)
+Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")
+library(reticulate)
+library(tidyverse)
+library(reticulate)
+library(gganimate)
+library(ggridges)
+library(ggthemes)
+library(magick)
+library(RColorBrewer)
+library(hexbin)
+library(ggiraph)
+library(patchwork)
+library(sf)
+library(plotly)
+
+# less important
+
+library(Ecdat)
+library(remotes)
+library(ggcats)
+
+```
+
+## Data import and preparation
+
+Now let's grab some data. We will use a realistic data example, the [World Bank's Gender Statistics database](https://genderdata.worldbank.org/), whose [raw data](https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip) is directly downloadable. Other [World Bank Open Data](https://data.worldbank.org/) is available as well. See [genderdata.worldbank.org](https://genderdata.worldbank.org) for more background on the Gender Data portal. Note that we have to inspect the data and understand the variables first before manipulating in R -- this is not an automatic process. This is the same data example used in [Data Analysis 1](https://ryanwomack.com/data_topics/data_analysis_1/data_analysis_1.html) and [Data Analysis 2](https://ryanwomack.com/data_topics/data_analysis_2/data_analysis_2.html)
+
+```{r download and import data}
+
+getOption("timeout")
+options(timeout=6000)
+download.file("https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip", "gender.zip")
+unzip("gender.zip")
+gender_data <- read_csv("Gender_StatsCSV.csv")
+
+```
+
+Now we'll perform a few steps to clean the data. We will use two versions of this data, one is the _gender_data_final_ file of all countries and regions, for 170 selected variables from the latest available data year with complete data, typically the year before the last in the data set. The second is a shorter list of our chosen countries, _gender_data_filtered_, based on a dozen countries (Central Asia and Mongolia plus selected high population or high income countries).  For this session, we'll just run these steps without explaining them. Data cleaning and wrangling is covered in more detail in the Data Analysis 1 workshop.  We will _attach_ these as needed so that a copy of the data is made the default dataset for this session.
+
+```{r data wrangling, results='hide', echo=TRUE, results='hide', error=FALSE, warning=FALSE, message=FALSE}
+
+# clean the data to remove superfluous columns
+names(gender_data)
+gender_data <- gender_data[,c(-2,-4)]
+names(gender_data)
+
+# clean the data to focus on a recent more complete time period
+gender_data2 <-
+   gender_data %>%
+   pivot_longer(3:68, names_to = "Year", values_to = "Value")
+
+#filter by year
+gender_data2024 <-
+  gender_data2 %>%
+  filter(Year=="2024")
+
+gender_data2024 <- gender_data2024[,-3]
+
+gender_data2024wide <-
+  gender_data2024 %>%
+  pivot_wider(names_from = "Indicator Name", values_from = "Value")
+
+# now use a little sapply trick to select variables that don't have much missing data - here the proportion is 0.75 (the 0.25 in the function is 1-proportion desired)
+
+gender_data_filtered <- gender_data2024wide[,!sapply(gender_data2024wide, function(x) mean(is.na(x)))>0.25]
+
+# and lastly simplify the dataset by removing some of the topics we won't use
+
+phrases <- c("Worried", "Made", "Received", "Saved", "Used", "Coming", "Borrowed")
+
+gender_data_final <- 
+  gender_data_filtered %>%
+  select(!starts_with(phrases))
+
+# we'll also generate a couple of variables for future use
+
+gender_data_final$female_high_labor <- gender_data_final$`Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)`>70
+gender_data_final$male_high_labor <- gender_data_final$`Labor force participation rate, male (% of male population ages 15-64) (modeled ILO estimate)`>70 
+
+# also for one step with pthon
+
+gender_data_final$female_high_numeric <- as.numeric(gender_data_final$female_high_labor)
+
+# select countries of interest
+country_list <- c("China", "Germany", "India", "Japan", "Kazakhstan", "Kyrgyz Republic", "Mongolia", "Russian Federation", "Tajikistan", "Turkmenistan", "United States", "Uzbekistan")
+
+gender_data_selected <-
+  gender_data_final %>%
+  filter(`Country Name` %in% country_list)
+
+attach(gender_data_final)
+```
+
+We will have some missing data issues, so get rid of NAs with the following code, taking care over the form of the quotes and variable names since these commands are fussy. We will also provide short versions of our variable names for later use. This is just a convenience to shorten some later commands.
+
+```{r missing data, echo=TRUE, results='hide', error=FALSE, warning=FALSE, message=FALSE}
+
+gender_data_final <- gender_data_final |>
+  drop_na(`Labor force participation rate for ages 15-24, female (%) (modeled ILO estimate)`) |>
+  drop_na(`Labor force participation rate for ages 15-24, male (%) (modeled ILO estimate)`) |>
+  drop_na(`GDP per capita (constant 2015 US$)`) |>
+  drop_na(`Fertility rate, total (births per woman)`)
+  
+# and redefine the selected list after these changes
+  
+  gender_data_selected <-
+  gender_data_final %>%
+  filter(`Country Name` %in% country_list)
+
+attach(gender_data_final)
+
+# short names
+
+labor_f <- gender_data_final$'Labor force participation rate for ages 15-24, female (%) (modeled ILO estimate)'                                    
+labor_m <- gender_data_final$'Labor force participation rate for ages 15-24, male (%) (modeled ILO estimate)'
+
+gdp <- gender_data_final$'GDP per capita (constant 2015 US$)'
+
+fertility <- gender_data_final$'Fertility rate, total (births per woman)'
+
+s_labor_f <- gender_data_selected$'Labor force participation rate for ages 15-24, female (%) (modeled ILO estimate)'                                    
+s_labor_m <- gender_data_selected$'Labor force participation rate for ages 15-24, male (%) (modeled ILO estimate)'
+
+s_gdp <- gender_data_selected$'GDP per capita (constant 2015 US$)'
+
+s_fertility <- gender_data_selected$`Fertility rate, total (births per woman)`
+
+```
+
+# Data Visualization
+
+We will explore via visualization some basic relationships between labor participation, gender, fertility, and income, using the [World Bank's own definition of gender](https://genderdata.worldbank.org/en/about): 
+
+>"Gender refers to the social, behavioral, and cultural attributes, expectations, and norms associated with being male or female."
+
+Note that this is just for the purposes of demonstration, and not a serious investigation into these important research issues.
+
+## base R _graphics_ and _lattice_ 
+
+In previous versions of my data visualization workshops, I have begun by giving examples from base R's _graphics_ package, which loads by default in R, and the _lattice_ package, which uses mostly base R syntax to accomplish some more powerful tasks with grouping data. Those are worthwhile things to learn, and you will still encounter a lot of code using them. However, including that material would keep this from being a concise, focused session on getting started with _ggplot2_, so they are omitted here.
+
+Learners interested in more on _graphics_ and _lattice_ can consult the older "tidyverse approach" version of this workshop at [my github](https://github.com/ryandata/tidyverse_approach/blob/master/R_graphics_with_ggplot2.R).
+
+A quick overview of base R graphics is provided by [intro2r](https://intro2r.com/simple-base-r-plots.html).
+
+References and examples to base R (and some ggplot2) plot techniques can be found at [R charts](https://r-charts.com/) and [R graph gallery](https://r-graph-gallery.com/).
+
+## goals of visualization
+
+This session will run through various coding examples, but the underlying philosophy is that in order to understand our research data, we should have multiple tools at our disposal to learn about the data's structure and characteristics. Applying various visualizations and graphic techniques to data can reveal those patterns.
+
+## why _ggplot2_?
+
+Just as with other [_tidyverse_](https://tidyverse.org) packages, we choose _ggplot2_ because it gives us a large degree of functionality with consistent, layerable commands, and produces high quality output that does not need much tweaking to be publication ready. It does not represent the complete possibilities of R that are spread out across numerous packages, but it represents an excellent starting point to get up and running quickly.
+
+Like other tidyverse commands, the complete documentation for _ggplot2_ is available not only R help, but conveniently online at [ggplot2.tidyverse.org](https://ggplot2.tidyverse.org).
+
+# Basic examples and syntax
+
+Despite what we said about focusing on _ggplot2_, I will use one base R _graphics_ command, to illustrate "standard" R syntax: namely, everything in a single command, with nested parentheses. The command _plot_ generates a scatterplot. We can also layer a line on top of the plot (here a regression line) in a separate step.
+
+```{r base graphics}
+
+plot(gdp~labor_f)
+
+plot(s_gdp~s_labor_f)
+
+plot(gdp~labor_f)
+abline(lm(gdp~labor_f), col="red")
+
+```
+
+Now for the _ggplot_ way:
+
+```{r first ggplot}
+
+ggplot(data=gender_data_final, aes(x=labor_f, y=gdp))
+
+```
+
+What happened here? Something happened. We can see that the coordinates have been mapped out according to the available data. But where is our scatterplot?
+
+The answer: _ggplot_ uses multi-part commands, linking an initial statement defining the data to be graphed to at least one other statement specifying the kind of plot, using a "+" symbol. 
+
+We can also modify portions of the graph by passing options inside the relevant segment of the code. In the example below, we pass an option to color the points (inside the _geom_point_ command), according to whether the country has a high or low female labor participation rate, as defined in our data setup.
+
+```{r second ggplot}
+
+ggplot(data=gender_data_final, aes(x=labor_f, y=gdp)) + geom_point()
+
+ggplot(data=gender_data_final, aes(x=labor_f, y=gdp)) + geom_point(aes(color=female_high_labor))
+
+```
+
+_ggplot_ uses some default conventions from best principles in the data visualization world, such as the light grey background, allowing a subtle grid to be shown, that locates the data without overshadowing the points. In general, the visualizations are "well-behaved" in this way.
+
+We can also layer a regression line on top of the plot. This occurs in a natural way with another "+" defining the additional type of graphing to be done. The term "geom" for geometry is ggplot's lingo for these different kinds of visualizations. Vist the ggplot2 site for the [list of geoms](https://ggplot2.tidyverse.org/reference/index.html#geoms) available.
+
+Putting a 45-degree line on the plot shows us that for nearly all but a few countries, male labor force participation is higher than female.
+
+```{r regression}
+
+ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(aes(color=female_high_labor)) + geom_smooth(method="lm")
+
+ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(aes(color=female_high_labor)) + geom_abline(intercept = 0, slope = 1)
+
+```
+
+We can also group the data using the "facet" component of the syntax.
+
+```{r facet}
+
+ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(aes(color=female_high_labor)) + facet_wrap(male_high_labor)
+
+```
+
+Note that ggplot makes it easy for us to plot multiple things at once via a natural syntax.
+
+## A fully dressed plot
+
+We can also label the axes and title, and tweak things like the color and style (pch or "print character") of the points.
+
+```{r fully dressed plot}
+
+ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(color="purple3", pch=19) + geom_abline(intercept = 0, slope = 1) + labs(x="male labor participation (percent)", y="female labor participation (percent)", title="Comparing male and female labor participation") 
+
+```
+
+Here's [a list of those pch symbols](https://r-charts.com/base-r/pch-symbols/)
+  
+# The Grammar of Graphics
+
+Much of _ggplot2_'s distinctive syntax is because it is derived from the book [The Grammar of Graphics](https://go.rutgers.edu/RULQS-t4dva43r), which proposed a theoretical framework for computer graphics, that separated different aspects of graphing into different parts. While the book is online via Springer Nature, the [Wikipedia summary](https://en.wikipedia.org/wiki/Wilkinson's_Grammar_of_Graphics) may serve as a starting point.
+
+The term "aes", frequently encountered in _ggplot2_ commands, is short for aesthetics, namely the look and feel of whatever element you are modified. The initial "aes" statement specifies that we want to visualize (the look and feel) of particular data elements. The "aes" modifier can also appear in other syntax elements, modifying the look of the graph, the theme, or other things.
+
+If the initial statement is the subject, and the "geom" commands are verbs, other modifiers can be viewed as adjectives or adverbs, such as  facet, labels ("labs"), theme, and more.
+
+There was presumably a ggplot before _ggplot2_, but _ggplot2_ itself has been around for a long time. I haven't researched the precise history of that.
+
+Why do we bother with this approach? Because modularizing the code this way makes it more easily understood, modifiable, and reusable. We'll see some examples of this shortly.
+
+# Detour into Python
+
+We will be giving a flavor of the Python approach to graphics, without going in depth. Python is covered in other workshops in greater detail.
+
+Running Python in RStudio requires the _reticulate_ package. The leading modules for graphics and visualization in Python are _matplotlib_ and _seaborn_, which you should have installed, along with _numpy_ and _scipy_.
+
+How to pass data from R to Python and vice-versa is described in this [blog post by Dima Diachkov](https://medium.com/data-and-beyond/how-to-seamlessly-integrate-python-into-r-rmarkdown-codes-2fe09cfdd0ee)
+
+Note that our code chunk is labeled Python. For more _reticulate_ package, see [this post](https://www.r-bloggers.com/2022/04/getting-started-with-python-using-r-and-reticulate/)
+
+Also note that it is also possible to invoke R from a Python environment using [rpy2](https://pypi.org/project/rpy2/)
+
+## _matplotlib_
+
+Use of [_matplotlib_](https://matplotlib.org/) is fundamental in the world of Python graphics. Its style is comparable to that of base R. Little is done automatically, but we can pass, line-by-line, and parameter-by-parameter, everything that will control and tweak the image.
+
+The unique step in _reticulate_ is that we pass the R data object to Python in a separate step (r.gender_data_final). Otherwise, this is straight Python code.
+
+The [Python Graph Gallery](https://python-graph-gallery.com/) can give more examples of _matplotlib_ code. In particular, [scatterplot with regression](https://python-graph-gallery.com/scatterplot-with-regression-fit-in-matplotlib/).
+
+```{python matplotlib}
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from scipy import stats
+
+# import from R
+
+gender_python = r.gender_data_final
+
+# specify variables
+
+labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+gdp = gender_python.loc[:,"GDP per capita (constant 2015 US$)"]
+
+# Initialize layout
+
+fig, ax = plt.subplots(figsize=(9, 9))
+
+# Add scatterplot
+
+ax.scatter(labor, gdp, s=60, alpha=0.7, edgecolors="k")
+
+# Fit linear regression via least squares with numpy.polyfit
+# It returns an slope (b) and intercept (a)
+# deg=1 means linear fit (i.e. polynomial of degree 1)
+
+b, a = np.polyfit(labor, gdp, deg=1)
+
+# Create sequence of 100 numbers from 0 to 100
+
+xseq = np.linspace(0, 100, num=1000)
+
+# Plot regression line
+
+ax.plot(xseq, a + b * xseq, color="k", lw=2.5)
+
+# show the plot
+
+plt.show()
+
+```
+
+## _seaborn_
+
+The [_seaborn_](https://seaborn.pydata.org/) module is not directly comparable to _ggplot2_, but in contrast to _matplotlib_, it does attempt to provide users with graphs that are "pretty by default", while giving up fine-grained control. Sometimes _seaborn_ is a useful way to quickly achieve the desired output and save time.
+
+Once again, the [Python Graph Gallery](https://python-graph-gallery.com/) can provide further code examples, such as [regression plots with seaborn](https://python-graph-gallery.com/42-custom-linear-regression-fit-seaborn/). The code chunk below illustrates some tweaking of the line width and style.
+
+```{python seaborn}
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# import from R
+
+gender_python = r.gender_data_final
+
+# specify variables
+
+labor = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+gdp = gender_python.loc[:,"GDP per capita (constant 2015 US$)"]
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.regplot(
+    x=labor,
+    y=gdp,
+    line_kws={"color": "red", "linewidth": 1.5},
+    ax=ax
+)
+plt.show()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.regplot(
+    x=labor,
+    y=gdp,
+    line_kws={
+        "color": "r",
+        "alpha": 0.4
+    },
+    ax=ax
+)
+plt.show()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.regplot(
+    x=labor,
+    y=gdp,
+    line_kws={
+        "color": "darkred",
+        "alpha": 0.4,
+        "lw": 5,
+        "ls": "--"
+    },
+    ax=ax
+)
+plt.show()
+
+```
+
+# Other features and graph types
+
+## save and export graphs
+
+While we can use the buttons within Rstudio to save and export our graphs, it is very useful to do this precisely and reproducibly in code. A feature not available in base R _graphics_ is the ability to store _ggplot2_ graphs as reusable objects in the R workspace. Using the usual R assignment operator, we can easily have multiple graphs at our fingertips to pull up, compare, or modify. 
+
+```{r save graph}
+
+mygraph <- ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(color="purple3", pch=19) + geom_abline(intercept = 0, slope = 1) + labs(x="male labor participation (percent)", y="female labor participation (percent)", title="Comparing male and female labor participation")
+
+```
+
+We can also export PDFs or image files (PNG, JPG, TIFF, BMP) directly with code, allowing to specify a filename and location, and parameters such as image quality and image size.
+
+These commands first initiate the routing of output to a file (via "pdf" or "png" or similar), then execute a graph command (PDFs can hold multiple graphs too), which will not display on screen. Finally the "dev.off" command turns off the routing to a file. The cryptic "null device" statement indicates that the process has concluded.
+
+```{r export graph}
+
+# export pdf 
+
+pdf(file="output.pdf")
+
+ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(color="purple3", pch=19) + geom_abline(intercept = 0, slope = 1) + labs(x="male labor participation (percent)", y="female labor participation (percent)", title="Comparing male and female labor participation") 
+
+dev.off()
+
+# export jpg
+
+jpeg(file="output.jpg", width = 800, height = 600, quality=100)
+
+mygraph
+
+dev.off()
+
+```
+
+## bar charts
+
+For this we'll use our smaller selected countries
+
+```{r barchart}
+
+ggplot(gender_data_selected, aes(x=`Fertility rate, total (births per woman)`)) + geom_bar(position="stack") 
+
+```
+
+Note that output doesn't make sense, or at least is not very useful. This does:
+
+```{r barchart 2}
+
+ggplot(gender_data_selected, aes(x=`female_high_labor`)) + geom_bar(position="stack") 
+
+```
+
+We need to take some care with the type of variables we use and match them to our commands.
+
+There are two types of bar charts: _geom_bar()_ and _geom_col()_. _geom_bar()_ makes the height of the bar proportional to the number of cases in each group (or if the weight aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use _geom_col()_ instead. _geom_bar()_ uses _stat_count()_ by default: it counts the number of cases at each x position. _geom_col()_ uses _stat_identity()_: it leaves the data as is. We can also tweak some of the options to improve legibility.
+
+```{r geom_col}
+
+ggplot(gender_data_selected, aes(x=`Country Name`, y=s_fertility)) + geom_col(position="dodge")
+
+ggplot(gender_data_selected, aes(x=`Country Name`, y=s_fertility)) + geom_col(position="dodge", fill = s_fertility) 
+
+# tweak it further
+
+ggplot(gender_data_selected, aes(x=`Country Name`, y=s_fertility)) + geom_col(position="dodge", aes(fill=s_fertility)) + labs(x="Country", y="Fertility", title="Fertility rate by Country") + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_gradient(low = "lightgreen", high = "darkgreen") + scale_x_discrete(guide = guide_axis(angle = 45))
+
+```
+
+See [this guide for working with color in ggplot2](https://r-graph-gallery.com/ggplot2-color.html) for some more tips on color selection and use.
+
+To change the title position to centered throughout our session, we can use _theme_update_ to accomplish this. The 0.5 indicates that the title should be placed 50% of the way across the image.
+
+```{r theme update}
+
+theme_update(plot.title = element_text(hjust = 0.5))
+ggplot() + ggtitle("Default is now set to centered")
+
+```
+
+
+## histogram
+
+The basic histogram is straightforward, but once again we may wish to enhance by techniques such as adjusting the fill color by the count of the data, illustrated below:
+
+```{r histogram}
+
+ggplot(gender_data_final, aes(fertility)) + geom_histogram()
+
+ggplot(gender_data_final, aes(fertility)) + geom_histogram(aes(fill = after_stat(count)))
+
+```
+
+## histogram - Python edition
+
+Just a quick illustration of the histogram done with _matplotlib_.
+
+```{python matpotlib histogram}
+
+import matplotlib.pyplot as plt
+
+# Load the example tips dataset
+
+gender_python = r.gender_data_final
+
+# specify variables
+
+labor_f = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+female_high_numeric = gender_python.loc[:,"female_high_numeric"]
+
+# matplotlib version
+
+fig.clear()
+data = gender_python["Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+plt.hist(data, color='skyblue', edgecolor='black')
+plt.xlabel('percent participation')
+plt.ylabel('Count')
+plt.title('Histogram of female labor participation')
+plt.show()
+```
+
+And now with _seaborn_.
+
+```{python seaborn histogram}
+
+import seaborn as sns
+sns.set_theme()
+
+# Load the example tips dataset
+
+gender_python = r.gender_data_final
+
+# specify variables
+
+labor_f = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+female_high_numeric = gender_python.loc[:,"female_high_numeric"]
+
+# seaborn version
+
+fig, ax = plt.subplots(figsize=(8, 6))
+chart = sns.histplot(data=gender_python, x="Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)")
+chart.set_title('Histogram of female labor participation')
+chart.set_xlabel('percent participation')
+chart.set_ylabel('Count')
+plt.show()
+
+```
+
+## box plot
+
+Box plots are commonly used in science and are useful for understanding the range and concentration of the distribution of data. The box plot is quickly illustrated below, in plain form.  The _coord_flip_ command is a separate piece of "grammar" that transposes the graph.
+
+```{r box plot}
+
+ggplot(gender_data_final, aes(x=female_high_labor, y=labor_f)) + geom_boxplot()
+
+ggplot(gender_data_final, aes(x=female_high_labor, y=labor_f)) + geom_boxplot() + coord_flip()
+
+```
+
+## box plot - Python edition
+
+Let's look at quick examples of boxplots in _matplotlib_ and _seaborn_. In general, we can always use the commands that we are most familiar with and best suit our needs. There is no one path to the best output in data visualization!
+
+```{python matpotlib boxplot}
+
+import matplotlib.pyplot as plt
+
+# Load the example tips dataset
+
+gender_python = r.gender_data_final
+
+# specify variables
+
+labor_f = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+female_high_numeric = gender_python.loc[:,"female_high_numeric"]
+
+# matplotlib version
+
+fig.clear()
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.boxplot(labor_f, patch_artist=True, boxprops=dict(facecolor='skyblue'))
+plt.xlabel('')
+plt.ylabel('percent participation')
+plt.title('box plot of female labor participation')
+plt.show()
+
+```
+
+Note that breaking the data into groups is not so easy in matplotlib. We would have to pass a matrix of data with two different columns for two different groups. Our dataset is not set up this way, and so it is easier to turn to _seaborn_ to plot two or more groups of data.
+
+```{python seaborn box plot}
+
+import seaborn as sns
+sns.set_theme()
+
+# Load the example tips dataset
+
+gender_python = r.gender_data_final
+
+# specify variables
+
+labor_f = gender_python.loc[:,"Labor force participation rate, female (% of female population ages 15-64) (modeled ILO estimate)"]
+female_high_numeric = gender_python.loc[:,"female_high_numeric"]
+
+# Draw a seaborn boxplot
+
+fig, ax = plt.subplots(figsize=(8, 6))
+chart = sns.boxplot(x=female_high_numeric, y=labor_f)
+chart.set_title('low (0) and high (1) groups')
+chart.set_xlabel('percent participation')
+chart.set_ylabel('box plot of female labor participation')
+plt.show()
+
+```
+
+## hexbin
+
+The hexbin method uses shaded hexagonal tiles to illustrate the amount of data in each area. This is another way of understanding data density, implemented in _ggplot2_ with _geom_hex_.
+
+```{r hexbin}
+
+ggplot(gender_data_final, aes(x=labor_m, y=labor_f)) + geom_hex() 
+
+```
+
+## regression
+
+A regression line can be added as a separate "geom" with _geom_smooth_, which can produce several types of fitted lines: here method lm is used for a linear regression. The _stat_smooth_ generates a curved line that is another way to represent best fit. The default implementation (which can be modified) is a LOESS fit. Confidence bands illustrating the accuracy of the fit are automatically shown. We can also plot customized confidence interval bands, but this requires computing them separately [see ggplot2 help]. Here the examples show the positive relationship between male and female labor participation rates.
+
+```{r ggplot regression}
+
+ggplot(gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point() + geom_smooth(method=lm)
+
+ggplot(gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point() + stat_smooth()
+
+```
+
+## theme tweaks
+
+Here we simply illustrate a few ways of changing the theme look and feel. In general, the graphs are infinitely customizable. We also invoke options to adjust the color and palettes used for the plots.
+
+```{r theme tweaks}
+
+ggplot(gender_data_final, aes(x=fertility, y=gdp)) + facet_grid(.~female_high_labor) + geom_point(fill="purple") + theme(panel.background = element_rect(fill='pink', colour='green'))
+
+ggplot(gender_data_final, aes(x=fertility, y=gdp)) + facet_grid(.~female_high_labor) + geom_point(fill="purple") + theme(panel.background = element_rect(fill='white', colour='black'))
+
+ggplot(gender_data_final, aes(x=fertility, y=gdp)) + facet_grid(.~female_high_labor) + geom_point(aes(color=gdp)) +
+scale_colour_distiller(palette = "Dark2", trans = "reverse")
+
+# this option can be used in some contexts
+# scale_color_manual(values = c("yellow","orange","pink","red","purple"))
+
+```
+
+# Using the power
+
+Here we show the power of the Grammar of Graphics in action. We can store R objects that correspond to the data elements of our graph, a theme applied to the graph, and the type of graph to be created. By then stringing these together, we generate a complete graph. Note the scale_colour_distiller must be attached to the ggplot data object, not to some other part of the syntax.
+
+Using this, we can write clean code that has simplified commands. Then, if we wish to modify the data being plotted, or change the theme across all code, or similar, we can simply edit the initial line of code that defines mydata or mytheme.
+
+```{r using the power}
+
+mydata <- ggplot(gender_data_final, aes(x=fertility, y=gdp)) + facet_grid(.~female_high_labor) +
+scale_colour_distiller(palette = "Dark2", trans = "reverse")
+
+mytheme <- theme(panel.background = element_rect(fill='lightblue', colour='darkgrey')) 
+
+mychart <- geom_point(aes(color=gdp)) 
+
+mydata+mytheme+mychart
+
+```
+
+# Plotly
+
+[Plotly](https://plotly.com/) provides interactive visualization in Python, Javascript, and other environments. The _plotly_ package in R brings interactivity to R graphics in a ggplot-friendly syntax. Plotly has the additional advantage of seamlessly working across Python and R and other languages with the same framework. Also, unlike the _ggplot2_ commands used up to now, Plotly output is web-friendly and can be embedded in HTML easily. 
+
+We will just provide a quick example of that here, but interactivity is an important tool in allowing the user to explore the richness of complex data sources. Plotly does this, and [Shiny](https://shiny.tidyverse.org), which is the main subject of the [Data Visualization 2](https://ryanwomack.com/data_topics/data_visualization_2/data_visualization_2.html) workshop, takes interactivity even further.
+
+In this example, a quick invocation of ggplotly allows mouseover reveals of data points.
+
+```{r Plotly}
+
+plotly_plot <- ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_point(color="purple3", pch=19) + geom_abline(intercept = 0, slope = 1) + labs(x="male labor participation (percent)", y="female labor participation (percent)", title="Comparing male and female labor participation") 
+
+ggplotly(plotly_plot)
+
+```
+
+# ggplot extensions
+
+There is an entire ecosystem of extensions to ggplot, which can be browsed at the [ggplot extensions page](https://exts.ggplot2.tidyverse.org/). We'll look at one of these (_ggridges_) below, and a few others later.
+
+## density plot and ggridges
+
+We will look at one more geom variant, and use it to illustrate the use of helper packages, in this case _ggridges_, which provides some enhancements to the appearance and layout of the graphs. Note that _geom_density_ produces an uninformative result, while _geom_density_ridges_ is informative, but plain. And finally _geom_density_ridges_gradient_ produces a more elegant result.
+
+```{r ggridges}
+
+ggplot(gender_data_selected, aes( x = `Fertility rate, total (births per woman)`, y = `female_high_labor`)) + geom_density()
+
+ggplot(gender_data_selected, aes( x = `Fertility rate, total (births per woman)`, y = `female_high_labor`)) + geom_density_ridges()
+
+ggplot(gender_data_selected, aes( x = `Fertility rate, total (births per woman)`, y = `female_high_labor`, fill = stat(x))) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis_c(name = "Depth", option = "C") +
+  coord_cartesian(clip = "off") + # To avoid cut off
+  theme_minimal()
+
+```
+
+# The grammar in action
+
+We turn to an iterative example that will help understand how the syntactic elements of the grammar of graphics can be used to tweak output to achieve specific results.
+
+Here we first apply a log transformation to the scales, a separate grammatical element.
+
+```{r log transform}
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point() + geom_smooth()
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point() + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+```
+
+## add color
+
+We apply color elements in various places in the grammar. Note we can use one setting, then partially override it with others, to achieve examples such as the last one below, with colored regression lines, but uniform points.
+
+```{r color tweaks}
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point() + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point(color="purple") + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point() + geom_smooth(color="purple") + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point(aes(color=female_high_labor)) + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility, color=female_high_labor)) + geom_point() + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+ggplot(gender_data_final, aes(x=gdp, y=fertility, color=female_high_labor)) + geom_point(color="purple") + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+```
+
+# Help with themes and palettes
+
+Packages such as _ggthemes_ (and also ggsci, ggthemr) can provide quick theme templates that are simple to apply.
+
+```{r ggthemes}
+
+lastplot <- ggplot(gender_data_final, aes(x=gdp, y=fertility)) + geom_point(aes(color=female_high_labor)) + geom_smooth() + scale_y_continuous(trans="log") + scale_x_continuous(trans="log")
+
+lastplot + theme_bw()
+
+lastplot + theme_dark()
+
+lastplot + theme_economist() +  scale_colour_economist()
+
+lastplot + theme_few() + scale_colour_few()
+
+lastplot + theme_fivethirtyeight()
+
+lastplot + theme_solarized_2() + scale_colour_solarized()
+
+lastplot + theme_stata() + scale_colour_stata()
+
+lastplot + theme_tufte()
+
+lastplot + theme_tufte() + scale_color_brewer(palette = "Dark2")
+
+lastplot + theme_wsj()
+
+```
+
+## palettes with RColorBrewer
+
+[RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html) implements various preselected color palettes, as described at [ColorBrewer](http://colorbrewer2.org/)
+
+```{r palettes with RColorBrewer}
+
+lastplot + theme_economist() + scale_color_brewer(palette = "Dark2")
+
+lastplot + theme_wsj() + scale_color_brewer(palette = "Set3")
+
+```
+
+## fun with ggcats
+
+The extra packages extend to the whimsical with the "cat plot", brought to you by [ggcats](https://github.com/R-CoderDotCom/ggcats)
+
+```{r cat plot}
+
+ggplot(data=gender_data_final, aes(x=labor_m, y=labor_f)) + geom_cat(cat = "venus", size=2) + geom_abline(intercept = 0, slope = 1) + labs(x="male labor participation (percent)", y="female labor participation (percent)", title="Comparing male and female labor participation") 
+
+# also try "nyancat", "grumpy", "pusheen"
+
+```
+
+And a second example illustrating using different cats to represent different data elements. This is a quick example using the built-in _iris_ dataset.
+
+```{r cat plot 2}
+
+# Create a new column
+iris$cat <- factor(iris$Species,
+                   labels = c("pusheen", "toast",
+                              "venus"))
+
+# Scatter plot by group
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+ geom_cat(aes(cat = cat), size = 4)
+
+```
+
+
+# Chloropleth maps and _ggiraph_
+
+Here we sketch some additional functionality, by including a chloropleth (shaded) map in a combined html graph developed using the _ggiraph_ package. The final result is an html file that you will want to browse to on your computer to view.
+
+```{r chloropleth, results='hide', echo=TRUE, results='hide', error=FALSE, warning=FALSE, message=FALSE}
+
+# Read the full world map
+
+world_sf <- read_sf("https://raw.githubusercontent.com/holtzy/R-graph-gallery/master/DATA/world.geojson")
+world_sf <- world_sf %>%
+  filter(!name %in% c("Antarctica", "Greenland"))
+
+# Join the gender data with the full world map
+
+gender_data_final_geo <- world_sf |>
+  left_join(gender_data_final, by = c("name" = "Country Name"))
+
+attach(gender_data_selected)
+
+# Create the first chart (Scatter plot)
+
+p1 <- ggplot(gender_data_selected, aes(s_gdp, s_fertility,
+  tooltip = `Country Name`,
+  data_id = `Country Name`,
+  color = `Country Name`
+)) +
+  geom_point_interactive(data = filter(gender_data_selected, !is.na(s_gdp)), size = 4) +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = "none"
+  )
+
+# Create the second chart (Bar plot)
+
+p2 <- ggplot(gender_data_selected, aes(
+  x = reorder(`Country Name`, s_gdp),
+  y = s_fertility,
+  tooltip = `Country Name`,
+  data_id = `Country Name`,
+  fill = `Country Name`
+)) +
+  geom_col_interactive(data = filter(gender_data_selected, !is.na(s_gdp))) +
+  coord_flip() +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = "none"
+  )
+
+# Create the third chart (choropleth)
+
+p3 <- ggplot() +
+  geom_sf(data = gender_data_final_geo, fill = "lightgrey", color = "lightgrey") +
+  geom_sf_interactive(
+    data = filter(gender_data_final_geo, !is.na(geometry)),
+    aes(fill = `name`, tooltip = `name`, data_id = `name`)
+  ) +
+  coord_sf(crs = st_crs(3857)) +
+  theme_void() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = "none"
+  )
+
+# Combine the plots
+
+combined_plot <- (p1 + p2) / p3 + plot_layout(heights = c(1, 2))
+
+# Create the interactive plot
+
+interactive_plot <- girafe(ggobj = combined_plot)
+interactive_plot <- girafe_options(
+  interactive_plot,
+  opts_hover(css = "fill:red;stroke:black;")
+)
+
+# save as an html widget
+
+htmltools::save_html(interactive_plot, "multiple-ggiraph-2.html")
+
+```
+
+
+# Animated cats
+
+We leave you with a whimsical animated example.
+
+```{r animated cats}
+
+library(Ecdat)
+data(incomeInequality)
+
+library(tidyverse)
+library(ggcats)
+library(gganimate)
+
+
+ dat <-
+   incomeInequality %>%
+   select(Year, P99, median) %>%
+   rename(income_median = median,
+          income_99percent = P99) %>%
+   pivot_longer(cols = starts_with("income"),
+                names_to = "income",
+                names_prefix = "income_")
+
+dat$cat <- rep(NA, 132)
+
+dat$cat[which(dat$income == "median")] <- "nyancat"
+dat$cat[which(dat$income == "99percent")] <- rep(c("pop_close", "pop"), 33)
+
+ggplot(dat, aes(x = Year, y = value, group = income, color = income)) +
+   geom_line(linewidth = 2) +
+   ggtitle("ggcats, a core package of the memeverse") +
+   geom_cat(aes(cat = cat), size = 5) +
+   xlab("Cats") +
+   ylab("Cats") +
+   theme(legend.position = "none",
+         plot.title = element_text(size = 20),
+         axis.text = element_blank(),
+         axis.ticks = element_blank()) +
+   transition_reveal(Year)
+
+```
+
+There's [more that can be done](https://r-charts.com/ggplot2/) of course, but we'll stop here.
+
+*Enjoy R!* _(and Python!)_
