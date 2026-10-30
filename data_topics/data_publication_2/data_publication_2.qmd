@@ -1,7 +1,7 @@
 ---
 title: "Data Publication 2"
 author: "Ryan Womack"
-date: "2024-10-03"
+date: "2026-10-29"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -27,9 +27,9 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(root.dir = "/home/ryan/R/littlePackage")
 ```
 
-Copyright Ryan Womack, 2024. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Copyright Ryan Womack, 2026. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-This workshop first reviews repositories for data publication such as Dataverse, ICPSR, OSF, Zenodo, and more. Then we turn to a detailed discussion of building R packages.
+This workshop first reviews repositories for data publication such as Dataverse, ICPSR, Zenodo, and more. Then we turn to a detailed discussion of building R packages.
 
 # Why Data Publication?
 
@@ -67,7 +67,6 @@ which are all good places to deposit data when more specialized repositories are
 - [IEEE Dataport](https://ieee-dataport.org/)
 - [Mendeley Data](https://data.mendeley.com/)
 - [_OpenICPSR_](https://openicpsr.org) - social science emphasis, free to use for Rutgers due to our institutional membership in ICPSR
-- [_Open Science Framework_](https://osf.io/)
 - [Synapse](https://www.synapse.org/)
 - [Vivli](https://vivli.org/)
 - [_Zenodo_](https://zenodo.org/)
