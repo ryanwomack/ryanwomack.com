@@ -2,22 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ryanwomack.com/tags/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/blog/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/email/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/privacy/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/tuta/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/blog/2026/11/tuta-mail/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ryanwomack.com/tags/tutanota/</loc>
+    <lastmod>2026-11-18T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://ryanwomack.com/chronology/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/career_timeline/</loc>
     <lastmod>2026-07-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ryanwomack.com/tags/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://ryanwomack.com/blog/2025/10/academic-freedom/</loc>
     <lastmod>2025-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/tags/academic-freedom/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryanwomack.com/tags/blog/</loc>
     <lastmod>2025-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/tags/universities/</loc>
@@ -36,9 +51,6 @@
     <lastmod>2025-09-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/tags/linux-mint/</loc>
-    <lastmod>2025-09-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ryanwomack.com/tags/privacy/</loc>
     <lastmod>2025-09-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ryanwomack.com/data_topics/</loc>
